@@ -1,0 +1,53 @@
+<div class="container" >
+  <div class="wrapper fadeInDown">
+    <div class="d-flex flex-column justify-content-start form-group">
+      <h5>Service</h5>
+      <form [formGroup]="BienForm" >
+        <h3>Où ce trouve votre bien?</h3>
+        <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
+          <option value="defaults" selected>Selectionez une ville</option>
+          <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nom_ville}}</option>
+        </select>
+        <input type="number" formControlName="coordonneeCPostal" placeholder="code postal">
+
+        <input type="text" formControlName="coordonneeRue" placeholder="rue">
+        <input type="number" formControlName="coordonneeNum" placeholder="numéro">
+        <input type="email" formControlName="coordonneeEmail" placeholder="email">
+        <input type="number" formControlName="coordonneeTelephone" placeholder="telephone">
+        <br><br>
+        <select class="form-select" formControlName="type"  aria-label="Default select example" >
+          <option value="defaults" selected>Selectionez un type de bien</option>
+          <option *ngFor="let t of listTypeDeBien; let i = index" value="{{i}}">{{t.nom}}</option>
+        </select>
+        <input type="number" formControlName="prix" placeholder="le prix en € "><p>€</p>
+        <input type="number" formControlName="npmin" placeholder="le nombre de personne minimum">
+        <input type="number" formControlName="npmax" placeholder="le nombre de personne maximum">
+        <input type="number" formControlName="nchambre" placeholder="le nombre de chambre">
+        <input type="number" formControlName="nsdb" placeholder="le nombre de salle de bain">
+        <input type="number" formControlName="nwc" placeholder="le nombre de toilette">
+        <input type="number" formControlName="superficie" placeholder="supperficie du bien"><p>m2</p>
+          <label><input formControlName="securite" type="checkbox" value="securité" >Service de securité</label>
+          <label><input formControlName="wifi" type="checkbox" value="wifi">Wifi</label>
+          <label><input formControlName="television" type="checkbox" value="television">Télévision</label>
+          <label><input formControlName="vesselle" type="checkbox" value="vesselle" >Vesselle</label>
+          <label><input formControlName="literie" type="checkbox" value="literie" >Literie</label>
+          <label><input formControlName="lingeMaison" type="checkbox" value="lingeMaison" >Linge de maison</label>
+          <label><input formControlName="eauChaude" type="checkbox" value="eauChaude" >Eau chaude</label>
+          <label><input formControlName="eauFroide" type="checkbox" value="eauFroide" >Eau froide</label>
+          <label><input formControlName="eauPotable" type="checkbox" value="eauPotable" >Eau potable</label>
+          <label><input formControlName="jardin" type="checkbox" value="jardin" >Jardin</label>
+          <label><input formControlName="cour" type="checkbox" value="cour" >Cour</label>
+          <label><input formControlName="terrasse" type="checkbox" value="terrasse" >Terresse</label>
+          <label><input formControlName="piscinePrive" type="checkbox" value="piscinePrive" >Piscine privée</label>
+          <label><input formControlName="piscineCommune" type="checkbox" value="piscineCommune" >Piscine commune</label>
+          <label><input formControlName="vehicule" type="checkbox" value="vehicule" >Voiture</label>
+          <label><input formControlName="animaux" type="checkbox" value="animaux" >Animaux autorisé</label>
+        <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="Description"></textarea>
+
+        <br>
+        <button class="btn btn-secondary mt-2" (click)="ajouterBien()">Ajouter</button>
+        <br><br>
+      </form>
+    </div>
+  </div>
+</div>

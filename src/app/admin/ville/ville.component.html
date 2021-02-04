@@ -1,5 +1,7 @@
+
+<br><br>
 <div class="container">
-    <div class="corp">
+    <div >
       <div class="d-flex flex-column justify-content-start form-group">
         <h5>Ville</h5>
         <form [formGroup]="villeForm" >
@@ -15,15 +17,16 @@
           <br>
           <button class="btn btn-secondary mt-2" (click)="ajouterVille()">Ajouter</button>
         </form>
-
       </div>
-      <!--FORM COORDONNEE-->
-      <div class="corp">
+
+      <br><br>
+
+      <div >
         <div class="pro"><label for="search"> Rechercher : </label>
           <input type="text" [(ngModel)]="startingString" id="search">
         </div>
 
-        <table class="table">
+        <table class="table table-striped">
           <thead>
           <th>ID</th>
           <th>Ville</th>

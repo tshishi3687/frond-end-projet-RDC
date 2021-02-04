@@ -1,0 +1,26 @@
+<div class="container">
+  <div><h2>Tous les biens disponible</h2></div>
+  <div *ngFor="let b of listBien">
+    <!--  <div class="pro"><label for="search"> Rechercher : </label>-->
+    <!--    <input type="text" [(ngModel)]="startingString" id="search">-->
+    <!--  </div>-->
+
+    <table class="table table-striped">
+      <thead>
+      <th>Type</th>
+      <th>Prix</th>
+      <th>Pers. Max.</th>
+      <th>Lieu</th>
+      <tbody>
+      <tr >
+        <td>{{b.type_bien.nom}}</td>
+        <td>{{b.prix}}€</td>
+        <td>{{b.npmax}} personnes maximum.</td>
+        <td>{{b.coordonnee.ville.nom_ville}} de la province de : {{b.coordonnee.ville.province.nomprovince}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <app-info-bien   [b]="b" (infoBien)="startInfo($event)"></app-info-bien>
+  </div>
+
+</div>

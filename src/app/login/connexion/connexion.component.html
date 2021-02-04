@@ -1,0 +1,29 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <p *ngIf="nonValide()">L'EMAIL OU MOT DE PASSE EST INCORECTE</p>
+    <!-- Login Form -->
+    <form [formGroup]="logForm">
+      <h3>Connexion</h3>
+      <input type="text" formControlName="email"  id="login" class="fadeIn second" name="login" placeholder="login">
+      <input type="password" formControlName="mdp" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" (click)="inscription()">Inscription </a>
+    </div>
+
+  </div>
+</div>
+<div class="container">
+  <app-all-bien></app-all-bien>
+</div>
+

@@ -1,0 +1,54 @@
+<div *ngIf="siConnecte()">
+  <button (click)="changement()" class="btn btn-dark">Information</button>
+</div>
+
+
+  <div *ngIf="echange" class="row">
+    <div class="row">
+      <div class="col-md-5">
+        <h4>{{b.type_bien.nom}} à {{b.coordonnee.ville.nom_ville}}</h4>
+        <h3>{{b.prix}}€</h3>
+      </div>
+      <div class="col-md-5">
+        <app-reservation [br]="b"></app-reservation>
+        <br><br>
+      </div>
+    </div>
+
+    <br>
+    <div class="col-md-3">
+      <h6>Personne min : {{b.npmin}}</h6>
+    </div>
+    <div class="col-md-3">
+      <h6>Personne max : {{b.npmax}}</h6>
+    </div>
+    <div class="col-md-3">
+      <h6>Chambre : {{b.nchambre}}</h6>
+    </div>
+    <div class="col-md-3">
+      <h6>Salle de bain : {{b.nsdb}}</h6>
+    </div>
+    <div class="col-md-3">
+      <h6>Superficie  : {{b.superficie}} m&#xB2;  </h6>
+    </div>
+    <div class="col-md-3">
+      <h6>Toilette : {{b.nwc}}</h6>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Description</h4>
+        <p>{{b.description}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h5>{{b.coordonnee.ville.nom_ville}}</h5>
+        <p>{{b.coordonnee.ville.description}}</p>
+      </div>
+      <div class="col-md-6">
+        <h5>{{b.coordonnee.ville.province.nomprovince}}</h5>
+        <p>{{b.coordonnee.ville.province.description}}</p>
+      </div>
+    </div>
+
+  </div>

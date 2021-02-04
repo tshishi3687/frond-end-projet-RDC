@@ -1,25 +1,26 @@
+
+<br>
 <div class="container">
-  <div class="corp">
+  <div>
     <div class="d-flex flex-column justify-content-start form-group">
       <h5>Provinve</h5>
       <form [formGroup]="provinceForm">
         <input type="file"  name="img" accept="image/*">
         <br><br>
         <input type="text" formControlName="nomprovince"  placeholder="nom provience ">
-        <input type="long_text" formControlName="description" placeholder="description ">
-        <br>
+        <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="description "></textarea>
         <button class="btn btn-secondary mt-2" (click)="ajouterProvince()">Ajouter</button>
       </form>
     </div>
-  </div>
 
+    <br><br>
 
-  <div class="corp">
+  <div >
     <div class="pro"><label for="search"> Rechercher : </label>
       <input type="text" [(ngModel)]="startingString" id="search">
     </div>
 
-    <table class="table">
+    <table class="table table-striped">
       <thead>
       <th>ID</th>
       <th>Province</th>
@@ -30,10 +31,20 @@
         <td>{{p.id}}</td>
         <td>{{p.nomprovince}}</td>
         <td>{{p.description}}</td>
-        <td><button class="btn bg-body" (click)="supprimerProvince(p.id)">suprimer </button></td>
+        <td><button class="btn btn-dark" (click)="supprimerProvince(p.id)">suprimer </button></td>
+        <td><button class="btn btn-dark" >modifier </button></td>
+        <div  class="d-flex flex-column justify-content-start form-group">
+          <form [formGroup]="provinceForm">
+            <input type="file"  name="img" accept="image/*">
+            <br><br>
+            <input type="text" formControlName="nomprovince" pla placeholder="{{p.nomprovince}} ">
+            <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="{{p.description}} "></textarea>
+            <button class="btn btn-warning">modifier</button>
+          </form>
+        </div>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
-
+</div>

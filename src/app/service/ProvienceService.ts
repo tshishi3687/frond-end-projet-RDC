@@ -36,4 +36,15 @@ export class ProvinceService {
   supprimerProvince(id) {
     return this.client.delete('http://localhost:8081/province/' + id);
   }
+
+  // tslint:disable-next-line:typedef
+  modifierProvinc(id, province){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.put('http://localhost:8081/province/' + id, province, httpOptions);
+  }
 }

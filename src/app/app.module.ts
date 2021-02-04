@@ -13,11 +13,23 @@ import { VilleComponent } from './admin/ville/ville.component';
 import { ServiceComponent } from './admin/service/service.component';
 import { TypeDeBienComponent } from './admin/type-de-bien/type-de-bien.component';
 import { TypeDeSeviceComponent } from './admin/type-de-sevice/type-de-sevice.component';
-import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
 import { ProvincePipe } from './admin/province/province.pipe';
 import { VillePipe } from './admin/ville/ville.pipe';
 import { TypeDeBienPipe } from './admin/type-de-bien/type-de-bien.pipe';
 import { TypeDeServicePipe } from './admin/type-de-sevice/type-de-service.pipe';
+import { ServicePipe } from './admin/service/service.pipe';
+import { LoginComponent } from './login/login.component';
+import { ConnexionComponent } from './login/connexion/connexion.component';
+import { InscriptionComponent } from './login/inscription/inscription.component';
+import { ModifiermdpComponent } from './login/modifiermdp/modifiermdp.component';
+import { ClientComponent } from './client/client.component';
+import { CreationDeBienComponent } from './client/creation-de-bien/creation-de-bien.component';
+import { VoirBienComponent } from './client/voir-bien/voir-bien.component';
+import { VoirBienPipe } from './client/voir-bien/voir-bien.pipe';
+import { AllBienComponent } from './all-bien/all-bien.component';
+import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
+import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
+import { MesResercationComponent } from './client/mes-resercation/mes-resercation.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +41,23 @@ import { TypeDeServicePipe } from './admin/type-de-sevice/type-de-service.pipe';
     ServiceComponent,
     TypeDeBienComponent,
     TypeDeSeviceComponent,
-    MenuAdminComponent,
     ProvincePipe,
     VillePipe,
     TypeDeBienPipe,
-    TypeDeServicePipe
+    TypeDeServicePipe,
+    ServicePipe,
+    LoginComponent,
+    ConnexionComponent,
+    InscriptionComponent,
+    ModifiermdpComponent,
+    ClientComponent,
+    CreationDeBienComponent,
+    VoirBienComponent,
+    VoirBienPipe,
+    AllBienComponent,
+    InfoBienComponent,
+    ReservationComponent,
+    MesResercationComponent,
   ],
   imports: [
     BrowserModule,

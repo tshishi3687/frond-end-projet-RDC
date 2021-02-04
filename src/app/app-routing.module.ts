@@ -5,32 +5,83 @@ import {ProvinceComponent} from './admin/province/province.component';
 import {VilleComponent} from './admin/ville/ville.component';
 import {TypeDeBienComponent} from './admin/type-de-bien/type-de-bien.component';
 import {TypeDeSeviceComponent} from './admin/type-de-sevice/type-de-sevice.component';
+import {ServiceComponent} from './admin/service/service.component';
+import {LoginComponent} from './login/login.component';
+import {ConnexionComponent} from './login/connexion/connexion.component';
+import {InscriptionComponent} from './login/inscription/inscription.component';
+import {ModifiermdpComponent} from './login/modifiermdp/modifiermdp.component';
+import {CreationDeBienComponent} from './client/creation-de-bien/creation-de-bien.component';
+import {VoirBienComponent} from './client/voir-bien/voir-bien.component';
+import {LoginService} from './service/login.service';
+import {AllBienComponent} from './all-bien/all-bien.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'province',
-    pathMatch: 'full'
+    redirectTo: 'connexion',
+    pathMatch: 'full',
+    canActivate: [LoginService]
   },
   {
-    path: 'Admin',
-    component: AdminComponent
+    path: 'connexion',
+    component: ConnexionComponent
+  },
+  {
+    path: 'inscription',
+    component: InscriptionComponent
+  }
+  ,
+  {
+    path: 'changeMdp',
+    component: ModifiermdpComponent,
+    canActivate: [LoginService]
   },
   {
     path: 'province',
-    component: ProvinceComponent
+    component: ProvinceComponent,
+    canActivate: [LoginService]
   },
   {
     path: 'ville',
-    component: VilleComponent
+    component: VilleComponent,
+    canActivate: [LoginService]
   },
   {
     path: 'typeBien',
-    component: TypeDeBienComponent
+    component: TypeDeBienComponent,
+    canActivate: [LoginService]
   },
   {
     path: 'typeService',
-    component: TypeDeSeviceComponent
+    component: TypeDeSeviceComponent,
+    canActivate: [LoginService]
+  },
+  {
+    path: 'service',
+    component: ServiceComponent,
+    canActivate: [LoginService]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginService]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [LoginService]
+  },
+  {
+    path: 'creerbien',
+    component: CreationDeBienComponent
+  },
+  {
+    path: 'voirBienPersonne',
+    component: VoirBienComponent,
+  },
+  {
+    path: 'allBien',
+    component: AllBienComponent,
   }
 ];
 

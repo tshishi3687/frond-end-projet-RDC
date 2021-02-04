@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {ServiceService} from '../../service/service.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TypeDeServiceService} from '../../service/type-de-service.service';
+import {VilleService} from '../../service/VilleService';
+import {Coordonnee, Service, TypeDeService, Ville} from '../../objet';
 
 @Component({
   selector: 'app-service',
@@ -7,9 +12,77 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serviceService: ServiceService, private typeService: TypeDeServiceService, private villeService: VilleService) {}
+
+  private error = 'Il y a eu un probleme :(';
+  startingString: string = '';
+
+  serviceForm = new FormGroup({
+    nom: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+    type: new FormControl('default'),
+    coordonneeVille: new FormControl('defaults'),
+    coordonneeCpostal: new FormControl(null, [Validators.min(100), Validators.max(100000)]),
+    coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
+    coordonneeNum: new FormControl(null, [Validators.min(1), Validators.max(10000)]),
+    coordonneeEmail: new FormControl(null, [Validators.email, Validators.maxLength(100)]),
+    coordonneeTelephone: new FormControl(null, [Validators.min(1000), Validators.max(999999999999999)])
+  });
+
+  listService: Array<Service> = [];
+  listTypeDeService: Array<TypeDeService> = [];
+  listVille: Array<Ville> = [];
 
   ngOnInit(): void {
+    this.voirType();
+    this.voirVille();
+    this.voirService();
   }
 
+  // tslint:disable-next-line:typedef
+  voirVille(){
+    // @ts-ignore
+    this.villeService.voirVille().subscribe(reponse => this.listVille = reponse.list , reponse => alert(this.error));
+    // console.log(this.listVille);
+  }
+
+  // tslint:disable-next-line:typedef
+  voirType(){
+    // @ts-ignore
+    this.typeService.voirTypeDeService().subscribe(reponse => this.listTypeDeService = reponse.list , reponse => alert(this.error));
+    // console.log(this.listTypeDeService);
+  }
+
+  // tslint:disable-next-line:typedef
+  voirService(){
+    // @ts-ignore
+    this.serviceService.voirService().subscribe(reponse => this.listService = reponse.list , reponse => alert(this.error));
+    // console.log(this.listService);
+  }
+
+  ajouterService(): void{
+    if (this.serviceForm.valid){
+
+      const serviceCoordonnee = new Coordonnee();
+      serviceCoordonnee.id = 0;
+      serviceCoordonnee.ville = this.listVille[this.serviceForm.value.coordonneeVille];
+      serviceCoordonnee.cpostal = this.serviceForm.value.coordonneeCpostal;
+      serviceCoordonnee.rue = this.serviceForm.value.coordonneeRue;
+      serviceCoordonnee.num = this.serviceForm.value.coordonneeNum;
+      serviceCoordonnee.email = this.serviceForm.value.coordonneeEmail;
+      serviceCoordonnee.telephone = this.serviceForm.value.coordonneeTelephone;
+
+      console.log(this.listVille[this.serviceForm.value.coordonneeVille]);
+
+      const service = new Service();
+      service.id = 0;
+      service.nom = this.serviceForm.value.nom;
+      service.type = this.listTypeDeService[this.serviceForm.value.type];
+      service.coordonnee = serviceCoordonnee;
+      this.serviceService.ajouterService(service).subscribe(reponse => this.voirService(), reponse => alert(this.error));
+    }
+  }
+
+  supprimerService(id): void{
+    this.serviceService.supprimerService(id).subscribe(reponse => this.voirService(), reponse => alert(this.error));
+  }
 }

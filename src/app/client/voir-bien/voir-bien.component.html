@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="pro"><label for="search"> Rechercher : </label>
+    <input type="text" [(ngModel)]="startingString" id="search">
+  </div>
+
+  <table class="table table-striped">
+  <thead>
+  <th>ID</th>
+  <th>Type</th>
+  <th>Prix</th>
+  <th>Max pers.</th>
+  <th>Ville</th>
+  <th>Province</th>
+  <tbody>
+  <tr *ngFor="let p of (listBien | voirBienPipes:(startingString))">
+    <td>{{p.id}}</td>
+    <td>{{p.type_bien.nom}}</td>
+    <td>{{p.prix}}</td>
+    <td>{{p.npmax}}</td>
+    <td>{{p.coordonnee.ville.nom_ville}}</td>
+    <td>{{p.coordonnee.ville.province.nomprovince}}</td>
+    <td><button class="btn btn-dark" (click)="supprimerBien(p.id)">suprimer </button></td>
+    <td>
+  </tr>
+  </tbody>
+</table>
+</div>

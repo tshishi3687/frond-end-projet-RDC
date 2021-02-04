@@ -14,7 +14,6 @@ export class VilleComponent implements OnInit {
   constructor(private service: VilleService, private pService: ProvinceService) { }
 
   private error = 'Il y a eu un probleme :(';
-  private ok = 'Tout c\'est bien passer :)-';
   startingString: string = '';
 
   villeForm = new FormGroup({
@@ -36,7 +35,6 @@ export class VilleComponent implements OnInit {
   voirProvince(){
     // @ts-ignore
     this.pService.voirProvince().subscribe(reponse => this.listProvince = reponse.list , reponse => alert(this.error));
-    console.log(this.listProvince);
   }
   // tslint:disable-next-line:typedef
   voirVille(){

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProvinceService} from '../service/ProvienceService';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Province} from '../objet';
-import {subscribeOn} from 'rxjs/operators';
+import {LoginService} from '../service/login.service';
+import {Router, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,35 +8,18 @@ import {subscribeOn} from 'rxjs/operators';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  constructor(private sercice: LoginService, private route: Router) { }
 
-  provinceForm = new FormGroup({
-    nomprovince: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-    description: new FormControl(null, [Validators.required, Validators.minLength(50)])
-  });
-
-  private error = 'Il y a eu un probleme :(';
-  private ok = 'Tout c\'est bien passer :)-';
-
-  listProvince: Array<Province> = [];
-  constructor(private service: ProvinceService) { }
+  private admin: boolean = false;
 
   ngOnInit(): void {
   }
-  // tslint:disable-next-line:typedef
-  ajouterProvince(){
-    // @ts-ignore
-    if (this.provinceForm.valid){
-      const province = new Province();
-      province.id = -1;
-      province.nomprovince = this.provinceForm.value.nomprovince;
-      province.description = this.provinceForm.value.description;
-      this.service.ajouterProvince(province).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
+  verif(): boolean {
+    if (this.sercice.client().status === 'admin'){
+      return true;
     }
-  }
-
-  // tslint:disable-next-line:typedef
-  voirProvince(){
-    // @ts-ignore
-    this.service.voirProvince().subscribe(reponse => this.listProvince = reponse , reponse => alert(this.error));
+    else{
+      this.route.navigateByUrl('/connexion');
+    }
   }
 }

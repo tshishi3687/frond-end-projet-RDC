@@ -9,7 +9,7 @@ input.ng-invalid.ng-touched{
 input.ng-valid.ng-touched{
   border: 3px solid green;
 }
-.corp{
+.formulaire{
   height: XXpx;
   width: XXpx;
   position: relative;

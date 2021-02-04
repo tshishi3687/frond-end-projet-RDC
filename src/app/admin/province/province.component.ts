@@ -12,7 +12,6 @@ export class ProvinceComponent implements OnInit {
   constructor(private service: ProvinceService) { }
 
   private error = 'Il y a eu un probleme :(';
-  private ok = 'Tout c\'est bien passer :)-';
 
   provinceForm = new FormGroup({
     nomprovince: new FormControl(null, [Validators.required, Validators.minLength(4)]),
