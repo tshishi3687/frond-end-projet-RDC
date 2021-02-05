@@ -27,7 +27,7 @@ export class ReservationService {
       })
     };
 
-    return this.client.post('http://localhost:8081/reservation/user', reservation, httpOptions);
+    return this.client.post('http://localhost:8081/reservations/user', reservation, httpOptions);
   }
 
   // tslint:disable-next-line:typedef

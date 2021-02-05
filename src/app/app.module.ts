@@ -30,6 +30,7 @@ import { AllBienComponent } from './all-bien/all-bien.component';
 import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
 import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
 import { MesResercationComponent } from './client/mes-resercation/mes-resercation.component';
+import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-reservation/info-mes-reservation.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MesResercationComponent } from './client/mes-resercation/mes-resercatio
     InfoBienComponent,
     ReservationComponent,
     MesResercationComponent,
+    InfoMesReservationComponent,
   ],
   imports: [
     BrowserModule,

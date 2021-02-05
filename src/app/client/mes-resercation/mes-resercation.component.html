@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngFor="let r of listreservation ">
   <table class="table table-striped">
     <thead>
     <th>ID</th>
@@ -8,8 +8,9 @@
     <th>Ville</th>
     <th>Province</th>
     <tbody>
-    <tr *ngFor="let r of listreservation ">
+    <tr >
       <td>{{r.id}}</td>
+      <td>{{r.bien_reserve.type_bien.nom}}</td>
       <td>{{r.dda}}</td>
       <td>{{r.ddd}}</td>
       <td>{{r.bien_reserve.coordonnee.ville.nom_ville}}</td>
@@ -17,4 +18,5 @@
     </tr>
     </tbody>
   </table>
+  <app-info-mes-reservation [r]="r" ></app-info-mes-reservation>
 </div>

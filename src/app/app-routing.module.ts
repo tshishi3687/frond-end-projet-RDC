@@ -14,6 +14,7 @@ import {CreationDeBienComponent} from './client/creation-de-bien/creation-de-bie
 import {VoirBienComponent} from './client/voir-bien/voir-bien.component';
 import {LoginService} from './service/login.service';
 import {AllBienComponent} from './all-bien/all-bien.component';
+import {MesResercationComponent} from './client/mes-resercation/mes-resercation.component';
 
 const routes: Routes = [
   {
@@ -77,7 +78,11 @@ const routes: Routes = [
   },
   {
     path: 'voirBienPersonne',
-    component: VoirBienComponent,
+    component: VoirBienComponent
+  },
+  {
+    path: 'voirMesReservation',
+    component: MesResercationComponent
   },
   {
     path: 'allBien',

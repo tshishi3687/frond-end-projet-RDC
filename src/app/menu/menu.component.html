@@ -30,11 +30,14 @@
           <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()">Mes biens</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()"> Bonjour {{service.client().prenom}}</a>
+          <a class="nav-link " routerLink="/voirMesReservation" *ngIf="verifSiCo()">Mes reservations</a>
         </li>
-        <li class="nav-item">
-          <button class="btn btn-secondary mt-2" (click)="deconnexion()" *ngIf="verifSiCo()">Deconnecter</button>
-        </li>
+          <li class="nav-item" id="btnDecoPlsNom">
+            <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()"> Bonjour {{service.client().prenom}}</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link" (click)="deconnexion()" *ngIf="verifSiCo()">Deconnecter</button>
+          </li>
       </ul>
     </div>
   </nav>

@@ -18,12 +18,14 @@ export class MesResercationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.mesReservation();
   }
 
   mesReservation(): void{
     const personne = new Personne();
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
-    this.service.voirReservationPersonne(this.personne.client()).subscribe(reponse => this.listreservation = reponse.list, reponse => alert(this.error));
+    this.service.voirReservationPersonne(this.personne.client()).subscribe(reponse => this.listreservation = reponse, reponse => alert(this.error));
+    console.log(this.listreservation);
   }
 }
