@@ -1,46 +1,45 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="verifCoo() && verifSiCo()" >
-          <a class="nav-link" routerLink="/province">Province</a>
-        </li>
-        <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
-          <a class="nav-link" routerLink="/ville">Ville</a>
-        </li>
-        <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
-          <a class="nav-link" routerLink="/service">Service</a>
-        </li>
-        <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
-          <a class="nav-link " routerLink="/typeBien">Type de bien</a>
-        </li>
-        <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
-          <a class="nav-link " routerLink="/typeService">Type de service</a>
-        </li>
-        <li class="nav-item" *ngIf=" verifSiCo()">
-          <a class="nav-link " routerLink="/allBien">Quoi de neuf</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " routerLink="/creerbien" *ngIf="verifSiCo()">Créer un bien</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()">Mes biens</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " routerLink="/voirMesReservation" *ngIf="verifSiCo()">Mes reservations</a>
-        </li>
-          <li class="nav-item" id="btnDecoPlsNom">
-            <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()"> Bonjour {{service.client().prenom}}</a>
+<div class="container" *ngIf="verifSiCo()">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" >Mobembo.cd</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" *ngIf="verifCoo() && verifSiCo()" >
+            <a class="nav-link" routerLink="/province">Province</a>
+          </li>
+          <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
+            <a class="nav-link" routerLink="/ville">Ville</a>
+          </li>
+          <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
+            <a class="nav-link" routerLink="/service">Service</a>
+          </li>
+          <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
+            <a class="nav-link " routerLink="/typeBien">Type de bien</a>
+          </li>
+          <li class="nav-item" *ngIf="verifCoo() && verifSiCo()">
+            <a class="nav-link " routerLink="/typeService">Type de service</a>
+          </li>
+          <li class="nav-item" *ngIf=" verifSiCo()">
+            <a class="nav-link " routerLink="/allBien">Quoi de neuf</a>
           </li>
           <li class="nav-item">
-            <button class="btn btn-link" (click)="deconnexion()" *ngIf="verifSiCo()">Deconnecter</button>
+            <a class="nav-link " routerLink="/creerbien" *ngIf="verifSiCo()">Créer un bien</a>
           </li>
-      </ul>
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()">Mes biens</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/voirMesReservation" *ngIf="verifSiCo()">Mes reservations</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()"> Bonjour {{service.client().nom}} {{service.client().prenom}}</a>
+          <button class="btn btn-link" (click)="deconnexion()" *ngIf="verifSiCo()">Deconnecter</button>
+        </form>
+      </div>
     </div>
   </nav>
 </div>
-
-

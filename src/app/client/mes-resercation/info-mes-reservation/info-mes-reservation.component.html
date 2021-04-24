@@ -9,7 +9,11 @@
       <h4>{{r.bien_reserve.type_bien.nom}} à {{r.bien_reserve.coordonnee.ville.nom_ville}}</h4>
       <h3>{{r.bien_reserve.prix}}€</h3>
       <h4>Info de contact</h4>
-      <h4>{{r.bien_reserve.appartient.nom}} {{r.bien_reserve.appartient.prenom}}</h4>
+      <ul>
+        <li>
+          <h6>De : {{r.bien_reserve.appartient.nom}} {{r.bien_reserve.appartient.prenom}}</h6>
+        </li>
+      </ul>
     </div>
   </div>
 

@@ -49,7 +49,7 @@ export class CreationDeBienComponent implements OnInit {
     coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
     coordonneeNum: new FormControl(null, [Validators.min(1), Validators.max(10000)]),
     coordonneeEmail: new FormControl(null, [Validators.email, Validators.maxLength(100)]),
-    coordonneeTelephone: new FormControl(null, [Validators.min(1000), Validators.max(999999999999999)]),
+    coordonneeTelephone: new FormControl(null, [Validators.min(100000)]),
     securite: new FormControl(),
     wifi: new FormControl(),
     television: new FormControl(),

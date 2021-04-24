@@ -10,7 +10,9 @@
     <p *ngIf="nonValide()">L'EMAIL OU MOT DE PASSE EST INCORECTE</p>
     <!-- Login Form -->
     <form [formGroup]="logForm">
-      <h3>Connexion</h3>
+      <h6>BIENVENUE</h6>
+      <h3>Mobembo.cd</h3>
+      <h6>connection</h6>
       <input type="text" formControlName="email"  id="login" class="fadeIn second" name="login" placeholder="login">
       <input type="password" formControlName="mdp" id="password" class="fadeIn third" name="login" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
