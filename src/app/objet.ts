@@ -115,3 +115,8 @@ export class Reservation{
   // tslint:disable-next-line:variable-name
   reserverPar: Personne;
 }
+
+export class ImageModel{
+  id: number;
+  image: string;
+}

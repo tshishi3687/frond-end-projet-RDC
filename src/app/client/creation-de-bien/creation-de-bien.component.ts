@@ -4,10 +4,12 @@ import {BienService} from '../../service/bien.service';
 import {VilleService} from '../../service/VilleService';
 import {TypeDeBienService} from '../../service/type-de-bien.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Bien, Coordonnee, TypeDeBien, Ville} from '../../objet';
+import {Bien, Coordonnee, ImageModel, TypeDeBien, Ville} from '../../objet';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {LienPhotoService} from '../../service/lien-photo.service';
+import {ImgService} from '../../service/img.service';
+import {getInputNamesOfClass} from '@angular/core/schematics/migrations/static-queries/angular/directive_inputs';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -15,7 +17,7 @@ import {LienPhotoService} from '../../service/lien-photo.service';
   styleUrls: ['./creation-de-bien.component.css']
 })
 export class CreationDeBienComponent implements OnInit {
-
+  imgFile: string;
   constructor(
     private client: HttpClient,
     // tslint:disable-next-line:variable-name
@@ -24,6 +26,7 @@ export class CreationDeBienComponent implements OnInit {
     private bienService: BienService,
     private villeService: VilleService,
     private typeDeBienService: TypeDeBienService,
+    private img: ImgService,
     private route: Router) { }
     private aladisposition = '';
 
@@ -32,6 +35,12 @@ export class CreationDeBienComponent implements OnInit {
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
+
+  uploadForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    file: new FormControl('', [Validators.required]),
+    imgSrc: new FormControl('', [Validators.required])
+  });
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
@@ -81,6 +90,35 @@ export class CreationDeBienComponent implements OnInit {
     this.voirTypeDeBien();
   }
 
+  // tslint:disable-next-line:typedef
+  get uf(){
+    return this.uploadForm.controls;
+  }
+
+  // tslint:disable-next-line:typedef
+  onImageChange(e) {
+    const reader = new FileReader();
+
+    if (e.target.files && e.target.files.length) {
+      const [file] = e.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imgFile = reader.result as string;
+        this.uploadForm.patchValue({
+          imgSrc: reader.result
+        });
+
+      };
+    }
+  }
+
+  // tslint:disable-next-line:typedef
+  upload(){
+    this.img.ajouterImage(this.selectedFile).subscribe(response => {
+        alert('Image has been uploaded.');
+      });
+  }
   // tslint:disable-next-line:typedef
   onFileSelected(event){
     this.selectedFile = (event.target.files[0] as File);
