@@ -16,6 +16,6 @@ export class LienPhotoService {
       })
     };
 
-    return this.client.post('http://localhost:8081/lien_photo', lien_photo, httpOptions);
+    return this.client.post('http://localhost:8081/lien_photo_bien', lien_photo, httpOptions);
   }
 }

@@ -18,6 +18,6 @@ export class ImgService {
 
     // tslint:disable-next-line:no-unused-expression
     // @ts-ignore
-    return this.client.post('http://localhost:8081/image/upppp', img);
+    return this.client.post('http://localhost:8081/image/upload', img, httpOptions);
   }
 }

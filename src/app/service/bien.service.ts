@@ -16,7 +16,7 @@ export class BienService {
       })
     };
 
-    return this.client.post('http://localhost:8081/bien', bien, httpOptions);
+    return this.client.post('http://localhost:8081/bien/creatt', bien, httpOptions);
   }
 
   // tslint:disable-next-line:typedef

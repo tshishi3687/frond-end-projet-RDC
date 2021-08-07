@@ -2,25 +2,13 @@
   <div class="wrapper fadeInDown">
     <div class="d-flex flex-column justify-content-start form-group">
       <h5>Service</h5>
-      <form [formGroup]="uploadForm" (ngSubmit)="upload()">
-
-        <div class="preview" *ngIf="imgFile">
-          <img [src]="imgFile" style="width:400px; height:250px">
-        </div>
-
-        <div class="form-group">
-          <label for="file">File</label>
-          <input type="file" name="file" class="form-control" id="file" formControlName="file" (change)="onImageChange($event)" accept="image/jpeg" />
-          <div *ngIf="uf.file.touched && uf.file.invalid" class="alert alert-danger">
-            <div *ngIf="uf.file.errors.required">Image file is required.</div>
-          </div>
-        </div>
-
-        <button class="btn btn-success" type="submit">Upload File</button>
-
-      </form>
       <form [formGroup]="BienForm" >
-        <h3>Où ce trouve votre bien?</h3>
+        <h5>Une photo</h5>
+        <div *ngIf="tailleimg">
+          <p>Vous ne pouvez ajouter un maximum de 10 images</p>
+        </div>
+        <input type="file" (change)="onFileSelected($event)" multiple/>
+        <h5>Où ce trouve votre bien?</h5>
         <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
           <option value="defaults" selected>Selectionez une ville</option>
           <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nom_ville}}</option>
@@ -68,3 +56,7 @@
     </div>
   </div>
 </div>
+
+
+
+

@@ -1,10 +1,11 @@
 import {DatePipe} from '@angular/common';
-import {Byte} from '@angular/compiler/src/util';
 
 export class Province{
   id: number;
   nomprovince: string;
   description: string;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Ville{
@@ -14,16 +15,22 @@ export class Ville{
   nhabitant: number;
   province: Province;
   description: string;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class TypeDeBien{
   id: number;
   nom: string;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class TypeDeService{
   id: number;
   nomtype: string;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Coordonnee{
@@ -34,6 +41,8 @@ export class Coordonnee{
   num: number;
   email: string;
   telephone: number;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Service{
@@ -41,6 +50,8 @@ export class Service{
   nom: string;
   type: TypeDeService;
   coordonnee: Coordonnee;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Personne{
@@ -52,6 +63,8 @@ export class Personne{
   telephone: number;
   email: string;
   status: string;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Bien{
@@ -69,6 +82,8 @@ export class Bien{
   description: string;
   coordonnee: Coordonnee;
   appartient: Personne;
+  dateCreation: Date;
+  superid: number;
 }
 
 export class Aladisposition{
@@ -95,12 +110,10 @@ export class Aladisposition{
 // tslint:disable-next-line:class-name
 export class Lien_photo{
   id: number;
-  name: string;
-  type: string;
-  image: FormData;
-  province: Province;
-  ville: Ville;
+  image: ImageModel;
   bien: Bien;
+  dateCreation: Date;
+  superid: number;
 }
 
 // tslint:disable-next-line:class-name
@@ -118,5 +131,7 @@ export class Reservation{
 
 export class ImageModel{
   id: number;
-  image: string;
+  // tslint:disable-next-line:variable-name
+  nom_photo: string;
 }
+

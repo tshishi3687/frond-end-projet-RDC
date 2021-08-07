@@ -36,7 +36,7 @@
           </li>
         </ul>
         <form class="d-flex">
-          <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()"> Bonjour {{service.client().nom}} {{service.client().prenom}}</a>
+          <a class="nav-link " routerLink="/voirBienPersonne" *ngIf="verifSiCo()">{{service.client().nom}} {{service.client().prenom}}</a>
           <button class="btn btn-link" (click)="deconnexion()" *ngIf="verifSiCo()">Deconnecter</button>
         </form>
       </div>
