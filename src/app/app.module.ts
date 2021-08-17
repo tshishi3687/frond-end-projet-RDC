@@ -31,6 +31,9 @@ import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
 import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
 import { MesResercationComponent } from './client/mes-resercation/mes-resercation.component';
 import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-reservation/info-mes-reservation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
+import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-r
     ReservationComponent,
     MesResercationComponent,
     InfoMesReservationComponent,
+    ImgALaOneComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,9 @@ import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-r
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatCarouselModule.forRoot()
   ],
   exports: [],
   providers: [],

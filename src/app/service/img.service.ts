@@ -20,4 +20,17 @@ export class ImgService {
     // @ts-ignore
     return this.client.post('http://localhost:8081/image/upload', img, httpOptions);
   }
+
+  // tslint:disable-next-line:typedef
+  rechercherParBienid(img) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    // tslint:disable-next-line:no-unused-expression
+    // @ts-ignore
+    return this.client.post('http://localhost:8081/image/all', img, httpOptions);
+  }
 }

@@ -12,26 +12,50 @@
       <div class="col-md-5">
         <app-reservation [br]="b"></app-reservation>
         <br><br>
+
       </div>
-    </div>
+
+      <mat-carousel
+        timings="250ms ease-in"
+        [autoplay]="true"
+        interval="5000"
+        color="accent"
+        maxWidth="auto"
+        proportion="100"
+        slides= "{{this.longSlider}}"
+        [loop]="true"
+        [hideArrows]="false"
+        [hideIndicators]="false"
+        [useKeyboard]="true"
+        [useMouseWheel]="false"
+        orientation="ltr"
+      >
+        <mat-carousel-slide
+          #matCarouselSlide
+          *ngFor="let slide of slides; let i = index"
+          [image]="slide.image"
+          overlayColor="#00000040"
+          [hideOverlay]="false"
+        ></mat-carousel-slide>
+      </mat-carousel>
 
     <br>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Personne min : {{b.npmin}}</h6>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Personne max : {{b.npmax}}</h6>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Chambre : {{b.nchambre}}</h6>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Salle de bain : {{b.nsdb}}</h6>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Superficie  : {{b.superficie}} m&#xB2;  </h6>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h6>Toilette : {{b.nwc}}</h6>
     </div>
     <div class="row">
@@ -51,4 +75,5 @@
       </div>
     </div>
 
+  </div>
   </div>

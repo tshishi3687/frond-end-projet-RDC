@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BienService} from '../service/bien.service';
-import {Bien} from '../objet';
+import {Bien, ImageBien} from '../objet';
+import {ImgService} from '../service/img.service';
 
 @Component({
   selector: 'app-all-bien',
@@ -10,14 +11,18 @@ import {Bien} from '../objet';
 export class AllBienComponent implements OnInit {
 
   constructor(
-    private bienService: BienService
+    private bienService: BienService,
+    private imagService: ImgService
   ) { }
 
-   listBien: Array<Bien> = [];
+  listBien: Array<Bien> = [];
+  image: string;
   @Output() bien: EventEmitter<any> = new EventEmitter();
+  @Input() tostring: string;
 
   ngOnInit(): void {
     this.voirToutBien();
+    console.log(this.tostring);
   }
 
   voirToutBien(): void{

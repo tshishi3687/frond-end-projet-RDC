@@ -1,26 +1,28 @@
 <div class="container">
-  <div><br><br><h6>Quoi de neuf:</h6></div>
-  <div *ngFor="let b of listBien">
-    <!--  <div class="pro"><label for="search"> Rechercher : </label>-->
-    <!--    <input type="text" [(ngModel)]="startingString" id="search">-->
-    <!--  </div>-->
 
-    <table class="table table-striped">
-      <thead>
-      <th>Type</th>
-      <th>Prix</th>
-      <th>Pers. Max.</th>
-      <th>Lieu</th>
-      <tbody>
-      <tr >
-        <td>{{b.type_bien.nom}}</td>
-        <td>{{b.prix}}€</td>
-        <td>{{b.npmax}} personnes maximum.</td>
-        <td>{{b.coordonnee.ville.nom_ville}} de la province de : {{b.coordonnee.ville.province.nomprovince}}</td>
-      </tr>
-      </tbody>
-    </table>
-    <app-info-bien   [b]="b" (infoBien)="startInfo($event)"></app-info-bien>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+    <div class="col" *ngFor="let b of listBien">
+      <div class="card shadow-sm">
+        <app-img-ala-one [b]="b"></app-img-ala-one>
+        <div class="card-body">
+          <h3 align="center">{{b.coordonnee.ville.nom_ville}} / {{b.coordonnee.ville.province.nomprovince}}</h3>
+          <h1 align="center">{{b.type_bien.nom}}</h1>
+          <p align="center">{{b.prix}}€/{{b.dureeLocation.duree}}</p>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols" align="center">
+            <div class="col">{{b.npmax}}/personne</div>
+            <div class="col">{{b.nchambre}}/chambre</div>
+            <div class="col">{{b.nsdb}}/salle bain</div>
+            <div class="col">{{b.superficie}}superficie</div>
+          </div>
+          <br>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Plus d'info ?</button>
+            </div>
+            <small class="text-muted">{{b.dateCreation}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>

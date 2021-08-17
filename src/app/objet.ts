@@ -1,4 +1,5 @@
 import {DatePipe} from '@angular/common';
+import {Byte} from '@angular/compiler/src/util';
 
 export class Province{
   id: number;
@@ -71,6 +72,7 @@ export class Bien{
   id: number;
   // tslint:disable-next-line:variable-name
   type_bien: TypeDeBien;
+  dureeLocation: DureeLocation;
   prix: number;
   npmin: number;
   npmax: number;
@@ -83,7 +85,6 @@ export class Bien{
   coordonnee: Coordonnee;
   appartient: Personne;
   dateCreation: Date;
-  superid: number;
 }
 
 export class Aladisposition{
@@ -107,14 +108,6 @@ export class Aladisposition{
   animaux: boolean;
 }
 
-// tslint:disable-next-line:class-name
-export class Lien_photo{
-  id: number;
-  image: ImageModel;
-  bien: Bien;
-  dateCreation: Date;
-  superid: number;
-}
 
 // tslint:disable-next-line:class-name
 export class Reservation{
@@ -129,9 +122,17 @@ export class Reservation{
   reserverPar: Personne;
 }
 
-export class ImageModel{
+export class ImageBien{
+  id: string;
+  name: string;
+  type: string;
+  picByte: Byte[];
+  bienid: Bien;
+}
+
+export class DureeLocation{
   id: number;
-  // tslint:disable-next-line:variable-name
-  nom_photo: string;
+  duree: string;
+  description: string;
 }
 

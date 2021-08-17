@@ -4,10 +4,11 @@ import {BienService} from '../../service/bien.service';
 import {VilleService} from '../../service/VilleService';
 import {TypeDeBienService} from '../../service/type-de-bien.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Bien, Coordonnee, ImageModel, Lien_photo, TypeDeBien, Ville} from '../../objet';
+import {Bien, Coordonnee, DureeLocation, ImageBien, TypeDeBien, Ville} from '../../objet';
 import {Router} from '@angular/router';
 import {LienPhotoService} from '../../service/lien-photo.service';
 import {ImgService} from '../../service/img.service';
+import {DureeLocationService} from '../../service/duree-location.service';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -19,6 +20,7 @@ export class CreationDeBienComponent implements OnInit {
   private idBien: number;
   constructor(
     private infoPersonne: LoginService,
+    private dureeLocationServive: DureeLocationService,
     private bienService: BienService,
     private villeService: VilleService,
     private typeDeBienService: TypeDeBienService,
@@ -31,9 +33,11 @@ export class CreationDeBienComponent implements OnInit {
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
+  listdureeLocation: Array<DureeLocation> = [];
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
+    dureeLocation: new FormControl('defaults'),
     prix: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(999999)]),
     npmin: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
     npmax: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
@@ -79,6 +83,8 @@ export class CreationDeBienComponent implements OnInit {
   ngOnInit(): void {
     this.voirVille();
     this.voirTypeDeBien();
+    this.voirdureeLocation();
+    console.log(this.listdureeLocation);
   }
 
   onFileSelected(event): void {
@@ -99,10 +105,15 @@ export class CreationDeBienComponent implements OnInit {
     // console.log(this.listVille);
   }
 
+  voirdureeLocation(): void{
+    // tslint:disable-next-line:max-line-length
+    this.dureeLocationServive.voirDureeLocation().subscribe(reponse => this.listdureeLocation = reponse.list, reponse => alert(this.error));
+  }
 
 
   voirTypeDeBien(): void{
     // @ts-ignore
+    // tslint:disable-next-line:max-line-length
     this.typeDeBienService.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse.list, reponse => alert(this.error));
   }
 
@@ -189,6 +200,7 @@ export class CreationDeBienComponent implements OnInit {
     const bien = new Bien();
     bien.id = 0;
     bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
+    bien.dureeLocation = this.listdureeLocation[this.BienForm.value.dureeLocation];
     bien.prix = this.BienForm.value.prix;
     bien.npmin = this.BienForm.value.npmin;
     bien.npmax = this.BienForm.value.npmax;

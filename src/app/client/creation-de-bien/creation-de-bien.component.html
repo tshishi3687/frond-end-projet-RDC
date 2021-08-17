@@ -24,6 +24,10 @@
           <option value="defaults" selected>Selectionez un type de bien</option>
           <option *ngFor="let t of listTypeDeBien; let i = index" value="{{i}}">{{t.nom}}</option>
         </select>
+        <select class="form-select" formControlName="dureeLocation"  aria-label="Default select example" >
+          <option value="defaults" selected>Selectionez une duréé de location</option>
+          <option *ngFor="let t of listdureeLocation; let i = index" value="{{i}}">{{t.duree}}</option>
+        </select>
         <input type="number" formControlName="prix" placeholder="le prix en € "><p>€</p>
         <input type="number" formControlName="npmin" placeholder="le nombre de personne minimum">
         <input type="number" formControlName="npmax" placeholder="le nombre de personne maximum">
