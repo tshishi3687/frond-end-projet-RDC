@@ -73,6 +73,7 @@ export class Bien{
   // tslint:disable-next-line:variable-name
   type_bien: TypeDeBien;
   dureeLocation: DureeLocation;
+  aladisposition: Aladisposition;
   prix: number;
   npmin: number;
   npmax: number;
@@ -80,7 +81,6 @@ export class Bien{
   nsdb: number;
   nwc: number;
   superficie: number;
-  aladisposition: string;
   description: string;
   coordonnee: Coordonnee;
   appartient: Personne;
@@ -88,6 +88,7 @@ export class Bien{
 }
 
 export class Aladisposition{
+  id: number;
   securite: boolean;
   wifi: boolean;
   television: boolean;
@@ -102,7 +103,7 @@ export class Aladisposition{
   terrasse: boolean;
   piscinePrive: boolean;
   piscineCommune: boolean;
-  vehicule: boolean;
+  voiture: boolean;
   moto: boolean;
   velo: boolean;
   animaux: boolean;
@@ -133,6 +134,6 @@ export class ImageBien{
 export class DureeLocation{
   id: number;
   duree: string;
-  description: string;
+  desciption: string;
 }
 

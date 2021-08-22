@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bien, ImageBien} from '../../objet';
 import {LoginService} from '../../service/login.service';
 import {ImgService} from '../../service/img.service';
@@ -30,8 +30,7 @@ export class ImgALaOneComponent implements OnInit {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < reponse.length; i++){
         // @ts-ignore
-        this.slides.push(
-          {image : 'data:image/jpeg;base64,' + reponse[i].picByte});
+        this.slides.push({image : 'data:image/jpeg;base64,' + reponse[i].picByte});
       }
     }, reponse => alert(this.error));
   }

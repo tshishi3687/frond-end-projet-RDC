@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {ReservationService} from '../../../service/reservation.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../../../service/login.service';
-import {Bien, Personne, Reservation} from '../../../objet';
 import {DatePipe, formatDate} from '@angular/common';
 import {EventEmitter} from 'events';
+import {Bien, Reservation} from '../../../objet';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ReservationService} from '../../../service/reservation.service';
+import {LoginService} from '../../../service/login.service';
 
 @Component({
   selector: 'app-reservation',
@@ -46,7 +46,7 @@ export class ReservationComponent implements OnInit {
       reservation.dda = this.reservationFrom.value.dda;
       reservation.ddd = this.reservationFrom.value.ddd;
       reservation.npersonne = this.reservationFrom.value.npersonne;
-      reservation.bien_reserve = this.br;
+      reservation.bien_reserve = this.personne.repBiendb();
       reservation.reserverPar = this.personne.client();
       this.service.ajouterReservation(reservation).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
     }else{
@@ -68,4 +68,11 @@ export class ReservationComponent implements OnInit {
     }
   }
 
+  reservationBoutton(): boolean{
+    if (this.personne.client().id === this.personne.repBiendb().appartient.id) {
+      return false;
+    }else{
+      return true;
+    }
+  }
 }

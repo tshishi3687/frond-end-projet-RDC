@@ -15,6 +15,7 @@ import {VoirBienComponent} from './client/voir-bien/voir-bien.component';
 import {LoginService} from './service/login.service';
 import {AllBienComponent} from './all-bien/all-bien.component';
 import {MesResercationComponent} from './client/mes-resercation/mes-resercation.component';
+import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,10 @@ const routes: Routes = [
   {
     path: 'allBien',
     component: AllBienComponent,
+  },
+  {
+    path: 'infoBien',
+    component: InfoBienComponent,
   }
 ];
 

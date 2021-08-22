@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ConnexionComponent} from '../login/connexion/connexion.component';
-import {Personne} from '../objet';
+import {Bien, Personne} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 export class LoginService implements CanActivate{
 
   private infoPersonne: Personne;
+  private bien: Bien;
   private isAdmin = false;
   private isClient = false;
   private exist = false;
@@ -39,6 +40,19 @@ export class LoginService implements CanActivate{
         this.route.navigateByUrl('/voirBienPersonne');
         break;
     }
+  }
+
+  // tslint:disable-next-line:typedef
+  biendb(bien: Bien){
+    this.bien = bien;
+    sessionStorage.setItem('bien-details', JSON.stringify(this.bien));
+  }
+
+  repBiendb(): Bien{
+    if (this.isAuthenticated()) {
+        const bien = JSON.parse(sessionStorage.getItem('bien-details'));
+        return bien as Bien;
+      }
   }
 
   client(): Personne{

@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bien, ImageBien} from '../../objet';
-import {LoginService} from '../../service/login.service';
 import {ImgService} from '../../service/img.service';
+import {LoginService} from '../../service/login.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-info-bien',
@@ -12,8 +13,9 @@ export class InfoBienComponent implements OnInit {
 
   @Output() infoBien: EventEmitter<any> = new EventEmitter();
   @Input() b: Bien;
-  constructor( private service: LoginService,
-               private imagService: ImgService) { }
+  constructor( private serv: LoginService,
+               private imagService: ImgService,
+               public dialogRef: MatDialogRef<InfoBienComponent>) { }
 
    echange = false;
   private error = 'Il y a eu un probleme :(';
@@ -22,11 +24,9 @@ export class InfoBienComponent implements OnInit {
   retrievedImage: Array<string> = [];
   slides: [] = [];
   longSlider: number;
-  // tslint:disable-next-line:new-parens
-  @Output() toString: EventEmitter<any> = new EventEmitter;
+  service = this.serv;
 
   ngOnInit(): void {
-    this.rechercheImagesBien();
   }
 
   rechercheImagesBien(): void{
@@ -36,8 +36,8 @@ export class InfoBienComponent implements OnInit {
       this.longSlider = reponse.length;
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < reponse.length; i++){
-        this.slides.push(
-          {'image': 'data:image/jpeg;base64,' + reponse[i].picByte});
+        // @ts-ignore
+        this.slides.push({image : 'data:image/jpeg;base64,' + reponse[i].picByte});
       }
     }, reponse => alert(this.error));
   }
@@ -55,5 +55,9 @@ export class InfoBienComponent implements OnInit {
       this.echange = false;
       return this.echange;
     }
+  }
+
+  onClose(): void{
+    this.dialogRef.close();
   }
 }

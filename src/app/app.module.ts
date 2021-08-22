@@ -27,14 +27,20 @@ import { CreationDeBienComponent } from './client/creation-de-bien/creation-de-b
 import { VoirBienComponent } from './client/voir-bien/voir-bien.component';
 import { VoirBienPipe } from './client/voir-bien/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
-import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
-import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
 import { MesResercationComponent } from './client/mes-resercation/mes-resercation.component';
 import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-reservation/info-mes-reservation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2/lib/sweetalert2.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
+import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
+import { PropriettaireComponent } from './login/inscription/propriettaire/propriettaire.component';
+import { LocataireComponent } from './login/inscription/locataire/locataire.component';
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +70,8 @@ import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component
     MesResercationComponent,
     InfoMesReservationComponent,
     ImgALaOneComponent,
+    PropriettaireComponent,
+    LocataireComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,10 +81,12 @@ import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCarouselModule.forRoot()
+    MatCarouselModule.forRoot(),
+    MatDialogModule,
   ],
   exports: [],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [InfoBienComponent]
 })
 export class AppModule { }

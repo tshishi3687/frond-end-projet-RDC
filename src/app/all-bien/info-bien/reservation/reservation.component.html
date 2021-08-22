@@ -1,19 +1,22 @@
-<h4><button type="submit" class="btn btn-success" *ngIf="btnReservation" (click)="changement()">RESERVER</button></h4>
-<div *ngIf="cadreReservation" >
-  <form [formGroup]="reservationFrom" >
-    <p *ngIf="formValide" class="text-center">Tous les champs sont OBLIBATOIRE</p>
-    <div class="form-group">
-      <label ><h6>Date d'arrivée</h6></label>
-      <input type="date" formControlName="dda" class="form-control" >
-      <label ><h6>Date de départ</h6></label>
-      <input type="date" formControlName="ddd" class="form-control" >
-      <label ><h6>Nombre de personne qui occupera le bien</h6></label>
-      <input type="number" formControlName="npersonne" class="form-control" >
-      <br>
-      <button type="submit" class="btn btn-primary" (click)="creerReservation()"><h6>Confirmer la réservation</h6></button>
-      -
-      <button type="submit" class="btn btn-warning" (click)="changement()"><h6>Annuler</h6></button>
-    </div>
-  </form>
+<div *ngIf="reservationBoutton()">
+  <h4><button type="submit" class="btn btn-success" *ngIf="btnReservation" (click)="changement()"> JE RESERVE </button></h4>
+  <div *ngIf="cadreReservation" >
+    <form [formGroup]="reservationFrom" >
+      <p *ngIf="formValide" class="text-center">Tous les champs sont OBLIBATOIRE</p>
+      <div class="form-group">
+        <label ><h6>Date d'arrivée</h6></label>
+        <input type="date" formControlName="dda" class="form-control" >
+        <label ><h6>Date de départ</h6></label>
+        <input type="date" formControlName="ddd" class="form-control" >
+        <label ><h6>Nombre de personne qui occupera le bien</h6></label>
+        <input type="number" formControlName="npersonne" class="form-control" >
+        <br>
+        <button type="submit" class="btn btn-primary" (click)="creerReservation()"><h6>Confirmer la réservation</h6></button>
+        -
+        <button type="submit" class="btn btn-warning" (click)="changement()"><h6>Annuler</h6></button>
+      </div>
+    </form>
+  </div>
 </div>
+
 

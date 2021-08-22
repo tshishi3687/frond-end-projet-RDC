@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Bien, Personne} from '../../objet';
 import {LoginService} from '../../service/login.service';
 import {BienService} from '../../service/bien.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {InfoBienComponent} from '../../all-bien/info-bien/info-bien.component';
 
 @Component({
   selector: 'app-voir-bien',
@@ -12,12 +14,15 @@ export class VoirBienComponent implements OnInit {
 
   constructor(
     private infoPersonne: LoginService,
-    private bienService: BienService
+    private bienService: BienService,
+    private dialog: MatDialog
   ) { }
   startingString = '';
+  service = this.infoPersonne;
   private error = 'Il y a eu un probleme :(';
   private echange = false;
   listBien: Array<Bien> = [];
+  peuxReserver = true;
 
   ngOnInit(): void {
     this.voirBienPersonne();
@@ -44,5 +49,17 @@ export class VoirBienComponent implements OnInit {
       this.echange = false;
       return this.echange;
     }
+  }
+
+
+  // tslint:disable-next-line:typedef
+  informationbient(b: Bien){
+    this.service.biendb(b);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(InfoBienComponent, dialogConfig);
   }
 }

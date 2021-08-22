@@ -4,7 +4,7 @@ import {BienService} from '../../service/bien.service';
 import {VilleService} from '../../service/VilleService';
 import {TypeDeBienService} from '../../service/type-de-bien.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Bien, Coordonnee, DureeLocation, ImageBien, TypeDeBien, Ville} from '../../objet';
+import {Aladisposition, Bien, Coordonnee, DureeLocation, ImageBien, TypeDeBien, Ville} from '../../objet';
 import {Router} from '@angular/router';
 import {LienPhotoService} from '../../service/lien-photo.service';
 import {ImgService} from '../../service/img.service';
@@ -33,7 +33,7 @@ export class CreationDeBienComponent implements OnInit {
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
-  listdureeLocation: Array<DureeLocation> = [];
+  listDureeLocation: Array<DureeLocation> = [];
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
@@ -44,7 +44,7 @@ export class CreationDeBienComponent implements OnInit {
     nchambre: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     nsdb: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     nwc: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
-    superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(300)]),
+    superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(10000)]),
     description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(450)]),
     lien_photo: new FormControl(),
     coordonneeVille: new FormControl('defaults', [Validators.required]),
@@ -84,7 +84,6 @@ export class CreationDeBienComponent implements OnInit {
     this.voirVille();
     this.voirTypeDeBien();
     this.voirdureeLocation();
-    console.log(this.listdureeLocation);
   }
 
   onFileSelected(event): void {
@@ -105,16 +104,16 @@ export class CreationDeBienComponent implements OnInit {
     // console.log(this.listVille);
   }
 
-  voirdureeLocation(): void{
-    // tslint:disable-next-line:max-line-length
-    this.dureeLocationServive.voirDureeLocation().subscribe(reponse => this.listdureeLocation = reponse.list, reponse => alert(this.error));
-  }
-
-
   voirTypeDeBien(): void{
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
     this.typeDeBienService.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse.list, reponse => alert(this.error));
+  }
+
+  voirdureeLocation(): void{
+    // @ts-ignore
+    // tslint:disable-next-line:max-line-length
+    this.dureeLocationServive.voirDureeLocation().subscribe(reponse => this.listDureeLocation = reponse.list, reponse => alert(this.error));
   }
 
   ajouterBien(): void{
@@ -128,79 +127,34 @@ export class CreationDeBienComponent implements OnInit {
     coordonnee.email = this.BienForm.value.coordonneeEmail;
     coordonnee.telephone = this.BienForm.value.coordonneeTelephone;
 
-    if (this.BienForm.value.securite) {
-      this.BienForm.value.securite = 'securite';
-    }
-    if (this.BienForm.value.wifi) {
-      this.BienForm.value.wifi = 'wifi';
-    }
-    if (this.BienForm.value.television) {
-      this.BienForm.value.television = 'television';
-    }
-    if (this.BienForm.value.vesselle) {
-      this.BienForm.value.vesselle = 'vesselle';
-    }
-    if (this.BienForm.value.literie) {
-      this.BienForm.value.literie = 'literie';
-    }
-    if (this.BienForm.value.lingeMaison) {
-      this.BienForm.value.lingeMaison = 'lingeMaison';
-    }
-    if (this.BienForm.value.eauChaude) {
-      this.BienForm.value.eauChaude = 'eau Chaude';
-    }
-    if (this.BienForm.value.eauFroide) {
-      this.BienForm.value.eauFroide = 'eau Froide';
-    }
-    if (this.BienForm.value.eauPotable) {
-      this.BienForm.value.eauPotable = 'eauPotable';
-    }
-    if (this.BienForm.value.jardin) {
-      this.BienForm.value.jardin = 'jardin';
-    }
-    if (this.BienForm.value.cour) {
-      this.BienForm.value.cour = 'cour';
-    }
-    if (this.BienForm.value.terrasse) {
-      this.BienForm.value.terrasse = 'terrasse';
-    }
-    if (this.BienForm.value.piscinePrive) {
-      this.BienForm.value.piscinePrive = 'piscinePrive';
-    }
-    if (this.BienForm.value.piscineCommune) {
-      this.BienForm.value.piscineCommune = 'piscineCommune';
-    }
-    if (this.BienForm.value.vehicule) {
-      this.BienForm.value.vehicule = 'vehicule';
-    }
-    if (this.BienForm.value.animaux) {
-      this.BienForm.value.animaux = 'animaux';
-    }
-
-    this.aladisposition = '' +
-      this.BienForm.value.securite + '' +
-      this.BienForm.value.wifi + '' +
-      this.BienForm.value.television + '' +
-      this.BienForm.value.vesselle + '' +
-      this.BienForm.value.literie + '' +
-      this.BienForm.value.lingeMaison + '' +
-      this.BienForm.value.eauChaude + '' +
-      this.BienForm.value.eauFroide + '' +
-      this.BienForm.value.eauPotable + '' +
-      this.BienForm.value.jardin + '' +
-      this.BienForm.value.cour + '' +
-      this.BienForm.value.terrasse + '' +
-      this.BienForm.value.piscinePrive + '' +
-      this.BienForm.value.piscineCommune + '' +
-      this.BienForm.value.vehicule + '' +
-      this.BienForm.value.animaux;
+    const aladispo = new Aladisposition();
+    aladispo.id = 0;
+    aladispo.securite = this.BienForm.value.securite;
+    aladispo.wifi = this.BienForm.value.wifi;
+    aladispo.television = this.BienForm.value.television;
+    aladispo.vesselle = this.BienForm.value.vesselle;
+    aladispo.literie = this.BienForm.value.literie;
+    aladispo.lingeMaison = this.BienForm.value.lingeMaison;
+    aladispo.eauChaude = this.BienForm.value.eauChaude;
+    aladispo.eauFroide = this.BienForm.value.eauFroide;
+    aladispo.eauPotable = this.BienForm.value.eauPotable;
+    aladispo.jardin = this.BienForm.value.jardin;
+    aladispo.cour = this.BienForm.value.cour;
+    aladispo.terrasse = this.BienForm.value.terrasse;
+    aladispo.piscinePrive = this.BienForm.value.piscinePrive;
+    aladispo.piscineCommune = this.BienForm.value.piscineCommune;
+    aladispo.voiture = this.BienForm.value.vehicule;
+    aladispo.moto = this.BienForm.value.moto;
+    aladispo.velo = this.BienForm.value.velo;
+    aladispo.animaux = this.BienForm.value.animaux;
 
     const img = this.BienForm.value.file;
 
     const bien = new Bien();
     bien.id = 0;
     bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
-    bien.dureeLocation = this.listdureeLocation[this.BienForm.value.dureeLocation];
+    bien.dureeLocation = this.listDureeLocation[this.BienForm.value.dureeLocation];
+    bien.aladisposition = aladispo;
     bien.prix = this.BienForm.value.prix;
     bien.npmin = this.BienForm.value.npmin;
     bien.npmax = this.BienForm.value.npmax;
@@ -208,7 +162,6 @@ export class CreationDeBienComponent implements OnInit {
     bien.nsdb = this.BienForm.value.nsdb;
     bien.nwc = this.BienForm.value.nwc;
     bien.superficie = this.BienForm.value.superficie;
-    bien.aladisposition = this.aladisposition;
     bien.description = this.BienForm.value.description;
     bien.coordonnee = coordonnee;
     bien.appartient = this.infoPersonne.client();

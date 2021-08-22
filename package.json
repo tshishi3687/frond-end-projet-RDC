@@ -22,8 +22,10 @@
     "@angular/platform-browser-dynamic": "~11.0.6",
     "@angular/router": "~11.0.6",
     "@ngmodule/material-carousel": "^0.6.0",
+    "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^5.0.0-beta1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.1.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
