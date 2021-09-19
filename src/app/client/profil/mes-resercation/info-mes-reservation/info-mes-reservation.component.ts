@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Bien, Reservation} from '../../../objet';
-import {LoginService} from '../../../service/login.service';
+import {Bien, Reservation} from '../../../../objet';
+import {LoginService} from '../../../../service/login.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-info-mes-reservation',
@@ -12,7 +13,9 @@ export class InfoMesReservationComponent implements OnInit {
   echange = false;
   @Input() r: Reservation;
 
-  constructor(private service: LoginService) { }
+  constructor(private service: LoginService,
+              public dialogRef: MatDialogRef<InfoMesReservationComponent>) { }
+  ser = this.service;
 
   ngOnInit(): void {
   }
@@ -30,6 +33,9 @@ export class InfoMesReservationComponent implements OnInit {
       this.echange = false;
       return this.echange;
     }
+  }
+  onClose(): void{
+    this.dialogRef.close();
   }
 
 }

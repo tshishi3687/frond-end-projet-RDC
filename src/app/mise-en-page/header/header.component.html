@@ -1,0 +1,34 @@
+<div class="b-example-divider"></div>
+<div >
+  <div class="container my-5">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg" >
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1">Bienvenue sur Mobembo.cd</h1>
+        <h2 class="display-4 fw-bold lh-2">Cette application est un travail de fin d'étude de bachelier en imformatique de gestion.</h2>
+        <p>De TshishiCréation</p>
+        <br>
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3" *ngIf="siconnecte()">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" (click)="bntInscription()">Inscription</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="bntConnection()">Connexion</button>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg" align="center">
+        <img class="rounded-lg-3" src="{{this.logo}}"  width="80%" height="80%" alt="TSHISHI création">
+      </div>
+    </div>
+    <app-profil></app-profil>
+  </div>
+</div>
+
+<div class="b-example-divider" *ngIf="siconnecte()">
+  <app-inscription *ngIf="this.inscription"></app-inscription>
+  <app-connexion *ngIf="this.connexion"></app-connexion>
+  <app-all-bien></app-all-bien>
+</div>
+<router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
+<br>
+<br>
+<app-footer></app-footer>
+<br>
+<br>

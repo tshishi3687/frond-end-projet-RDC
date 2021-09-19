@@ -1,0 +1,27 @@
+<div class="container fadeInDown" *ngIf="verifSiCo()">
+  <div id="content" class="content p-0">
+    <div class="profile-header">
+      <div class="profile-header-cover"></div>
+
+      <div class="profile-header-content">
+        <div class="profile-header-img">
+          <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" />
+        </div>
+
+        <div class="profile-header-info">
+          <h4 class="m-t-sm">{{donneeClient.client().nom}} {{donneeClient.client().prenom}}</h4>
+          <p class="m-b-sm">{{donneeClient.client().roll.nomRoll}}</p>
+          <a href="#" class="btn btn-xs btn-info mb-4">Edit Profile</a>
+        </div>
+        <app-menu></app-menu>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <div class="row row-space-20">
+        <div class="col-md-8">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

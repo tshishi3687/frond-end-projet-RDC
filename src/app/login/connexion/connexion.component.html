@@ -1,29 +1,30 @@
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<div class="b-example-divider"></div>
 
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-
-    <p *ngIf="nonValide()">L'EMAIL OU MOT DE PASSE EST INCORECTE</p>
-    <!-- Login Form -->
-    <form [formGroup]="logForm">
-      <h6>BIENVENUE</h6>
-      <h3>Mobembo.cd</h3>
-      <h6>connection</h6>
-      <input type="text" formControlName="email"  id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="password" formControlName="mdp" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
-    </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" (click)="inscription()">Inscription </a>
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Message du mois :</h1>
+      <p class="col-lg-10 fs-4">
+        Lorsque tu aperçois le palmier, le palmier t'avait déjà vu.
+        Citation africaine ;</p>
+      <p>La grammaire wolofe (1826).</p>
     </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
 
+          <!-- Login Form -->
+          <form [formGroup]="logForm">
+            <h3 class="text-danger" *ngIf="nonValide()">Mot de passe ou E-mail invalide</h3>
+            <input type="email" formControlName="email"   class="fadeIn second" name="email" placeholder="Votre E-mail">
+            <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
+            <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
+          </form>
+
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-  <app-all-bien></app-all-bien>
+<div class="b-example-divider"></div>
+
 

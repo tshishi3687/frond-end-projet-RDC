@@ -10,12 +10,12 @@ import {Router, Routes} from '@angular/router';
 export class AdminComponent implements OnInit {
   constructor(private sercice: LoginService, private route: Router) { }
 
-  private admin: boolean = false;
+  private admin = false;
 
   ngOnInit(): void {
   }
   verif(): boolean {
-    if (this.sercice.client().status === 'admin'){
+    if (this.sercice.client().roll.nomRoll === 'Admin'){
       return true;
     }
     else{

@@ -12,13 +12,7 @@
       <input type="number" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
       <p *ngIf="verifExiste()">Une personne est déjà inscrit avec cette adresse email !</p>
       <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
-      <input type="submit" class="fadeIn fourth" value="Connexion" (click)="ajouterPersonne()">
+      <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()">
     </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" (click)="redirection()">Connexion</a>
-    </div>
-
   </div>
 </div>

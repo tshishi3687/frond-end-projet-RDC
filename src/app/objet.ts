@@ -54,18 +54,19 @@ export class Service{
   dateCreation: Date;
   superid: number;
 }
-
+export class Roll{
+  id: number;
+  nomRoll: string;
+}
 export class Personne{
   id: number;
   nom: string;
   prenom: string;
   ddn: DatePipe;
-  mdp: string;
-  telephone: number;
-  email: string;
-  status: string;
-  dateCreation: Date;
-  superid: number;
+  roll: Roll;
+  contactUser: ContactUser;
+  mdp: Mdp;
+  ddj: DatePipe;
 }
 
 export class Bien{
@@ -85,6 +86,7 @@ export class Bien{
   coordonnee: Coordonnee;
   appartient: Personne;
   dateCreation: Date;
+  likes: number;
 }
 
 export class Aladisposition{
@@ -109,6 +111,16 @@ export class Aladisposition{
   animaux: boolean;
 }
 
+export class Mdp{
+  mdp: string;
+  mail: string;
+}
+export class ContactUser{
+  id: number;
+  email: string;
+  telephone: string;
+  appartienA: Personne;
+}
 
 // tslint:disable-next-line:class-name
 export class Reservation{
@@ -136,4 +148,10 @@ export class DureeLocation{
   duree: string;
   desciption: string;
 }
+
+export class LikeBien{
+  personneSimplifierDTO: Personne;
+  bienDTO: Bien;
+}
+
 

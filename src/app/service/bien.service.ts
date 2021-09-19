@@ -45,14 +45,4 @@ export class BienService {
     return this.client.delete('http://localhost:8081/bien/' + id);
   }
 
-  // tslint:disable-next-line:typedef
-  modifierBien(id, bien){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
-
-    return this.client.put('http://localhost:8081/bien/' + id, bien, httpOptions);
-  }
 }

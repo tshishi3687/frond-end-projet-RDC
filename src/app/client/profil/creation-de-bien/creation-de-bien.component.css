@@ -1,7 +1,6 @@
 input.ng-invalid.ng-touched{
   border: 3px solid red;
 }
-
 input.ng-valid.ng-touched{
   border: 3px solid green;
 }
@@ -13,3 +12,4 @@ input.ng-valid.ng-touched{
   padding: 8px 12px;
   background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
 }
+

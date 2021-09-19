@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Personne} from '../../../objet';
+import {ContactUser, Mdp, Personne, Roll} from '../../../objet';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PersonneService} from '../../../service/personne.service';
@@ -35,18 +35,31 @@ export class LocataireComponent implements OnInit {
 
   ajouterPersonne(): void{
     if (this.PersonneForm.valid){
+
+      const roll = new Roll();
+      roll.id = 0;
+      roll.nomRoll = 'proprietaire';
+
+      const contactUser = new ContactUser();
+      contactUser.id = 0;
+      contactUser.email = this.PersonneForm.value.Email;
+      contactUser.telephone = this.PersonneForm.value.Telephone;
+
+      const mdp = new Mdp();
+      mdp.mdp = this.PersonneForm.value.Password;
+      mdp.mail = this.PersonneForm.value.Email;
+
       const personne = new Personne();
       personne.id = 0;
       personne.nom = this.PersonneForm.value.Nom;
       personne.prenom = this.PersonneForm.value.Prenom;
       personne.ddn = this.PersonneForm.value.Ddn;
-      personne.mdp = this.PersonneForm.value.Password;
-      personne.telephone = this.PersonneForm.value.Telephone;
-      personne.email = this.PersonneForm.value.Email;
-      personne.status = 'locataire';
-      // tslint:disable-next-line:max-line-length
+      personne.roll = roll;
+      personne.contactUser = contactUser;
+      personne.mdp = mdp;
+
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
-      this.personneService.voirSiExiste(personne).subscribe((reponse: boolean) => {
+      this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
         // tslint:disable-next-line:no-conditional-assignment
         if (reponse ){
           this.personneExiste = true;

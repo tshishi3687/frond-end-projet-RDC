@@ -27,4 +27,8 @@ export class MenuComponent implements OnInit {
   verifSiCo(): boolean{
     return this.service.isAuthenticated();
   }
+
+  verifsiloca(): boolean{
+    return !this.service.isLocataireRoll();
+  }
 }

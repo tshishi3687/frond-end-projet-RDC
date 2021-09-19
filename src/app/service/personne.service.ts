@@ -16,7 +16,7 @@ export class PersonneService {
       })
     };
 
-    return this.client.post('http://localhost:8081/personne', personne, httpOptions);
+    return this.client.post('http://localhost:8081/personne/creat', personne, httpOptions);
   }
 
   // tslint:disable-next-line:typedef
@@ -39,5 +39,16 @@ export class PersonneService {
     };
 
     return this.client.post('http://localhost:8081/personne/email', personne);
+  }
+
+  // tslint:disable-next-line:typedef
+  like(likeBien){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/personne/likes', likeBien, httpOptions);
   }
 }

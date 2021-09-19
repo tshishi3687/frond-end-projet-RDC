@@ -5,11 +5,6 @@ html {
   background-color: #56baed;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
-
 a {
   color: #92badd;
   display:inline-block;
@@ -25,10 +20,6 @@ h2 {
   display:inline-block;
   margin: 40px 8px 10px 8px;
   color: #cccccc;
-}
-
-P {
-  border: 3px solid red;
 }
 
 /* STRUCTURE */
@@ -262,3 +253,7 @@ input::placeholder {
 #icon {
   width:60%;
 }
+input.ng-invalid.ng-touched{
+  border: 3px solid red;
+}
+

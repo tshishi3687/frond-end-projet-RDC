@@ -1,0 +1,29 @@
+
+<h1 align="center">Mes réservation(s)</h1>
+<br>
+<br>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+    <div class="col" *ngFor="let r of listreservation">
+      <div class="card shadow-sm">
+        <app-img-ala-one [b]="r.bien_reserve"></app-img-ala-one>
+        <div class="card-body">
+          <h3 align="center">{{r.bien_reserve.coordonnee.ville.nom_ville}} / {{r.bien_reserve.coordonnee.ville.province.nomprovince}}</h3>
+          <h1 align="center">{{r.bien_reserve.type_bien.nom}}</h1>
+          <p align="center">{{r.bien_reserve.prix}}€/{{r.bien_reserve.dureeLocation.duree}}</p>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols" align="center">
+            <div class="col">{{r.bien_reserve.npmax}}/personne</div>
+            <div class="col">{{r.bien_reserve.nchambre}}/chambre</div>
+            <div class="col">{{r.bien_reserve.nsdb}}/salle bain</div>
+            <div class="col">{{r.bien_reserve.superficie}}superficie</div>
+          </div>
+          <br>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button *ngIf="this.personne.isAuthenticated()" type="button"  class="btn btn-sm btn-outline-secondary" (click)="informationbient(r)">Plus d'info ?</button>
+            </div>
+            <small class="text-muted">{{r.bien_reserve.dateCreation}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

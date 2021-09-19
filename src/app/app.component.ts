@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Personne} from './objet';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +7,5 @@ import {Personne} from './objet';
 })
 export class AppComponent {
   title = 'untitled';
+
 }

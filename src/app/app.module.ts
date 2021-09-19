@@ -23,21 +23,30 @@ import { ConnexionComponent } from './login/connexion/connexion.component';
 import { InscriptionComponent } from './login/inscription/inscription.component';
 import { ModifiermdpComponent } from './login/modifiermdp/modifiermdp.component';
 import { ClientComponent } from './client/client.component';
-import { CreationDeBienComponent } from './client/creation-de-bien/creation-de-bien.component';
+import { CreationDeBienComponent } from './client/profil/creation-de-bien/creation-de-bien.component';
 import { VoirBienComponent } from './client/voir-bien/voir-bien.component';
 import { VoirBienPipe } from './client/voir-bien/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
-import { MesResercationComponent } from './client/mes-resercation/mes-resercation.component';
-import { InfoMesReservationComponent } from './client/mes-resercation/info-mes-reservation/info-mes-reservation.component';
+import { MesResercationComponent } from './client/profil/mes-resercation/mes-resercation.component';
+import { InfoMesReservationComponent } from './client/profil/mes-resercation/info-mes-reservation/info-mes-reservation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2/lib/sweetalert2.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
 import { ReservationComponent } from './all-bien/info-bien/reservation/reservation.component';
 import { PropriettaireComponent } from './login/inscription/propriettaire/propriettaire.component';
 import { LocataireComponent } from './login/inscription/locataire/locataire.component';
+import { MiseEnPageComponent } from './mise-en-page/mise-en-page.component';
+import { HeaderComponent } from './mise-en-page/header/header.component';
+import { SeLoguerComponent } from './login/se-loguer/se-loguer.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { ProfilComponent } from './client/profil/profil.component';
+import { FooterComponent } from './mise-en-page/footer/footer.component';
+import { AllBienPipe } from './all-bien/all-bien.pipe';
+import { VillesPipe } from './all-bien/villes.pipe';
+import { TypeBiensPipe } from './all-bien/type-biens.pipe';
 
 // @ts-ignore
 // @ts-ignore
@@ -72,6 +81,14 @@ import { LocataireComponent } from './login/inscription/locataire/locataire.comp
     ImgALaOneComponent,
     PropriettaireComponent,
     LocataireComponent,
+    MiseEnPageComponent,
+    HeaderComponent,
+    SeLoguerComponent,
+    ProfilComponent,
+    FooterComponent,
+    AllBienPipe,
+    VillesPipe,
+    TypeBiensPipe,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +100,8 @@ import { LocataireComponent } from './login/inscription/locataire/locataire.comp
     BrowserAnimationsModule,
     MatCarouselModule.forRoot(),
     MatDialogModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   exports: [],
   providers: [],

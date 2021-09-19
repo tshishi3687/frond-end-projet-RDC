@@ -10,23 +10,28 @@ import {LoginComponent} from './login/login.component';
 import {ConnexionComponent} from './login/connexion/connexion.component';
 import {InscriptionComponent} from './login/inscription/inscription.component';
 import {ModifiermdpComponent} from './login/modifiermdp/modifiermdp.component';
-import {CreationDeBienComponent} from './client/creation-de-bien/creation-de-bien.component';
+import {CreationDeBienComponent} from './client/profil/creation-de-bien/creation-de-bien.component';
 import {VoirBienComponent} from './client/voir-bien/voir-bien.component';
 import {LoginService} from './service/login.service';
 import {AllBienComponent} from './all-bien/all-bien.component';
-import {MesResercationComponent} from './client/mes-resercation/mes-resercation.component';
+import {MesResercationComponent} from './client/profil/mes-resercation/mes-resercation.component';
 import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
+import {ProfilComponent} from './client/profil/profil.component';
+import {AppComponent} from './app.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'connexion',
-    pathMatch: 'full',
-    canActivate: [LoginService]
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
-    path: 'connexion',
-    component: ConnexionComponent
+    path: 'home',
+    component: AppComponent
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent
   },
   {
     path: 'inscription',

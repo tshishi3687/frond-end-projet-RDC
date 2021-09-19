@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {max} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class ImgService {
 
   // tslint:disable-next-line:typedef
   ajouterImage(img) {
+    // @ts-ignore
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*'

@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, PACKAGE_ROOT_URL} from '@angular/core';
-import {Personne} from '../../objet';
+import {Mdp, Personne} from '../../objet';
 import {PersonneService} from '../../service/personne.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router, Routes} from '@angular/router';
@@ -40,11 +40,11 @@ export class ConnexionComponent implements OnInit {
   }
 
   verrif(): void {
-    const personne = new Personne();
-    personne.email = this.logForm.value.email;
-    personne.mdp = this.logForm.value.mdp;
+    const mdp = new Mdp();
+    mdp.mail = this.logForm.value.email;
+    mdp.mdp = this.logForm.value.mdp;
     // tslint:disable-next-line:max-line-length
-    this.personneService.voirPersonne(personne).subscribe((reponse: Personne) => ((this.maPersonne = reponse), this.logService.redirection(this.maPersonne)), reponse => alert(this.error));
+    this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => ((this.maPersonne = reponse), this.logService.redirection(this.maPersonne)), reponse => alert(this.error));
   }
 
 

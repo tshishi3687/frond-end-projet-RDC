@@ -19,8 +19,11 @@ export class AllBienComponent implements OnInit {
     private imagService: ImgService,
     private dialog: MatDialog
   ) { }
+  ville = '';
+  province = '';
+  typeBien = '';
 
-  listBien: Array<Bien> = [];
+  @Output() listBien: Array<Bien> = [];
   image: string;
   allfaut = false;
   @Output() bien: EventEmitter<any> = new EventEmitter();
@@ -28,7 +31,6 @@ export class AllBienComponent implements OnInit {
 
   ngOnInit(): void {
     this.voirToutBien();
-    console.log(this.tostring);
   }
 
   voirToutBien(): void{
@@ -38,13 +40,18 @@ export class AllBienComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   informationbient(b: Bien){
-    this.service.biendb(b);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.height = '100%';
-    this.dialog.open(InfoBienComponent, dialogConfig);
+    if (this.service.isAuthenticated()){
+      this.service.biendb(b);
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = '100%';
+      dialogConfig.height = '100%';
+      this.dialog.open(InfoBienComponent, dialogConfig);
+    }else{
+      alert('vous devez être connecter pour en voir plus');
+    }
+
   }
 
   envoyerBien(bien: Bien): void{

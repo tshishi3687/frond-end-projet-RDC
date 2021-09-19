@@ -20,7 +20,7 @@ export class ProvinceComponent implements OnInit {
 
   listProvince: Array<Province> = [];
 
-  startingString: string = '';
+  startingString = '';
 
   ngOnInit(): void {
     this.voirProvince();
@@ -42,7 +42,7 @@ export class ProvinceComponent implements OnInit {
   voirProvince(){
     // @ts-ignore
     this.service.voirProvince().subscribe(reponse => this.listProvince = reponse.list , reponse => alert(this.error));
-    console.log(this.listProvince);
+
   }
 
   // tslint:disable-next-line:typedef
