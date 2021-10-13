@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
+import { MenuComponent } from './mise-en-page/menu/menu.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
@@ -24,8 +24,8 @@ import { InscriptionComponent } from './login/inscription/inscription.component'
 import { ModifiermdpComponent } from './login/modifiermdp/modifiermdp.component';
 import { ClientComponent } from './client/client.component';
 import { CreationDeBienComponent } from './client/profil/creation-de-bien/creation-de-bien.component';
-import { VoirBienComponent } from './client/voir-bien/voir-bien.component';
-import { VoirBienPipe } from './client/voir-bien/voir-bien.pipe';
+import { VoirBienComponent } from './client/profil/voir-bien/voir-bien.component';
+import { VoirBienPipe } from './client/profil/voir-bien/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
 import { MesResercationComponent } from './client/profil/mes-resercation/mes-resercation.component';
 import { InfoMesReservationComponent } from './client/profil/mes-resercation/info-mes-reservation/info-mes-reservation.component';
@@ -47,6 +47,15 @@ import { FooterComponent } from './mise-en-page/footer/footer.component';
 import { AllBienPipe } from './all-bien/all-bien.pipe';
 import { VillesPipe } from './all-bien/villes.pipe';
 import { TypeBiensPipe } from './all-bien/type-biens.pipe';
+import { ImgHeaderComponent } from './mise-en-page/header/img-header/img-header.component';
+import { DemandeComponent } from './all-bien/info-bien/demande/demande.component';
+import { MesDemandesComponent } from './client/profil/mes-demandes/mes-demandes.component';
+import { DemandeRecuComponent } from './client/profil/demande-recu/demande-recu.component';
+import { MenuProfilComponent } from './mise-en-page/menu-profil/menu-profil.component';
+import { InfoMesDemandesComponent } from './client/profil/demande-recu/info-mes-demandes/info-mes-demandes.component';
+import { CommunicationsComponent } from './communications/communications.component';
+import { DangerComponent } from './communications/danger/danger.component';
+import { SuppressionBienComponent } from './communications/danger/suppression-bien/suppression-bien.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -89,6 +98,15 @@ import { TypeBiensPipe } from './all-bien/type-biens.pipe';
     AllBienPipe,
     VillesPipe,
     TypeBiensPipe,
+    ImgHeaderComponent,
+    DemandeComponent,
+    MesDemandesComponent,
+    DemandeRecuComponent,
+    MenuProfilComponent,
+    InfoMesDemandesComponent,
+    CommunicationsComponent,
+    DangerComponent,
+    SuppressionBienComponent,
   ],
   imports: [
     BrowserModule,

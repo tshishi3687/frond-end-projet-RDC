@@ -7,17 +7,18 @@ import {TypeDeBienComponent} from './admin/type-de-bien/type-de-bien.component';
 import {TypeDeSeviceComponent} from './admin/type-de-sevice/type-de-sevice.component';
 import {ServiceComponent} from './admin/service/service.component';
 import {LoginComponent} from './login/login.component';
-import {ConnexionComponent} from './login/connexion/connexion.component';
 import {InscriptionComponent} from './login/inscription/inscription.component';
 import {ModifiermdpComponent} from './login/modifiermdp/modifiermdp.component';
 import {CreationDeBienComponent} from './client/profil/creation-de-bien/creation-de-bien.component';
-import {VoirBienComponent} from './client/voir-bien/voir-bien.component';
+import {VoirBienComponent} from './client/profil/voir-bien/voir-bien.component';
 import {LoginService} from './service/login.service';
 import {AllBienComponent} from './all-bien/all-bien.component';
 import {MesResercationComponent} from './client/profil/mes-resercation/mes-resercation.component';
 import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
 import {ProfilComponent} from './client/profil/profil.component';
 import {AppComponent} from './app.component';
+import {MesDemandesComponent} from './client/profil/mes-demandes/mes-demandes.component';
+import {DemandeRecuComponent} from './client/profil/demande-recu/demande-recu.component';
 
 const routes: Routes = [
   {
@@ -29,15 +30,6 @@ const routes: Routes = [
     path: 'home',
     component: AppComponent
   },
-  {
-    path: 'profil',
-    component: ProfilComponent
-  },
-  {
-    path: 'inscription',
-    component: InscriptionComponent
-  }
-  ,
   {
     path: 'changeMdp',
     component: ModifiermdpComponent,
@@ -87,8 +79,16 @@ const routes: Routes = [
     component: VoirBienComponent
   },
   {
-    path: 'voirMesReservation',
+    path: 'MesReservation',
     component: MesResercationComponent
+  },
+  {
+    path: 'demandeRecu',
+    component: DemandeRecuComponent
+  },
+  {
+    path: 'MesDemande',
+    component: MesDemandesComponent
   },
   {
     path: 'allBien',
@@ -97,6 +97,10 @@ const routes: Routes = [
   {
     path: 'infoBien',
     component: InfoBienComponent,
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
   }
 ];
 

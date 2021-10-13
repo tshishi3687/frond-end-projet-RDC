@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Bien, Reservation} from '../../../../objet';
+import {Bien, Demande} from '../../../../objet';
 import {LoginService} from '../../../../service/login.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -11,7 +11,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class InfoMesReservationComponent implements OnInit {
 
   echange = false;
-  @Input() r: Reservation;
+  @Input() r: Demande;
 
   constructor(private service: LoginService,
               public dialogRef: MatDialogRef<InfoMesReservationComponent>) { }

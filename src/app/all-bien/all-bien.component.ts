@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BienService} from '../service/bien.service';
-import {Bien, ImageBien} from '../objet';
+import {Bien} from '../objet';
 import {ImgService} from '../service/img.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from './info-bien/info-bien.component';
 import {LoginService} from '../service/login.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-all-bien',
@@ -14,14 +15,20 @@ import {LoginService} from '../service/login.service';
 export class AllBienComponent implements OnInit {
 
   constructor(
-    private service: LoginService,
+    private ser: LoginService,
     private bienService: BienService,
     private imagService: ImgService,
     private dialog: MatDialog
   ) { }
+
+  allProvince = new FormGroup({
+
+    nomProvince:  new FormControl()
+  });
+  service = this.ser;
   ville = '';
-  province = '';
   typeBien = '';
+  province = '';
 
   @Output() listBien: Array<Bien> = [];
   image: string;
@@ -31,6 +38,11 @@ export class AllBienComponent implements OnInit {
 
   ngOnInit(): void {
     this.voirToutBien();
+  }
+
+  nomPro(nomPro: string): void{
+    this.province = nomPro;
+    console.log(this.province);
   }
 
   voirToutBien(): void{

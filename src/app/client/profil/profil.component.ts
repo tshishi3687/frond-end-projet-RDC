@@ -13,6 +13,7 @@ export class ProfilComponent implements OnInit {
   creation: boolean;
   bien: boolean;
   reservation: boolean;
+  logo = 'assets/img/rdc-map-flag.png';
 
   ngOnInit(): void {
   }

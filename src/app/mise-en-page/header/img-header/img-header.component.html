@@ -1,0 +1,62 @@
+<mat-carousel
+  timings="250ms ease-in"
+  [autoplay]="true"
+  interval="5000"
+  color="accent"
+  maxWidth="auto"
+  proportion="25"
+  slides= "{{this.listImgProvince.length}}"
+  [loop]="true"
+  [hideArrows]="true"
+  [hideIndicators]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="true"
+  orientation="ltr"
+>
+  <mat-carousel-slide
+    #matCarouselSlide
+    *ngFor="let slide of slides; let i = index"
+    [image]="slide.image"
+    overlayColor="#00000040"
+    [hideOverlay]="true"
+  ></mat-carousel-slide>
+</mat-carousel>
+
+
+<!--<mat-carousel-->
+<!--  timings="250ms ease-in"-->
+<!--  [autoplay]="false"-->
+<!--  interval="5000"-->
+<!--  color="accent"-->
+<!--  maxWidth="auto"-->
+<!--  proportion="50"-->
+<!--  slides= "{{this.slides.length}}"-->
+<!--  [loop]="true"-->
+<!--  [hideArrows]="false"-->
+<!--  [hideIndicators]="false"-->
+<!--  [useKeyboard]="true"-->
+<!--  [useMouseWheel]="false"-->
+<!--  orientation="ltr"-->
+<!--&gt;-->
+<!--  <mat-carousel-slide-->
+<!--    #matCarouselSlide-->
+<!--    *ngFor="let slide of slides; let i = index"-->
+<!--    [image]="slide.image"-->
+<!--    overlayColor="#00000040"-->
+<!--    [hideOverlay]="true"-->
+<!--  >-->
+<!--    <div-->
+<!--      style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"-->
+<!--    >-->
+<!--      <h1>{{ i }}</h1>-->
+<!--      <h1>disabled: {{ matCarouselSlide.disabled }}</h1>-->
+<!--      <button-->
+<!--        mat-flat-button-->
+<!--        (click)="matCarouselSlide.disabled = !matCarouselSlide.disabled"-->
+<!--      >-->
+<!--        Click me!-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </mat-carousel-slide>-->
+<!--</mat-carousel>-->
+

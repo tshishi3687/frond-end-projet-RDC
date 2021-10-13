@@ -121,6 +121,24 @@ export class ContactUser{
   telephone: string;
   appartienA: Personne;
 }
+// tslint:disable-next-line:class-name
+export class Demande{
+  id: number;
+  ddj: Date;
+  dda: Date;
+  ddd: Date;
+  npersonne: number;
+  // tslint:disable-next-line:variable-name
+  bienDemandee: Bien;
+  // tslint:disable-next-line:variable-name
+  faitPar: Personne;
+  etat: EtatDemande;
+}
+
+export class EtatDemande{
+  id: number;
+  etat: string;
+}
 
 // tslint:disable-next-line:class-name
 export class Reservation{
@@ -141,6 +159,16 @@ export class ImageBien{
   type: string;
   picByte: Byte[];
   bienid: Bien;
+}
+
+
+// tslint:disable-next-line:class-name
+export class ImageProvince{
+  id: string;
+  name: string;
+  type: string;
+  picByte: Byte[];
+  provinceID: Province;
 }
 
 export class DureeLocation{

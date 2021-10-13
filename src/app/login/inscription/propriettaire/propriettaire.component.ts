@@ -38,7 +38,7 @@ export class PropriettaireComponent implements OnInit {
 
       const roll = new Roll();
       roll.id = 0;
-      roll.nomRoll = 'proprietaire';
+      roll.nomRoll = 'Proprietaire';
 
       const contactUser = new ContactUser();
       contactUser.id = 0;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Province} from '../../objet';
 import {ProvinceService} from '../../service/ProvienceService';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ImageProvinceService} from '../../service/image-province.service';
 
 @Component({
   selector: 'app-province',
@@ -9,9 +10,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./province.component.css']
 })
 export class ProvinceComponent implements OnInit {
-  constructor(private service: ProvinceService) { }
+  constructor(private service: ProvinceService,
+              private imgProvince: ImageProvinceService) { }
 
-  private error = 'Il y a eu un probleme :(';
+   error = 'Il y a eu un probleme :(';
 
   provinceForm = new FormGroup({
     nomprovince: new FormControl(null, [Validators.required, Validators.minLength(4)]),
@@ -21,10 +23,63 @@ export class ProvinceComponent implements OnInit {
   listProvince: Array<Province> = [];
 
   startingString = '';
+  imgError = '';
+  tailleimg = false;
+  // tslint:disable-next-line:ban-types
+  private myFiles: File [] = [];
+  private selectedFile: File;
+  imgValid = false;
+  errorList: Array<string> = [];
+  boolImgNull = false;
+  imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
+
 
   ngOnInit(): void {
     this.voirProvince();
   }
+
+
+  onFileSelected(event): void {
+    if ((event.target.files.length) > 10){
+      this.tailleimg = true;
+    }else{
+      for (let i = 0; i < (event.target.files.length); i++) {
+        if (event.target.files[i].size <= 1048576){
+          this.selectedFile = event.target.files[i];
+          // @ts-ignore
+          this.myFiles.push(this.selectedFile);
+        }else{
+          this.imgValid = true;
+          this.imgError = 'La photo n°' + (i + 1) + ' portant le nom de "' + event.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + event.target.files[i].size + '/Ko';
+          this.errorList.push(this.imgError);
+        }
+      }
+    }
+  }
+
+
+  ajouerIMG(provinceID: number): void{
+
+    console.log(provinceID);
+    let uploadImageData = new FormData();
+    // @ts-ignore
+    uploadImageData.append('province', provinceID);
+    for (let i = 0; i < (this.myFiles.length); i++){
+      // @ts-ignore
+      // tslint:disable-next-line:max-line-length
+      uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
+    }
+    this.imgProvince.ajouterImageProvince(uploadImageData).subscribe(reponse => {
+      alert('ok');
+      uploadImageData = new FormData();
+
+    }, reponse => {
+      this.myFiles = [];
+    });
+  }
+
+
+
 
   // tslint:disable-next-line:typedef
   ajouterProvince(){

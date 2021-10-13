@@ -18,7 +18,6 @@ export class ImgALaOneComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
 
   ngOnInit(): void {
-    console.log(this.toString);
     this.rechercheImagesBien();
   }
 

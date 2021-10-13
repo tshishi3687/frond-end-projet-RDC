@@ -1,0 +1,34 @@
+
+<h1 align="center">Mes bien(s)</h1>
+<br>
+<br>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+    <div class="col" *ngFor="let b of (listBien | voirBienPipes:(startingString))" >
+      <div class="card shadow-sm">
+        <div class="btn-group">
+          <button *ngIf="this.service.isAuthenticated()" type="button"  class="btn btn-outline-success" (click)="informationbient(b)">Voir</button>
+          <button *ngIf="this.service.isAuthenticated()" type="button"  class="btn btn-outline-warning" (click)="informationbient(b)">Modification</button>
+          <button *ngIf="this.service.isAuthenticated()" type="button"  class="btn btn-outline-danger" (click)="suprimerBien(b)">Suprimer</button>
+        </div>
+        <app-img-ala-one [b]="b"></app-img-ala-one>
+        <div class="card-body">
+          <h3 align="center">
+            <br>
+            {{b.coordonnee.ville.nom_ville}} / {{b.coordonnee.ville.province.nomprovince}}</h3>
+          <h1 align="center">{{b.type_bien.nom}}</h1>
+          <h3 align="center">Créé le : {{b.dateCreation | date}}</h3>
+          <p align="center">{{b.prix}}€/{{b.dureeLocation.duree}}</p>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols" align="center">
+            <div class="col">{{b.npmax}}/personne</div>
+            <div class="col">{{b.nchambre}}/chambre</div>
+            <div class="col">{{b.nsdb}}/salle bain</div>
+            <div class="col">{{b.superficie}}superficie</div>
+          </div>
+          <br>
+          <div class="d-flex justify-content-between align-items-center" align="center">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

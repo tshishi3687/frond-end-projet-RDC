@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Bien, Personne, Reservation} from '../../../objet';
+import {Personne, Reservation} from '../../../objet';
 import {ReservationService} from '../../../service/reservation.service';
 import {LoginService} from '../../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {InfoMesReservationComponent} from './info-mes-reservation/info-mes-reservation.component';
 
 @Component({
@@ -29,8 +28,7 @@ export class MesResercationComponent implements OnInit {
     const personne = new Personne();
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
-    this.service.voirReservationPersonne(this.personne.client()).subscribe(reponse => this.listreservation = reponse, reponse => alert(this.error));
-    console.log(this.listreservation);
+    // this.service.voirReservationPersonne(this.personne.client()).subscribe(reponse => this.listreservation = reponse, reponse => alert(this.error));
   }
 
   // tslint:disable-next-line:typedef

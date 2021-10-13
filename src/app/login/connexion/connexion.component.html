@@ -1,30 +1,15 @@
 
-<div class="b-example-divider"></div>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
 
-  <div class="row align-items-center g-lg-5 py-5">
-    <div class="col-lg-7 text-center text-lg-start">
-      <h1 class="display-4 fw-bold lh-1 mb-3">Message du mois :</h1>
-      <p class="col-lg-10 fs-4">
-        Lorsque tu aperçois le palmier, le palmier t'avait déjà vu.
-        Citation africaine ;</p>
-      <p>La grammaire wolofe (1826).</p>
-    </div>
-    <div class="col-md-10 mx-auto col-lg-5">
-      <div class="wrapper fadeInDown">
-        <div id="formContent">
+      <!-- Login Form -->
+      <form [formGroup]="logForm">
+        <h3 class="text-danger" *ngIf="nonValide()">Mot de passe ou E-mail invalide</h3>
+        <input type="email" formControlName="email"   class="fadeIn second" name="email" placeholder="Votre E-mail">
+        <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
+        <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
+      </form>
 
-          <!-- Login Form -->
-          <form [formGroup]="logForm">
-            <h3 class="text-danger" *ngIf="nonValide()">Mot de passe ou E-mail invalide</h3>
-            <input type="email" formControlName="email"   class="fadeIn second" name="email" placeholder="Votre E-mail">
-            <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
-            <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
-          </form>
-
-        </div>
-      </div>
     </div>
   </div>
-<div class="b-example-divider"></div>
-
 

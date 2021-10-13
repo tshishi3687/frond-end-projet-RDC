@@ -3,6 +3,7 @@ import {ContactUser, Mdp, Personne, Roll} from '../../../objet';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PersonneService} from '../../../service/personne.service';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-locataire',
@@ -21,6 +22,7 @@ export class LocataireComponent implements OnInit {
     Prenom: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
     Ddn: new FormControl(null, [Validators.required, ]),
     Password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+    verifPassword: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
     Telephone: new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999999999)]),
     Email: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
   });
@@ -28,17 +30,25 @@ export class LocataireComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
   private ok = 'Vous êtes bien inscrit.\n Vous allez etre redirigé vers la page de connection';
   private personneExiste = false;
+  textError = '';
 
   ngOnInit(): void {
   }
 
 
   ajouterPersonne(): void{
-    if (this.PersonneForm.valid){
+    const dateJ = new Date();
+    const datePer = new Date(this.PersonneForm.value.Ddn);
+    const mdp1 = this.PersonneForm.value.Password;
+    const mdp2 = this.PersonneForm.value.verifPassword;
+
+
+    // @ts-ignore
+    if (this.PersonneForm.valid && (dateJ > datePer) && ((dateJ.getFullYear() - datePer.getFullYear()) >= 18) && (mdp1 === mdp2)){
 
       const roll = new Roll();
       roll.id = 0;
-      roll.nomRoll = 'proprietaire';
+      roll.nomRoll = 'Locataire';
 
       const contactUser = new ContactUser();
       contactUser.id = 0;
@@ -69,6 +79,8 @@ export class LocataireComponent implements OnInit {
           this.redirection();
         }
       }, reponse => alert(this.error));
+    }else{
+      this.textError = 'Les information entrées ne nous permetent pas d\'accepter votre inscription';
     }
   }
 

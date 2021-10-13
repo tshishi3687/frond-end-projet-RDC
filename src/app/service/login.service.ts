@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ConnexionComponent} from '../login/connexion/connexion.component';
-import {Bien, Personne, Reservation} from '../objet';
+import {Bien, Demande, Personne, Reservation} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -12,6 +12,7 @@ export class LoginService implements CanActivate{
   private infoPersonne: Personne;
   private bien: Bien;
   private reservation;
+  private demande;
   private isAdmin = false;
   private isProprietaire = false;
   private isLocataire = false;
@@ -61,6 +62,18 @@ export class LoginService implements CanActivate{
         const bien = JSON.parse(sessionStorage.getItem('bien-details'));
         return bien as Bien;
       }
+  }
+
+  demandeDB(demande: Demande): void{
+    this.demande = demande;
+    sessionStorage.setItem('demande-details', JSON.stringify(this.demande));
+  }
+
+  recDemande(): Demande{
+    if (this.isAuthenticated()) {
+      const demande = JSON.parse(sessionStorage.getItem('demande-details'));
+      return demande as Demande;
+    }
   }
 
   reservationDB(reservation: Reservation): void{

@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {DatePipe, formatDate} from '@angular/common';
-import {EventEmitter} from 'events';
-import {Bien, Reservation} from '../../../objet';
+import {Bien, Demande} from '../../../objet';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReservationService} from '../../../service/reservation.service';
 import {LoginService} from '../../../service/login.service';
@@ -37,21 +36,22 @@ export class ReservationComponent implements OnInit {
   }
 
   creerReservation(): void{
-    if (this.reservationFrom.valid){
-      this.formValide = false;
-      const dateJ = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-      const reservation = new Reservation();
-      reservation.id = 0;
-      reservation.ddj = dateJ;
-      reservation.dda = this.reservationFrom.value.dda;
-      reservation.ddd = this.reservationFrom.value.ddd;
-      reservation.npersonne = this.reservationFrom.value.npersonne;
-      reservation.bien_reserve = this.personne.repBiendb();
-      reservation.reserverPar = this.personne.client();
-      this.service.ajouterReservation(reservation).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
-    }else{
-      this.formValide = true;
-    }
+
+    // const dateJ = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    // const reservation = new Demande();
+    //
+    // if (this.reservationFrom.valid){
+    //   this.formValide = false;
+    //   reservation.id = 0;
+    //   reservation.dda = this.reservationFrom.value.dda;
+    //   reservation.ddd = this.reservationFrom.value.ddd;
+    //   reservation.npersonne = this.reservationFrom.value.npersonne;
+    //   reservation.bienDemandee = this.personne.repBiendb();
+    //   reservation.faitPar = this.personne.client();
+    //   this.service.ajouterReservation(reservation).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
+    // }else{
+    //   this.formValide = true;
+    // }
   }
 
   mesReservation(): void{

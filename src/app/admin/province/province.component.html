@@ -3,7 +3,17 @@
     <div class="d-flex flex-column justify-content-start form-group">
       <h5>Provinve</h5>
       <form [formGroup]="provinceForm">
-        <input type="file"  name="img" accept="image/*">
+        <div class="col-sm-6 p-3 mb-2 bg-secondary text-white">
+        <h5>Une photo</h5>
+        <p *ngIf="boolImgNull" class="p-3 mb-2 bg-danger text-white">{{this.imgNull}}</p>
+        <div *ngIf="tailleimg">
+          <p>Vous ne pouvez ajouter un maximum de 10 images</p>
+        </div>
+        <input type="file" (change)="onFileSelected($event)" multiple accept="image/png, image/jpeg"/>
+        <div *ngFor="let error of this.errorList">
+          <p class="p-3 mb-2 bg-danger text-white">{{error}}</p>
+        </div>
+      </div>
         <br><br>
         <input type="text" formControlName="nomprovince"  placeholder="nom provience ">
         <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="description "></textarea>
@@ -31,15 +41,7 @@
         <td>{{p.description}}</td>
         <td><button class="btn btn-dark" (click)="supprimerProvince(p.id)">suprimer </button></td>
         <td><button class="btn btn-dark" >modifier </button></td>
-        <div  class="d-flex flex-column justify-content-start form-group">
-          <form [formGroup]="provinceForm">
-            <input type="file"  name="img" accept="image/*">
-            <br><br>
-            <input type="text" formControlName="nomprovince" pla placeholder="{{p.nomprovince}} ">
-            <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="{{p.description}} "></textarea>
-            <button class="btn btn-warning">modifier</button>
-          </form>
-        </div>
+        <td><button class="btn btn-dark" (click)="ajouerIMG(p.id)">Ajouter IMG </button></td>
       </tr>
       </tbody>
     </table>

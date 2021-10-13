@@ -1,0 +1,75 @@
+
+<h1 align="center">Mes bien(s)</h1>
+<br>
+<br>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+  <div class="col"  *ngFor="let demande of this.listDemande">
+
+<!--    si en attente-->
+    <div class="card shadow-sm bg-light text-dark" *ngIf="demande.etat.id == 1">
+      <app-img-ala-one [b]="demande.bienDemandee"></app-img-ala-one>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols " align="center">
+        <div class="col">
+          <button type="button" class="btn btn-outline-success" (click)="demandeAccepter(demande)" >Accepter</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger" (click)="demandeRefuser(demande)">Refuser</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <h1 align="center">{{demande.faitPar.nom}} {{demande.faitPar.prenom}}</h1>
+        <h2 align="center">{{demande.dda | date}} - {{demande.ddd | date}}</h2>
+        <h3 align="center">Nombre de personne qui occupera les lieux<br>{{demande.npersonne}}</h3>
+        <h1 align="center" class="text-warning">{{demande.etat.etat}}</h1>
+        <p align="center">{{demande.ddj | date}}</p>
+        <h3 align="center">
+          {{demande.bienDemandee.type_bien.nom}} :{{demande.bienDemandee.coordonnee.num}}  {{demande.bienDemandee.coordonnee.rue}},
+          {{demande.bienDemandee.coordonnee.ville.nom_ville}} / {{demande.bienDemandee.coordonnee.ville.province.nomprovince}}
+        </h3>
+      </div>
+    </div>
+
+
+<!--    si acceptée-->
+    <div class="card shadow-sm bg-success text-white" *ngIf="demande.etat.id == 2">
+      <app-img-ala-one [b]="demande.bienDemandee"></app-img-ala-one>
+      <div class="card-body">
+        <h1 align="center">{{demande.faitPar.nom}} {{demande.faitPar.prenom}}</h1>
+        <h2 align="center">{{demande.dda | date}} - {{demande.ddd | date}}</h2>
+        <h3 align="center">Nombre de personne qui occupera les lieux<br>{{demande.npersonne}}</h3>
+        <h1 align="center">{{demande.etat.etat}}</h1>
+        <p align="center">{{demande.ddj | date}}</p>
+        <h3 align="center">
+          {{demande.bienDemandee.coordonnee.num}}  {{demande.bienDemandee.coordonnee.rue}},
+          {{demande.bienDemandee.coordonnee.ville.nom_ville}} / {{demande.bienDemandee.coordonnee.ville.province.nomprovince}}
+        </h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols" align="center">
+          <div class="col">{{demande.bienDemandee.type_bien.nom}}</div>
+          <div class="col">{{demande.bienDemandee.npmax}}/personne Max</div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+<!-- si refuser-->
+    <div class="card shadow-sm bg-danger text-dark" *ngIf="demande.etat.id == 3">
+      <app-img-ala-one [b]="demande.bienDemandee"></app-img-ala-one>
+      <div class="card-body">
+        <h1 align="center">{{demande.faitPar.nom}} {{demande.faitPar.prenom}}</h1>
+        <h2 align="center">{{demande.dda | date}} - {{demande.ddd | date}}</h2>
+        <h3 align="center">Nombre de personne qui occupera les lieux<br>{{demande.npersonne}}</h3>
+        <h1 align="center">{{demande.etat.etat}}</h1>
+        <p align="center">{{demande.ddj | date}}</p>
+        <h3 align="center">
+          {{demande.bienDemandee.coordonnee.num}}  {{demande.bienDemandee.coordonnee.rue}},
+          {{demande.bienDemandee.coordonnee.ville.nom_ville}} / {{demande.bienDemandee.coordonnee.ville.province.nomprovince}}
+        </h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols" align="center">
+          <div class="col">{{demande.bienDemandee.type_bien.nom}}</div>
+          <div class="col">{{demande.bienDemandee.npmax}}/personne Max</div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

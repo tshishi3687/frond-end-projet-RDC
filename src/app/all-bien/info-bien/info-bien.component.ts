@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Bien, ImageBien, LikeBien, Personne} from '../../objet';
+import {Bien, LikeBien, Personne} from '../../objet';
 import {ImgService} from '../../service/img.service';
 import {LoginService} from '../../service/login.service';
 import {MatDialogRef} from '@angular/material/dialog';

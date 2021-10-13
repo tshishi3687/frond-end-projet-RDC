@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   inscription: boolean;
   service = this.ser;
   logo = 'assets/img/rdc-map-flag.png';
+  boolLogo = true;
 
   ngOnInit(): void {
   }
@@ -22,12 +23,14 @@ export class HeaderComponent implements OnInit {
   }
 
   bntConnection(): void{
-      this.inscription = false;
-      this.connexion = true;
+    this.boolLogo = false;
+    this.inscription = false;
+    this.connexion = true;
   }
 
   bntInscription(): void{
-      this.inscription = true;
-      this.connexion = false;
+    this.boolLogo = true;
+    this.inscription = true;
+    this.connexion = false;
   }
 }

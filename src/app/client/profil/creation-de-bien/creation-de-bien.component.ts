@@ -85,7 +85,6 @@ export class CreationDeBienComponent implements OnInit {
   imgValid = false;
   errorList: Array<string> = [];
   imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
-  formulaireNull = 'Veuillez vous assurer que TOUS LES ELEMENT OBLIGATOIRE SONT REMPLI';
   boolImgNull = false;
 
   ngOnInit(): void {
@@ -179,11 +178,9 @@ export class CreationDeBienComponent implements OnInit {
       bien.coordonnee = coordonnee;
       bien.appartient = this.infoPersonne.client();
 
-      console.log(bien);
       // tslint:disable-next-line:max-line-length
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
 
-        console.log(this.superid);
         const uploadImageData = new FormData();
         // @ts-ignore
         uploadImageData.append('bien', reponselienPhoto);
