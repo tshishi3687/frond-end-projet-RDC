@@ -8,7 +8,7 @@ import {Province, Ville} from '../../objet';
 export class VillePipe implements PipeTransform {
 
   transform(value: Array<Ville>, stringProvince: string): Array<Ville>{
-    return value.filter(ville => ville.nom_ville.toLowerCase().startsWith(stringProvince.toLowerCase()));
+    return value.filter(ville => ville.nomVille.toLowerCase().startsWith(stringProvince.toLowerCase()));
   }
 
 }

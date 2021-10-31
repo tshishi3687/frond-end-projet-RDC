@@ -4,7 +4,10 @@
 
     <!-- Login Form -->
     <form [formGroup]="PersonneForm">
-      <h3>DEVENIR PROPRIETAIRE</h3>
+      <div class="p-3 mb-2 bg-secondary text-white">
+        <h3>DEVENIR PROPIETAIRE</h3>
+      </div>
+      <p class="text-danger" *ngIf="textBool">{{textError}}</p>
       <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
       <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
       <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">

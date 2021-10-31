@@ -31,6 +31,9 @@ export class LocataireComponent implements OnInit {
   private ok = 'Vous êtes bien inscrit.\n Vous allez etre redirigé vers la page de connection';
   private personneExiste = false;
   textError = '';
+  textBool = false;
+  connexionOK = false;
+  inscriptionBool = true;
 
   ngOnInit(): void {
   }
@@ -80,13 +83,15 @@ export class LocataireComponent implements OnInit {
         }
       }, reponse => alert(this.error));
     }else{
+      this.textBool = true;
       this.textError = 'Les information entrées ne nous permetent pas d\'accepter votre inscription';
     }
   }
 
 // @ts-ignore
   redirection(): void{
-    this.router.navigateByUrl('/connexion');
+    this.connexionOK = true;
+    this.inscriptionBool = false;
   }
 
   verifExiste(): boolean{

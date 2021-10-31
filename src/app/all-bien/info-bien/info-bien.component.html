@@ -114,7 +114,7 @@
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">Ville</strong>
-          <h3 class="mb-0">{{this.service.repBiendb().coordonnee.ville.nom_ville}}</h3>
+          <h3 class="mb-0">{{this.service.repBiendb().coordonnee.ville.nomVille}}</h3>
           <div class="mb-1 text-muted">Date de mise à jour : {{this.service.repBiendb().coordonnee.ville.dateCreation}}</div>
           <p class="mb-auto">{{this.service.repBiendb().coordonnee.ville.description}}</p>
           <p class="stretched-link">Nombre habitant : {{this.service.repBiendb().coordonnee.ville.nhabitant}}</p>
@@ -130,7 +130,7 @@
   <div class="row g-5">
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        Adresse : {{this.service.repBiendb().coordonnee.num}} {{this.service.repBiendb().coordonnee.rue}}, {{this.service.repBiendb().coordonnee.ville.nom_ville}} {{this.service.repBiendb().coordonnee.ville.province.nomprovince}}
+        Adresse : {{this.service.repBiendb().coordonnee.num}} {{this.service.repBiendb().coordonnee.rue}}, {{this.service.repBiendb().coordonnee.ville.nomVille}} {{this.service.repBiendb().coordonnee.ville.province.nomprovince}}
       </h3>
 
       <article class="blog-post">
@@ -143,8 +143,8 @@
 
 
       <article class="blog-post">
-        <h2 class="blog-post-title">Avoir aussi</h2>
-        <app-all-bien></app-all-bien>
+        <h2 class="blog-post-title">Disponible dans le coin:</h2>
+        <app-list-service></app-list-service>
       </article>
 
       <nav class="blog-pagination" aria-label="Pagination">
@@ -166,6 +166,7 @@
               <p *ngIf="likes">merci pour votre réaction</p>
               <p *ngIf="problemCo">il y a eu un problème de connéxion, veuillez réessayer plustard</p>
             </button>
+            <button type="button" class="btn btn-outline-danger" (click)="onClose()">Retour</button>
           </h4>
           <app-demande></app-demande>
         </div>

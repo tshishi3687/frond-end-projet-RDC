@@ -13,7 +13,7 @@
         </select>
         <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
           <option value="defaults" selected>Selectionez une ville</option>
-          <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nom_ville}}</option>
+          <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
         </select>
         <input type="number" formControlName="coordonneeCpostal" placeholder="code postal">
 
@@ -55,7 +55,7 @@
             <td>{{s.type.nomtype}}</td>
             <td>{{s.coordonnee.rue}}</td>
             <td>{{s.coordonnee.num}}</td>
-            <td>{{s.coordonnee.ville.nom_ville}}</td>
+            <td>{{s.coordonnee.ville.nomVille}}</td>
             <td>{{s.coordonnee.ville.province.nomprovince}}</td>
             <td><button class="btn bg-body" (click)="supprimerService(s.id)">suprimer </button></td>
           </tr>

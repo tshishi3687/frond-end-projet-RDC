@@ -101,7 +101,19 @@ export class LoginService implements CanActivate{
 
   logout(): void{
     sessionStorage.removeItem('user-details');
+    this.logoutBien();
+    sessionStorage.removeItem('reservation-details');
+    // tslint:disable-next-line:no-unused-expression
+    this.logoutDemande;
     this.route.navigateByUrl('/home');
+  }
+
+  logoutDemande(): void{
+    sessionStorage.removeItem('demande-details');
+  }
+
+  logoutBien(): void{
+    sessionStorage.removeItem('bien-details');
   }
 
   AdminRolle(): boolean{

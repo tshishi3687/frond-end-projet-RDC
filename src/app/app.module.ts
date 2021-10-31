@@ -51,11 +51,11 @@ import { ImgHeaderComponent } from './mise-en-page/header/img-header/img-header.
 import { DemandeComponent } from './all-bien/info-bien/demande/demande.component';
 import { MesDemandesComponent } from './client/profil/mes-demandes/mes-demandes.component';
 import { DemandeRecuComponent } from './client/profil/demande-recu/demande-recu.component';
-import { MenuProfilComponent } from './mise-en-page/menu-profil/menu-profil.component';
 import { InfoMesDemandesComponent } from './client/profil/demande-recu/info-mes-demandes/info-mes-demandes.component';
 import { CommunicationsComponent } from './communications/communications.component';
 import { DangerComponent } from './communications/danger/danger.component';
 import { SuppressionBienComponent } from './communications/danger/suppression-bien/suppression-bien.component';
+import { ListServiceComponent } from './all-bien/list-service/list-service.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -102,11 +102,11 @@ import { SuppressionBienComponent } from './communications/danger/suppression-bi
     DemandeComponent,
     MesDemandesComponent,
     DemandeRecuComponent,
-    MenuProfilComponent,
     InfoMesDemandesComponent,
     CommunicationsComponent,
     DangerComponent,
     SuppressionBienComponent,
+    ListServiceComponent,
   ],
   imports: [
     BrowserModule,

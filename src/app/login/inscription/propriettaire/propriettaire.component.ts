@@ -28,13 +28,21 @@ export class PropriettaireComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
   private ok = 'Vous êtes bien inscrit.\n Vous allez etre redirigé vers la page de connection';
   private personneExiste = false;
+  textError = '';
+  textBool = false;
 
   ngOnInit(): void {
   }
 
-
   ajouterPersonne(): void{
-    if (this.PersonneForm.valid){
+    const dateJ = new Date();
+    const datePer = new Date(this.PersonneForm.value.Ddn);
+    const mdp1 = this.PersonneForm.value.Password;
+    const mdp2 = this.PersonneForm.value.verifPassword;
+
+
+    // @ts-ignore
+    if (this.PersonneForm.valid && (dateJ > datePer) && ((dateJ.getFullYear() - datePer.getFullYear()) >= 18) && (mdp1 === mdp2)){
 
       const roll = new Roll();
       roll.id = 0;
@@ -59,7 +67,7 @@ export class PropriettaireComponent implements OnInit {
       personne.mdp = mdp;
 
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
-      this.personneService.voirSiExiste(personne.mdp).subscribe((reponse: boolean) => {
+      this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
         // tslint:disable-next-line:no-conditional-assignment
         if (reponse ){
           this.personneExiste = true;
@@ -69,9 +77,11 @@ export class PropriettaireComponent implements OnInit {
           this.redirection();
         }
       }, reponse => alert(this.error));
+    }else{
+      this.textBool = true;
+      this.textError = 'Les information entrées ne nous permetent pas d\'accepter votre inscription';
     }
   }
-
 // @ts-ignore
   redirection(): void{
     this.router.navigateByUrl('/connexion');

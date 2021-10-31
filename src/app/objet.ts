@@ -12,12 +12,11 @@ export class Province{
 export class Ville{
   id: number;
   // tslint:disable-next-line:variable-name
-  nom_ville: string;
+  nomVille: string;
   nhabitant: number;
   province: Province;
   description: string;
   dateCreation: Date;
-  superid: number;
 }
 
 export class TypeDeBien{

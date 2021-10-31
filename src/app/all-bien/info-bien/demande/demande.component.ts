@@ -36,7 +36,9 @@ export class DemandeComponent implements OnInit {
 
   creeDemande(): void{
 
-    const dateJ = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    // @ts-ignore
+    const dateJ = new Date(this.reservationFrom.value.ddd);
+    console.log(dateJ);
     const demande = new Demande();
     const etatDEmande = new EtatDemande();
     etatDEmande.id = 1;

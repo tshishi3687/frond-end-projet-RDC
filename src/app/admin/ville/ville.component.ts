@@ -20,7 +20,7 @@ export class VilleComponent implements OnInit {
     nom_ville: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     nhabitant: new FormControl(null, [Validators.required, Validators.min(1000), Validators.max(900000000)]),
     province: new FormControl('default'),
-    description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(400)])
+    description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)])
   });
 
   listVille: Array<Ville> = [];
@@ -47,7 +47,7 @@ export class VilleComponent implements OnInit {
     if (this.villeForm.valid){
       const ville = new Ville();
       ville.id = 0;
-      ville.nom_ville = this.villeForm.value.nom_ville;
+      ville.nomVille = this.villeForm.value.nom_ville;
       ville.nhabitant = this.villeForm.value.nhabitant;
       ville.province = this.listProvince[this.villeForm.value.province];
       ville.description = this.villeForm.value.description;

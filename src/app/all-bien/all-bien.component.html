@@ -20,12 +20,12 @@
 <br>
 <br>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
-    <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | villesPipes:(ville) | typeBiensPipes:(typeBien))">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | villesPipes:(ville) | typeBiensPipes:(typeBien))" >
       <div class="card shadow-sm" >
         <app-img-ala-one [b]="b"></app-img-ala-one>
         <div class="card-body">
-          <h3 align="center">{{b.coordonnee.ville.nom_ville}} / {{b.coordonnee.ville.province.nomprovince}}</h3>
+          <h3 align="center">{{b.coordonnee.ville.nomVille}} / {{b.coordonnee.ville.province.nomprovince}}</h3>
           <h1 align="center">{{b.type_bien.nom}}</h1>
           <h3 align="center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">

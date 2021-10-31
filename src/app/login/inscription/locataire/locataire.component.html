@@ -1,11 +1,13 @@
 
 <div class="wrapper fadeInDown">
-  <div id="formContent">
+  <div id="formContent" *ngIf="this.inscriptionBool">
 
     <!-- Login Form -->
     <form [formGroup]="PersonneForm">
-      <h3>DEVENIR LOCATAIRE</h3>
-      <p class="text-danger">{{textError}}</p>
+      <div class="p-3 mb-2 bg-primary text-white">
+        <h3>DEVENIR LOCATAIRE</h3>
+      </div>
+      <p class="text-danger" *ngIf="textBool">{{textError}}</p>
       <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
       <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
       <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
@@ -17,5 +19,11 @@
       <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()" *ngIf="this.PersonneForm.valid">
     </form>
 
+  </div>
+
+  <div class="p-3 mb-2 bg-success text-white" align="center" *ngIf="this.connexionOK">
+    <h1> Votre inscription est un succès</h1>
+    <h3>Vous pouvez dès aprèsent vous connecter sur votre compte</h3>
+    <app-connexion></app-connexion>
   </div>
 </div>

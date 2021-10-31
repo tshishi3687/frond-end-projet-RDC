@@ -42,7 +42,13 @@ export class BienService {
 
   // tslint:disable-next-line:typedef
   supprimerBien(id) {
-    return this.client.delete('http://localhost:8081/bien/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    // @ts-ignore
+    return this.client.post('http://localhost:8081/bien/deletebien', id, httpOptions);
   }
 
 }

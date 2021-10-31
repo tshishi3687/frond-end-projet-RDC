@@ -35,4 +35,15 @@ export class ImgService {
     // @ts-ignore
     return this.client.post('http://localhost:8081/image/all', img, httpOptions);
   }
+
+  // tslint:disable-next-line:typedef
+  supprimerIMG(bien) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    // @ts-ignore
+    return this.client.post('http://localhost:8081/image/deleteimg', bien, httpOptions);
+  }
 }

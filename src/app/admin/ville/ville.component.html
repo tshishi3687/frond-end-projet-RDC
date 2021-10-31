@@ -36,7 +36,7 @@
           <tbody>
           <tr *ngFor="let v of (listVille | VillePipe:(startingString))">
             <td>{{v.id}}</td>
-            <td>{{v.nom_ville}}</td>
+            <td><h3>{{v.nomVille}}</h3></td>
             <td>{{v.province.nomprovince}}</td>
             <td>{{v.nhabitant}}</td>
             <td>{{v.description}}</td>

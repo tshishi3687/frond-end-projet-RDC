@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Bien, Personne} from '../../../objet';
 import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {SuppressionBienComponent} from '../../../communications/danger/suppression-bien/suppression-bien.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-voir-bien',
@@ -16,8 +17,10 @@ export class VoirBienComponent implements OnInit {
   constructor(
     private infoPersonne: LoginService,
     private bienService: BienService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: Router
   ) { }
+  @Input() biensup: boolean;
   startingString = '';
   service = this.infoPersonne;
   private error = 'Il y a eu un probleme :(';
@@ -27,6 +30,13 @@ export class VoirBienComponent implements OnInit {
 
   ngOnInit(): void {
     this.voirBienPersonne();
+    console.log(this.biensup);
+  }
+
+  redirection(): void{
+    if (this.biensup === true){
+      this.voirBienPersonne();
+    }
   }
 
   voirBienPersonne(): void{

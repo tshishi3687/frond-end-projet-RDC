@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Bien, LikeBien, Personne} from '../../objet';
+import {Bien, LikeBien, Personne, Service, Ville} from '../../objet';
 import {ImgService} from '../../service/img.service';
 import {LoginService} from '../../service/login.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../service/personne.service';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-info-bien',
@@ -20,12 +21,12 @@ export class InfoBienComponent implements OnInit {
                private personne: PersonneService,
   ) { }
 
-   echange = false;
   myFiles: File [] = [];
   slides: [] = [];
   service = this.serv;
   likes = false;
   problemCo = false;
+  listServiceVille: Array<Service> = [];
 
   ngOnInit(): void {
   }
