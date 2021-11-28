@@ -1,17 +1,21 @@
-<div *ngIf="reservationBoutton()">
-  <h4><button type="submit" class="btn btn-success" *ngIf="btnReservation" (click)="changement()"> JE RESERVE </button></h4>
+<div *ngIf="reservationBoutton() && fomDemande" >
+  <h4><button type="submit" class="btn btn-success" *ngIf="btnReservation" (click)="changement()"> FAIRE UNE DEMANDE </button></h4>
   <div *ngIf="cadreReservation" >
     <form [formGroup]="reservationFrom" >
-      <p *ngIf="formValide" class="text-center">Tous les champs sont OBLIBATOIRE</p>
+      <p class="text-danger" *ngIf="!reservationFrom.valid">Tous les champs sont obligatoire.</p>
       <div class="form-group">
         <label ><h6>Date d'arrivée</h6></label>
+        <p class="text-danger" *ngIf="((this.reservationFrom.value.dda | date) > (dateJ | date))">vous ne pouvez pas faire une demande avec une date d'arrivée inferieure à la date du jour.<br>Date du jour : {{this.dateJ | date}}.</p>
         <input type="date" formControlName="dda" class="form-control" >
         <label ><h6>Date de départ</h6></label>
+        <p class="text-danger" *ngIf="((this.reservationFrom.value.ddd | date) < (this.reservationFrom.value.dda | date))">La date de depart ne peut être plus petit que la date d'arrivée.<br>Date d'arrivée : {{this.reservationFrom.value.dda | date}}.</p>
         <input type="date" formControlName="ddd" class="form-control" >
         <label ><h6>Nombre de personne qui occupera le bien</h6></label>
+        <p class="text-danger" *ngIf="this.personne.repBiendb().npmax < this.reservationFrom.value.npersonne">Ce bien ne peut contenir plus de {{this.personne.repBiendb().npmax}} personnes.</p>
+        <p class="text-danger" *ngIf="this.reservationFrom.value.npersonne <= 0">Vous ne pouvez mettre un chiffre négatif </p>
         <input type="number" formControlName="npersonne" class="form-control" >
         <br>
-        <button type="submit" class="btn btn-primary" (click)="creeDemande()"><h6>Confirmer la réservation</h6></button>
+        <button type="submit" class="btn btn-primary" (click)="creeDemande()" *ngIf="this.personne.repBiendb().npmax >= this.reservationFrom.value.npersonne && ((this.reservationFrom.value.ddd | date) <= (this.reservationFrom.value.dda | date)) && ((dateJ | date) >= (this.reservationFrom.value.dda | date)) && this.reservationFrom.value.npersonne > 0"><h6>Confirmer la DEMANDE</h6></button>
         -
         <button type="submit" class="btn btn-warning" (click)="changement()"><h6>Annuler</h6></button>
       </div>
@@ -19,4 +23,5 @@
   </div>
 </div>
 
-
+<h1 class="text-success">{{textDemandeEnvoyer}}</h1>
+<app-message-dattente *ngIf="messageAttenteBool"></app-message-dattente>

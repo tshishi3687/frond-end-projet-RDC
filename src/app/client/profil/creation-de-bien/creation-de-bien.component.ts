@@ -1,16 +1,12 @@
-import {Component, getPlatform, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {VilleService} from '../../../service/VilleService';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Aladisposition, Bien, Coordonnee, DureeLocation, ImageBien, TypeDeBien, Ville} from '../../../objet';
-import {Router} from '@angular/router';
-import {LienPhotoService} from '../../../service/lien-photo.service';
+import {Aladisposition, Bien, Coordonnee, DureeLocation, TypeDeBien, Ville} from '../../../objet';
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
-import {hasI18nAttrs} from '@angular/compiler/src/render3/view/i18n/util';
-import {isEmpty} from 'rxjs/operators';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -18,20 +14,18 @@ import {isEmpty} from 'rxjs/operators';
   styleUrls: ['./creation-de-bien.component.css']
 })
 export class CreationDeBienComponent implements OnInit {
-  imgFile: string;
-  private idBien: number;
+
   constructor(
     private infoPersonne: LoginService,
     private dureeLocationServive: DureeLocationService,
     private bienService: BienService,
     private villeService: VilleService,
     private typeDeBienService: TypeDeBienService,
-    private imgService: ImgService,
-    private route: Router) { }
-    private aladisposition = '';
+    private imgService: ImgService) { }
 
   private error = 'Il y a eu un probleme :(';
   private ok = 'tout c\'est bien passée :)-';
+  imgFile: string;
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
@@ -86,6 +80,10 @@ export class CreationDeBienComponent implements OnInit {
   errorList: Array<string> = [];
   imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
   boolImgNull = false;
+  formCreationEnvoyeBool = true;
+  vuBienCreee = false;
+  messageAttenteBool = false;
+  private idBien: number;
 
   ngOnInit(): void {
     this.voirVille();
@@ -130,6 +128,9 @@ export class CreationDeBienComponent implements OnInit {
   }
 
   ajouterBien(): void{
+      this.formCreationEnvoyeBool = false;
+      this.messageAttenteBool = true;
+
       const coordonnee = new Coordonnee();
       coordonnee.id = 0;
       coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
@@ -178,20 +179,22 @@ export class CreationDeBienComponent implements OnInit {
       bien.coordonnee = coordonnee;
       bien.appartient = this.infoPersonne.client();
 
-      // tslint:disable-next-line:max-line-length
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
-
         const uploadImageData = new FormData();
         // @ts-ignore
         uploadImageData.append('bien', reponselienPhoto);
         for (let i = 0; i < (this.myFiles.length); i++){
-          // @ts-ignore
-          // tslint:disable-next-line:max-line-length
+
           uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
         }
-        this.imgService.ajouterImage(uploadImageData).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
-        this.myFiles = null;
-        location.reload();
+        this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
+          this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
+            this.infoPersonne.biendb(monBien);
+            this.myFiles = null;
+            this.vuBienCreee = true;
+            this.messageAttenteBool = false;
+          }, monBien => alert('error'));
+        }, reponse => alert(this.error));
       }, reponselienPhoto => alert(this.error));
   }
 }

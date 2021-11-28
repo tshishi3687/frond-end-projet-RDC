@@ -27,19 +27,21 @@ export class LocataireComponent implements OnInit {
     Email: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
   });
 
-  private error = 'Il y a eu un probleme :(';
+  private error = 'Il y a eu un probleme avec le serveur.\nVeuillez réessayer plus tard:(';
   private ok = 'Vous êtes bien inscrit.\n Vous allez etre redirigé vers la page de connection';
   private personneExiste = false;
   textError = '';
   textBool = false;
   connexionOK = false;
   inscriptionBool = true;
+  attenteBool = false;
 
   ngOnInit(): void {
   }
 
 
   ajouterPersonne(): void{
+
     const dateJ = new Date();
     const datePer = new Date(this.PersonneForm.value.Ddn);
     const mdp1 = this.PersonneForm.value.Password;
@@ -62,6 +64,10 @@ export class LocataireComponent implements OnInit {
       mdp.mdp = this.PersonneForm.value.Password;
       mdp.mail = this.PersonneForm.value.Email;
 
+      const verifMdp = new Mdp();
+      mdp.mdp = this.PersonneForm.value.verifPassword;
+      mdp.mail = this.PersonneForm.value.Email;
+
       const personne = new Personne();
       personne.id = 0;
       personne.nom = this.PersonneForm.value.Nom;
@@ -69,7 +75,9 @@ export class LocataireComponent implements OnInit {
       personne.ddn = this.PersonneForm.value.Ddn;
       personne.roll = roll;
       personne.contactUser = contactUser;
-      personne.mdp = mdp;
+      personne.password = mdp;
+      personne.verifMDP = this.PersonneForm.value.verifPassword;
+      console.log(personne.verifMDP);
 
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
       this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
@@ -77,9 +85,12 @@ export class LocataireComponent implements OnInit {
         if (reponse ){
           this.personneExiste = true;
         }else{
+          // this.attenteBool = true;
+          // this.inscriptionBool = false;
           // tslint:disable-next-line:max-line-length
-          this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
-          this.redirection();
+          this.personneService.ajouterPersonne(personne).subscribe(reponseins => {
+            this.redirection();
+          }, reponseins => alert(this.error));
         }
       }, reponse => alert(this.error));
     }else{
@@ -91,7 +102,7 @@ export class LocataireComponent implements OnInit {
 // @ts-ignore
   redirection(): void{
     this.connexionOK = true;
-    this.inscriptionBool = false;
+    this.attenteBool = false;
   }
 
   verifExiste(): boolean{

@@ -48,10 +48,6 @@ export class VoirBienComponent implements OnInit {
     this.bienService.voirBienPersonne(maPersonne).subscribe(reponse => this.listBien = reponse, reponse => alert(this.error));
   }
 
-  supprimerBien(id): void{
-    this.bienService.supprimerBien(id).subscribe(reponse => this.voirBienPersonne(), reponse => alert(this.error));
-  }
-
   changement(): boolean{
     if (this.echange === !this.echange) {
       this.echange = true;

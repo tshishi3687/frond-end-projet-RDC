@@ -1,6 +1,4 @@
-
-<h1 align="center">Création de BIEN</h1>
-<form [formGroup]="BienForm" >
+<form *ngIf="formCreationEnvoyeBool" [formGroup]="BienForm" >
     <div class="py-5 text-center">
       <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
@@ -215,7 +213,7 @@
               <label class="form-label">La Ville : </label>
               <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
                 <option value="defaults" selected>Selectionez une ville</option>
-                <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nom_ville}}</option>
+                <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
               </select>
             </div>
 
@@ -251,4 +249,5 @@
     </div>
 
 </form>
-
+<app-message-dattente *ngIf="messageAttenteBool"></app-message-dattente>
+<app-presentation-bien-cree *ngIf="vuBienCreee"></app-presentation-bien-cree>

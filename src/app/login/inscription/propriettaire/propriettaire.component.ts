@@ -21,15 +21,19 @@ export class PropriettaireComponent implements OnInit {
     Prenom: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
     Ddn: new FormControl(null, [Validators.required, ]),
     Password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+    verifPassword: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
     Telephone: new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999999999)]),
     Email: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
   });
 
-  private error = 'Il y a eu un probleme :(';
+  private error = 'Il y a eu un probleme avec le serveur.\nVeuillez réessayer plus tard:(';
   private ok = 'Vous êtes bien inscrit.\n Vous allez etre redirigé vers la page de connection';
   private personneExiste = false;
   textError = '';
   textBool = false;
+  connexionOK = false;
+  inscriptionBool = true;
+  attenteBool = false;
 
   ngOnInit(): void {
   }
@@ -64,7 +68,7 @@ export class PropriettaireComponent implements OnInit {
       personne.ddn = this.PersonneForm.value.Ddn;
       personne.roll = roll;
       personne.contactUser = contactUser;
-      personne.mdp = mdp;
+      personne.password = mdp;
 
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
       this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
@@ -72,9 +76,12 @@ export class PropriettaireComponent implements OnInit {
         if (reponse ){
           this.personneExiste = true;
         }else{
+          this.attenteBool = true;
+          this.inscriptionBool = false;
           // tslint:disable-next-line:max-line-length
-          this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
-          this.redirection();
+          this.personneService.ajouterPersonne(personne).subscribe(reponseins => {
+            this.redirection();
+          }, reponseins => alert(this.error));
         }
       }, reponse => alert(this.error));
     }else{
@@ -84,7 +91,8 @@ export class PropriettaireComponent implements OnInit {
   }
 // @ts-ignore
   redirection(): void{
-    this.router.navigateByUrl('/connexion');
+    this.connexionOK = true;
+    this.attenteBool = false;
   }
 
   verifExiste(): boolean{

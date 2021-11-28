@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ImageBien, ImageProvince} from '../../../objet';
-import {ImageProvinceService} from '../../../service/image-province.service';
 
 @Component({
   selector: 'app-img-header',
@@ -9,29 +7,31 @@ import {ImageProvinceService} from '../../../service/image-province.service';
 })
 export class ImgHeaderComponent implements OnInit {
 
-  constructor(private img: ImageProvinceService) { }
-
-  longSlider: number;
+  constructor() { }
   slides: [] = [];
-  private error = 'Il y a eu un probleme :(';
-  listImgProvince: Array<ImageProvince> = [];
 
 
   ngOnInit(): void {
-    this.imgPro();
+    this.imageHeader();
   }
 
-  imgPro(): void{
-    // tslint:disable-next-line:max-line-length
+  imageHeader(): void{
     // @ts-ignore
-    this.img.getAll().subscribe((reponses: Array<ImageProvince>) => {
-      this.listImgProvince = reponses;
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.listImgProvince.length; i++){
-        // @ts-ignore
-        this.slides.push({'image' : 'data:image/jpeg;base64,' + this.listImgProvince[i].picByte});
-      }
-    }, reponses => alert(this.error));
+    this.slides.push({image : 'assets/img/header/44fa2d3a34_50177121_good-planete-reforestation-2.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/1080-village-gettyimages-632917598-lr_wrfviu9.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/cb9d55e9e6688c24bd7460892be3f433_1534338682-b.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/content__0020_11_01-La-ville-de-Kinshasa.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/Copyright-Slavik_ua-Shutterstock-1.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/GPJNEWS-DRC-EN-NYIRAGONGO-1-47_web-650x434c.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/gpjnews-rdc-MK-taxes-aux-rebelles-4_Web.jpg'});
+    // @ts-ignore
+    this.slides.push({image : 'assets/img/header/phpa7hIAZ.jpg'});
   }
 
 }

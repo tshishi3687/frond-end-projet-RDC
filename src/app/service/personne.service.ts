@@ -27,7 +27,7 @@ export class PersonneService {
       })
     };
 
-    return this.client.post('http://localhost:8081/personne/user', personne);
+    return this.client.post('http://localhost:8081/personne/user', personne, {observe: 'response'});
   }
 
   // tslint:disable-next-line:typedef
@@ -50,5 +50,16 @@ export class PersonneService {
     };
 
     return this.client.post('http://localhost:8081/personne/likes', likeBien, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
+  verifCompte(codeActivation){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/personne/activation_compte', codeActivation, httpOptions);
   }
 }

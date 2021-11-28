@@ -1,0 +1,25 @@
+<ul class="list-group" *ngFor="let service of listServiceVille">
+  <container-element [ngSwitch]="service.type.nomtype">
+    <some-element *ngSwitchCase="'aeroport'">
+      <li class="list-group-item">
+        <h3><img src="./assets/img/icones/avion.png" width="35" height="35"/> {{service.nom}}</h3>
+        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
+      </li>
+    </some-element>
+    <some-element *ngSwitchCase="'alimantaire'">
+      <li class="list-group-item">
+        <h3><img src="./assets/img/icones/conteneur-alimentaire.png" width="35" height="35"/> {{service.nom}}</h3>
+        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
+      </li>
+    </some-element>
+    <some-element *ngSwitchCase="'Restaurant'">
+      <li class="list-group-item">
+        <h3><img src="./assets/img/icones/service-alimentaire.png" width="35" height="35"/> {{service.nom}}</h3>
+        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
+      </li>
+    </some-element>
+    <some-element *ngSwitchDefault>
+      ... default ...
+    </some-element>
+  </container-element>
+</ul>

@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  verifCoo(): boolean{
+  verifSiAdmin(): boolean{
    return this.service.AdminRolle();
   }
 
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
     return this.service.isAuthenticated();
   }
 
-  verifsiloca(): boolean{
-    return !this.service.isLocataireRoll();
+  verifSiPropietere(): boolean{
+    return this.service.isProprietaireRoll();
   }
 }

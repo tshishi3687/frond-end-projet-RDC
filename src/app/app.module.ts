@@ -56,6 +56,10 @@ import { CommunicationsComponent } from './communications/communications.compone
 import { DangerComponent } from './communications/danger/danger.component';
 import { SuppressionBienComponent } from './communications/danger/suppression-bien/suppression-bien.component';
 import { ListServiceComponent } from './all-bien/list-service/list-service.component';
+import { ActivationCompteComponent } from './login/activation-compte/activation-compte.component';
+import { MessageDAttenteComponent } from './communications/attente/message-dattente/message-dattente.component';
+import { OneBienComponent } from './one-bien/one-bien.component';
+import { PresentationBienCreeComponent } from './client/profil/creation-de-bien/presentation-bien-cree/presentation-bien-cree.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -107,6 +111,10 @@ import { ListServiceComponent } from './all-bien/list-service/list-service.compo
     DangerComponent,
     SuppressionBienComponent,
     ListServiceComponent,
+    ActivationCompteComponent,
+    MessageDAttenteComponent,
+    OneBienComponent,
+    PresentationBienCreeComponent,
   ],
   imports: [
     BrowserModule,

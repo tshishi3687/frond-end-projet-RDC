@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BienService {
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient,
+              private service: LoginService) { }
 
   // tslint:disable-next-line:typedef
   ajouterBien(bien) {
@@ -32,6 +34,14 @@ export class BienService {
 
   // tslint:disable-next-line:typedef
   voirBien(){
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
     return this.client.get('http://localhost:8081/bien');
   }
 

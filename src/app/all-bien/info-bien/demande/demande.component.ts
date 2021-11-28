@@ -30,20 +30,28 @@ export class DemandeComponent implements OnInit {
   cadreReservation = false;
   btnReservation = true;
   formValide: boolean;
+  messageAttenteBool = false;
+  fomDemande = true;
+  textDemandeEnvoyer: string;
+  textError: string;
+  npersonne: number;
+  dateJ = new Date();
 
   ngOnInit(): void {
   }
 
   creeDemande(): void{
-
-    // @ts-ignore
-    const dateJ = new Date(this.reservationFrom.value.ddd);
-    console.log(dateJ);
+    const dateA = new Date(this.reservationFrom.value.dda);
+    const dateD = new Date(this.reservationFrom.value.ddd);
+    this.npersonne = this.reservationFrom.value.npersonne;
     const demande = new Demande();
     const etatDEmande = new EtatDemande();
     etatDEmande.id = 1;
 
-    if (this.reservationFrom.valid){
+    if ((this.reservationFrom.valid) && (dateA <= this.dateJ) && (dateD <= dateA) && (this.npersonne <= this.personne.repBiendb().npmax)){
+
+      this.messageAttenteBool = true;
+      this.fomDemande = false;
       this.formValide = false;
       demande.id = 0;
       demande.dda = this.reservationFrom.value.dda;
@@ -52,14 +60,12 @@ export class DemandeComponent implements OnInit {
       demande.bienDemandee = this.personne.repBiendb();
       demande.faitPar = this.personne.client();
       demande.etat = etatDEmande;
-      this.service.ajouterReservation(demande).subscribe(reponse => alert(this.ok), reponse => alert(this.error));
-    }else{
-      this.formValide = true;
+      this.service.ajouterReservation(demande).subscribe(reponse => {
+        this.messageAttenteBool = false;
+        this.fomDemande = false;
+        this.textDemandeEnvoyer = 'Votre demande a bien été envoyé ;)';
+      }, reponse => alert(this.error));
     }
-  }
-
-  mesReservation(): void{
-
   }
 
   changement(): void{

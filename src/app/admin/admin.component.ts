@@ -14,12 +14,4 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  verif(): boolean {
-    if (this.sercice.client().roll.nomRoll === 'Admin'){
-      return true;
-    }
-    else{
-      this.route.navigateByUrl('/connexion');
-    }
-  }
 }

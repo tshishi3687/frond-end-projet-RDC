@@ -57,6 +57,10 @@ export class Roll{
   id: number;
   nomRoll: string;
 }
+export class Authorities{
+  authority: string;
+}
+
 export class Personne{
   id: number;
   nom: string;
@@ -64,8 +68,10 @@ export class Personne{
   ddn: DatePipe;
   roll: Roll;
   contactUser: ContactUser;
-  mdp: Mdp;
+  password: Mdp;
+  verifMDP: string;
   ddj: DatePipe;
+  active: boolean;
 }
 
 export class Bien{

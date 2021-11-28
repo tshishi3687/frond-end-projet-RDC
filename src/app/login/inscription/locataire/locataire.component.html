@@ -21,9 +21,12 @@
 
   </div>
 
-  <div class="p-3 mb-2 bg-success text-white" align="center" *ngIf="this.connexionOK">
+  <div  align="center" *ngIf="attenteBool">
+    <app-message-dattente></app-message-dattente>
+  </div>
+
+  <div  align="center" *ngIf="this.connexionOK">
     <h1> Votre inscription est un succès</h1>
-    <h3>Vous pouvez dès aprèsent vous connecter sur votre compte</h3>
-    <app-connexion></app-connexion>
+    <app-activation-compte></app-activation-compte>
   </div>
 </div>

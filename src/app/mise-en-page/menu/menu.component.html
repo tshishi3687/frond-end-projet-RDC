@@ -15,34 +15,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" *ngIf="verifCoo()" >
+                <li class="nav-item" *ngIf="verifSiAdmin()" >
                   <button type="button" class="btn btn-light" routerLink="/province">Province</button>
                 </li>
-                <li class="nav-item" *ngIf="verifCoo()">
+                <li class="nav-item" *ngIf="verifSiAdmin()">
                   <button type="button" class="btn btn-light" routerLink="/ville">Ville</button>
                 </li>
-                <li class="nav-item" *ngIf="verifCoo()">
+                <li class="nav-item" *ngIf="verifSiAdmin()">
                   <button type="button" class="btn btn-light" routerLink="/service">Service</button>
                 </li>
-                <li class="nav-item" *ngIf="verifCoo()">
+                <li class="nav-item" *ngIf="verifSiAdmin()">
                   <button type="button" class="btn btn-light" routerLink="/typeBien">Type de bien</button>
                 </li>
-                <li class="nav-item" *ngIf="verifCoo()">
+                <li class="nav-item" *ngIf="verifSiAdmin()">
                   <button type="button" class="btn btn-light" routerLink="/typeService">Type de service</button>
                 </li>
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
                 </li>
-                <li class="nav-item" *ngIf="verifsiloca()">
+                <li class="nav-item" *ngIf="verifSiPropietere()">
                   <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un bien</button>
                 </li>
-                <li class="nav-item" *ngIf="verifsiloca()">
+                <li class="nav-item" >
                   <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes biens</button>
                 </li>
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>
                 </li>
-                <li class="nav-item" *ngIf="verifsiloca()">
+                <li class="nav-item" *ngIf="verifSiPropietere()">
                   <button type="button" class="btn btn-light" routerLink="/demandeRecu">Demande ruçue(s)</button>
                 </li>
                 <li class="nav-item">
