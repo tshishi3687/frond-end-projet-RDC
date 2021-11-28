@@ -27,7 +27,7 @@ export class PersonneService {
       })
     };
 
-    return this.client.post('http://localhost:8081/personne/user', personne, {observe: 'response'});
+    return this.client.post('http://localhost:8081/personne/user', personne, httpOptions);
   }
 
   // tslint:disable-next-line:typedef

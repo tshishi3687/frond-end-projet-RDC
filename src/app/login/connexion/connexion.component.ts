@@ -42,43 +42,27 @@ export class ConnexionComponent implements OnInit {
     this.route.navigateByUrl('/inscription');
   }
 
+
   verrif(): void {
     const mdp = new Mdp();
     mdp.mail = this.logForm.value.email;
     mdp.mdp = this.logForm.value.mdp;
     // tslint:disable-next-line:max-line-length
-    this.personneService.voirPersonne(mdp).subscribe(reponse => {
-      // @ts-ignore
-      // console.log(reponse.headers);
-      console.log(reponse.headers.get('Authorization'));
-      // ((this.maPersonne = reponse), this.logService.redirection(this.maPersonne));
-    }, reponse => {
-
-      // @ts-ignore
-      alert('error');
-    });
+    // @ts-ignore
+    this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => {
+      console.log(reponse);
+      if (reponse.id <= 0){
+        this.textErro = 'E-mail ou Mot de passe INCORECTE';
+      }else { // @ts-ignore
+        if (reponse.active){
+                this.logService.redirection(reponse);
+              }else{
+                this.activeCompte = true;
+                this.connnectionOKBUT = false;
+              }
+      }
+    }, reponse => alert(this.error));
   }
-  //
-  // verrif(): void {
-  //   const mdp = new Mdp();
-  //   mdp.mail = this.logForm.value.email;
-  //   mdp.mdp = this.logForm.value.mdp;
-  //   // tslint:disable-next-line:max-line-length
-  //   this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => {
-  //     console.log(reponse);
-  //     // @ts-ignore
-  //     if (reponse.id <= 0){
-  //       this.textErro = 'E-mail ou Mot de passe INCORECTE';
-  //     }else { // @ts-ignore
-  //       if (reponse.enabled){
-  //               this.logService.redirection(reponse);
-  //             }else{
-  //               this.activeCompte = true;
-  //               this.connnectionOKBUT = false;
-  //             }
-  //     }
-  //   }, reponse => alert(this.error));
-  // }
 
 
 }
