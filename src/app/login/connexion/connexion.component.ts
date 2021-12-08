@@ -50,7 +50,6 @@ export class ConnexionComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     // @ts-ignore
     this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => {
-      console.log(reponse);
       if (reponse.id <= 0){
         this.textErro = 'E-mail ou Mot de passe INCORECTE';
       }else { // @ts-ignore

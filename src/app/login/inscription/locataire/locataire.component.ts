@@ -39,7 +39,6 @@ export class LocataireComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   ajouterPersonne(): void{
 
     const dateJ = new Date();
@@ -85,8 +84,8 @@ export class LocataireComponent implements OnInit {
         if (reponse ){
           this.personneExiste = true;
         }else{
-          // this.attenteBool = true;
-          // this.inscriptionBool = false;
+          this.attenteBool = true;
+          this.inscriptionBool = false;
           // tslint:disable-next-line:max-line-length
           this.personneService.ajouterPersonne(personne).subscribe(reponseins => {
             this.redirection();

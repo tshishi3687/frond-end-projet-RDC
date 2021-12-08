@@ -1,5 +1,5 @@
 <div class="fadeInDown" >
-  <div id="content" class="content p-0" *ngIf="verifSiCo()">
+  <div id="content" class="content p-0" *ngIf="ser.isAuthenticated()">
     <div class="profile-header">
       <div class="profile-header-cover"></div>
 
@@ -15,34 +15,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" *ngIf="verifSiAdmin()" >
+                <li class="nav-item" *ngIf="ser.AdminRolle()" >
                   <button type="button" class="btn btn-light" routerLink="/province">Province</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiAdmin()">
+                <li class="nav-item" *ngIf="ser.AdminRolle()">
                   <button type="button" class="btn btn-light" routerLink="/ville">Ville</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiAdmin()">
+                <li class="nav-item" *ngIf="ser.AdminRolle()">
                   <button type="button" class="btn btn-light" routerLink="/service">Service</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiAdmin()">
+                <li class="nav-item" *ngIf="ser.AdminRolle()">
                   <button type="button" class="btn btn-light" routerLink="/typeBien">Type de bien</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiAdmin()">
+                <li class="nav-item" *ngIf="ser.AdminRolle()">
                   <button type="button" class="btn btn-light" routerLink="/typeService">Type de service</button>
                 </li>
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiPropietere()">
+                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
                   <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un bien</button>
                 </li>
-                <li class="nav-item" >
+                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
                   <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes biens</button>
                 </li>
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>
                 </li>
-                <li class="nav-item" *ngIf="verifSiPropietere()">
+                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
                   <button type="button" class="btn btn-light" routerLink="/demandeRecu">Demande ruçue(s)</button>
                 </li>
                 <li class="nav-item">
@@ -50,7 +50,7 @@
                 </li>
               </ul>
               <form class="d-flex">
-                <button type="button" class="btn btn-outline-primary" routerLink="/profil">{{service.client().roll.nomRoll}} : {{service.client().nom}} {{service.client().prenom}}</button>
+                <button type="button" class="btn btn-outline-primary" routerLink="/profil">{{ser.client().roll.nomRoll}} : {{ser.client().nom}} {{ser.client().prenom}}</button>
               </form>
             </div>
           </div>

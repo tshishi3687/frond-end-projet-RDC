@@ -28,9 +28,9 @@ export class AllBienComponent implements OnInit {
   ) { }
 
   rechercheForm = new FormGroup({
-    province:  new FormControl(),
-    ville: new FormControl(),
-    typeBien: new FormControl()
+    province:  new FormControl('defaults'),
+    ville: new FormControl('defaults'),
+    typeBien: new FormControl('defaults')
   });
 
   service = this.ser;
@@ -97,17 +97,37 @@ export class AllBienComponent implements OnInit {
     });
   }
 
-  // @ts-ignore
-  listVillePro(p: Province): Array<Ville>{
-    const listVille: Array<Ville> = [];
-    // tslint:disable-next-line:prefer-const
-    for (const n of this.listVille)  {
-      if (n.province.nomprovince.includes(p.nomprovince)){
-        // @ts-ignore
-        listVille.push(n);
-        console.log(n.nomVille);
-      }
-      return listVille;
+  enventTB(): void{
+    if (this.rechercheForm.value.typeBien === 'defaults'){
+      this.typeBien = '';
+    }else{
+      // @ts-ignore
+      this.typeBien = this.listTypeBien[this.rechercheForm.value.typeBien].nom;
     }
+  }
+
+  enventProvince(): void{
+    if (this.rechercheForm.value.province === 'defaults'){
+      this.province = '';
+    }else{
+      // @ts-ignore
+      this.province = this.listProvince[this.rechercheForm.value.province].nomprovince;
+    }
+  }
+
+  enventVille(): void{
+    if (this.rechercheForm.value.ville === 'defaults'){
+      this.ville = '';
+    }else{
+      // @ts-ignore
+      this.ville = this.listVille[this.rechercheForm.value.ville].nomVille;
+    }
+  }
+
+  resetReserche(): void{
+    this.rechercheForm.reset();
+    this.ville = '';
+    this.province = '';
+    this.typeBien = '';
   }
 }

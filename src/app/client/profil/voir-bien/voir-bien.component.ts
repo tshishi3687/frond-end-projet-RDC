@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Bien, Personne} from '../../../objet';
+import {Bien, Personne, TypeDeBien} from '../../../objet';
 import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {SuppressionBienComponent} from '../../../communications/danger/suppression-bien/suppression-bien.component';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
+import {TypeDeBienService} from '../../../service/type-de-bien.service';
 
 @Component({
   selector: 'app-voir-bien',
@@ -18,19 +20,38 @@ export class VoirBienComponent implements OnInit {
     private infoPersonne: LoginService,
     private bienService: BienService,
     private dialog: MatDialog,
-    private route: Router
+    private typeDBien: TypeDeBienService
   ) { }
+
+
+  rechercheForm = new FormGroup({
+    typeBien: new FormControl('defaults')
+  });
+
   @Input() biensup: boolean;
   startingString = '';
   service = this.infoPersonne;
   private error = 'Il y a eu un probleme :(';
   private echange = false;
   listBien: Array<Bien> = [];
-  peuxReserver = true;
+  listTypeBien: Array<TypeDeBien> = [];
+  typeBien = '';
 
   ngOnInit(): void {
     this.voirBienPersonne();
-    console.log(this.biensup);
+    this.voirTypeBien();
+  }
+
+  voirTypeBien(): void{
+    this.typeDBien.voirTypeDeBien().subscribe((reponse: Array<TypeDeBien>) => {
+      // @ts-ignore
+      this.listTypeBien = reponse.list;
+    });
+  }
+
+  resetReserche(): void{
+    this.rechercheForm.reset();
+    this.typeBien = '';
   }
 
   redirection(): void{
@@ -44,8 +65,8 @@ export class VoirBienComponent implements OnInit {
     maPersonne.id = this.infoPersonne.client().id;
     maPersonne.nom = this.infoPersonne.client().nom;
     maPersonne.prenom = this.infoPersonne.client().prenom;
-      // @ts-ignore
-    this.bienService.voirBienPersonne(maPersonne).subscribe(reponse => this.listBien = reponse, reponse => alert(this.error));
+    // tslint:disable-next-line:max-line-length
+    this.bienService.voirBienPersonne(maPersonne).subscribe((reponse: Array<Bien>) => this.listBien = reponse, reponse => alert(this.error));
   }
 
   changement(): boolean{
@@ -59,8 +80,7 @@ export class VoirBienComponent implements OnInit {
   }
 
 
-  // tslint:disable-next-line:typedef
-  informationbient(b: Bien){
+  informationbient(b: Bien): void{
     this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -70,8 +90,7 @@ export class VoirBienComponent implements OnInit {
     this.dialog.open(InfoBienComponent, dialogConfig);
   }
 
-  // tslint:disable-next-line:typedef
-  suprimerBien(b: Bien){
+  suprimerBien(b: Bien): void{
     this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -79,5 +98,23 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
     this.dialog.open(SuppressionBienComponent, dialogConfig);
+    this.voirBienPersonne();
   }
+
+  // tslint:disable-next-line:typedef
+  activation(b: Bien): void{
+    this.bienService.activate(b).subscribe(result => {
+      this.voirBienPersonne();
+    }, result => alert('problemme de connection server'));
+  }
+
+  enventTB(): void{
+    if (this.rechercheForm.value.typeBien === 'defaults'){
+      this.typeBien = '';
+    }else{
+      // @ts-ignore
+      this.typeBien = this.listTypeBien[this.rechercheForm.value.typeBien].nom;
+    }
+  }
+
 }

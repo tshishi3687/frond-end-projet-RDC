@@ -61,4 +61,14 @@ export class BienService {
     return this.client.post('http://localhost:8081/bien/deletebien', id, httpOptions);
   }
 
+  // tslint:disable-next-line:typedef
+  activate(bien){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    return this.client.post('http://localhost:8081/bien/acti', bien, httpOptions);
+  }
+
 }

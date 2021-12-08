@@ -4,7 +4,11 @@
       <h3 class="text-danger">{{this.textErro}}</h3>
       <!-- Login Form -->
       <form [formGroup]="logForm">
+        <label class="email-detail-attachment">E-mail </label><br>
         <input type="email" formControlName="email"   class="fadeIn second" name="email" placeholder="Votre E-mail">
+        <br>
+        <br>
+        <label class="email-detail-attachment">Mot de passe</label><br>
         <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
         <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
       </form>

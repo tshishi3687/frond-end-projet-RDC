@@ -11,25 +11,9 @@ export class MenuComponent implements OnInit {
   text = 'Bonjour Bienvenue dans Angular';
   input: string;
 
-  constructor(private ser: LoginService) { }
-  service = this.ser;
+  constructor(private service: LoginService) { }
+  ser = this.service;
 
   ngOnInit(): void {
-  }
-
-  verifSiAdmin(): boolean{
-   return this.service.AdminRolle();
-  }
-
-  deconnexion(): void{
-    this.service.logout();
-  }
-
-  verifSiCo(): boolean{
-    return this.service.isAuthenticated();
-  }
-
-  verifSiPropietere(): boolean{
-    return this.service.isProprietaireRoll();
   }
 }

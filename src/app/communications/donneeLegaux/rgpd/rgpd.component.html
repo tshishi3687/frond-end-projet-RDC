@@ -1,0 +1,14 @@
+<button type="button" class="btn btn-success" *ngIf="!service.isAuthenticated()" (click)="AcceptationConditions()">J'accepte</button>
+<button type="button" class="btn btn-link" *ngIf="!service.isAuthenticated()" (click)="refusConditions()">Je refuse</button>
+<button type="button" class="btn btn-danger" *ngIf="service.isAuthenticated()" (click)="AcceptationConditions()">Fermer</button>
+<br>
+<br>
+<p>RÈGLEMENT (UE) 2016/679 DU PARLEMENT EUROPÉEN ET DU CONSEIL
+  du 27 avril 2016
+  relatif à la protection des personnes physiques à l'égard du traitement des données à caractère
+  personnel et à la libre circulation de ces données, et abrogeant la directive 95/46/CE (règlement
+  général sur la protection des données) </p>
+<object data="/assets/PDF/Protection%20des%20données%5B2956%5D.pdf" width="100%" height="100%" type='application/pdf'>
+  <p>Sorry, the PDF couldn't be displayed :(</p>
+  <a href="/assets/PDF/Protection%20des%20données%5B2956%5D.pdf" target="_blank">Click Here</a>
+</object>

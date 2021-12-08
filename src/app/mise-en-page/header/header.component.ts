@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from '../../service/login.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MiseEngardeStartAppsComponent} from '../../communications/avertissement/mise-engarde-start-apps/mise-engarde-start-apps.component';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,8 @@ import {LoginService} from '../../service/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private ser: LoginService) { }
+  constructor(private ser: LoginService,
+              private dialog: MatDialog) { }
   connexion: boolean;
   inscription: boolean;
   service = this.ser;
@@ -16,6 +19,7 @@ export class HeaderComponent implements OnInit {
   boolLogo = true;
 
   ngOnInit(): void {
+    this.avertissement();
   }
 
   siconnecte(): boolean{
@@ -32,5 +36,18 @@ export class HeaderComponent implements OnInit {
     this.boolLogo = true;
     this.inscription = true;
     this.connexion = false;
+  }
+
+
+
+  avertissement(): void{
+    if (!this.service.isAuthenticated()){
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = 'auto';
+      dialogConfig.height = 'auto';
+      this.dialog.open(MiseEngardeStartAppsComponent, dialogConfig);
+    }
   }
 }

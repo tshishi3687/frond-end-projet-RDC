@@ -60,6 +60,12 @@ import { ActivationCompteComponent } from './login/activation-compte/activation-
 import { MessageDAttenteComponent } from './communications/attente/message-dattente/message-dattente.component';
 import { OneBienComponent } from './one-bien/one-bien.component';
 import { PresentationBienCreeComponent } from './client/profil/creation-de-bien/presentation-bien-cree/presentation-bien-cree.component';
+import { MiseEngardeStartAppsComponent } from './communications/avertissement/mise-engarde-start-apps/mise-engarde-start-apps.component';
+import { RGPDComponent } from './communications/donneeLegaux/rgpd/rgpd.component';
+import { CurriculumViteaComponent } from './communications/donneeLegaux/curriculumVitae/curriculum-vitea/curriculum-vitea.component';
+import { LettreDeMotivationComponent } from './communications/donneeLegaux/lM/lettre-de-motivation/lettre-de-motivation.component';
+import { TravailDeFinEtudeComponent } from './communications/donneeLegaux/TFE/travail-de-fin-etude/travail-de-fin-etude.component';
+import { ContactComponent } from './communications/donneeLegaux/contact/contact/contact.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -115,6 +121,12 @@ import { PresentationBienCreeComponent } from './client/profil/creation-de-bien/
     MessageDAttenteComponent,
     OneBienComponent,
     PresentationBienCreeComponent,
+    MiseEngardeStartAppsComponent,
+    RGPDComponent,
+    CurriculumViteaComponent,
+    LettreDeMotivationComponent,
+    TravailDeFinEtudeComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

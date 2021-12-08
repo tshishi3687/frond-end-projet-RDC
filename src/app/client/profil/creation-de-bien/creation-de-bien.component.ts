@@ -7,6 +7,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Aladisposition, Bien, Coordonnee, DureeLocation, TypeDeBien, Ville} from '../../../objet';
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
+import {VoirBienComponent} from '../voir-bien/voir-bien.component';
+import {OneBienComponent} from '../../../one-bien/one-bien.component';
+import {PresentationBienCreeComponent} from './presentation-bien-cree/presentation-bien-cree.component';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -21,7 +26,8 @@ export class CreationDeBienComponent implements OnInit {
     private bienService: BienService,
     private villeService: VilleService,
     private typeDeBienService: TypeDeBienService,
-    private imgService: ImgService) { }
+    private imgService: ImgService,
+    private dialog: MatDialog) { }
 
   private error = 'Il y a eu un probleme :(';
   private ok = 'tout c\'est bien passée :)-';
@@ -81,9 +87,6 @@ export class CreationDeBienComponent implements OnInit {
   imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
   boolImgNull = false;
   formCreationEnvoyeBool = true;
-  vuBienCreee = false;
-  messageAttenteBool = false;
-  private idBien: number;
 
   ngOnInit(): void {
     this.voirVille();
@@ -128,73 +131,82 @@ export class CreationDeBienComponent implements OnInit {
   }
 
   ajouterBien(): void{
-      this.formCreationEnvoyeBool = false;
-      this.messageAttenteBool = true;
 
-      const coordonnee = new Coordonnee();
-      coordonnee.id = 0;
-      coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
-      coordonnee.cpostal = this.BienForm.value.coordonneeCPostal;
-      coordonnee.rue = this.BienForm.value.coordonneeRue;
-      coordonnee.num = this.BienForm.value.coordonneeNum;
-      coordonnee.email = this.BienForm.value.coordonneeEmail;
-      coordonnee.telephone = this.BienForm.value.coordonneeTelephone;
+    const coordonnee = new Coordonnee();
+    coordonnee.id = 0;
+    coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
+    coordonnee.cpostal = this.BienForm.value.coordonneeCPostal;
+    coordonnee.rue = this.BienForm.value.coordonneeRue;
+    coordonnee.num = this.BienForm.value.coordonneeNum;
+    coordonnee.email = this.BienForm.value.coordonneeEmail;
+    coordonnee.telephone = this.BienForm.value.coordonneeTelephone;
 
-      const aladispo = new Aladisposition();
-      aladispo.id = 0;
-      aladispo.securite = this.BienForm.value.securite;
-      aladispo.wifi = this.BienForm.value.wifi;
-      aladispo.television = this.BienForm.value.television;
-      aladispo.vesselle = this.BienForm.value.vesselle;
-      aladispo.literie = this.BienForm.value.literie;
-      aladispo.lingeMaison = this.BienForm.value.lingeMaison;
-      aladispo.eauChaude = this.BienForm.value.eauChaude;
-      aladispo.eauFroide = this.BienForm.value.eauFroide;
-      aladispo.eauPotable = this.BienForm.value.eauPotable;
-      aladispo.jardin = this.BienForm.value.jardin;
-      aladispo.cour = this.BienForm.value.cour;
-      aladispo.terrasse = this.BienForm.value.terrasse;
-      aladispo.piscinePrive = this.BienForm.value.piscinePrive;
-      aladispo.piscineCommune = this.BienForm.value.piscineCommune;
-      aladispo.voiture = this.BienForm.value.vehicule;
-      aladispo.moto = this.BienForm.value.moto;
-      aladispo.velo = this.BienForm.value.velo;
-      aladispo.animaux = this.BienForm.value.animaux;
+    const aladispo = new Aladisposition();
+    aladispo.id = 0;
+    aladispo.securite = this.BienForm.value.securite;
+    aladispo.wifi = this.BienForm.value.wifi;
+    aladispo.television = this.BienForm.value.television;
+    aladispo.vesselle = this.BienForm.value.vesselle;
+    aladispo.literie = this.BienForm.value.literie;
+    aladispo.lingeMaison = this.BienForm.value.lingeMaison;
+    aladispo.eauChaude = this.BienForm.value.eauChaude;
+    aladispo.eauFroide = this.BienForm.value.eauFroide;
+    aladispo.eauPotable = this.BienForm.value.eauPotable;
+    aladispo.jardin = this.BienForm.value.jardin;
+    aladispo.cour = this.BienForm.value.cour;
+    aladispo.terrasse = this.BienForm.value.terrasse;
+    aladispo.piscinePrive = this.BienForm.value.piscinePrive;
+    aladispo.piscineCommune = this.BienForm.value.piscineCommune;
+    aladispo.voiture = this.BienForm.value.vehicule;
+    aladispo.moto = this.BienForm.value.moto;
+    aladispo.velo = this.BienForm.value.velo;
+    aladispo.animaux = this.BienForm.value.animaux;
 
-      const img = this.BienForm.value.file;
+    const bien = new Bien();
+    bien.id = 0;
+    bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
+    bien.dureeLocation = this.listDureeLocation[this.BienForm.value.dureeLocation];
+    bien.aladisposition = aladispo;
+    bien.prix = this.BienForm.value.prix;
+    bien.npmin = this.BienForm.value.npmin;
+    bien.npmax = this.BienForm.value.npmax;
+    bien.nchambre = this.BienForm.value.nchambre;
+    bien.nsdb = this.BienForm.value.nsdb;
+    bien.nwc = this.BienForm.value.nwc;
+    bien.superficie = this.BienForm.value.superficie;
+    bien.description = this.BienForm.value.description;
+    bien.coordonnee = coordonnee;
+    bien.appartient = this.infoPersonne.client();
 
-      const bien = new Bien();
-      bien.id = 0;
-      bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
-      bien.dureeLocation = this.listDureeLocation[this.BienForm.value.dureeLocation];
-      bien.aladisposition = aladispo;
-      bien.prix = this.BienForm.value.prix;
-      bien.npmin = this.BienForm.value.npmin;
-      bien.npmax = this.BienForm.value.npmax;
-      bien.nchambre = this.BienForm.value.nchambre;
-      bien.nsdb = this.BienForm.value.nsdb;
-      bien.nwc = this.BienForm.value.nwc;
-      bien.superficie = this.BienForm.value.superficie;
-      bien.description = this.BienForm.value.description;
-      bien.coordonnee = coordonnee;
-      bien.appartient = this.infoPersonne.client();
+    this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
+      const uploadImageData = new FormData();
+      // @ts-ignore
+      uploadImageData.append('bien', reponselienPhoto);
+      for (let i = 0; i < (this.myFiles.length); i++){
 
-      this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
-        const uploadImageData = new FormData();
-        // @ts-ignore
-        uploadImageData.append('bien', reponselienPhoto);
-        for (let i = 0; i < (this.myFiles.length); i++){
+        uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
+      }
+      this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
+        this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
+          this.infoPersonne.biendb(monBien);
+          this.resstFormControl();
+          this.voirBienCre();
+        }, monBien => alert('error'));
+      }, reponse => alert(this.error));
+    }, reponselienPhoto => alert(this.error));
+  }
 
-          uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
-        }
-        this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
-          this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
-            this.infoPersonne.biendb(monBien);
-            this.myFiles = null;
-            this.vuBienCreee = true;
-            this.messageAttenteBool = false;
-          }, monBien => alert('error'));
-        }, reponse => alert(this.error));
-      }, reponselienPhoto => alert(this.error));
+  voirBienCre(): void{
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = 'auto';
+      dialogConfig.height = 'auto';
+      this.dialog.open(PresentationBienCreeComponent, dialogConfig);
+  }
+
+  resstFormControl(): void{
+    this.BienForm.reset();
+    this.myFiles = [];
   }
 }

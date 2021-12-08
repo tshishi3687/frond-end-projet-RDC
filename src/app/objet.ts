@@ -92,6 +92,7 @@ export class Bien{
   appartient: Personne;
   dateCreation: Date;
   likes: number;
+  modeActive: boolean;
 }
 
 export class Aladisposition{
@@ -187,4 +188,48 @@ export class LikeBien{
   bienDTO: Bien;
 }
 
+export abstract class Constants{
+  // tslint:disable-next-line:variable-name
+  private readonly _roll1 = btoa('Admin');
+  // tslint:disable-next-line:variable-name
+  private readonly _roll2 = btoa('Proprietaire');
+  // tslint:disable-next-line:variable-name
+  private readonly _roll3 = btoa('Locataire');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionUser = btoa('user-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionBien = btoa('bien-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionDemande = btoa('demande-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionREservation = btoa('reservation-details');
 
+
+  get SessionUser(): string {
+    return atob(this._SessionUser);
+  }
+
+  get SessionBien(): string {
+    return atob(this._SessionBien);
+  }
+
+  get SessionDemande(): string {
+    return atob(this._SessionDemande);
+  }
+
+  get SessionREservation(): string {
+    return atob(this._SessionREservation);
+  }
+
+  get roll1(): string {
+    return atob(this._roll1);
+  }
+
+  get roll2(): string {
+    return atob(this._roll2);
+  }
+
+  get roll3(): string {
+    return atob(this._roll3);
+  }
+}
