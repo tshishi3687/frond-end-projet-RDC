@@ -78,7 +78,6 @@ export class Bien{
   id: number;
   // tslint:disable-next-line:variable-name
   type_bien: TypeDeBien;
-  dureeLocation: DureeLocation;
   aladisposition: Aladisposition;
   prix: number;
   npmin: number;
@@ -93,6 +92,9 @@ export class Bien{
   dateCreation: Date;
   likes: number;
   modeActive: boolean;
+  images: Array<ImageBien>;
+  idNNuit: number;
+  dateFinMisEnLigne: Date;
 }
 
 export class Aladisposition{
@@ -127,18 +129,28 @@ export class ContactUser{
   telephone: string;
   appartienA: Personne;
 }
-// tslint:disable-next-line:class-name
-export class Demande{
+
+export class Contrat{
   id: number;
-  ddj: Date;
-  dda: Date;
-  ddd: Date;
-  npersonne: number;
+  bailleur: Personne;
+  preneur: Personne;
+  enCour: boolean;
+  entre: string;
+  entre2: string;
+  objet: string;
+  etatLieu: string;
+  loyer: string;
+  duree: string;
+  dardl: string;
+}
+
+// tslint:disable-next-line:class-name
+export class BienMisEnLigne{
+  id: number;
+  bienLie: Bien;
+  contratBienMisEnLigne: Contrat;
   // tslint:disable-next-line:variable-name
-  bienDemandee: Bien;
-  // tslint:disable-next-line:variable-name
-  faitPar: Personne;
-  etat: EtatDemande;
+  preneurOuBailleur: Personne;
 }
 
 export class EtatDemande{
@@ -188,6 +200,33 @@ export class LikeBien{
   bienDTO: Bien;
 }
 
+export class Pays{
+  id: number;
+  code: number;
+  alpha2: string;
+  alpha3: string;
+  nomEnGb: string;
+  nomFrFr: string;
+}
+
+export class AdressUser{
+  id: number;
+  numHabitation: string;
+  nomRue: string;
+  codePostal: string;
+  pays: Pays;
+  appartienA: Personne;
+}
+
+export class InfoBancaire{
+  id: number;
+  nomBanque: string;
+  numCarte: string;
+  numCompte: string;
+  dateExpiration: Date;
+  appartienA: Personne;
+}
+
 export abstract class Constants{
   // tslint:disable-next-line:variable-name
   private readonly _roll1 = btoa('Admin');
@@ -203,7 +242,19 @@ export abstract class Constants{
   private readonly _SessionDemande = btoa('demande-details');
   // tslint:disable-next-line:variable-name
   private readonly _SessionREservation = btoa('reservation-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionVerifIBAU = btoa('IBAU-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionContrat = btoa('contrat-details');
 
+
+  get SessionContrat(): string {
+    return atob(this._SessionContrat);
+  }
+
+  get SessionVerifIBAU(): string {
+    return atob(this._SessionVerifIBAU);
+  }
 
   get SessionUser(): string {
     return atob(this._SessionUser);

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private ser: LoginService,
               private dialog: MatDialog) { }
+  imgBoo = true;
   connexion: boolean;
   inscription: boolean;
   service = this.ser;
@@ -22,17 +23,15 @@ export class HeaderComponent implements OnInit {
     this.avertissement();
   }
 
-  siconnecte(): boolean{
-    return !this.service.isAuthenticated();
-  }
-
   bntConnection(): void{
     this.boolLogo = false;
     this.inscription = false;
     this.connexion = true;
+    this.imgBoo = false;
   }
 
   bntInscription(): void{
+    this.imgBoo = false;
     this.boolLogo = true;
     this.inscription = true;
     this.connexion = false;

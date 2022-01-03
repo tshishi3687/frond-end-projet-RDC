@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {DatePipe, formatDate} from '@angular/common';
-import {Bien, Demande} from '../../../objet';
+import {Bien} from '../../../objet';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReservationService} from '../../../service/reservation.service';
 import {LoginService} from '../../../service/login.service';

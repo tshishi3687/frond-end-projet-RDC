@@ -1,4 +1,4 @@
-<div class="fadeInDown" >
+<div class="fadeInDown text-center" >
   <div id="content" class="content p-0" *ngIf="ser.isAuthenticated()">
     <div class="profile-header">
       <div class="profile-header-cover"></div>
@@ -25,7 +25,7 @@
                   <button type="button" class="btn btn-light" routerLink="/service">Service</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/typeBien">Type de bien</button>
+                  <button type="button" class="btn btn-light" routerLink="/typeBien">Type de Bien</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
                   <button type="button" class="btn btn-light" routerLink="/typeService">Type de service</button>
@@ -34,19 +34,13 @@
                   <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
-                  <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un bien</button>
+                  <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un Bien</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
-                  <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes biens</button>
+                  <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes Biens</button>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="ser.isLocataireRoll()">
                   <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
-                  <button type="button" class="btn btn-light" routerLink="/demandeRecu">Demande ruçue(s)</button>
-                </li>
-                <li class="nav-item">
-                  <button type="button" class="btn btn-light" routerLink="/MesDemande">Mes demandes</button>
                 </li>
               </ul>
               <form class="d-flex">

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MesResercationComponent } from './mes-resercation.component';
+import { BienMisEnLigneComponent } from './bien-mis-en-ligne.component';
 
-describe('MesResercationComponent', () => {
-  let component: MesResercationComponent;
-  let fixture: ComponentFixture<MesResercationComponent>;
+describe('BienMisEnLigneComponent', () => {
+  let component: BienMisEnLigneComponent;
+  let fixture: ComponentFixture<BienMisEnLigneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MesResercationComponent ]
+      declarations: [ BienMisEnLigneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MesResercationComponent);
+    fixture = TestBed.createComponent(BienMisEnLigneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

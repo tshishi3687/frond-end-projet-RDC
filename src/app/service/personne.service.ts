@@ -20,6 +20,17 @@ export class PersonneService {
   }
 
   // tslint:disable-next-line:typedef
+  verifIBAU(personne) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/personne/ibau', personne, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
   voirPersonne(personne){
     const httpOptions = {
       headers: new HttpHeaders({

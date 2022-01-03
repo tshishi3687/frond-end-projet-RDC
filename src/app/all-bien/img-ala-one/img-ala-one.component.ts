@@ -16,22 +16,20 @@ export class ImgALaOneComponent implements OnInit {
   longSlider: number;
   slides: [] = [];
   private error = 'Il y a eu un probleme :(';
+  nomImg = '';
 
   ngOnInit(): void {
     this.rechercheImagesBien();
   }
 
   rechercheImagesBien(): void{
-    // tslint:disable-next-line:max-line-length
-    this.imagService.rechercherParBienid(this.b).subscribe((reponse: Array<ImageBien>) => {
-      // tslint:disable-next-line:prefer-for-of
-      this.longSlider = reponse.length;
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < reponse.length; i++){
+    let nomimg;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.b.images.length; i++){
+      nomimg = this.b.images[i].name;
         // @ts-ignore
-        this.slides.push({image : 'data:image/jpeg;base64,' + reponse[i].picByte});
+      this.slides.push({image : 'data:image/jpeg;base64,' + this.b.images[i].picByte});
       }
-    }, reponse => alert(this.error));
   }
 
 }

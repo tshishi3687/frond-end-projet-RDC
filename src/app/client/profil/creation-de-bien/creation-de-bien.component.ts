@@ -132,68 +132,78 @@ export class CreationDeBienComponent implements OnInit {
 
   ajouterBien(): void{
 
-    const coordonnee = new Coordonnee();
-    coordonnee.id = 0;
-    coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
-    coordonnee.cpostal = this.BienForm.value.coordonneeCPostal;
-    coordonnee.rue = this.BienForm.value.coordonneeRue;
-    coordonnee.num = this.BienForm.value.coordonneeNum;
-    coordonnee.email = this.BienForm.value.coordonneeEmail;
-    coordonnee.telephone = this.BienForm.value.coordonneeTelephone;
+    if (this.infoPersonne.isProprietaireRoll()){
 
-    const aladispo = new Aladisposition();
-    aladispo.id = 0;
-    aladispo.securite = this.BienForm.value.securite;
-    aladispo.wifi = this.BienForm.value.wifi;
-    aladispo.television = this.BienForm.value.television;
-    aladispo.vesselle = this.BienForm.value.vesselle;
-    aladispo.literie = this.BienForm.value.literie;
-    aladispo.lingeMaison = this.BienForm.value.lingeMaison;
-    aladispo.eauChaude = this.BienForm.value.eauChaude;
-    aladispo.eauFroide = this.BienForm.value.eauFroide;
-    aladispo.eauPotable = this.BienForm.value.eauPotable;
-    aladispo.jardin = this.BienForm.value.jardin;
-    aladispo.cour = this.BienForm.value.cour;
-    aladispo.terrasse = this.BienForm.value.terrasse;
-    aladispo.piscinePrive = this.BienForm.value.piscinePrive;
-    aladispo.piscineCommune = this.BienForm.value.piscineCommune;
-    aladispo.voiture = this.BienForm.value.vehicule;
-    aladispo.moto = this.BienForm.value.moto;
-    aladispo.velo = this.BienForm.value.velo;
-    aladispo.animaux = this.BienForm.value.animaux;
+      const coordonnee = new Coordonnee();
+      coordonnee.id = 0;
+      coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
+      coordonnee.cpostal = this.BienForm.value.coordonneeCPostal;
+      coordonnee.rue = this.BienForm.value.coordonneeRue;
+      coordonnee.num = this.BienForm.value.coordonneeNum;
+      coordonnee.email = this.BienForm.value.coordonneeEmail;
+      coordonnee.telephone = this.BienForm.value.coordonneeTelephone;
 
-    const bien = new Bien();
-    bien.id = 0;
-    bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
-    bien.dureeLocation = this.listDureeLocation[this.BienForm.value.dureeLocation];
-    bien.aladisposition = aladispo;
-    bien.prix = this.BienForm.value.prix;
-    bien.npmin = this.BienForm.value.npmin;
-    bien.npmax = this.BienForm.value.npmax;
-    bien.nchambre = this.BienForm.value.nchambre;
-    bien.nsdb = this.BienForm.value.nsdb;
-    bien.nwc = this.BienForm.value.nwc;
-    bien.superficie = this.BienForm.value.superficie;
-    bien.description = this.BienForm.value.description;
-    bien.coordonnee = coordonnee;
-    bien.appartient = this.infoPersonne.client();
+      const aladispo = new Aladisposition();
+      aladispo.id = 0;
+      aladispo.securite = this.BienForm.value.securite;
+      aladispo.wifi = this.BienForm.value.wifi;
+      aladispo.television = this.BienForm.value.television;
+      aladispo.vesselle = this.BienForm.value.vesselle;
+      aladispo.literie = this.BienForm.value.literie;
+      aladispo.lingeMaison = this.BienForm.value.lingeMaison;
+      aladispo.eauChaude = this.BienForm.value.eauChaude;
+      aladispo.eauFroide = this.BienForm.value.eauFroide;
+      aladispo.eauPotable = this.BienForm.value.eauPotable;
+      aladispo.jardin = this.BienForm.value.jardin;
+      aladispo.cour = this.BienForm.value.cour;
+      aladispo.terrasse = this.BienForm.value.terrasse;
+      aladispo.piscinePrive = this.BienForm.value.piscinePrive;
+      aladispo.piscineCommune = this.BienForm.value.piscineCommune;
+      aladispo.voiture = this.BienForm.value.vehicule;
+      aladispo.moto = this.BienForm.value.moto;
+      aladispo.velo = this.BienForm.value.velo;
+      aladispo.animaux = this.BienForm.value.animaux;
 
-    this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
-      const uploadImageData = new FormData();
-      // @ts-ignore
-      uploadImageData.append('bien', reponselienPhoto);
-      for (let i = 0; i < (this.myFiles.length); i++){
+      const bien = new Bien();
+      bien.id = 0;
+      bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
+      bien.aladisposition = aladispo;
+      bien.prix = this.BienForm.value.prix;
+      bien.npmin = this.BienForm.value.npmin;
+      bien.npmax = this.BienForm.value.npmax;
+      bien.nchambre = this.BienForm.value.nchambre;
+      bien.nsdb = this.BienForm.value.nsdb;
+      bien.nwc = this.BienForm.value.nwc;
+      bien.superficie = this.BienForm.value.superficie;
+      bien.description = this.BienForm.value.description;
+      bien.coordonnee = coordonnee;
+      bien.appartient = this.infoPersonne.client();
 
-        uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
-      }
-      this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
-        this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
-          this.infoPersonne.biendb(monBien);
-          this.resstFormControl();
-          this.voirBienCre();
-        }, monBien => alert('error'));
-      }, reponse => alert(this.error));
-    }, reponselienPhoto => alert(this.error));
+      this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
+        console.log(reponselienPhoto);
+        if (reponselienPhoto <= 0){
+          alert(this.error + 'on est ici 1');
+        }else{
+          const uploadImageData = new FormData();
+          // @ts-ignore
+          uploadImageData.append('bien', reponselienPhoto);
+          for (let i = 0; i < (this.myFiles.length); i++){
+
+            uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
+          }
+          this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
+            this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
+              // console.log(monBien);
+              this.infoPersonne.biendb(monBien);
+              this.resstFormControl();
+              this.voirBienCre();
+            }, monBien => alert('error'));
+          }, reponse => alert(this.error));
+        }
+      }, reponselienPhoto => alert(this.error));
+    }else{
+      alert(this.error + ' on est ici 3');
+    }
   }
 
   voirBienCre(): void{

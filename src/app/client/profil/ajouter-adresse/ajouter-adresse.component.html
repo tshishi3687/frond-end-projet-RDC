@@ -1,0 +1,60 @@
+<div class="text-center" *ngIf="adressUser==null">
+  <p>{{this.adressText}}</p>
+  <h1 class="text-danger" *ngIf="adressUser==null">VOUS N'AVEZ PAS D'ADRESSE ENREGISTREE</h1>
+  <h2>Ajouter une adresse :</h2>
+  <div >
+    <form [formGroup]="adressUserForm">
+      <div class="row">
+        <div class="col">
+          <input type="text" formControlName="numBien" class="form-control" placeholder="Numéro">
+        </div>
+        <div class="col">
+          <input type="text" formControlName="nomRue" class="form-control" placeholder="Rue">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <input type="text" formControlName="codePostal" class="form-control" placeholder="Code postal">
+        </div>
+        <div class="col">
+          <select class="form-select" formControlName="pays"  aria-label="Default select example" >
+            <option value="defaults" selected>Pays</option>
+            <option *ngFor="let p of listPays; let i = index" value="{{i}}">{{i}} - {{p.nomFrFr}}  ({{p.alpha2}})</option>
+          </select>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col">
+          <button class="w-100 btn btn-primary btn-lg" (click)="ajourterAdressUser()">Ajouter une adresse.</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="text-center" *ngIf="adressUser!=null">
+  <button type="button" class="btn btn-link" (click)="changerAdress()">J'aimerais changer d'adresse</button>
+  <div class="row">
+    <div class="col">
+      <label>N°</label>
+      <input type="text" class="form-control" placeholder="{{adressUser.numHabitation}}" readonly>
+    </div>
+    <div class="col">
+      <label>Rue</label>
+      <input type="text" class="form-control" placeholder="{{adressUser.nomRue}}" readonly>
+    </div>
+    <div class="col">
+      <label>Localité/C.postal</label>
+      <input type="text" class="form-control" placeholder="{{adressUser.codePostal}}" readonly>
+    </div>
+    <div class="col">
+      <label>Pays</label>
+      <input type="text" class="form-control" placeholder="{{adressUser.pays.nomFrFr}}" readonly>
+    </div>
+  </div>
+</div>
+
+<div class="b-example-divider"></div>

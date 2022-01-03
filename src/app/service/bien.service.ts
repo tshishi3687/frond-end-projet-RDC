@@ -7,8 +7,7 @@ import {LoginService} from './login.service';
 })
 export class BienService {
 
-  constructor(private client: HttpClient,
-              private service: LoginService) { }
+  constructor(private client: HttpClient) { }
 
   // tslint:disable-next-line:typedef
   ajouterBien(bien) {

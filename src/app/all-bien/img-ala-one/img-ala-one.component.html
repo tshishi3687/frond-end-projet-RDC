@@ -5,7 +5,7 @@
   color="accent"
   maxWidth="auto"
   proportion="50"
-  slides= "{{this.longSlider}}"
+  slides= "{{this.b.images.length}}"
   [loop]="true"
   [hideArrows]="false"
   [hideIndicators]="false"
@@ -21,6 +21,6 @@
     [hideOverlay]="true"
   ></mat-carousel-slide>
 </mat-carousel>
-<p align="center" *ngIf="longSlider <=1">{{longSlider}} photo disponible</p>
-<p align="center" *ngIf="longSlider >=2">{{longSlider}} photos disponibles</p>
+<p align="center" *ngIf="b.images.length <=1">{{b.images.length}} photo disponible</p>
+<p align="center" *ngIf="b.images.length >=2">{{b.images.length}} photos disponibles</p>
 

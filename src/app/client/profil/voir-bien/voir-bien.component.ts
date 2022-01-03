@@ -5,9 +5,9 @@ import {BienService} from '../../../service/bien.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {SuppressionBienComponent} from '../../../communications/danger/suppression-bien/suppression-bien.component';
-import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-voir-bien',
@@ -20,7 +20,8 @@ export class VoirBienComponent implements OnInit {
     private infoPersonne: LoginService,
     private bienService: BienService,
     private dialog: MatDialog,
-    private typeDBien: TypeDeBienService
+    private typeDBien: TypeDeBienService,
+    private route: Router
   ) { }
 
 
@@ -103,9 +104,14 @@ export class VoirBienComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   activation(b: Bien): void{
-    this.bienService.activate(b).subscribe(result => {
-      this.voirBienPersonne();
-    }, result => alert('problemme de connection server'));
+    if (this.service.repIBAU()){
+      b.idNNuit = 1;
+      this.bienService.activate(b).subscribe(result => {
+        this.voirBienPersonne();
+      }, result => alert('problemme de connection server'));
+    }else{
+      this.route.navigateByUrl('/profil');
+    }
   }
 
   enventTB(): void{
