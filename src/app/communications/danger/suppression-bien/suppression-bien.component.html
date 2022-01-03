@@ -1,0 +1,19 @@
+<div class="alert alert-danger" role="alert" align="center">
+  <h2>Vous étes sur le point d'effacer "
+    {{clientService.repBiendb().type_bien.nom}} à l'addresse : {{clientService.repBiendb().coordonnee.num}} {{clientService.repBiendb().coordonnee.rue}},
+    {{clientService.repBiendb().coordonnee.ville.nomVille}} {{clientService.repBiendb().coordonnee.ville.province.nomprovince}}"</h2>
+  <h1>Ceci est une action sans retour</h1>
+  <button type="button" class="btn btn-success" (click)="annulle()">Annuler</button>
+  <button type="button" class="btn btn-outline-danger" (click)="etap2()">Supprimer</button>
+
+  <br>
+  <br>
+  <form *ngIf="btnSuppress" [formGroup]="deleteForm">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Veuillez retaper cette phrase "{{this.suppressionMessage}}"</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="textDelet">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-danger" (click)="suprimerBien()">Je confirme la suppression</button>
+  </form>
+</div>

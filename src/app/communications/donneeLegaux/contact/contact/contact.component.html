@@ -1,0 +1,27 @@
+<form *ngIf="service.isAuthenticated()">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="{{service.client().nom}}" readonly>
+    </div>
+    <div class="col">
+      <input type="text"  class="form-control" placeholder="{{service.client().prenom}}" readonly>
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="{{service.client().roll.nomRoll}}" readonly>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Sujet">
+    </div>
+  </div>
+  <br>
+  <div class="md-form">
+    <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Votre message"></textarea>
+  </div>
+  <br>
+  <button type="button" class="btn btn-primary" >ENVOYER</button>   <button type="button" class="btn btn-link" (click)="close()">Annullé</button>
+
+</form>

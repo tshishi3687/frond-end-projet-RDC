@@ -1,0 +1,61 @@
+<div class="text-center" *ngIf="infoBancaire==null">
+  <p>{{this.infoBancaireText}}</p>
+  <h1 class="text-danger" *ngIf="infoBancaire==null">VOUS N'AVEZ PAS D'INFORMATION BANCAIRE ENREGISTREE</h1>
+  <h2>Ajouter une information bancaire :</h2>
+  <div >
+    <form [formGroup]="infoBancaireForm">
+      <div class="row">
+        <div class="col">
+          <input type="text" formControlName="nomBanque" class="form-control" placeholder="Nom banque">
+        </div>
+        <div class="col">
+          <input type="text" formControlName="numCarte" class="form-control" placeholder="N° carte">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <input type="text" formControlName="numCompte" class="form-control" placeholder="N° compte">
+        </div>
+        <div class="col">
+          <input type="date" formControlName="dateExpiration" class="form-control" placeholder="Date d'expiration">
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col">
+          <button class="w-100 btn btn-primary btn-lg" (click)="ajouterInfoBancaire()">Ajouter une information bancaire.</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="text-center" *ngIf="infoBancaire!=null">
+  <button type="button" class="btn btn-link" (click)="changerInfoBancaire()">J'aimerais changer d'information bancaire
+  </button>
+  <div class="row">
+    <div class="col">
+      <label>Nom Banque</label>
+      <input type="text" class="form-control" placeholder="{{infoBancaire.nomBanque}}" readonly>
+    </div>
+    <div class="col">
+      <label>N° Carte</label>
+      <input type="text" class="form-control" placeholder="{{infoBancaire.numCarte}}" readonly>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <label>N° Compte</label>
+      <input type="text" class="form-control" placeholder="{{infoBancaire.numCompte}}" readonly>
+    </div>
+    <div class="col">
+      <label>Expiration</label>
+      <input type="text" class="form-control" placeholder="{{infoBancaire.dateExpiration}}" readonly>
+    </div>
+  </div>
+</div>
+
+<div class="b-example-divider"></div>

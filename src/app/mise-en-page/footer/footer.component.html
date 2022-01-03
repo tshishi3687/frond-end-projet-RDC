@@ -1,0 +1,11 @@
+<footer class="footer">
+  <div class="container">
+    <ul class="foote_bottom_ul_amrc">
+      <li ><button type="button" class="btn btn-link" (click)="lookRGPD()">Protection des données[2956]</button></li>
+      <li ><button type="button" class="btn btn-link" (click)="lookCV()">Curriculum vitae</button></li>
+      <li ><button type="button" class="btn btn-link" (click)="lookLM()">Lettre de motivation</button></li>
+      <li ><button type="button" class="btn btn-link" (click)="lookTFE()">Travail de fin d'étude</button></li>
+      <li ><button type="button" class="btn btn-link" *ngIf="service.isAuthenticated()" (click)="lookContact()">Contact</button></li>
+    </ul>
+  </div>
+</footer>
