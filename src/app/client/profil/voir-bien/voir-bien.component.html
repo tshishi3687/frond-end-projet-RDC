@@ -1,4 +1,3 @@
-<app-bien-mis-en-ligne></app-bien-mis-en-ligne>
 <div class="b-example-divider"></div>
 
 <div class="px-4 pt-5 my-5 text-center border-bottom" *ngIf="this.listBien.length >=1">
@@ -50,7 +49,6 @@
                   </svg></button>
                 </div>
                 <app-img-ala-one [b]="b"></app-img-ala-one>
-                <button  type="button" *ngIf="b.modeActive" class="btn btn-outline-danger" (click)="activation(b)">Cacher</button>
                 <button  type="button" *ngIf="!b.modeActive" class="btn btn-outline-success" (click)="activation(b)">Mettre en ligne</button>
                 <div class="card-body">
                   <h3 align="center">
@@ -95,3 +93,4 @@
 </div>
 
 <div class="b-example-divider"></div>
+<app-bien-mis-en-ligne></app-bien-mis-en-ligne>

@@ -65,6 +65,7 @@ import { AjouterInfoBancaireComponent } from './client/profil/ajouter-info-banca
 import { BienMisEnLigneComponent } from './client/profil/bien-mis-en-ligne/bien-mis-en-ligne.component';
 import { VoirContratComponent } from './client/profil/voir-contrat/voir-contrat.component';
 import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
+import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -125,6 +126,7 @@ import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
     BienMisEnLigneComponent,
     VoirContratComponent,
     BmelPipe,
+    MettreBienEnLigneComponent,
   ],
   imports: [
     BrowserModule,

@@ -71,7 +71,6 @@ export class AllBienComponent implements OnInit {
     }else{
       alert('vous devez être connecter pour en voir plus');
     }
-
   }
 
   voirVilleProvince(): void{

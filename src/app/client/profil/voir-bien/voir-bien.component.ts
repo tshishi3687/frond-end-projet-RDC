@@ -8,6 +8,7 @@ import {SuppressionBienComponent} from '../../../communications/danger/suppressi
 import {FormControl, FormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 import {Router} from '@angular/router';
+import {MettreBienEnLigneComponent} from '../../../communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 
 @Component({
   selector: 'app-voir-bien',
@@ -104,14 +105,13 @@ export class VoirBienComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   activation(b: Bien): void{
-    if (this.service.repIBAU()){
-      b.idNNuit = 1;
-      this.bienService.activate(b).subscribe(result => {
-        this.voirBienPersonne();
-      }, result => alert('problemme de connection server'));
-    }else{
-      this.route.navigateByUrl('/profil');
-    }
+    this.service.biendb(b);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = 'auto';
+    dialogConfig.height = 'auto';
+    this.dialog.open(MettreBienEnLigneComponent, dialogConfig);
   }
 
   enventTB(): void{

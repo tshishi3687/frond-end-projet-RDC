@@ -227,6 +227,11 @@ export class InfoBancaire{
   appartienA: Personne;
 }
 
+export class NombreNuitVoulu{
+  id: number;
+  nNuit: number;
+}
+
 export abstract class Constants{
   // tslint:disable-next-line:variable-name
   private readonly _roll1 = btoa('Admin');
