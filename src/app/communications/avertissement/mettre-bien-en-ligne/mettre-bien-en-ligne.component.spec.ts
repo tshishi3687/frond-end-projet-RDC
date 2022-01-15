@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModifiermdpComponent } from './modifiermdp.component';
+import { MettreBienEnLigneComponent } from './mettre-bien-en-ligne.component';
 
-describe('ModifiermdpComponent', () => {
-  let component: ModifiermdpComponent;
-  let fixture: ComponentFixture<ModifiermdpComponent>;
+describe('MettreBienEnLigneComponent', () => {
+  let component: MettreBienEnLigneComponent;
+  let fixture: ComponentFixture<MettreBienEnLigneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModifiermdpComponent ]
+      declarations: [ MettreBienEnLigneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModifiermdpComponent);
+    fixture = TestBed.createComponent(MettreBienEnLigneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

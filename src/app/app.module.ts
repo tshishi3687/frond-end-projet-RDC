@@ -21,7 +21,6 @@ import { ServicePipe } from './admin/service/service.pipe';
 import { LoginComponent } from './login/login.component';
 import { ConnexionComponent } from './login/connexion/connexion.component';
 import { InscriptionComponent } from './login/inscription/inscription.component';
-import { ModifiermdpComponent } from './login/modifiermdp/modifiermdp.component';
 import { ClientComponent } from './client/client.component';
 import { CreationDeBienComponent } from './client/profil/creation-de-bien/creation-de-bien.component';
 import { VoirBienComponent } from './client/profil/voir-bien/voir-bien.component';
@@ -66,6 +65,7 @@ import { BienMisEnLigneComponent } from './client/profil/bien-mis-en-ligne/bien-
 import { VoirContratComponent } from './client/profil/voir-contrat/voir-contrat.component';
 import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
+import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -87,7 +87,6 @@ import { MettreBienEnLigneComponent } from './communications/avertissement/mettr
     LoginComponent,
     ConnexionComponent,
     InscriptionComponent,
-    ModifiermdpComponent,
     ClientComponent,
     CreationDeBienComponent,
     VoirBienComponent,
@@ -127,6 +126,7 @@ import { MettreBienEnLigneComponent } from './communications/avertissement/mettr
     VoirContratComponent,
     BmelPipe,
     MettreBienEnLigneComponent,
+    ModifMotDePasseComponent,
   ],
   imports: [
     BrowserModule,

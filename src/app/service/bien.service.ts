@@ -70,4 +70,14 @@ export class BienService {
     return this.client.post('http://localhost:8081/bien/acti', bien, httpOptions);
   }
 
+  // tslint:disable-next-line:typedef
+  envoiMail(bien){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    return this.client.post('http://localhost:8081/bien/env_mail', bien, httpOptions);
+  }
+
 }

@@ -33,8 +33,6 @@ export class BienMisEnLigneComponent implements OnInit {
   listBienMisEnLigne: Array<BienMisEnLigne> = [];
 
   ngOnInit(): void {
-    this.bienMisEnLigne();
-    this.voirTypeBien();
   }
 
   voirTypeBien(): void{
@@ -93,8 +91,8 @@ export class BienMisEnLigneComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.width = '100%';
-      dialogConfig.height = '100%';
+      dialogConfig.width = 'auto';
+      dialogConfig.height = 'auto';
       this.dialog.open(VoirContratComponent, dialogConfig);
     }else{
       alert('vous devez être connecter pour en voir plus');

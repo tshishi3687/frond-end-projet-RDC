@@ -11,8 +11,6 @@ export class LoginService implements CanActivate{
 
   private bien: Bien;
   private contrat: Contrat;
-  private demande;
-  private exist = false;
   // @ts-ignore
   private constance: Constants = new Constants();
 
@@ -23,7 +21,6 @@ export class LoginService implements CanActivate{
   redirection(personne: Personne): void{
     // @ts-ignore
     if (personne.id <= 0){
-      this.exist = true;
       return ;
     }
 
@@ -43,7 +40,6 @@ export class LoginService implements CanActivate{
         }
         break;
         default:
-          this.exist = true;
           return ;
       }
     }
@@ -134,8 +130,4 @@ export class LoginService implements CanActivate{
       return false;
     }
   }
-
-  loginExiste(): boolean {
-    return this.exist;
-}
 }

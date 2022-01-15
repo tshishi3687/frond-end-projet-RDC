@@ -30,12 +30,9 @@ export class ConnexionComponent implements OnInit {
   textErro: string;
   activeCompte = false;
   connnectionOKBUT = true;
+  modifMDPBool = false;
 
   ngOnInit(): void {
-  }
-
-  nonValide(): boolean{
-    return this.logService.loginExiste();
   }
 
   inscription(): void{
@@ -64,4 +61,13 @@ export class ConnexionComponent implements OnInit {
   }
 
 
+  voirModifMDP(): void {
+    this.connnectionOKBUT = false;
+    this.modifMDPBool = true;
+  }
+
+  voirConnexion(): void {
+    this.connnectionOKBUT = true;
+    this.modifMDPBool = false;
+  }
 }

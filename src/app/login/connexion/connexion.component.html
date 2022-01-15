@@ -12,8 +12,14 @@
         <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
         <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
       </form>
-
+      <p (click)="voirModifMDP()">Mot de passe oublié. =></p>
     </div>
   </div>
 
-  <app-activation-compte *ngIf="activeCompte"></app-activation-compte>
+  <div *ngIf="activeCompte">
+    <app-activation-compte></app-activation-compte>
+  </div>
+  <div *ngIf="modifMDPBool">
+    <p (click)="voirConnexion()"><br><= Revenir à la connexion</p>
+    <app-modif-mot-de-passe></app-modif-mot-de-passe>
+  </div>

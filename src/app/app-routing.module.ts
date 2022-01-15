@@ -12,7 +12,6 @@ import {AllBienComponent} from './all-bien/all-bien.component';
 import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
 import {ProfilComponent} from './client/profil/profil.component';
 import {AppComponent} from './app.component';
-import {BienMisEnLigneComponent} from './client/profil/bien-mis-en-ligne/bien-mis-en-ligne.component';
 
 const routes: Routes = [
   {
@@ -59,20 +58,20 @@ const routes: Routes = [
   },
   {
     path: 'allBien',
-    component: AllBienComponent,
+    component: AllBienComponent
   },
   {
     path: 'infoBien',
-    component: InfoBienComponent,
+    component: InfoBienComponent
   },
   {
     path: 'profil',
-    component: ProfilComponent,
+    component: ProfilComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

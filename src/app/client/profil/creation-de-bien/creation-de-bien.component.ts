@@ -8,9 +8,6 @@ import {Aladisposition, Bien, Coordonnee, DureeLocation, TypeDeBien, Ville} from
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
-import {VoirBienComponent} from '../voir-bien/voir-bien.component';
-import {OneBienComponent} from '../../../one-bien/one-bien.component';
 import {PresentationBienCreeComponent} from './presentation-bien-cree/presentation-bien-cree.component';
 
 @Component({
@@ -91,7 +88,6 @@ export class CreationDeBienComponent implements OnInit {
   ngOnInit(): void {
     this.voirVille();
     this.voirTypeDeBien();
-    this.voirdureeLocation();
   }
 
   onFileSelected(event): void {
@@ -122,12 +118,6 @@ export class CreationDeBienComponent implements OnInit {
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
     this.typeDeBienService.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse.list, reponse => alert(this.error));
-  }
-
-  voirdureeLocation(): void{
-    // @ts-ignore
-    // tslint:disable-next-line:max-line-length
-    this.dureeLocationServive.voirDureeLocation().subscribe(reponse => this.listDureeLocation = reponse.list, reponse => alert(this.error));
   }
 
   ajouterBien(): void{

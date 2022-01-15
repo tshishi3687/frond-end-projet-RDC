@@ -1,0 +1,31 @@
+
+<div class="wrapper fadeInDown">
+  <div id="formContent" *ngIf="this.inscriptionBool">
+
+    <!-- Login Form -->
+    <form [formGroup]="PersonneForm">
+      <div class="p-3 mb-2 bg-primary text-white">
+        <h3>Demande de changement de mot de passe</h3>
+      </div>
+      <p class="text-danger" *ngIf="textBool">{{textError}}</p>
+      <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
+      <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
+      <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
+      <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
+      <input type="submit" class="fadeIn fourth" value="Envoi de la demande" (click)="envoiDemande()" *ngIf="this.PersonneForm.valid">
+    </form>
+
+  </div>
+
+  <div  align="center" *ngIf="attenteBool">
+    <app-message-dattente></app-message-dattente>
+  </div>
+
+  <div  align="center" *ngIf="this.connexionOK">
+    <h1> Votre inscription est un succès</h1>
+    <form [formGroup]="verifForm">
+      <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
+      <input type="submit" class="fadeIn fourth" value="Je confirme mon compte" (click)="validationCode()">
+    </form>
+  </div>
+</div>
