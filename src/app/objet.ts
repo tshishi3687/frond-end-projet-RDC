@@ -160,15 +160,11 @@ export class EtatDemande{
 
 // tslint:disable-next-line:class-name
 export class Reservation{
-  id: number;
-  ddj: string;
-  dda: Date;
-  ddd: Date;
-  npersonne: number;
-  // tslint:disable-next-line:variable-name
-  bien_reserve: Bien;
-  // tslint:disable-next-line:variable-name
-  reserverPar: Personne;
+  bienConserne: Bien;
+  faitPar: Personne;
+  ddArrivee: Date;
+  ddDepart: Date;
+  nPersonneSurLieu: number;
 }
 
 export class ImageBien{
@@ -232,6 +228,12 @@ export class NombreNuitVoulu{
   nNuit: number;
 }
 
+export class ModifPass{
+  codeActive: string;
+  newPass: string;
+  verifPass: string;
+}
+
 export abstract class Constants{
   // tslint:disable-next-line:variable-name
   private readonly _roll1 = btoa('Admin');
@@ -251,10 +253,26 @@ export abstract class Constants{
   private readonly _SessionVerifIBAU = btoa('IBAU-details');
   // tslint:disable-next-line:variable-name
   private readonly _SessionContrat = btoa('contrat-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _Sessionjwt = btoa('jwt-details');
+  // tslint:disable-next-line:variable-name
+  private readonly _SessionUserName = btoa('username-deails');
 
+
+  get Sessionjwt(): string {
+    return atob(this._Sessionjwt);
+  }
+
+  get SessionUserName(): string {
+    return atob(this._SessionUserName);
+  }
 
   get SessionContrat(): string {
     return atob(this._SessionContrat);
+  }
+
+  get SessionJwtt(): string {
+    return atob(this._Sessionjwt);
   }
 
   get SessionVerifIBAU(): string {

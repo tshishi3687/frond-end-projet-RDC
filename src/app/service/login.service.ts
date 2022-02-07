@@ -3,12 +3,17 @@ import {Bien, Constants, Contrat, Personne, Reservation} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {PersonneService} from './personne.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService implements CanActivate{
 
+  private jwt: string;
+  private prefix = 'Bearer ';
+  private username: string;
+  private role: string;
   private bien: Bien;
   private contrat: Contrat;
   // @ts-ignore
@@ -43,6 +48,20 @@ export class LoginService implements CanActivate{
           return ;
       }
     }
+  }
+
+  saveToken(jwt: string): void{
+    sessionStorage.setItem(this.constance.SessionJwtt, JSON.stringify(this.prefix + jwt));
+  }
+
+  repToken(): string{
+    const jwt = JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt));
+    return jwt as string;
+  }
+
+  repUserName(): string{
+    const username = JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt));
+    return username as string;
   }
 
   verifIBAU(): void{

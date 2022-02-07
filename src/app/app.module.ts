@@ -6,7 +6,7 @@ import { MenuComponent } from './mise-en-page/menu/menu.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProvinceComponent } from './admin/province/province.component';
 import { VilleComponent } from './admin/ville/ville.component';
@@ -66,6 +66,8 @@ import { VoirContratComponent } from './client/profil/voir-contrat/voir-contrat.
 import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
+import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
+// import { BasicAuthHtppInterceptorService } from './service/basic-auth-htpp-interceptor.service';
 
 // @ts-ignore
 // @ts-ignore
@@ -127,22 +129,29 @@ import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-d
     BmelPipe,
     MettreBienEnLigneComponent,
     ModifMotDePasseComponent,
+    ReservationComponent,
   ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatCarouselModule.forRoot(),
-    MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatCarouselModule.forRoot(),
+        MatDialogModule,
+        MatToolbarModule,
+        MatIconModule
+    ],
   exports: [],
-  providers: [],
+  providers: [
+  //   {
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass: BasicAuthHtppInterceptorService,
+  //   multi: true
+  // }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [InfoBienComponent]
 })

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class PersonneService {
 
   constructor(private client: HttpClient) { }
+  logService: LoginService;
 
   // tslint:disable-next-line:typedef
   ajouterPersonne(personne) {
@@ -28,6 +30,11 @@ export class PersonneService {
     };
 
     return this.client.post('http://localhost:8081/personne/ibau', personne, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
+  infoPersonne() {
+    return this.client.get('http://localhost:8081/personne/info_personne');
   }
 
   // tslint:disable-next-line:typedef
@@ -72,5 +79,27 @@ export class PersonneService {
     };
 
     return this.client.post('http://localhost:8081/personne/activation_compte', codeActivation, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
+  changeMDP(info){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/personne/change_passe', info, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
+  mdpModif(modif){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/personne/mdp_modif', modif, httpOptions);
   }
 }

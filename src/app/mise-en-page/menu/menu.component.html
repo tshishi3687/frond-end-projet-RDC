@@ -39,9 +39,9 @@
                 <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
                   <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes Biens</button>
                 </li>
-                <li class="nav-item" *ngIf="ser.isLocataireRoll()">
-                  <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>
-                </li>
+<!--                <li class="nav-item" *ngIf="ser.isLocataireRoll()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>-->
+<!--                </li>-->
               </ul>
               <form class="d-flex">
                 <button type="button" class="btn btn-outline-primary" routerLink="/profil">{{ser.client().roll.nomRoll}} : {{ser.client().nom}} {{ser.client().prenom}}</button>

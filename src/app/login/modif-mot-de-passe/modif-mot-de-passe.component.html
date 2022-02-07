@@ -1,6 +1,6 @@
 
 <div class="wrapper fadeInDown">
-  <div id="formContent" *ngIf="this.inscriptionBool">
+  <div id="formContent" *ngIf="this.inscriptionBool && !attenteBool">
 
     <!-- Login Form -->
     <form [formGroup]="PersonneForm">
@@ -22,9 +22,12 @@
   </div>
 
   <div  align="center" *ngIf="this.connexionOK">
-    <h1> Votre inscription est un succès</h1>
+    <h1>Confirmation d'identitée</h1>
+    <p>un e-mail vient de vous être envoyé. Insérez votre code.</p>
     <form [formGroup]="verifForm">
-      <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
+      <input type="password"  formControlName="codeActivation" class="fadeIn third" placeholder="Votre Code secret">
+      <input type="password" formControlName="nPass"  class="fadeIn third"  placeholder="Nouveau mot de passe">
+      <input type="password" formControlName="vPass"  class="fadeIn third"  placeholder="Confirmer mdp">
       <input type="submit" class="fadeIn fourth" value="Je confirme mon compte" (click)="validationCode()">
     </form>
   </div>

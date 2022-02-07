@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Bien, LikeBien, Personne, Service, Ville} from '../../objet';
+import {Bien, LikeBien, Personne, Reservation, Service, Ville} from '../../objet';
 import {ImgService} from '../../service/img.service';
 import {LoginService} from '../../service/login.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../service/personne.service';
 import {ServiceService} from '../../service/service.service';
+import {ReservationComponent} from '../../communications/avertissement/reservation/reservation.component';
 
 @Component({
   selector: 'app-info-bien',
@@ -19,6 +20,7 @@ export class InfoBienComponent implements OnInit {
                private imagService: ImgService,
                public dialogRef: MatDialogRef<InfoBienComponent>,
                private personne: PersonneService,
+               private dialog: MatDialog,
   ) { }
 
   myFiles: File [] = [];
@@ -49,5 +51,18 @@ export class InfoBienComponent implements OnInit {
     }, reponse => {
       this.problemCo = true;
     });
+  }
+
+  reservation(): void{
+    if (this.service.isLocataireRoll()){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = 'auto';
+    this.dialog.open(ReservationComponent, dialogConfig);
+  }else{
+    alert('vous devez être connecter pour en voir plus');
+  }
   }
 }

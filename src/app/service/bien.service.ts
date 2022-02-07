@@ -21,6 +21,17 @@ export class BienService {
   }
 
   // tslint:disable-next-line:typedef
+  reservation(reservation) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+
+    return this.client.post('http://localhost:8081/bien/reservation', reservation, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
   voirBienPersonne(personne){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -78,6 +89,16 @@ export class BienService {
       })
     };
     return this.client.post('http://localhost:8081/bien/env_mail', bien, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
+  envoiMailReservation(bien){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    return this.client.post('http://localhost:8081/bien/envo_mail', bien, httpOptions);
   }
 
 }
