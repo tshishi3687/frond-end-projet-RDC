@@ -80,6 +80,7 @@ export class LocataireComponent implements OnInit {
 
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
       this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
+        console.log(reponse);
         // tslint:disable-next-line:no-conditional-assignment
         if (reponse ){
           this.personneExiste = true;

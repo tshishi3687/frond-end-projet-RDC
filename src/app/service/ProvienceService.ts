@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
 
-  constructor(private client: HttpClient) {
-  }
+  constructor(private client: HttpClient) {}
+  // @ts-ignore
+  private constance: Constants = new Constants();
 
   // tslint:disable-next-line:typedef
   ajouterProvince(province) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 
@@ -26,23 +28,12 @@ export class ProvinceService {
   }
 
   // tslint:disable-next-line:typedef
-  voirUneProvince(id){
-    return this.client.get ('http://localhost:8081/province/' + id);
-  }
-
-  // tslint:disable-next-line:typedef
   supprimerProvince(id) {
-    return this.client.delete('http://localhost:8081/province/' + id);
-  }
-
-  // tslint:disable-next-line:typedef
-  modifierProvinc(id, province){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
-
-    return this.client.put('http://localhost:8081/province/' + id, province, httpOptions);
+    return this.client.delete('http://localhost:8081/province/' + id, httpOptions);
   }
 }

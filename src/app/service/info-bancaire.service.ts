@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class InfoBancaireService {
 
   constructor(private client: HttpClient) { }
+  // @ts-ignore
+  private constance: Constants = new Constants();
 
   // tslint:disable-next-line:typedef
   ajouterInfoBancaire(infoBancaire) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 
@@ -23,7 +26,7 @@ export class InfoBancaireService {
   voirInfoBancairePersonne(personne) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 

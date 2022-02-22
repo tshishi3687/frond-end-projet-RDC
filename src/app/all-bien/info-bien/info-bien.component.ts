@@ -38,6 +38,7 @@ export class InfoBienComponent implements OnInit {
   }
 
   onClose(): void{
+    console.log((this.service.repBiendb().description as string).length);
     this.dialogRef.close();
   }
 

@@ -15,18 +15,9 @@ export class ListServiceComponent implements OnInit {
     private serv: LoginService
   ) { }
 
-  listServiceVille: Array<Service> = [];
+  listServiceVille: Array<Service> = this.serv.repBiendb().service;
 
   ngOnInit(): void {
-    this.voirServiceDisponible();
-  }
-
-  voirServiceDisponible(): void{
-    const ville = new Ville();
-    ville.id = this.serv.repBiendb().coordonnee.ville.id;
-    this.serSercice.voirServiceVille(ville).subscribe((reponse: Array<Service>) => {
-      this.listServiceVille = reponse;
-    }, reponse => alert('il y à un problem'));
   }
 
 }

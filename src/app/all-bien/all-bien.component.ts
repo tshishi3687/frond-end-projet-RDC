@@ -5,10 +5,11 @@ import {ImgService} from '../service/img.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from './info-bien/info-bien.component';
 import {LoginService} from '../service/login.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
   selector: 'app-all-bien',
@@ -95,6 +96,7 @@ export class AllBienComponent implements OnInit {
       this.listTypeBien = reponse.list;
     });
   }
+
 
   enventTB(): void{
     if (this.rechercheForm.value.typeBien === 'defaults'){

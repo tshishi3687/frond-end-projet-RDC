@@ -3,6 +3,7 @@ import {Bien} from '../../../../objet';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {SuppressionBienComponent} from '../../../../communications/danger/suppression-bien/suppression-bien.component';
 import {LoginService} from '../../../../service/login.service';
+import {MettreBienEnLigneComponent} from '../../../../communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 
 @Component({
   selector: 'app-presentation-bien-cree',
@@ -33,4 +34,16 @@ export class PresentationBienCreeComponent implements OnInit {
   doBack(): void{
     this.dialogRef.close();
   }
+
+  // tslint:disable-next-line:typedef
+  activation(b: Bien): void{
+    this.service.biendb(b);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = 'auto';
+    dialogConfig.height = 'auto';
+    this.dialog.open(MettreBienEnLigneComponent, dialogConfig);
+  }
+
 }

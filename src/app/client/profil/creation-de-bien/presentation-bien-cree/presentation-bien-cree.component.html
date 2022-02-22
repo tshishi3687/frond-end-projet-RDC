@@ -20,7 +20,7 @@
       <p class="lead">
         Votre {{service.repBiendb().type_bien.nom}} a bien été créé. <br>
         Actuellement, ce bien est en mode hors-ligne.<br>Ce qui veut dire que personne ne peut le voir. <br>
-        Vous pouvez l'<button type="button" class="btn btn-link" (click)="suprimerBien(service.repBiendb())">ACTIVER</button> directement ou plus tard dans votre espace "Mes Biens".
+        Vous pouvez l'<button type="button" class="btn btn-link" (click)="activation(service.repBiendb())">ACTIVER</button> directement ou plus tard dans votre espace "Mes Biens".
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
         <button type="button" class="btn btn-outline-success" (click)="doBack()">

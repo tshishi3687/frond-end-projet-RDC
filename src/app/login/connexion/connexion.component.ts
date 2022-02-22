@@ -5,7 +5,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {EventEmitter} from 'events';
 import {LoginService} from '../../service/login.service';
-import {HttpHeaders} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-connexion',
@@ -41,56 +42,55 @@ export class ConnexionComponent implements OnInit {
   }
 
 
-  // verrif(): void {
-  //   const mdp = new Mdp();
-  //   mdp.mail = this.logForm.value.email;
-  //   mdp.mdp = this.logForm.value.mdp;
-  //   // tslint:disable-next-line:max-line-length
-  //   // @ts-ignore
-  //   this.personneService.voirPersonne(mdp).subscribe(reponse => {
-  //     sessionStorage.setItem('username', mdp.mail);
-  //     // @ts-ignore
-  //     console.log(reponse.body.token);
-  //     // @ts-ignore
-  //     // this.logService.saveToken(reponse.body.token);
-  //     // @ts-ignore
-  //     // console.log(reponse.body.token);
-  //     //
-  //     this.personneService.infoPersonne().subscribe((rep: Personne) => {
-  //       console.log(rep);
-  //     }, rep => alert('error RepPersonne') );
-  //   //   if (reponse.id <= 0){
-  //   //     this.textErro = 'E-mail ou Mot de passe INCORECTE';
-  //   //   }else { // @ts-ignore
-  //   //     if (reponse.active){
-  //   //             this.logService.redirection(reponse);
-  //   //           }else{
-  //   //             this.activeCompte = true;
-  //   //             this.connnectionOKBUT = false;
-  //   //           }
-  //   //   }
-  //   }, reponse => alert(this.error));
-  // }
   verrif(): void {
     const mdp = new Mdp();
     mdp.mail = this.logForm.value.email;
     mdp.mdp = this.logForm.value.mdp;
     // tslint:disable-next-line:max-line-length
     // @ts-ignore
-    this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => {
-      // console.log(reponse);
-      if (reponse.id <= 0){
-        this.textErro = 'E-mail ou Mot de passe INCORECTE';
-      }else { // @ts-ignore
-        if (reponse.active){
-          this.logService.redirection(reponse);
+    this.personneService.voirPersonne(mdp).subscribe(reponse => {
+      const jwtDecode = new JwtHelperService();
+      // @ts-ignore
+      console.log(jwtDecode.decodeToken(reponse.token));
+      // @ts-ignore
+      console.log((reponse.token as string).length);
+
+      // @ts-ignore
+      this.logService.saveToken(reponse.token as string);
+      // @ts-ignore
+      // console.log(reponse.body.token);
+      //
+      this.personneService.infoPersonne().subscribe((rep: Personne) => {
+        console.log(rep);
+        if (rep.active){
+          this.logService.redirection(rep);
         }else{
           this.activeCompte = true;
           this.connnectionOKBUT = false;
         }
-      }
+      }, rep => alert('error RepPersonne') );
     }, reponse => alert(this.error));
   }
+  // verrif(): void {
+  //   const mdp = new Mdp();
+  //   mdp.mail = this.logForm.value.email;
+  //   mdp.mdp = this.logForm.value.mdp;
+  //   // tslint:disable-next-line:max-line-length
+  //   // @ts-ignore
+  //   this.personneService.voirPersonne(mdp).subscribe((reponse: Personne) => {
+  //     // console.log(reponse);
+  //     if (reponse.id <= 0){
+  //       this.textErro = 'E-mail ou Mot de passe INCORECTE';
+  //     }else { // @ts-ignore
+  //       if (reponse.active){
+  //         this.logService.redirection(reponse);
+  //       }else{
+  //         this.activeCompte = true;
+  //         this.connnectionOKBUT = false;
+  //       }
+  //     }
+  //   }, reponse => alert(this.error));
+  // }
 
   voirModifMDP(): void {
     this.connnectionOKBUT = false;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from './login.service';
+import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,14 @@ import {LoginService} from './login.service';
 export class BienService {
 
   constructor(private client: HttpClient) { }
+  // @ts-ignore
+  private constance: Constants = new Constants();
 
   // tslint:disable-next-line:typedef
   ajouterBien(bien) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 
@@ -24,7 +27,7 @@ export class BienService {
   reservation(reservation) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 
@@ -35,7 +38,7 @@ export class BienService {
   voirBienPersonne(personne){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
 
@@ -44,27 +47,24 @@ export class BienService {
 
   // tslint:disable-next-line:typedef
   voirBien(){
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
     return this.client.get('http://localhost:8081/bien');
   }
 
   // tslint:disable-next-line:typedef
   voirUneBien(id){
-    return this.client.get ('http://localhost:8081/bien/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+      })
+    };
+    return this.client.get ('http://localhost:8081/bien/' + id, httpOptions);
   }
 
   // tslint:disable-next-line:typedef
   supprimerBien(id) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     // @ts-ignore
@@ -75,7 +75,7 @@ export class BienService {
   activate(bien){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     return this.client.post('http://localhost:8081/bien/acti', bien, httpOptions);
@@ -85,7 +85,7 @@ export class BienService {
   envoiMail(bien){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     return this.client.post('http://localhost:8081/bien/env_mail', bien, httpOptions);
@@ -95,7 +95,7 @@ export class BienService {
   envoiMailReservation(bien){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     return this.client.post('http://localhost:8081/bien/envo_mail', bien, httpOptions);

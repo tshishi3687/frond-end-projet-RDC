@@ -9,6 +9,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 import {Router} from '@angular/router';
 import {MettreBienEnLigneComponent} from '../../../communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
+import {ModificationDeBienComponent} from '../modification-de-bien/modification-de-bien.component';
 
 @Component({
   selector: 'app-voir-bien',
@@ -90,6 +91,15 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.width = '100%';
     dialogConfig.height = '100%';
     this.dialog.open(InfoBienComponent, dialogConfig);
+  }
+  modification(b: Bien): void{
+    this.service.biendb(b);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(ModificationDeBienComponent, dialogConfig);
   }
 
   suprimerBien(b: Bien): void{

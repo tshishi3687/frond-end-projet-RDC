@@ -6,7 +6,7 @@ import { MenuComponent } from './mise-en-page/menu/menu.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProvinceComponent } from './admin/province/province.component';
 import { VilleComponent } from './admin/ville/ville.component';
@@ -67,10 +67,8 @@ import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
 import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
-// import { BasicAuthHtppInterceptorService } from './service/basic-auth-htpp-interceptor.service';
+import { ModificationDeBienComponent } from './client/profil/modification-de-bien/modification-de-bien.component';
 
-// @ts-ignore
-// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,6 +128,7 @@ import { ReservationComponent } from './communications/avertissement/reservation
     MettreBienEnLigneComponent,
     ModifMotDePasseComponent,
     ReservationComponent,
+    ModificationDeBienComponent
   ],
     imports: [
         BrowserModule,

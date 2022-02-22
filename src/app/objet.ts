@@ -66,6 +66,7 @@ export class Personne{
   nom: string;
   prenom: string;
   ddn: DatePipe;
+  role: string;
   roll: Roll;
   contactUser: ContactUser;
   password: Mdp;
@@ -95,6 +96,7 @@ export class Bien{
   images: Array<ImageBien>;
   idNNuit: number;
   dateFinMisEnLigne: Date;
+  service: Array<Service>;
 }
 
 export class Aladisposition{

@@ -170,7 +170,6 @@ export class CreationDeBienComponent implements OnInit {
       bien.appartient = this.infoPersonne.client();
 
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
-        console.log(reponselienPhoto);
         if (reponselienPhoto <= 0){
           alert(this.error + 'on est ici 1');
         }else{

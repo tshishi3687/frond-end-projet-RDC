@@ -8,6 +8,7 @@
 //
 //   constructor() { }
 //
+//   // tslint:disable-next-line:typedef
 //   intercept(req: HttpRequest<any>, next: HttpHandler) {
 //
 //     if (sessionStorage.getItem('username') && sessionStorage.getItem('jwt-details')) {
@@ -15,7 +16,7 @@
 //         setHeaders: {
 //           Authorization: sessionStorage.getItem('jwt-details') as string
 //         }
-//       })
+//       });
 //     }
 //
 //     return next.handle(req);

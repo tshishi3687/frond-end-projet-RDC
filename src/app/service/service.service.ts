@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class ServiceService {
 
   constructor(private client: HttpClient) { }
+  // @ts-ignore
+  private constance: Constants = new Constants();
 
   // tslint:disable-next-line:typedef
   ajouterService(service){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     return this.client.post('http://localhost:8081/service', service, httpOptions);
@@ -20,14 +23,19 @@ export class ServiceService {
 
   // tslint:disable-next-line:typedef
   voirService() {
-    return this.client.get('http://localhost:8081/service');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+      })
+    };
+    return this.client.get('http://localhost:8081/service', httpOptions);
   }
 
   // tslint:disable-next-line:typedef
   voirServiceVille(bien) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
     return this.client.post('http://localhost:8081/service/ville', bien, httpOptions);
@@ -35,6 +43,11 @@ export class ServiceService {
 
   // tslint:disable-next-line:typedef
   supprimerService(id) {
-    return this.client.delete('http://localhost:8081/service/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+      })
+    };
+    return this.client.delete('http://localhost:8081/service/' + id, httpOptions);
   }
 }

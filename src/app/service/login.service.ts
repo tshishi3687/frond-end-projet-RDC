@@ -32,7 +32,7 @@ export class LoginService implements CanActivate{
     // @ts-ignore
     if (personne.active){
 
-      switch (personne.roll.nomRoll){
+      switch (personne.role){
       case this.constance.roll1:
       case this.constance.roll2:
       case this.constance.roll3:
@@ -115,6 +115,8 @@ export class LoginService implements CanActivate{
     this.logoutBien();
     sessionStorage.removeItem(this.constance.SessionREservation);
     sessionStorage.removeItem(this.constance.SessionDemande);
+    sessionStorage.removeItem(this.constance.Sessionjwt);
+    sessionStorage.removeItem(this.constance.SessionUserName);
     this.route.navigateByUrl('/home');
   }
 
@@ -124,19 +126,19 @@ export class LoginService implements CanActivate{
 
   AdminRolle(): boolean{
     const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
-    return this.isAuthenticated && personne.roll.nomRoll.includes(this.constance.roll1);
+    return this.isAuthenticated && personne.role.includes(this.constance.roll1);
   }
 
   isProprietaireRoll(): boolean{
     const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
     // tslint:disable-next-line:max-line-length
-    return this.isAuthenticated() && (personne.roll.nomRoll.includes(this.constance.roll1) || personne.roll.nomRoll.includes(this.constance.roll2));
+    return this.isAuthenticated() && (personne.role.includes(this.constance.roll1) || personne.role.includes(this.constance.roll2));
   }
 
   isLocataireRoll(): boolean{
     const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
     // tslint:disable-next-line:max-line-length
-    return this.isAuthenticated() && (personne.roll.nomRoll.includes(this.constance.roll1) || personne.roll.nomRoll.includes(this.constance.roll3));
+    return this.isAuthenticated() && (personne.role.includes(this.constance.roll1) || personne.role.includes(this.constance.roll3));
   }
 
   // tslint:disable-next-line:max-line-length

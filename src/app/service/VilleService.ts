@@ -1,21 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VilleService {
 
-  constructor(private client: HttpClient) {
-  }
+  constructor(private client: HttpClient) {}
+  // @ts-ignore
+  private constance: Constants = new Constants();
 
   // tslint:disable-next-line:typedef
   ajouterVille(ville){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
       })
     };
+
     return this.client.post('http://localhost:8081/ville', ville, httpOptions);
   }
 
@@ -26,6 +29,11 @@ export class VilleService {
 
   // tslint:disable-next-line:typedef
   supprimerVille(id) {
-    return this.client.delete('http://localhost:8081/ville/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+      })
+    };
+    return this.client.delete('http://localhost:8081/ville/' + id, httpOptions);
   }
 }
