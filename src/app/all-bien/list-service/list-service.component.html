@@ -1,25 +1,33 @@
-<ul class="list-group" *ngFor="let service of listServiceVille">
-  <container-element [ngSwitch]="service.type.nomtype">
-    <some-element *ngSwitchCase="'aeroport'">
-      <li class="list-group-item">
-        <h3><img src="./assets/img/icones/avion.png" width="35" height="35"/> {{service.nom}}</h3>
-        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
-      </li>
-    </some-element>
-    <some-element *ngSwitchCase="'alimantaire'">
-      <li class="list-group-item">
-        <h3><img src="./assets/img/icones/conteneur-alimentaire.png" width="35" height="35"/> {{service.nom}}</h3>
-        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
-      </li>
-    </some-element>
-    <some-element *ngSwitchCase="'Restaurant'">
-      <li class="list-group-item">
-        <h3><img src="./assets/img/icones/service-alimentaire.png" width="35" height="35"/> {{service.nom}}</h3>
-        <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
-      </li>
-    </some-element>
-    <some-element *ngSwitchDefault>
-      ... default ...
-    </some-element>
-  </container-element>
-</ul>
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col" *ngFor="let service of listServiceVille">
+        <div class="card shadow-sm">
+          <container-element [ngSwitch]="service.type.nomtype">
+            <some-element *ngSwitchCase="'Aéroport'">
+                <h3><img src="assets/img/icones/avion.png" width="35" height="35" alt=""/> {{service.nom}}</h3>
+            </some-element>
+            <some-element *ngSwitchCase="'Alimentation'">
+                <h3><img src="assets/img/icones/conteneur-alimentaire.png" width="35" height="35" alt=""/> {{service.nom}}</h3>
+            </some-element>
+            <some-element *ngSwitchCase="'Restaurant'">
+                <h3><img src="assets/img/icones/service-alimentaire.png" width="35" height="35" alt=""/> {{service.nom}}</h3>
+            </some-element>
+            <some-element *ngSwitchCase="'Snack'">
+                <h3><img src="assets/img/icones/pack-alimentaire.png" width="35" height="35" alt=""/> {{service.nom}}</h3>
+            </some-element>
+          </container-element>
+          <div class="card-body">
+            <p>{{service.type.nomtype}}: {{service.coordonnee.num}} {{service.coordonnee.rue}}, {{service.coordonnee.ville.nomVille}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
