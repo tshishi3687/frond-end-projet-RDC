@@ -1,9 +1,6 @@
 <div class="b-example-divider"></div>
 
 <div class="px-4 pt-5 my-5 text-center border-bottom ">
-  <h1 class="display-4 fw-bold " *ngIf="listBien.length ==1">{{listBien.length}} bien disponible</h1>
-  <h1 class="display-4 fw-bold" *ngIf="listBien.length >=2">{{listBien.length}} biens disponibles</h1>
-  <h1 class="display-4 fw-bold" *ngIf="listBien.length <=0">{{listBien.length}} Il y a actuellement auccun bien mis en ligne</h1>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <main>
     <div class="row g-5">
@@ -11,6 +8,7 @@
       <div class="col-md-3">
         <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 bg-light">
+            <app-img-header></app-img-header>
             <h4 class="fst-italic">Que Recherchez vous?</h4>
             <div>
               <form [formGroup]="rechercheForm">
