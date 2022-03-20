@@ -289,7 +289,7 @@
 <main class="container">
 
   <div class="row g-5">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         {{this.service.repBiendb().type_bien.nom}} à {{this.service.repBiendb().coordonnee.ville.nomVille}} dans la province de {{this.service.repBiendb().coordonnee.ville.province.nomprovince}}.
       </h3>
@@ -307,9 +307,11 @@
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">Province</strong>
+
               <h3 class="mb-0">{{this.service.repBiendb().coordonnee.ville.province.nomprovince}}</h3>
               <div class="mb-1 text-muted">Date de mise à jour  {{this.service.repBiendb().coordonnee.ville.province.dateCreation}}</div>
               <p class="card-text mb-auto">{{this.service.repBiendb().coordonnee.ville.province.description}}</p>
+              <app-image-province></app-image-province>
             </div>
           </div>
         </div>
@@ -321,6 +323,7 @@
               <div class="mb-1 text-muted">Date de mise à jour  {{this.service.repBiendb().coordonnee.ville.dateCreation}}</div>
               <p class="mb-auto">{{this.service.repBiendb().coordonnee.ville.description}}</p>
               <p class="stretched-link">Nombre habitant  {{this.service.repBiendb().coordonnee.ville.nhabitant}}</p>
+              <app-image-ville></app-image-ville>
             </div>
           </div>
         </div>
@@ -338,15 +341,15 @@
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="position-sticky" style="top:2rem;">
         <div class="p-4 mb-3 bg-light rounded">
           <h4 class="fst-italic">Information de contact </h4>
           <div class="row">
-            <div class="col-4">
+            <div class="col">
               <button *ngIf="this.service.isAuthenticated" type="button" class="btn btn-outline-success" (click)="reservation()">Réservation</button>
             </div>
-            <div class="col-4">
+            <div class="col">
               <button type="button" class="btn btn-info" (click)="iLike()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -356,7 +359,7 @@
                 <p *ngIf="problemCo">il y a eu un problème de connéxion, veuillez réessayer plustard</p>
               </button>
             </div>
-            <div class="col-4">
+            <div class="col">
               <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
             </div>
           </div>

@@ -26,15 +26,19 @@
                     <option value="defaults" selected>Défauts</option>
                     <option *ngFor="let p of listProvince; let i = index" value="{{i}}">{{p.nomprovince}}</option>
                   </select>
+                  <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults'">
+
                 </div>
                 <br>
-                <div class="col">
-                  <label class="form-label">Par Ville : </label>
-                  <select class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
-                    <option value="defaults" selected>Défauts</option>
-                    <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
-                  </select>
-                </div>
+                <div class="col" *ngIf="rechercheForm.value.province != 'defaults'">
+                <label class="form-label">Par Ville : </label>
+                <select class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
+                  <option value="defaults" selected>Défauts</option>
+                  <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
+                </select>
+                <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults'">
+              </div>
+                <br>
               </form>
               <br>
               <button type="button" class="btn btn-primary" (click)="resetReserche()">Réinitialiser</button>
@@ -47,7 +51,7 @@
         <article class="blog-post">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-            <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | villesPipes:(ville) | typeBiensPipes:(typeBien))">
+            <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | typeBiensPipes:(typeBien))">
               <div class="card shadow-sm border border-dark"  (click)="informationbient(b)">
                 <app-img-ala-one [b]="b"></app-img-ala-one>
                 <div class="card-body">

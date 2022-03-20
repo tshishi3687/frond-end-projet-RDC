@@ -10,6 +10,7 @@ import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
 import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {Byte} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-all-bien',
@@ -43,6 +44,8 @@ export class AllBienComponent implements OnInit {
   listTypeBien: Array<TypeDeBien> = [];
 
   @Output() listBien: Array<Bien> = [];
+  imgProvince: Byte[];
+  imgVille: Byte[];
   image: string;
   allfaut = false;
   @Output() bien: EventEmitter<any> = new EventEmitter();
@@ -51,7 +54,6 @@ export class AllBienComponent implements OnInit {
   ngOnInit(): void {
     this.voirAllProvince();
     this.voirToutBien();
-    this.voirVilleProvince();
     this.voirTypeBien();
   }
 
@@ -72,15 +74,6 @@ export class AllBienComponent implements OnInit {
     }else{
       alert('vous devez être connecter pour en voir plus');
     }
-  }
-
-  voirVilleProvince(): void{
-    // @ts-ignore
-    this.villeService.voirVille().subscribe((reponse: Array<Ville>) => {
-      // @ts-ignore
-      this.listVille = reponse.list;
-    } , reponse => alert('il y a eu un probleme avec le telechargement ville'));
-    // console.log(this.listVille);
   }
 
   voirAllProvince(): void{
@@ -111,7 +104,8 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.province === 'defaults'){
       this.province = '';
     }else{
-      // @ts-ignore
+      this.imgProvince = this.listProvince[this.rechercheForm.value.province].img[0].picByte;
+      this.listVille = this.listProvince[this.rechercheForm.value.province].villes;
       this.province = this.listProvince[this.rechercheForm.value.province].nomprovince;
     }
   }
@@ -120,6 +114,7 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.ville === 'defaults'){
       this.ville = '';
     }else{
+      this.imgVille = this.listVille[this.rechercheForm.value.ville].img[0].picByte;
       // @ts-ignore
       this.ville = this.listVille[this.rechercheForm.value.ville].nomVille;
     }
@@ -127,6 +122,11 @@ export class AllBienComponent implements OnInit {
 
   resetReserche(): void{
     this.rechercheForm.reset();
+    this.rechercheForm.value.province = 'defaults';
+    this.rechercheForm.value.ville = 'defaults';
+    this.rechercheForm.value.typeBien = 'defaults';
+    this.imgVille = null;
+    this.imgProvince = null;
     this.ville = '';
     this.province = '';
     this.typeBien = '';

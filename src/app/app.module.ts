@@ -64,6 +64,8 @@ import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
 import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
+import { ImageProvinceComponent } from './all-bien/info-bien/image-province/image-province.component';
+import { ImageVilleComponent } from './all-bien/info-bien/image-ville/image-ville.component';
 
 @NgModule({
     declarations: [
@@ -120,7 +122,9 @@ import { ReservationComponent } from './communications/avertissement/reservation
         BmelPipe,
         MettreBienEnLigneComponent,
         ModifMotDePasseComponent,
-        ReservationComponent
+        ReservationComponent,
+        ImageProvinceComponent,
+        ImageVilleComponent
     ],
     imports: [
         BrowserModule,

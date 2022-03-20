@@ -60,7 +60,6 @@ export class ProvinceComponent implements OnInit {
 
   ajouerIMG(provinceID: number): void{
 
-    console.log(provinceID);
     let uploadImageData = new FormData();
     // @ts-ignore
     uploadImageData.append('province', provinceID);

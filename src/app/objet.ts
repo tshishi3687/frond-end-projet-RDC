@@ -7,6 +7,8 @@ export class Province{
   description: string;
   dateCreation: Date;
   superid: number;
+  img: Array<ImageProvince>;
+  villes: Array<Ville>;
 }
 
 export class Ville{
@@ -17,6 +19,7 @@ export class Ville{
   province: Province;
   description: string;
   dateCreation: Date;
+  img: Array<ImageVille>;
 }
 
 export class TypeDeBien{
@@ -180,6 +183,15 @@ export class ImageBien{
 
 // tslint:disable-next-line:class-name
 export class ImageProvince{
+  id: string;
+  name: string;
+  type: string;
+  picByte: Byte[];
+  provinceID: Province;
+}
+
+// tslint:disable-next-line:class-name
+export class ImageVille{
   id: string;
   name: string;
   type: string;

@@ -15,6 +15,16 @@ export class VilleComponent implements OnInit {
 
   private error = 'Il y a eu un probleme :(';
   startingString: string = '';
+  imgError = '';
+  tailleimg = false;
+  // tslint:disable-next-line:ban-types
+  private myFiles: File [] = [];
+  private selectedFile: File;
+  imgValid = false;
+  errorList: Array<string> = [];
+  boolImgNull = false;
+  imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
+
 
   villeForm = new FormGroup({
     nom_ville: new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -29,6 +39,24 @@ export class VilleComponent implements OnInit {
   ngOnInit(): void {
     this.voirProvince();
     this.voirVille();
+  }
+
+  onFileSelected(event): void {
+    if ((event.target.files.length) > 10){
+      this.tailleimg = true;
+    }else{
+      for (let i = 0; i < (event.target.files.length); i++) {
+        if (event.target.files[i].size <= 1048576){
+          this.selectedFile = event.target.files[i];
+          // @ts-ignore
+          this.myFiles.push(this.selectedFile);
+        }else{
+          this.imgValid = true;
+          this.imgError = 'La photo n°' + (i + 1) + ' portant le nom de "' + event.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + event.target.files[i].size + '/Ko';
+          this.errorList.push(this.imgError);
+        }
+      }
+    }
   }
 
   // tslint:disable-next-line:typedef
@@ -58,5 +86,23 @@ export class VilleComponent implements OnInit {
   // tslint:disable-next-line:typedef
   supprimerVille(id){
     this.service.supprimerVille(id).subscribe(reponse => this.voirVille(), reponse => alert(this.error));
+  }
+
+  ajouerIMG(villeId: number): void {
+    let uploadImageData = new FormData();
+    // @ts-ignore
+    uploadImageData.append('province', villeId);
+    for (let i = 0; i < (this.myFiles.length); i++){
+      // @ts-ignore
+      // tslint:disable-next-line:max-line-length
+      uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
+    }
+    this.service.ajouterImageVille(uploadImageData).subscribe(reponse => {
+      alert('ok');
+      uploadImageData = new FormData();
+
+    }, reponse => {
+      this.myFiles = [];
+    });
   }
 }

@@ -36,4 +36,17 @@ export class VilleService {
     };
     return this.client.delete('http://localhost:8081/ville/' + id, httpOptions);
   }
+
+  // tslint:disable-next-line:typedef
+  ajouterImageVille(img) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+      })
+    };
+
+    // tslint:disable-next-line:no-unused-expression
+    // @ts-ignore
+    return this.client.post('http://localhost:8081/image_ville/upload', img, httpOptions);
+  }
 }

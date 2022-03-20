@@ -10,19 +10,17 @@ import {ImgService} from '../../service/img.service';
 })
 export class ImgALaOneComponent implements OnInit {
 
-  constructor(private service: LoginService,
-              private imagService: ImgService) { }
+  constructor() { }
   @Input() b: Bien;
   longSlider: number;
   slides: [] = [];
-  private error = 'Il y a eu un probleme :(';
   nomImg = '';
 
   ngOnInit(): void {
-    this.rechercheImagesBien();
+    this.imgBien();
   }
 
-  rechercheImagesBien(): void{
+  imgBien(): void{
     let nomimg;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.b.images.length; i++){
