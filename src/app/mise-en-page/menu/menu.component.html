@@ -33,10 +33,10 @@
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
                 </li>
-                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
+                <li class="nav-item" *ngIf="ser.isClient()">
                   <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un Bien</button>
                 </li>
-                <li class="nav-item" *ngIf="ser.isProprietaireRoll()">
+                <li class="nav-item" *ngIf="ser.isClient()">
                   <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes Biens</button>
                 </li>
 <!--                <li class="nav-item" *ngIf="ser.isLocataireRoll()">-->
@@ -44,7 +44,7 @@
 <!--                </li>-->
               </ul>
               <form class="d-flex">
-                <button type="button" class="btn btn-outline-primary" routerLink="/profil">{{ser.client().role}} : {{ser.client().nom}} {{ser.client().prenom}}</button>
+                <button type="button" class="btn btn-outline-primary" routerLink="/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>
               </form>
             </div>
           </div>

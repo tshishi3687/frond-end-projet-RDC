@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
               private dialog: MatDialog) { }
   imgBoo = true;
   connexion: boolean;
+  mdpBoll: boolean;
   inscription: boolean;
   service = this.ser;
   logo = 'assets/img/rdc-map-flag.png';
@@ -28,12 +29,22 @@ export class HeaderComponent implements OnInit {
     this.inscription = false;
     this.connexion = true;
     this.imgBoo = false;
+    this.mdpBoll = false;
   }
 
   bntInscription(): void{
     this.imgBoo = false;
-    this.boolLogo = true;
+    this.boolLogo = false;
     this.inscription = true;
+    this.connexion = false;
+    this.mdpBoll = false;
+  }
+
+  mdpModif(): void{
+    this.mdpBoll = true;
+    this.imgBoo = false;
+    this.boolLogo = false;
+    this.inscription = false;
     this.connexion = false;
   }
 

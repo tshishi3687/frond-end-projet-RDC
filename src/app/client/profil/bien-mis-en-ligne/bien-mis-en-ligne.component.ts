@@ -44,16 +44,10 @@ export class BienMisEnLigneComponent implements OnInit {
 
   bienMisEnLigne(): void{
     // tslint:disable-next-line:max-line-length
-    if (this.service.AdminRolle()){
+    if (this.service.isAuthenticated()){
       // @ts-ignore
       // tslint:disable-next-line:max-line-length
       this.bmelService.voirBienMisEnLigneBailleur(this.service.client()).subscribe(reponse => this.listBienMisEnLigne = reponse, reponse => alert(this.error));
-    }else if (this.service.isProprietaireRoll()){
-      // @ts-ignore
-      // tslint:disable-next-line:max-line-length
-      this.bmelService.voirBienMisEnLignePreneur(this.service.client()).subscribe(reponse => this.listBienMisEnLigne = reponse, reponse => alert(this.error));
-    }else{
-
     }
   }
 

@@ -240,9 +240,7 @@ export abstract class Constants{
   // tslint:disable-next-line:variable-name
   private readonly _roll1 = btoa('Admin');
   // tslint:disable-next-line:variable-name
-  private readonly _roll2 = btoa('Proprietaire');
-  // tslint:disable-next-line:variable-name
-  private readonly _roll3 = btoa('Locataire');
+  private readonly _roll2 = btoa('Client');
   // tslint:disable-next-line:variable-name
   private readonly _SessionUser = btoa('user-details');
   // tslint:disable-next-line:variable-name
@@ -303,9 +301,5 @@ export abstract class Constants{
 
   get roll2(): string {
     return atob(this._roll2);
-  }
-
-  get roll3(): string {
-    return atob(this._roll3);
   }
 }

@@ -31,11 +31,8 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
 import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
-import { PropriettaireComponent } from './login/inscription/propriettaire/propriettaire.component';
-import { LocataireComponent } from './login/inscription/locataire/locataire.component';
 import { MiseEnPageComponent } from './mise-en-page/mise-en-page.component';
 import { HeaderComponent } from './mise-en-page/header/header.component';
-import { SeLoguerComponent } from './login/se-loguer/se-loguer.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { ProfilComponent } from './client/profil/profil.component';
@@ -93,11 +90,8 @@ import { ReservationComponent } from './communications/avertissement/reservation
         AllBienComponent,
         InfoBienComponent,
         ImgALaOneComponent,
-        PropriettaireComponent,
-        LocataireComponent,
         MiseEnPageComponent,
         HeaderComponent,
-        SeLoguerComponent,
         ProfilComponent,
         FooterComponent,
         AllBienPipe,

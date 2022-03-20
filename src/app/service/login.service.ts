@@ -10,10 +10,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class LoginService implements CanActivate{
 
-  private jwt: string;
   private prefix = 'Bearer ';
-  private username: string;
-  private role: string;
   private bien: Bien;
   private contrat: Contrat;
   // @ts-ignore
@@ -35,14 +32,9 @@ export class LoginService implements CanActivate{
       switch (personne.role){
       case this.constance.roll1:
       case this.constance.roll2:
-      case this.constance.roll3:
         sessionStorage.setItem(this.constance.SessionUser, JSON.stringify(personne));
         this.verifIBAU();
-        if (this.repIBAU()){
-          this.route.navigateByUrl('/allBien');
-        }else{
-          this.route.navigateByUrl('/profil');
-        }
+        this.route.navigateByUrl('/allBien');
         break;
         default:
           return ;
@@ -129,16 +121,10 @@ export class LoginService implements CanActivate{
     return this.isAuthenticated && personne.role.includes(this.constance.roll1);
   }
 
-  isProprietaireRoll(): boolean{
+  isClient(): boolean{
     const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
     // tslint:disable-next-line:max-line-length
     return this.isAuthenticated() && (personne.role.includes(this.constance.roll1) || personne.role.includes(this.constance.roll2));
-  }
-
-  isLocataireRoll(): boolean{
-    const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
-    // tslint:disable-next-line:max-line-length
-    return this.isAuthenticated() && (personne.role.includes(this.constance.roll1) || personne.role.includes(this.constance.roll3));
   }
 
   // tslint:disable-next-line:max-line-length

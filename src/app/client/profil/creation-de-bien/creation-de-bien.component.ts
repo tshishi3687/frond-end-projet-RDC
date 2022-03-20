@@ -122,7 +122,7 @@ export class CreationDeBienComponent implements OnInit {
 
   ajouterBien(): void{
 
-    if (this.infoPersonne.isProprietaireRoll()){
+    if (this.infoPersonne.isAuthenticated()){
 
       const coordonnee = new Coordonnee();
       coordonnee.id = 0;

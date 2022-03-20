@@ -4,22 +4,20 @@
       <h3 class="text-danger">{{this.textErro}}</h3>
       <!-- Login Form -->
       <form [formGroup]="logForm">
+        <div class="p-3 mb-2 bg-success text-white">
+        <h1>Connexion</h1>
+      </div>
         <label class="email-detail-attachment">E-mail </label><br>
         <input type="email" formControlName="email"   class="fadeIn second" name="email" placeholder="Votre E-mail">
         <br>
         <br>
         <label class="email-detail-attachment">Mot de passe</label><br>
         <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
-        <input type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
+        <input *ngIf="logForm.valid" type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
       </form>
-      <p (click)="voirModifMDP()">Mot de passe oublié. =></p>
     </div>
   </div>
 
   <div *ngIf="activeCompte">
     <app-activation-compte></app-activation-compte>
-  </div>
-  <div *ngIf="modifMDPBool">
-    <p (click)="voirConnexion()"><br><= Revenir à la connexion</p>
-    <app-modif-mot-de-passe></app-modif-mot-de-passe>
   </div>

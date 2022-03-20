@@ -38,7 +38,6 @@ export class InfoBienComponent implements OnInit {
   }
 
   onClose(): void{
-    console.log((this.service.repBiendb().description as string).length);
     this.dialogRef.close();
   }
 
@@ -55,7 +54,7 @@ export class InfoBienComponent implements OnInit {
   }
 
   reservation(): void{
-    if (this.service.isLocataireRoll()){
+    if (this.service.isAuthenticated()){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

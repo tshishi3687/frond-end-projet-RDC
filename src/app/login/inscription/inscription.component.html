@@ -1,62 +1,31 @@
-<div class="b-example-divider">
-</div>
+<div class="wrapper fadeInDown">
+  <div id="formContent" *ngIf="this.inscriptionBool">
 
-<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 flex-lg-row-reverse align-items-center g-1">
-  <div class=" col-lg-6">
-    <app-locataire *ngIf="locataire"></app-locataire>
-    <app-propriettaire *ngIf="proprietaire"></app-propriettaire>
+    <!-- Login Form -->
+    <form [formGroup]="PersonneForm">
+      <div class="p-3 mb-2 bg-primary text-white">
+        <h1>Nouveau Client</h1>
+      </div>
+      <p class="text-danger" *ngIf="textBool">{{textError}}</p>
+      <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
+      <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
+      <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
+      <input type="password" formControlName="Password"  class="fadeIn third" name="password" placeholder="Un mot de passe">
+      <input type="password" formControlName="verifPassword"  class="fadeIn third" name="password" placeholder="Verif mot de passe">
+      <input type="number" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
+      <p *ngIf="verifExiste()" >Une personne est déjà inscrit avec cette adresse email !</p>
+      <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
+      <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()" *ngIf="this.PersonneForm.valid">
+    </form>
+
   </div>
 
-  <div class="col-lg-6">
-    <h1 class="display-5 fw-bold lh-1 mb-3">Bienvenu(e) chèr(e) ami(e)...</h1>
-    <p class="lead">A l'inscription, deux choix vous est proposé:</p>
-    <ul>
-      <li>
-        <p class="lead">Créer un compte en tant que propriétaire;</p>
-      </li>
-      <li>
-        <p class="lead">Créer un compte en tant que locataire.</p>
-      </li>
-    </ul>
-    <table class="table text-center">
-      <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Infos</th>
-        <th scope="col">Création</th>
-        <th scope="col">Publication</th>
-        <th scope="col">Réservation</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="choixLocataire()">LOCATAIRE</button>
-        </th>
-        <td>oui</td>
-        <td>non</td>
-        <td>non</td>
-        <td>oui</td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="choiProprietaire()">PROPRIETAIRE</button>
-        </th>
-        <td>oui</td>
-        <td>oui</td>
-        <td>oui</td>
-        <td>non</td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-    </div>
+  <div  align="center" *ngIf="attenteBool">
+    <app-message-dattente></app-message-dattente>
   </div>
 
-
-<div class="b-example-divider">
-</div>
-
-<div class="b-example-divider">
-</div>
+  <div  align="center" *ngIf="this.connexionOK">
+    <h1> Votre inscription est un succès</h1>
+    <app-activation-compte></app-activation-compte>
+  </div>
 </div>

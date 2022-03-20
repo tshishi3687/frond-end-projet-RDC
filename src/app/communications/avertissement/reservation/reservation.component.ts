@@ -81,18 +81,23 @@ export class ReservationComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   activation(): void{
-    this.cachedemandeJour = false;
-    this.verifCode = true;
     if (this.service.repIBAU() && this.acceptForm.valid){
+      this.cachedemandeJour = false;
+      this.verifCode = true;
       const reservation = new Reservation();
       reservation.bienConserne = this.serv.repBiendb();
       reservation.faitPar = this.serv.client();
       reservation.ddArrivee = this.choixJourForm.value.jourA;
       reservation.ddDepart = this.choixJourForm.value.jourD;
       this.bienService.envoiMailReservation(reservation).subscribe((result: number) => {
-        this.codeAcceptee = true;
-        this.nJour = result;
-        console.log(result);
+        if (result <= 0){
+          this.codeAcceptee = true;
+          this.nJour = 1;
+        }else {
+          this.codeAcceptee = true;
+          this.nJour = result;
+          console.log(result);
+        }
       }, result => alert('problemme de connection server'));
     }
     else{

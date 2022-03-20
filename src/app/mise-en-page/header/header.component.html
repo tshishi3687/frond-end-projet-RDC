@@ -7,25 +7,20 @@
        <h2 class="display-4 fw-bold lh-2">Cette application est un travail de fin d'étude de bachelier en informatique de gestion.</h2>
        <h3>De Tshibangu Cédrick</h3>
        <p>Developpeur junior</p>
-       <br>
-       <br>
        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3" *ngIf="!this.service.isAuthenticated()">
          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" (click)="bntInscription()">Inscription</button>
-         <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="bntConnection()">Connexion</button>
+         <button type="button" class="btn btn-outline-success btn-lg px-4" (click)="bntConnection()">Connexion</button>
+         <button type="button" class="btn btn-link-warning" (click)="mdpModif()">Mot-De-Passe oublié ?</button>
        </div>
      </div>
      <br>
      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg" align="center" *ngIf="!this.service.isAuthenticated()">
        <img class="rounded-lg-3" src="{{this.logo}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="this.boolLogo">
        <app-connexion *ngIf="this.connexion"></app-connexion>
-     </div>
-     <div class="b-example-divider" *ngIf="!this.service.isAuthenticated()">
-       <app-inscription *ngIf="this.inscription"></app-inscription>
+       <app-modif-mot-de-passe *ngIf="mdpBoll"></app-modif-mot-de-passe>
+       <app-inscription *ngIf="inscription"></app-inscription>
      </div>
    </div>
-   <!-- <app-all-bien *ngIf="siconnecte()"></app-all-bien>-->
-
-     <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
-
-      <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
- </div>
+  <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
+  <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
+</div>

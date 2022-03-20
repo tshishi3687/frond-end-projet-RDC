@@ -39,12 +39,4 @@ export class ProfilComponent implements OnInit {
   deconnexion(): void{
     this.donneeClient.logout();
   }
-
-  verifSiCo(): boolean{
-    return this.donneeClient.isAuthenticated();
-  }
-
-  verifsiloca(): boolean{
-    return !this.donneeClient.isLocataireRoll();
-  }
 }
