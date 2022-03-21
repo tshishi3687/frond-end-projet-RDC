@@ -4,9 +4,9 @@
   interval="5000"
   color="accent"
   maxWidth="auto"
-  proportion="55"
-  slides= "{{this.b.images.length}}"
-  [loop]="true"
+  proportion="{{this.pourcentageAffichage}}"
+  slides= "{{this.img.length}}"
+  [loop]="false"
   [hideArrows]="false"
   [hideIndicators]="false"
   [useKeyboard]="true"
@@ -16,11 +16,9 @@
   <mat-carousel-slide
     #matCarouselSlide
     *ngFor="let slide of slides; let i = index"
-    [image]="slide.image"
+    [image]="slide.nomimg"
     overlayColor="#00000040"
     [hideOverlay]="true"
   ></mat-carousel-slide>
 </mat-carousel>
-<p align="center" *ngIf="b.images.length <=1">{{b.images.length}} photo disponible</p>
-<p align="center" *ngIf="b.images.length >=2">{{b.images.length}} photos disponibles</p>
 

@@ -53,7 +53,7 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
             <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | typeBiensPipes:(typeBien))">
               <div class="card shadow-sm border border-dark"  (click)="informationbient(b)">
-                <app-img-ala-one [b]="b"></app-img-ala-one>
+                <app-img-caroucel [img]="b.images" [pourcentageAffichage]="55"></app-img-caroucel>
                 <div class="card-body">
                   <h3 align="center">{{b.coordonnee.ville.nomVille}} / {{b.coordonnee.ville.province.nomprovince}}</h3>
                   <h1 align="center">{{b.type_bien.nom}}</h1>

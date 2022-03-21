@@ -1,6 +1,6 @@
 <div class=" text-white rounded bg-dark">
-    <app-img-ala-one [b]="this.service.repBiendb()"></app-img-ala-one>
-  </div>
+  <app-img-caroucel [img]="this.service.repBiendb().images" [pourcentageAffichage]="55"></app-img-caroucel>
+</div>
 
 <header >
   <h1 class="text-primary display-2 text-center">{{this.service.repBiendb().type_bien.nom}}</h1>
@@ -311,7 +311,7 @@
               <h3 class="mb-0">{{this.service.repBiendb().coordonnee.ville.province.nomprovince}}</h3>
               <div class="mb-1 text-muted">Date de mise à jour  {{this.service.repBiendb().coordonnee.ville.province.dateCreation}}</div>
               <p class="card-text mb-auto">{{this.service.repBiendb().coordonnee.ville.province.description}}</p>
-              <app-image-province></app-image-province>
+              <app-img-caroucel [img]="this.service.repBiendb().coordonnee.ville.province.img" [pourcentageAffichage]="100"></app-img-caroucel>
             </div>
           </div>
         </div>
@@ -323,7 +323,7 @@
               <div class="mb-1 text-muted">Date de mise à jour  {{this.service.repBiendb().coordonnee.ville.dateCreation}}</div>
               <p class="mb-auto">{{this.service.repBiendb().coordonnee.ville.description}}</p>
               <p class="stretched-link">Nombre habitant  {{this.service.repBiendb().coordonnee.ville.nhabitant}}</p>
-              <app-image-ville></app-image-ville>
+              <app-img-caroucel [img]="this.service.repBiendb().coordonnee.ville.img" [pourcentageAffichage]="100"></app-img-caroucel>
             </div>
           </div>
         </div>

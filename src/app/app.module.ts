@@ -28,7 +28,6 @@ import { VoirBienPipe } from './client/profil/voir-bien/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
-import { ImgALaOneComponent } from './all-bien/img-ala-one/img-ala-one.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
 import { MiseEnPageComponent } from './mise-en-page/mise-en-page.component';
@@ -56,7 +55,6 @@ import { LettreDeMotivationComponent } from './communications/donneeLegaux/lM/le
 import { TravailDeFinEtudeComponent } from './communications/donneeLegaux/TFE/travail-de-fin-etude/travail-de-fin-etude.component';
 import { ContactComponent } from './communications/donneeLegaux/contact/contact/contact.component';
 import { AjouterAdresseComponent } from './client/profil/ajouter-adresse/ajouter-adresse.component';
-import { PayPalComponent } from './login/pay-pal/pay-pal.component';
 import { AjouterInfoBancaireComponent } from './client/profil/ajouter-info-bancaire/ajouter-info-bancaire.component';
 import { BienMisEnLigneComponent } from './client/profil/bien-mis-en-ligne/bien-mis-en-ligne.component';
 import { VoirContratComponent } from './client/profil/voir-contrat/voir-contrat.component';
@@ -64,8 +62,7 @@ import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
 import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
-import { ImageProvinceComponent } from './all-bien/info-bien/image-province/image-province.component';
-import { ImageVilleComponent } from './all-bien/info-bien/image-ville/image-ville.component';
+import { ImgCaroucelComponent } from './communications/ImgCaroucel/img-caroucel/img-caroucel.component';
 
 @NgModule({
     declarations: [
@@ -91,7 +88,6 @@ import { ImageVilleComponent } from './all-bien/info-bien/image-ville/image-vill
         VoirBienPipe,
         AllBienComponent,
         InfoBienComponent,
-        ImgALaOneComponent,
         MiseEnPageComponent,
         HeaderComponent,
         ProfilComponent,
@@ -115,7 +111,6 @@ import { ImageVilleComponent } from './all-bien/info-bien/image-ville/image-vill
         TravailDeFinEtudeComponent,
         ContactComponent,
         AjouterAdresseComponent,
-        PayPalComponent,
         AjouterInfoBancaireComponent,
         BienMisEnLigneComponent,
         VoirContratComponent,
@@ -123,8 +118,7 @@ import { ImageVilleComponent } from './all-bien/info-bien/image-ville/image-vill
         MettreBienEnLigneComponent,
         ModifMotDePasseComponent,
         ReservationComponent,
-        ImageProvinceComponent,
-        ImageVilleComponent
+        ImgCaroucelComponent
     ],
     imports: [
         BrowserModule,

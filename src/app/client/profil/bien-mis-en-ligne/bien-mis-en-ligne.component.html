@@ -39,7 +39,7 @@
                     <p>{{enLigne.contratBienMisEnLigne.preneur.ddn | date}}</p>
                   </div>
                   <div class="card shadow-sm border border-dark">
-                    <app-img-ala-one [b]="enLigne.bienLie"></app-img-ala-one>
+                    <app-img-caroucel [img]="enLigne.bienLie.images" [pourcentageAffichage]="55"></app-img-caroucel>
                     <button type="button" class="btn btn-primary" (click)="voircontratLie(enLigne.contratBienMisEnLigne)">Voir contrat associé</button>
                     <div></div>
                     <div class="card-body">

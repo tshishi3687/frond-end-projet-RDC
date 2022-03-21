@@ -199,6 +199,15 @@ export class ImageVille{
   provinceID: Province;
 }
 
+
+export class Img{
+  id: string;
+  name: string;
+  type: string;
+  picByte: Byte[];
+  provinceID: Province;
+}
+
 export class DureeLocation{
   id: number;
   duree: string;

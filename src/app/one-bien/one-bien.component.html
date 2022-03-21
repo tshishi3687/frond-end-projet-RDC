@@ -1,6 +1,6 @@
 <div class="col " >
     <div class="card shadow-sm" >
-      <app-img-ala-one [b]="b"></app-img-ala-one>
+      <app-img-caroucel [img]="b.images" [pourcentageAffichage]="55"></app-img-caroucel>
       <div class="card-body">
         <h3 align="center">{{this.b.coordonnee.ville.nomVille}} / {{this.b.coordonnee.ville.province.nomprovince}}</h3>
         <h3 align="center">{{this.b.type_bien.nom}}</h3>

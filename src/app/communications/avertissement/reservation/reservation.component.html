@@ -7,7 +7,7 @@
         <h3 *ngIf="acceptForm.value.check == true && verifCode">ETAPE 3: Verification identité.</h3>
         <h3 *ngIf="acceptForm.value.check == true && !verifCode && codeAcceptee && verifCode2">ETAPE 4: Payement.</h3>
         <div class="card shadow-sm" >
-          <app-img-ala-one [b]="this.service.repBiendb()"></app-img-ala-one>
+          <app-img-caroucel [img]="this.service.repBiendb().images" [pourcentageAffichage]="55"></app-img-caroucel>
           <div class="card-body">
             <h3 align="center">{{this.service.repBiendb().coordonnee.ville.nomVille}} / {{this.service.repBiendb().coordonnee.ville.province.nomprovince}}</h3>
             <h3 align="center">{{this.service.repBiendb().type_bien.nom}}</h3>
