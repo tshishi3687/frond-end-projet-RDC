@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Contrat} from '../../../objet';
+import {BienMisEnLigneService} from '../../../service/bien-mis-en-ligne.service';
 
 @Component({
   selector: 'app-voir-contrat',
@@ -8,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class VoirContratComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(private contratService: BienMisEnLigneService) { }
+
+  listContrat: Array<Contrat> = [];
 
   ngOnInit(): void {
+    this.voirContratMEL();
+  }
+
+  voirContratMEL(): void{
+   this.contratService.voirContratPreneur().subscribe((reponse: Array<Contrat>) => this.listContrat = reponse, reponse => alert('error'));
   }
 
 }

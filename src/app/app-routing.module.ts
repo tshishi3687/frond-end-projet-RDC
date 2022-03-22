@@ -12,6 +12,8 @@ import {AllBienComponent} from './all-bien/all-bien.component';
 import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
 import {ProfilComponent} from './client/profil/profil.component';
 import {AppComponent} from './app.component';
+import {Contrat} from './objet';
+import {VoirContratComponent} from './client/profil/voir-contrat/voir-contrat.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,10 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent
+  },
+  {
+    path: 'contrat_mel',
+    component: VoirContratComponent
   }
 ];
 

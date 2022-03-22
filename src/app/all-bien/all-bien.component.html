@@ -1,29 +1,29 @@
 <div class="b-example-divider"></div>
 
-<div class="px-4 pt-5 my-5 text-center border-bottom ">
+<div class="px-4 pt-5 my-5 text-center border-bottom " >
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <main>
     <div class="row g-5">
 
       <div class="col-md-3">
         <div class="position-sticky" style="top: 2rem;">
-          <div class="p-4 mb-3 bg-light">
+          <div class="p-4 mb-3 ">
             <app-img-header></app-img-header>
-            <h4 class="fst-italic">Que Recherchez vous?</h4>
+            <h4 class="fst-italic"></h4>
             <div>
               <form [formGroup]="rechercheForm">
                 <div class="col">
-                  <label class="form-label">Par type de bien :</label>
+                  <label class="form-label"></label>
                   <select class="form-select"  aria-label="Default select example" formControlName="typeBien" (change)="enventTB()">
-                    <option value="defaults" selected>Défauts</option>
+                    <option value="defaults" selected>Type de Bien</option>
                     <option  *ngFor="let t of listTypeBien; let i = index" value="{{i}}">{{t.nom}}</option>
                   </select>
                 </div>
                 <br>
                 <div class="col">
-                  <label class="form-label">Par province : </label>
+                  <label class="form-label"></label>
                   <select class="form-select" aria-label="Default select example" formControlName="province" (change)="enventProvince()">
-                    <option value="defaults" selected>Défauts</option>
+                    <option value="defaults" selected>Par Province</option>
                     <option *ngFor="let p of listProvince; let i = index" value="{{i}}">{{p.nomprovince}}</option>
                   </select>
                   <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults'">
@@ -31,9 +31,9 @@
                 </div>
                 <br>
                 <div class="col" *ngIf="rechercheForm.value.province != 'defaults'">
-                <label class="form-label">Par Ville : </label>
+                <label class="form-label"></label>
                 <select class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
-                  <option value="defaults" selected>Défauts</option>
+                  <option value="defaults" selected>Par Ville</option>
                   <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
                 </select>
                 <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults'">

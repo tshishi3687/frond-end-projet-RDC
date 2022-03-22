@@ -39,9 +39,9 @@
                 <li class="nav-item" *ngIf="ser.isClient()">
                   <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes Biens</button>
                 </li>
-<!--                <li class="nav-item" *ngIf="ser.isLocataireRoll()">-->
-<!--                  <button type="button" class="btn btn-light" routerLink="/MesReservation">Mes réservations</button>-->
-<!--                </li>-->
+                <li class="nav-item" *ngIf="ser.isClient()">
+                  <button type="button" class="btn btn-light" routerLink="/contrat_mel">Contrat Mise en ligne</button>
+                </li>
               </ul>
               <form class="d-flex">
                 <button type="button" class="btn btn-outline-primary" routerLink="/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>

@@ -9,6 +9,6 @@ import {LoginService} from './service/login.service';
 export class AppComponent {
   title = 'untitled';
    service: LoginService;
-  photo = 'assets/img/27078837-image-d-un-lion-regardant-la-caméra-.jpg';
+  photo = 'assets/img/header/999999-6413933219236.jpg';
 
 }

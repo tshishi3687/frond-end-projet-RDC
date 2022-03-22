@@ -139,6 +139,9 @@ export class Contrat{
   id: number;
   bailleur: Personne;
   preneur: Personne;
+  ddDebut: Date;
+  ddFin: Date;
+  bienVuDTO: Bien;
   enCour: boolean;
   entre: string;
   entre2: string;

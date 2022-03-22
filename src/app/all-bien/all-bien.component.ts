@@ -50,6 +50,7 @@ export class AllBienComponent implements OnInit {
   allfaut = false;
   @Output() bien: EventEmitter<any> = new EventEmitter();
   @Input() tostring: string;
+  photo = 'assets/img/header/999999-6413933219236.jpg';
 
   ngOnInit(): void {
     this.voirAllProvince();
