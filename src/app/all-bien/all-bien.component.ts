@@ -39,6 +39,10 @@ export class AllBienComponent implements OnInit {
   ville = '';
   typeBien = '';
   province = '';
+  titreProvince = '';
+  titreVille = '';
+  textProvince = '';
+  textVille = '';
   listVille: Array<Ville> = [];
   listProvince: Array<Province> = [];
   listTypeBien: Array<TypeDeBien> = [];
@@ -105,9 +109,12 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.province === 'defaults'){
       this.province = '';
     }else{
+      this.resetVille();
       this.imgProvince = this.listProvince[this.rechercheForm.value.province].img[0].picByte;
-      this.listVille = this.listProvince[this.rechercheForm.value.province].villes;
+      this.textProvince = this.listProvince[this.rechercheForm.value.province].description;
+      this.titreProvince = this.listProvince[this.rechercheForm.value.province].nomprovince;
       this.province = this.listProvince[this.rechercheForm.value.province].nomprovince;
+      this.listVille = this.listProvince[this.rechercheForm.value.province].villes;
     }
   }
 
@@ -116,11 +123,20 @@ export class AllBienComponent implements OnInit {
       this.ville = '';
     }else{
       this.imgVille = this.listVille[this.rechercheForm.value.ville].img[0].picByte;
+      this.textVille = this.listVille[this.rechercheForm.value.ville].description;
+      this.titreVille = this.listVille[this.rechercheForm.value.ville].nomVille;
       // @ts-ignore
       this.ville = this.listVille[this.rechercheForm.value.ville].nomVille;
     }
   }
 
+  resetVille(): void{
+    this.rechercheForm.value.ville = 'defaults';
+    this.imgVille = null;
+    this.ville = '';
+    this.titreVille = '';
+    this.textVille = '';
+  }
   resetReserche(): void{
     this.rechercheForm.reset();
     this.rechercheForm.value.province = 'defaults';
@@ -131,5 +147,9 @@ export class AllBienComponent implements OnInit {
     this.ville = '';
     this.province = '';
     this.typeBien = '';
+    this.titreVille = '';
+    this.textVille = '';
+    this.titreProvince = '';
+    this.textProvince = '';
   }
 }

@@ -21,6 +21,10 @@
        <app-inscription *ngIf="inscription"></app-inscription>
      </div>
    </div>
-  <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
-  <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
+
+  <div class="body">
+    <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
+    <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
+  </div>
+
 </div>

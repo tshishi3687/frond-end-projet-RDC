@@ -1,6 +1,6 @@
 <div class="b-example-divider"></div>
 
-<div class="px-4 pt-5 my-5 text-center border-bottom " *ngIf="this.listBien.length >=1">
+<div class="px-4 pt-5 my-5 text-center border-bottom " >
   <main>
     <div class="row g-5">
 
@@ -27,9 +27,14 @@
         </div>
       </div>
       <div class="col-md-9">
+        <div *ngIf="this.listBien.length < 1">
+          <h1>Pour le moment, vous ne pouvez manipuler aucun bien!</h1>
+          <h3>Soit parce que vous n'avez pas encore créé un bien, soit parce que votre/vos bien(s) a/ont un contrat de "Bien Mis En Ligne" actif.</h3>
+        </div>
         <article class="blog-post">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
             <div class="col" *ngFor="let b of (listBien | typeBiensPipes:(typeBien))">
               <div class="card shadow-sm border border-dark">
                 <div class="btn-group">

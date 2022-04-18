@@ -28,7 +28,8 @@ export class ActivationCompteComponent implements OnInit {
 
   validationCompte(): void{
     if (this.verifForm.valid){
-      this.personneService.verifCompte(this.verifForm.value.codeActivation).subscribe((reponse: boolean) => {
+      this.personneService.verifCompte(this.verifForm.value.codeActivation).subscribe(reponse => {
+        console.log(reponse);
         if (reponse){
           // @ts-ignore
           this.activationCompteOK = true;

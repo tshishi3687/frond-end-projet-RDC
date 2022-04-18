@@ -95,6 +95,7 @@ export class InscriptionComponent implements OnInit {
   redirection(): void{
     this.connexionOK = true;
     this.attenteBool = false;
+    this.inscriptionBool = false;
   }
 
   verifExiste(): boolean{

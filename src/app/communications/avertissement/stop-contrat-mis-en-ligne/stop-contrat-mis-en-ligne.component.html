@@ -1,0 +1,66 @@
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6" >
+      <div *ngIf="acceptForm.value.check == true">
+        <div class="alert alert-danger" role="alert" align="center">
+          <h2>Vous étes sur le point d'annuler le contrat :"</h2>
+          <p class="pb-2 border-bottom">Contrat de mise en ligne de/d' {{contrat.bienVuDTO.type_bien.nom}}.<br>A l'adresse: {{contrat.bienVuDTO.coordonnee.num}} {{contrat.bienVuDTO.coordonnee.rue}}, {{contrat.bienVuDTO.coordonnee.ville.nomVille}} / {{contrat.bienVuDTO.coordonnee.ville.province.nomprovince}}</p>
+          <p class="pb-2 border-bottom" *ngIf="contrat.enCour">En cour... du {{contrat.ddDebut | date}} à {{contrat.ddFin | date}}</p>
+          <p class="pb-2 border-bottom" *ngIf="!contrat.enCour">Ce contrat a prit fin le {{contrat.ddFin | date}}</p>
+          <h1>Ceci est une action sans retour qui entraine le payement de {{contrat.bienVuDTO.prix}}€ au profit de Mobembo.cd, comme stipulé dans le contrat.</h1>
+          <button type="button" class="btn btn-outline-danger" (click)="etap2()">Continuer</button>
+
+          <br>
+          <br>
+          <form *ngIf="btnSuppress" [formGroup]="stopFrom">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Veuillez retaper cette phrase "{{this.stopMessageContrat}}"</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="textStop">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-outline-danger" (click)="stopContrat()">Je confirme la demande d'arrêt du contrat</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-6">
+
+      <h1 class="display-5 fw-bold lh-1 mb-3 text-danger">ATTENTION !!!</h1>
+      <h2 class="display-5 fw-bold lh-1 mb-3 text-warning">Vous êtes sur le point de STOPPER CE CONTRAT.</h2>
+      <p class="pb-2 border-bottom">Contrat de mise en ligne de la/le/l' {{contrat.bienVuDTO.type_bien.nom}}.<br>A l'adresse: {{contrat.bienVuDTO.coordonnee.num}} {{contrat.bienVuDTO.coordonnee.rue}}, {{contrat.bienVuDTO.coordonnee.ville.nomVille}} / {{contrat.bienVuDTO.coordonnee.ville.province.nomprovince}}</p>
+      <p class="pb-2 border-bottom" *ngIf="contrat.enCour">En cours... du {{contrat.ddDebut | date}} à {{contrat.ddFin | date}}</p>
+      <p class="pb-2 border-bottom" *ngIf="!contrat.enCour">Ce contrat a pris fin le {{contrat.ddFin | date}}</p>
+      <p *ngIf="acceptForm.value.check == true" class="text-success">Vous avez accepté les termes du contrat. si ce n'est pas le cas, veuillez cliquer sur <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>.</p>
+
+      <div *ngIf="!acceptForm.value.check == true">
+        <p class="lead text-danger">Ce qui implique une redevance de {{contrat.bienVuDTO.prix}}€ au profit de Mobembo.cd, comme stipulé dans le contrat.</p>
+        <br>
+        <form [formGroup]="acceptForm">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="check">
+            <label class="form-check-label" >J'accepte et je poursuis l'arrêt de mon contrat.</label>
+          </div>
+        </form>
+      </div>
+
+<!--      <div class="wrapper fadeInDown" *ngIf="verifCode">-->
+<!--        <div id="formContent">-->
+<!--&lt;!&ndash;          <p class="text-info">Pour connaître votre code de vérification,<br>Veuillez consulter votre boite e-mail!</p>&ndash;&gt;-->
+<!--&lt;!&ndash;          &lt;!&ndash; Login Form &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;          <form [formGroup]="veifCodeForm">&ndash;&gt;-->
+<!--&lt;!&ndash;            {{codeFaut}}&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="submit" class="fadeIn fourth" value="Je confirme la mise en ligne." *ngIf="veifCodeForm.valid" (click)="envoiCode()">&ndash;&gt;-->
+<!--&lt;!&ndash;          </form>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p class="text-danger">*** ATTENTION *** La réservation d'un Bien doit être un acte mûrement réfléchi!!!</p>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Toute demande de résiliation pour cette réservation faite 15 jours ouvrable avant le {{choixJourForm.value.jourA}} ne vous sera pas facturé.&ndash;&gt;-->
+<!--&lt;!&ndash;            <br>Après, vous serez facturé d'une fois le prix d'une nuit demandé pour ce Bien, soit {{service.repBiendb().prix}} €.</p>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!acceptForm.value.check == true">-->
+<!--        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>

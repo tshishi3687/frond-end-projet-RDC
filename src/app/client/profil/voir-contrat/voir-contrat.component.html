@@ -18,7 +18,7 @@
       </div>
       <h3>Objet</h3>
       <p>{{c.objet}}</p>
-      <a href="#" class="icon-link">
+      <a class="icon-link" (click)="stopContrat(c)">
         Mettre fin au contrat
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
       </a>
@@ -30,7 +30,7 @@
       <p>{{c.loyer}}</p>
       <h3>Etat des lieux</h3>
       <p>{{c.etatLieu}}</p>
-      <a href="#" class="icon-link">
+      <a class="icon-link">
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
       </a>
     </div>
@@ -41,7 +41,7 @@
       <p>{{c.duree}}</p>
       <h5>DARDL</h5>
       <p>{{c.dardl}}</p>
-      <a href="#" class="icon-link">
+      <a class="icon-link">
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
       </a>
     </div>

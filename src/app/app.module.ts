@@ -63,6 +63,7 @@ import { MettreBienEnLigneComponent } from './communications/avertissement/mettr
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
 import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
 import { ImgCaroucelComponent } from './communications/ImgCaroucel/img-caroucel/img-caroucel.component';
+import { StopContratMisEnLigneComponent } from './communications/avertissement/stop-contrat-mis-en-ligne/stop-contrat-mis-en-ligne.component';
 
 @NgModule({
     declarations: [
@@ -118,7 +119,8 @@ import { ImgCaroucelComponent } from './communications/ImgCaroucel/img-caroucel/
         MettreBienEnLigneComponent,
         ModifMotDePasseComponent,
         ReservationComponent,
-        ImgCaroucelComponent
+        ImgCaroucelComponent,
+        StopContratMisEnLigneComponent
     ],
     imports: [
         BrowserModule,
