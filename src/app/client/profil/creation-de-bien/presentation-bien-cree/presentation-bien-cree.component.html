@@ -18,18 +18,18 @@
         </svg>
       </h1>
       <p class="lead">
-        Votre {{service.repBiendb().type_bien.nom}} a bien été créé. <br>
+        Votre {{bien.type_bien.nom}} a bien été créé. <br>
         Actuellement, ce bien est en mode hors-ligne.<br>Ce qui veut dire que personne ne peut le voir. <br>
-        Vous pouvez l'<button type="button" class="btn btn-link" (click)="activation(service.repBiendb())">ACTIVER</button> directement ou plus tard dans votre espace "Mes Biens".
+        Vous pouvez l'<button type="button" class="btn btn-link" (click)="activation(bien)">ACTIVER</button> directement ou plus tard dans votre espace "Mes Biens".
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
         <button type="button" class="btn btn-outline-success" (click)="doBack()">
-          En créer un autre
+          En créer un autre / Retour
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-plus-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89.471-1.178-1.178.471L5.93 9.363l.338.215a.5.5 0 0 1 .154.154l.215.338 7.494-7.494ZM16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 .5-.5Z"/>
           </svg>
         </button>
-        <button type="button" class="btn btn-link" (click)="suprimerBien(service.repBiendb())">Supprimer ce Bien!</button>
+        <button type="button" class="btn btn-link" (click)="suprimerBien(bien)">Supprimer ce Bien!</button>
       </div>
     </div>
     <div class="col-lg-4 offset-lg-1 p-4 overflow-hidden shadow-lg">

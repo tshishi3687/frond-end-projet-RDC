@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Bien} from '../../../../objet';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {SuppressionBienComponent} from '../../../../communications/danger/suppression-bien/suppression-bien.component';
 import {LoginService} from '../../../../service/login.service';
 import {MettreBienEnLigneComponent} from '../../../../communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
@@ -14,20 +14,24 @@ export class PresentationBienCreeComponent implements OnInit {
 
   constructor(private ser: LoginService,
               private dialog: MatDialog,
-              public dialogRef: MatDialogRef<PresentationBienCreeComponent>) { }
+              public dialogRef: MatDialogRef<PresentationBienCreeComponent>,
+              @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.bien = data.bien;
+  }
 
-  service = this.ser;
+  bien: Bien;
 
   ngOnInit(): void {
   }
 
   suprimerBien(b: Bien): void{
-    this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {bien: b};
     this.dialog.open(SuppressionBienComponent, dialogConfig);
   }
 
@@ -37,12 +41,12 @@ export class PresentationBienCreeComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   activation(b: Bien): void{
-    this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {bien: b};
     this.dialog.open(MettreBienEnLigneComponent, dialogConfig);
   }
 

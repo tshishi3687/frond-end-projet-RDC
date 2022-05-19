@@ -50,7 +50,6 @@ export class ConnexionComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       // @ts-ignore
       this.personneService.voirPersonne(mdp).subscribe(reponse => {
-        const jwtDecode = new JwtHelperService();
 
         // @ts-ignore
         this.logService.saveToken(reponse.token as string);

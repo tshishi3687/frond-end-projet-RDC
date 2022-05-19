@@ -23,8 +23,8 @@ import { ConnexionComponent } from './login/connexion/connexion.component';
 import { InscriptionComponent } from './login/inscription/inscription.component';
 import { ClientComponent } from './client/client.component';
 import { CreationDeBienComponent } from './client/profil/creation-de-bien/creation-de-bien.component';
-import { VoirBienComponent } from './client/profil/voir-bien/voir-bien.component';
-import { VoirBienPipe } from './client/profil/voir-bien/voir-bien.pipe';
+import { VoirBienComponent } from './client/profil/voir-biens/voir-bien.component';
+import { VoirBienPipe } from './client/profil/voir-biens/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
@@ -48,7 +48,7 @@ import { ActivationCompteComponent } from './login/activation-compte/activation-
 import { MessageDAttenteComponent } from './communications/attente/message-dattente/message-dattente.component';
 import { OneBienComponent } from './one-bien/one-bien.component';
 import { PresentationBienCreeComponent } from './client/profil/creation-de-bien/presentation-bien-cree/presentation-bien-cree.component';
-import { MiseEngardeStartAppsComponent } from './communications/avertissement/mise-engarde-start-apps/mise-engarde-start-apps.component';
+import { MiseEngardeStartAppsComponent } from './communications/avertissement/mise-engarde-start-apps-rgpd/mise-engarde-start-apps.component';
 import { RGPDComponent } from './communications/donneeLegaux/rgpd/rgpd.component';
 import { CurriculumViteaComponent } from './communications/donneeLegaux/curriculumVitae/curriculum-vitea/curriculum-vitea.component';
 import { LettreDeMotivationComponent } from './communications/donneeLegaux/lM/lettre-de-motivation/lettre-de-motivation.component';
@@ -57,7 +57,7 @@ import { ContactComponent } from './communications/donneeLegaux/contact/contact/
 import { AjouterAdresseComponent } from './client/profil/ajouter-adresse/ajouter-adresse.component';
 import { AjouterInfoBancaireComponent } from './client/profil/ajouter-info-bancaire/ajouter-info-bancaire.component';
 import { BienMisEnLigneComponent } from './client/profil/bien-mis-en-ligne/bien-mis-en-ligne.component';
-import { VoirContratComponent } from './client/profil/voir-contrat/voir-contrat.component';
+import { VoirContratComponent } from './client/profil/voir-contrat-mis-en-ligne/voir-contrat.component';
 import { BmelPipe } from './client/profil/bien-mis-en-ligne/bmel.pipe';
 import { MettreBienEnLigneComponent } from './communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-de-passe.component';
@@ -136,13 +136,7 @@ import { StopContratMisEnLigneComponent } from './communications/avertissement/s
         MatIconModule
     ],
     exports: [],
-    providers: [
-    //   {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: BasicAuthHtppInterceptorService,
-    //   multi: true
-    // }
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

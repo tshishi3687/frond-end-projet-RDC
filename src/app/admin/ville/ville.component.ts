@@ -3,6 +3,7 @@ import {VilleService} from '../../service/VilleService';
 import {ProvinceService} from '../../service/ProvienceService';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Province, Ville} from '../../objet';
+import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'app-ville',
@@ -11,7 +12,7 @@ import {Province, Ville} from '../../objet';
 })
 export class VilleComponent implements OnInit {
 
-  constructor(private service: VilleService, private pService: ProvinceService) { }
+  constructor(private service: VilleService, private pService: ProvinceService, private logService: LoginService) { }
 
   private error = 'Il y a eu un probleme :(';
   startingString: string = '';

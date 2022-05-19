@@ -83,34 +83,34 @@ export class VoirBienComponent implements OnInit {
 
 
   informationbient(b: Bien): void{
-    this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '100%';
     dialogConfig.height = '100%';
+    dialogConfig.data = {bien: b};
     this.dialog.open(InfoBienComponent, dialogConfig);
   }
 
   suprimerBien(b: Bien): void{
-    this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {bien: b};
     this.dialog.open(SuppressionBienComponent, dialogConfig);
     this.voirBienPersonne();
   }
 
   // tslint:disable-next-line:typedef
   activation(b: Bien): void{
-    this.service.biendb(b);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {bien: b};
     this.dialog.open(MettreBienEnLigneComponent, dialogConfig);
   }
 

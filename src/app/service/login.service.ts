@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Bien, Constants, Contrat, Personne, Reservation} from '../objet';
+import {Bien, Contrat, Personne} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {PersonneService} from './personne.service';
-import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +10,38 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 export class LoginService implements CanActivate{
 
   private prefix = 'Bearer ';
+  // tslint:disable-next-line:variable-name
   private bien: Bien;
   private contrat: Contrat;
-  // @ts-ignore
-  private constance: Constants = new Constants();
+
+  // tslint:disable-next-line:variable-name
+  public readonly roll1 = 'Admin';
+  // tslint:disable-next-line:variable-name
+  public readonly roll2 = 'Client';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionUser = 'user-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionBien = 'bien-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionDemande = 'demande-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionREservation = 'reservation-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionVerifIBAU = 'IBAU-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionContrat = 'contrat-details';
+  // tslint:disable-next-line:variable-name
+  public readonly Sessionjwt = 'jwt-details';
+  // tslint:disable-next-line:variable-name
+  public readonly SessionUserName = 'username-deails';
+  // tslint:disable-next-line:variable-name
+  serveurAdresse = 'http://localhost:8081';
+
 
   constructor(private route: Router,
               private personneService: PersonneService) { }
 
+  href = this.route.url;
   // tslint:disable-next-line:ban-types
   redirection(personne: Personne): void{
     // @ts-ignore
@@ -30,101 +53,78 @@ export class LoginService implements CanActivate{
     if (personne.active){
 
       switch (personne.role){
-      case this.constance.roll1:
-      case this.constance.roll2:
-        sessionStorage.setItem(this.constance.SessionUser, JSON.stringify(personne));
+      case this.roll1:
+      case this.roll2:
+        sessionStorage.setItem(this.SessionUser, JSON.stringify(personne));
         this.verifIBAU();
         this.route.navigateByUrl('/allBien');
         break;
-        default:
-          return ;
+      default:
+        return ;
       }
     }
   }
 
   saveToken(jwt: string): void{
-    sessionStorage.setItem(this.constance.SessionJwtt, JSON.stringify(this.prefix + jwt));
+    sessionStorage.setItem(this.Sessionjwt, JSON.stringify(this.prefix + jwt));
   }
 
   repToken(): string{
-    const jwt = JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt));
+    const jwt = JSON.parse(sessionStorage.getItem(this.Sessionjwt));
     return jwt as string;
   }
 
   repUserName(): string{
-    const username = JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt));
+    const username = JSON.parse(sessionStorage.getItem(this.Sessionjwt));
     return username as string;
   }
 
   verifIBAU(): void{
     this.personneService.verifIBAU(this.client()).subscribe((reponse: boolean) => {
-      sessionStorage.setItem(this.constance.SessionVerifIBAU, JSON.stringify(reponse));
+      sessionStorage.setItem(this.SessionVerifIBAU, JSON.stringify(reponse));
     }, reponse => alert('Impossible de verifier l\'IBAU'));
   }
 
   repIBAU(): boolean{
-    return JSON.parse(sessionStorage.getItem(this.constance.SessionVerifIBAU)) as boolean;
+    return JSON.parse(sessionStorage.getItem(this.SessionVerifIBAU)) as boolean;
   }
 
-  biendb(bien: Bien): void{
-    this.bien = bien;
-    sessionStorage.setItem(this.constance.SessionBien, JSON.stringify(this.bien));
-  }
-
-  repBiendb(): Bien{
-    if (this.isAuthenticated()) {
-        const bien = JSON.parse(sessionStorage.getItem(this.constance.SessionBien));
-        return bien as Bien;
-      }
-  }
-
-  contratDB(contrat: Contrat): void{
-    this.contrat = contrat;
-    sessionStorage.setItem(this.constance.SessionContrat, JSON.stringify(this.contrat));
-  }
-
-  repContrat(): Contrat{
-    if (this.isAuthenticated()) {
-      const contrat = JSON.parse(sessionStorage.getItem(this.constance.SessionContrat));
-      return contrat as Contrat;
-    }
-  }
 
   client(): Personne{
     if (this.isAuthenticated()){
-      const personne = JSON.parse(sessionStorage.getItem(this.constance.SessionUser));
+      const personne = JSON.parse(sessionStorage.getItem(this.SessionUser));
       return personne as Personne;
     }
   }
 
   isAuthenticated(): boolean {
-    return sessionStorage.getItem(this.constance.SessionUser) !== null;
+    return sessionStorage.getItem(this.SessionUser) !== null;
   }
 
   logout(): void{
-    sessionStorage.removeItem(this.constance.SessionUser);
-    sessionStorage.removeItem(this.constance.SessionVerifIBAU);
-    this.logoutBien();
-    sessionStorage.removeItem(this.constance.SessionREservation);
-    sessionStorage.removeItem(this.constance.SessionDemande);
-    sessionStorage.removeItem(this.constance.Sessionjwt);
-    sessionStorage.removeItem(this.constance.SessionUserName);
-    this.route.navigateByUrl('/home');
-  }
-
-  logoutBien(): void{
-    sessionStorage.removeItem(this.constance.SessionBien);
+    sessionStorage.removeItem(this.SessionUser);
+    sessionStorage.removeItem(this.SessionVerifIBAU);
+    sessionStorage.removeItem(this.SessionREservation);
+    sessionStorage.removeItem(this.SessionDemande);
+    sessionStorage.removeItem(this.Sessionjwt);
+    sessionStorage.removeItem(this.SessionUserName);
+    this.route.navigateByUrl('/allBien');
   }
 
   AdminRolle(): boolean{
-    const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
-    return this.isAuthenticated && personne.role.includes(this.constance.roll1);
+    const personne = (JSON.parse(sessionStorage.getItem(this.SessionUser)) as Personne);
+    return this.isAuthenticated && personne.role.includes(this.roll1);
   }
 
   isClient(): boolean{
-    const personne = (JSON.parse(sessionStorage.getItem(this.constance.SessionUser)) as Personne);
+    const personne = (JSON.parse(sessionStorage.getItem(this.SessionUser)) as Personne);
     // tslint:disable-next-line:max-line-length
-    return this.isAuthenticated() && (personne.role.includes(this.constance.roll1) || personne.role.includes(this.constance.roll2));
+    return this.isAuthenticated() && (personne.role.includes(this.roll1) || personne.role.includes(this.roll2));
+  }
+
+  viderCache(): void{
+    sessionStorage.removeItem(this.SessionContrat);
+    sessionStorage.removeItem(this.SessionBien);
   }
 
   // tslint:disable-next-line:max-line-length

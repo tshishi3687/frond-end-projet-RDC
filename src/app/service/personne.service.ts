@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from './login.service';
-import {Constants} from '../objet';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +8,7 @@ import {Constants} from '../objet';
 export class PersonneService {
 
   constructor(private client: HttpClient) { }
-  logService: LoginService;
-  // @ts-ignore
-  private constance: Constants = new Constants();
+  private service: LoginService;
 
   // tslint:disable-next-line:typedef
   ajouterPersonne(personne) {
@@ -28,7 +25,7 @@ export class PersonneService {
   verifIBAU(personne) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
 
@@ -39,7 +36,7 @@ export class PersonneService {
   infoPersonne() {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
     return this.client.get('http://localhost:8081/personne/info_personne', httpOptions);
@@ -71,7 +68,7 @@ export class PersonneService {
   like(likeBien){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
 
@@ -82,7 +79,7 @@ export class PersonneService {
   verifCompte(codeActivation){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
 
@@ -93,7 +90,7 @@ export class PersonneService {
   changeMDP(info){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
 
@@ -104,7 +101,7 @@ export class PersonneService {
   mdpModif(modif){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
       })
     };
 

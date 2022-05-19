@@ -4,7 +4,7 @@ import {LoginService} from '../../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Bien, BienMisEnLigne, Contrat, Personne, TypeDeBien} from '../../../objet';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
-import {VoirContratComponent} from '../voir-contrat/voir-contrat.component';
+import {VoirContratComponent} from '../voir-contrat-mis-en-ligne/voir-contrat.component';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 
@@ -67,12 +67,12 @@ export class BienMisEnLigneComponent implements OnInit {
 
   informationbient(b: Bien): void{
     if (this.service.isAuthenticated()){
-      this.service.biendb(b);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '100%';
       dialogConfig.height = '100%';
+      dialogConfig.data = {bien: b};
       this.dialog.open(InfoBienComponent, dialogConfig);
     }else{
       alert('vous devez être connecter pour en voir plus');
@@ -81,12 +81,12 @@ export class BienMisEnLigneComponent implements OnInit {
 
   voircontratLie(c: Contrat): void{
     if (this.service.isAuthenticated()){
-      this.service.contratDB(c);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = 'auto';
       dialogConfig.height = 'auto';
+      dialogConfig.data = {contrat: c};
       this.dialog.open(VoirContratComponent, dialogConfig);
     }else{
       alert('vous devez être connecter pour en voir plus');

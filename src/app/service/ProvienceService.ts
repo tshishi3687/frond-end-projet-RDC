@@ -1,39 +1,38 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Constants} from '../objet';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginService} from './login.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
 
-  constructor(private client: HttpClient) {}
-  // @ts-ignore
-  private constance: Constants = new Constants();
+  constructor(private client: HttpClient, private service: LoginService) {}
 
   // tslint:disable-next-line:typedef
   ajouterProvince(province) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
 
-    return this.client.post('http://localhost:8081/province', province, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/province', province, httpOptions);
   }
 
-  // tslint:disable-next-line:typedef
-  voirProvince(){
-    return this.client.get('http://localhost:8081/province');
+
+  voirProvince(): Observable<any>{
+    return this.client.get(this.service.serveurAdresse + '/province');
   }
 
   // tslint:disable-next-line:typedef
   supprimerProvince(id) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
-    return this.client.delete('http://localhost:8081/province/' + id, httpOptions);
+    return this.client.delete(this.service.serveurAdresse + '/province/' + id, httpOptions);
   }
 }

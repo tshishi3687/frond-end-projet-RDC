@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Constants} from '../objet';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TypeDeServiceService {
 
-  constructor(private client: HttpClient) { }
-  // @ts-ignore
-  private constance: Constants = new Constants();
+  constructor(private client: HttpClient, private service: LoginService) { }
 
   // tslint:disable-next-line:typedef
   ajouterTypeDeService(typeDeService){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
-    return this.client.post('http://localhost:8081/type', typeDeService, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/type', typeDeService, httpOptions);
   }
 
   // tslint:disable-next-line:typedef
   voirTypeDeService() {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
-    return this.client.get('http://localhost:8081/type', httpOptions);
+    return this.client.get(this.service.serveurAdresse + '/type', httpOptions);
   }
 
   // tslint:disable-next-line:typedef
   supprimerTypeDeService(id) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
-    return this.client.delete('http://localhost:8081/type/' + id, httpOptions);
+    return this.client.delete(this.service.serveurAdresse + '/type/' + id, httpOptions);
   }
 }

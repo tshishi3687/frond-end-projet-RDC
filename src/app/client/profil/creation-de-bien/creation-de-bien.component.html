@@ -110,7 +110,7 @@
               <div *ngIf="tailleimg">
                 <p>Vous ne pouvez ajouter un maximum de 10 images</p>
               </div>
-              <input type="file" (change)="onFileSelected($event)" multiple accept="image/png, image/jpeg"/>
+              <input #imgs type="file" (change)="onFileSelected($event)" multiple accept="image/png, image/jpeg"/>
 
               <div *ngFor="let error of this.errorList">
                 <p class="p-3 mb-2 bg-danger text-white">{{error}}</p>

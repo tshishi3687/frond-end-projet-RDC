@@ -7,8 +7,6 @@ import {LoginService} from './service/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'untitled';
-   service: LoginService;
-  photo = 'assets/img/header/999999-6413933219236.jpg';
 
+  service: LoginService;
 }

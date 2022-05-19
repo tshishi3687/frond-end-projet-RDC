@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from '../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {MiseEngardeStartAppsComponent} from '../../communications/avertissement/mise-engarde-start-apps/mise-engarde-start-apps.component';
+import {MiseEngardeStartAppsComponent} from '../../communications/avertissement/mise-engarde-start-apps-rgpd/mise-engarde-start-apps.component';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ import {MiseEngardeStartAppsComponent} from '../../communications/avertissement/
 export class HeaderComponent implements OnInit {
 
   constructor(private ser: LoginService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private root: Router) { }
+  myRoot = '';
   imgBoo = true;
   connexion: boolean;
   mdpBoll: boolean;

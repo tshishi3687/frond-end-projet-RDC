@@ -15,7 +15,8 @@ export class ListServiceComponent implements OnInit {
     private serv: LoginService
   ) { }
 
-  listServiceVille: Array<Service> = this.serv.repBiendb().service;
+  @Input() services: Array<Service> = [];
+
 
   ngOnInit(): void {
   }

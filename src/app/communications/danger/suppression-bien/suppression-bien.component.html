@@ -1,7 +1,7 @@
 <div class="alert alert-danger" role="alert" align="center">
   <h2>Vous étes sur le point d'effacer "
-    {{clientService.repBiendb().type_bien.nom}} à l'addresse : {{clientService.repBiendb().coordonnee.num}} {{clientService.repBiendb().coordonnee.rue}},
-    {{clientService.repBiendb().coordonnee.ville.nomVille}} {{clientService.repBiendb().coordonnee.ville.province.nomprovince}}"</h2>
+    {{bien.type_bien.nom}} à l'addresse : {{bien.coordonnee.num}} {{bien.coordonnee.rue}},
+    {{bien.coordonnee.ville.nomVille}} {{bien.coordonnee.ville.province.nomprovince}}"</h2>
   <h1>Ceci est une action sans retour</h1>
   <button type="button" class="btn btn-success" (click)="annulle()">Annuler</button>
   <button type="button" class="btn btn-outline-danger" (click)="etap2()">Supprimer</button>

@@ -3,6 +3,7 @@ import {Province} from '../../objet';
 import {ProvinceService} from '../../service/ProvienceService';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ImageProvinceService} from '../../service/image-province.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-province',
@@ -11,8 +12,10 @@ import {ImageProvinceService} from '../../service/image-province.service';
 })
 export class ProvinceComponent implements OnInit {
   constructor(private service: ProvinceService,
-              private imgProvince: ImageProvinceService) { }
+              private imgProvince: ImageProvinceService,
+              private route: Router) { }
 
+  myRoute = this.route.url;
    error = 'Il y a eu un probleme :(';
 
   provinceForm = new FormGroup({

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {VilleService} from '../../../service/VilleService';
@@ -26,6 +26,7 @@ export class CreationDeBienComponent implements OnInit {
     private imgService: ImgService,
     private dialog: MatDialog) { }
 
+  @ViewChild('imgs') imgs: ElementRef;
   private error = 'Il y a eu un probleme :(';
   private ok = 'tout c\'est bien passée :)-';
   imgFile: string;
@@ -40,11 +41,11 @@ export class CreationDeBienComponent implements OnInit {
     coordonneeVille: new FormControl('defaults'),
     prix: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(999999)]),
     npmin: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
-    npmax: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(10000)]),
+    npmax: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(500000)]),
     nchambre: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     nsdb: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     nwc: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
-    superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(10000)]),
+    superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(900000)]),
     description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)]),
     lien_photo: new FormControl(),
     coordonneeCPostal: new FormControl(null, [Validators.min(100), Validators.max(100000)]),
@@ -74,6 +75,8 @@ export class CreationDeBienComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   private myFiles: File [] = [];
   private selectedFile: File;
+
+  dialogConfig = new MatDialogConfig();
   message: string;
   imageName: any;
   tailleimg = false;
@@ -153,7 +156,8 @@ export class CreationDeBienComponent implements OnInit {
       aladispo.moto = this.BienForm.value.moto;
       aladispo.velo = this.BienForm.value.velo;
       aladispo.animaux = this.BienForm.value.animaux;
-
+      console.log(aladispo.eauPotable);
+      console.log(aladispo);
       const bien = new Bien();
       bien.id = 0;
       bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
@@ -176,14 +180,14 @@ export class CreationDeBienComponent implements OnInit {
           const uploadImageData = new FormData();
           // @ts-ignore
           uploadImageData.append('bien', reponselienPhoto);
-          for (let i = 0; i < (this.myFiles.length); i++){
 
+          for (let i = 0; i < (this.myFiles.length); i++){
             uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
           }
           this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
             this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
               // console.log(monBien);
-              this.infoPersonne.biendb(monBien);
+              this.dialogConfig.data = {bien: monBien};
               this.resstFormControl();
               this.voirBienCre();
             }, monBien => alert('error'));
@@ -196,16 +200,16 @@ export class CreationDeBienComponent implements OnInit {
   }
 
   voirBienCre(): void{
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = 'auto';
-      dialogConfig.height = 'auto';
-      this.dialog.open(PresentationBienCreeComponent, dialogConfig);
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.autoFocus = true;
+    this.dialogConfig.width = 'auto';
+    this.dialogConfig.height = 'auto';
+    this.dialog.open(PresentationBienCreeComponent, this.dialogConfig);
   }
 
   resstFormControl(): void{
     this.BienForm.reset();
     this.myFiles = [];
+    this.imgs.nativeElement.value = null;
   }
 }

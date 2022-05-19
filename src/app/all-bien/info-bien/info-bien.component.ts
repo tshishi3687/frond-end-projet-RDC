@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Bien, LikeBien, Personne, Reservation, Service, Ville} from '../../objet';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Bien,  LikeBien, Service} from '../../objet';
 import {ImgService} from '../../service/img.service';
 import {LoginService} from '../../service/login.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../service/personne.service';
-import {ServiceService} from '../../service/service.service';
 import {ReservationComponent} from '../../communications/avertissement/reservation/reservation.component';
 
 @Component({
@@ -15,20 +14,20 @@ import {ReservationComponent} from '../../communications/avertissement/reservati
 export class InfoBienComponent implements OnInit {
 
   @Output() infoBien: EventEmitter<any> = new EventEmitter();
-  @Input() b: Bien;
   constructor( private serv: LoginService,
                private imagService: ImgService,
                public dialogRef: MatDialogRef<InfoBienComponent>,
                private personne: PersonneService,
                private dialog: MatDialog,
-  ) { }
+               @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.bien = data.bien;
+  }
 
-  myFiles: File [] = [];
-  slides: [] = [];
+  bien: Bien;
   service = this.serv;
   likes = false;
   problemCo = false;
-  listServiceVille: Array<Service> = [];
 
   ngOnInit(): void {
   }
@@ -39,13 +38,14 @@ export class InfoBienComponent implements OnInit {
 
   onClose(): void{
     this.dialogRef.close();
+    this.serv.viderCache();
   }
 
   // tslint:disable-next-line:typedef
   iLike() {
     const myLike = new LikeBien();
     myLike.personneSimplifierDTO = this.service.client();
-    myLike.bienDTO = this.service.repBiendb();
+    myLike.bienDTO = this.bien;
     this.personne.like(myLike).subscribe(reponse => {
       this.likes = true;
     }, reponse => {
@@ -60,6 +60,7 @@ export class InfoBienComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '100%';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {bien: this.bien};
     this.dialog.open(ReservationComponent, dialogConfig);
   }else{
     alert('vous devez être connecter pour en voir plus');

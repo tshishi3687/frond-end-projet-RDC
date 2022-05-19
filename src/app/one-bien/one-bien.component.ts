@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Bien} from '../objet';
 import {LoginService} from '../service/login.service';
 import {BienService} from '../service/bien.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../all-bien/info-bien/info-bien.component';
 
 @Component({
@@ -14,8 +14,13 @@ export class OneBienComponent implements OnInit {
 
   constructor(private serv: LoginService,
               private bienService: BienService,
-              private dialog: MatDialog) { }
-   b = this.serv.repBiendb();
+              private dialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.b = data.bien;
+  }
+
+  b: Bien;
   service = this.serv.isAuthenticated();
 
   ngOnInit(): void {

@@ -16,35 +16,35 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" *ngIf="ser.AdminRolle()" >
-                  <button type="button" class="btn btn-light" routerLink="/province">Province</button>
+                  <button type="button" class="btn btn-light" routerLink="/Admin/province">Province</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/ville">Ville</button>
+                  <button type="button" class="btn btn-light" routerLink="/Admin/ville">Ville</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/service">Service</button>
+                  <button type="button" class="btn btn-light" routerLink="/Admin/service">Service</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/typeBien">Type de Bien</button>
+                  <button type="button" class="btn btn-light" routerLink="/Admin/typeBien">Type de Bien</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/typeService">Type de service</button>
+                  <button type="button" class="btn btn-light" routerLink="/Admin/service/typeService">Type de service</button>
                 </li>
                 <li class="nav-item">
                   <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/creerbien">Créer un Bien</button>
+                  <button type="button" class="btn btn-light" routerLink="/Client/creerbien">Créer un Bien</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/voirBienPersonne">Mes Biens</button>
+                  <button type="button" class="btn btn-light" routerLink="/Client/voirBienPersonne">Mes Biens</button>
                 </li>
                 <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/contrat_mel">Contrat mis en ligne</button>
+                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_mel">Contrat mis en ligne</button>
                 </li>
               </ul>
               <form class="d-flex">
-                <button type="button" class="btn btn-outline-primary" routerLink="/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>
+                <button type="button" class="btn btn-outline-primary" routerLink="/Client/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>
               </form>
             </div>
           </div>

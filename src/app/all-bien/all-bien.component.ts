@@ -54,27 +54,29 @@ export class AllBienComponent implements OnInit {
   allfaut = false;
   @Output() bien: EventEmitter<any> = new EventEmitter();
   @Input() tostring: string;
-  photo = 'assets/img/header/999999-6413933219236.jpg';
 
   ngOnInit(): void {
-    this.voirAllProvince();
     this.voirToutBien();
     this.voirTypeBien();
+    this.voirAllProvince();
   }
 
   voirToutBien(): void{
     // @ts-ignore
-    this.bienService.voirBien().subscribe(reponse => this.listBien = reponse.list, reponse => alert('il y a un probleme'));
+    this.bienService.voirBien().subscribe((reponse: Array<Bien>) => {
+      // @ts-ignore
+      this.listBien = reponse.list;
+    }, reponse => alert('il y a un probleme'));
   }
 
   informationbient(b: Bien): void{
     if (this.service.isAuthenticated()){
-      this.service.biendb(b);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '100%';
       dialogConfig.height = '100%';
+      dialogConfig.data = {bien: b};
       this.dialog.open(InfoBienComponent, dialogConfig);
     }else{
       alert('vous devez être connecter pour en voir plus');
@@ -82,17 +84,17 @@ export class AllBienComponent implements OnInit {
   }
 
   voirAllProvince(): void{
-    this.provinceService.voirProvince().subscribe((reponse: Array<Province>) => {
-      // @ts-ignore
+    this.provinceService.voirProvince().subscribe(reponse => {
       this.listProvince = reponse.list;
     }, reponse => alert('il y a eu un probleme avec la liste des provinve'));
   }
 
   voirTypeBien(): void{
+    // @ts-ignore
     this.typeDBien.voirTypeDeBien().subscribe((reponse: Array<TypeDeBien>) => {
       // @ts-ignore
       this.listTypeBien = reponse.list;
-    });
+    }, reponse => alert('il y a eu un probleme avec la liste des type de bien'));
   }
 
 

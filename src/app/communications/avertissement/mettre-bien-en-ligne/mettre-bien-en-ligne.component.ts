@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Bien, NombreNuitVoulu} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
 
 @Component({
@@ -19,9 +19,13 @@ export class MettreBienEnLigneComponent implements OnInit {
               private bienService: BienService,
               private serv: LoginService,
               public dialogRef: MatDialogRef<MettreBienEnLigneComponent>,
-              private personneService: PersonneService
-  ) { }
+              private personneService: PersonneService,
+              @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.bien = data.bien;
+  }
 
+  bien: Bien;
   acceptForm = new FormGroup({
     check: new FormControl(false, [Validators.required])
   });
@@ -78,9 +82,9 @@ export class MettreBienEnLigneComponent implements OnInit {
     this.verifCode = true;
     if (this.service.repIBAU() && this.acceptForm.valid){
       const bien = new Bien();
-      bien.id = this.service.repBiendb().id;
-      bien.type_bien = this.service.repBiendb().type_bien;
-      bien.coordonnee = this.service.repBiendb().coordonnee;
+      bien.id = this.bien.id;
+      bien.type_bien = this.bien.type_bien;
+      bien.coordonnee = this.bien.coordonnee;
       // @ts-ignore
       bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
       this.bienService.envoiMail(bien).subscribe(result => {
@@ -94,9 +98,9 @@ export class MettreBienEnLigneComponent implements OnInit {
   envoiCode(): void{
     if (this.veifCodeForm.valid){
       const bien = new Bien();
-      bien.id = this.service.repBiendb().id;
-      bien.type_bien = this.service.repBiendb().type_bien;
-      bien.coordonnee = this.service.repBiendb().coordonnee;
+      bien.id = this.bien.id;
+      bien.type_bien = this.bien.type_bien;
+      bien.coordonnee = this.bien.coordonnee;
       // @ts-ignore
       bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
       this.personneService.verifCompte(this.veifCodeForm.value.codeActivation).subscribe((reponse: boolean) => {

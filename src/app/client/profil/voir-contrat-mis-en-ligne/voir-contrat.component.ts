@@ -32,12 +32,12 @@ export class VoirContratComponent implements OnInit {
   }
 
   stopContrat(c: Contrat): void{
-    this.service.contratDB(c);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
+    dialogConfig.data = {contrat: c};
     this.dialog.open(StopContratMisEnLigneComponent, dialogConfig);
   }
 }

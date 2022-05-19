@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient, private service: LoginService) { }
 
   // tslint:disable-next-line:typedef
   ajouterReservation(reservation){
@@ -16,7 +17,7 @@ export class ReservationService {
       })
     };
 
-    return this.client.post('http://localhost:8081/reservations', reservation, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/reservations', reservation, httpOptions);
   }
 
   // tslint:disable-next-line:typedef
@@ -27,11 +28,11 @@ export class ReservationService {
       })
     };
 
-    return this.client.post('http://localhost:8081/reservations/user', reservation, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/reservations/user', reservation, httpOptions);
   }
 
   // tslint:disable-next-line:typedef
   supprimerReservation(id) {
-    return this.client.delete('http://localhost:8081/reservation/' + id);
+    return this.client.delete(this.service.serveurAdresse + '/reservation/' + id);
   }
 }

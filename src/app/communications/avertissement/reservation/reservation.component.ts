@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Bien, NombreNuitVoulu, Reservation} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -20,22 +20,18 @@ export class ReservationComponent implements OnInit {
               private bienService: BienService,
               private serv: LoginService,
               public dialogRef: MatDialogRef<ReservationComponent>,
-              private personneService: PersonneService
-  ) { }
+              private personneService: PersonneService,
+              @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.bien = data.bien;
+  }
 
+  bien: Bien;
   acceptForm = new FormGroup({
     check: new FormControl(false, [Validators.required])
   });
 
-  nPMax = this.serv.repBiendb().npmax;
-
-  // @ts-ignore
-  choixJourForm = new FormGroup({
-    jourA: new FormControl(Date, [Validators.required]),
-    jourD: new FormControl(Date, [Validators.required]),
-    nPersonne: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(this.nPMax)])
-  });
-
+  choixJourForm: FormGroup;
   veifCodeForm = new FormGroup({
     codeActivation: new FormControl('', [Validators.required])
   });
@@ -49,6 +45,11 @@ export class ReservationComponent implements OnInit {
   nJour: number;
 
   ngOnInit(): void {
+    this.choixJourForm = new FormGroup({
+      jourA: new FormControl(Date, [Validators.required]),
+      jourD: new FormControl(Date, [Validators.required]),
+      nPersonne: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(this.bien.npmax)])
+    });
   }
 
   addListNuit(): void{
@@ -61,7 +62,6 @@ export class ReservationComponent implements OnInit {
     nNuit2.id = 2;
     nNuit2.nNuit = 30;
     this.listNuit.push(nNuit2);
-
 
     const nNuit3 = new NombreNuitVoulu();
     nNuit3.id = 3;
@@ -85,7 +85,7 @@ export class ReservationComponent implements OnInit {
       this.cachedemandeJour = false;
       this.verifCode = true;
       const reservation = new Reservation();
-      reservation.bienConserne = this.serv.repBiendb();
+      reservation.bienConserne = this.bien;
       reservation.faitPar = this.serv.client();
       reservation.ddArrivee = this.choixJourForm.value.jourA;
       reservation.ddDepart = this.choixJourForm.value.jourD;

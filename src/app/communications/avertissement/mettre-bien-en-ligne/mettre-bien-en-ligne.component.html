@@ -38,9 +38,9 @@
               <input type="submit" class="fadeIn fourth" value="Je confirme la mise en ligne." *ngIf="veifCodeForm.valid" (click)="envoiCode()">
             </form>
             <p class="text-danger">*** ATTENTION *** La mise en ligne est un acte qui doit être mûrement réfléchi!!!</p>
-            <p>Pour cet/cette {{service.repBiendb().type_bien.nom}}, il ne vous sera plus possible de faire des modifications.
+            <p>Pour cet/cette {{bien.type_bien.nom}}, il ne vous sera plus possible de faire des modifications.
               <br>
-            Et toute demande de retrait de mise en ligne, vous sera facturée d'une fois le prix d'une nuit demandé pour ce Bien, soit {{service.repBiendb().prix}} €.</p>
+            Et toute demande de retrait de mise en ligne, vous sera facturée d'une fois le prix d'une nuit demandé pour ce Bien, soit {{bien.prix}} €.</p>
           </div>
         </div>
       </div>

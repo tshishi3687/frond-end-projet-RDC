@@ -56,10 +56,12 @@ export class Service{
   dateCreation: Date;
   superid: number;
 }
+
 export class Roll{
   id: number;
   nomRoll: string;
 }
+
 export class Authorities{
   authority: string;
 }
@@ -96,7 +98,7 @@ export class Bien{
   dateCreation: Date;
   likes: number;
   modeActive: boolean;
-  images: Array<ImageBien>;
+  images: Array<ImageModel>;
   idNNuit: number;
   dateFinMisEnLigne: Date;
   service: Array<Service>;
@@ -128,6 +130,7 @@ export class Mdp{
   mdp: string;
   mail: string;
 }
+
 export class ContactUser{
   id: number;
   email: string;
@@ -175,12 +178,10 @@ export class Reservation{
   nPersonneSurLieu: number;
 }
 
-export class ImageBien{
-  id: string;
+export class ImageModel{
   name: string;
   type: string;
   picByte: Byte[];
-  bienid: Bien;
 }
 
 
@@ -190,7 +191,6 @@ export class ImageProvince{
   name: string;
   type: string;
   picByte: Byte[];
-  provinceID: Province;
 }
 
 // tslint:disable-next-line:class-name
@@ -199,7 +199,6 @@ export class ImageVille{
   name: string;
   type: string;
   picByte: Byte[];
-  provinceID: Province;
 }
 
 
@@ -208,7 +207,6 @@ export class Img{
   name: string;
   type: string;
   picByte: Byte[];
-  provinceID: Province;
 }
 
 export class DureeLocation{
@@ -260,70 +258,3 @@ export class ModifPass{
   verifPass: string;
 }
 
-export abstract class Constants{
-  // tslint:disable-next-line:variable-name
-  private readonly _roll1 = btoa('Admin');
-  // tslint:disable-next-line:variable-name
-  private readonly _roll2 = btoa('Client');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionUser = btoa('user-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionBien = btoa('bien-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionDemande = btoa('demande-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionREservation = btoa('reservation-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionVerifIBAU = btoa('IBAU-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionContrat = btoa('contrat-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _Sessionjwt = btoa('jwt-details');
-  // tslint:disable-next-line:variable-name
-  private readonly _SessionUserName = btoa('username-deails');
-
-
-  get Sessionjwt(): string {
-    return atob(this._Sessionjwt);
-  }
-
-  get SessionUserName(): string {
-    return atob(this._SessionUserName);
-  }
-
-  get SessionContrat(): string {
-    return atob(this._SessionContrat);
-  }
-
-  get SessionJwtt(): string {
-    return atob(this._Sessionjwt);
-  }
-
-  get SessionVerifIBAU(): string {
-    return atob(this._SessionVerifIBAU);
-  }
-
-  get SessionUser(): string {
-    return atob(this._SessionUser);
-  }
-
-  get SessionBien(): string {
-    return atob(this._SessionBien);
-  }
-
-  get SessionDemande(): string {
-    return atob(this._SessionDemande);
-  }
-
-  get SessionREservation(): string {
-    return atob(this._SessionREservation);
-  }
-
-  get roll1(): string {
-    return atob(this._roll1);
-  }
-
-  get roll2(): string {
-    return atob(this._roll2);
-  }
-}

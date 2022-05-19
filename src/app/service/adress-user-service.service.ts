@@ -1,35 +1,33 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Constants} from '../objet';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdressUserServiceService {
 
-  constructor(private client: HttpClient) { }
-  // @ts-ignore
-  private constance: Constants = new Constants();
+  constructor(private client: HttpClient, private service: LoginService) { }
 
   // tslint:disable-next-line:variable-name typedef
   voirAdressUSer(personne) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
 
-    return this.client.post('http://localhost:8081/adress_user/user', personne, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/adress_user/user', personne, httpOptions);
   }
 
   // tslint:disable-next-line:variable-name typedef
   ajouterAdressUser(adress) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.constance.SessionJwtt))
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
       })
     };
 
-    return this.client.post('http://localhost:8081/adress_user', adress, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/adress_user', adress, httpOptions);
   }
 }

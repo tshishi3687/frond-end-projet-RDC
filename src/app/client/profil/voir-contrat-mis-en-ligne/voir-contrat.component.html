@@ -18,10 +18,7 @@
       </div>
       <h3>Objet</h3>
       <p>{{c.objet}}</p>
-      <a class="icon-link" (click)="stopContrat(c)">
-        Mettre fin au contrat
-        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-      </a>
+      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="stopContrat(c)">Mettre fin au contrat</button>
     </div>
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">

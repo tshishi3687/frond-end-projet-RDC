@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LienPhotoService {
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient, private service: LoginService) { }
 
   // tslint:disable-next-line:variable-name typedef
   ajouterLien_photo(lien_photo) {
@@ -16,6 +17,6 @@ export class LienPhotoService {
       })
     };
 
-    return this.client.post('http://localhost:8081/lien_photo_bien', lien_photo, httpOptions);
+    return this.client.post(this.service.serveurAdresse + '/lien_photo_bien', lien_photo, httpOptions);
   }
 }
