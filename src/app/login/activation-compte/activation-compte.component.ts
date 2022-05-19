@@ -13,8 +13,7 @@ import {Personne} from '../../objet';
 export class ActivationCompteComponent implements OnInit {
 
   constructor(private ser: LoginService,
-              private personneService: PersonneService,
-              private route: Router) { }
+              private personneService: PersonneService) { }
 
   activationCompteOK: false;
   textErro: string;
@@ -23,13 +22,15 @@ export class ActivationCompteComponent implements OnInit {
     codeActivation: new FormControl(null, [Validators.required])
   });
 
+  code = '';
+
   ngOnInit(): void {
   }
 
   validationCompte(): void{
     if (this.verifForm.valid){
-      this.personneService.verifCompte(this.verifForm.value.codeActivation).subscribe(reponse => {
-        console.log(reponse);
+      this.code = this.verifForm.value.codeActivation;
+      this.personneService.verifCompte(this.code).subscribe(reponse => {
         if (reponse){
           // @ts-ignore
           this.activationCompteOK = true;

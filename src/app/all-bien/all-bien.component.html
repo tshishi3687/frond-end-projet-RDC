@@ -55,7 +55,7 @@
 
         <article class="blog-post">
 
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+          <div class="biens row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
             <div class="col" *ngFor="let b of (listBien | allBienPipes:(province) | typeBiensPipes:(typeBien) |villesPipes:(ville))">
               <div class="card shadow-sm border border-dark"  (click)="informationbient(b)">
                 <app-img-caroucel [img]="b.images" [pourcentageAffichage]="55"></app-img-caroucel>
