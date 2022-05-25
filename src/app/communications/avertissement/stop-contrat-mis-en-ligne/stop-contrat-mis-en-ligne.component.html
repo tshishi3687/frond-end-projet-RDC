@@ -21,18 +21,7 @@
         </div>
         <div class="wrapper fadeInDown" *ngIf="verifCode">
           <div id="formContent">
-            <h1>Veuillez introduire votre code de vérification.</h1>
-            <!-- Login Form -->
-            <form [formGroup]="veifCodeForm">
-              {{codeFaut}}
-              <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
-              <input type="submit" class="fadeIn fourth" value="Valider" *ngIf="veifCodeForm.valid" >
-            </form>
-            <p class="text-info">Pour connaître votre code de vérification, Veuillez consulter votre boite e-mail!</p>
-            <div><br></div>
-            <p class="text-danger">*** ATTENTION *** Une demande d'arrêt d'un contrat doit être un acte mûrement réfléchi!!!
-              <br>CAR CELA ENTRAINE DES FRAIS!!!!</p>
-            <p class="lead text-danger">Pour ce Bien, cela implique une redevance de {{contrat.bienVuDTO.prix}}€ au profit de Mobembo.cd, comme stipulé dans le contrat.</p>
+            <app-pay-pal [idObjet]="contrat.id" [prix]="contrat.bienVuDTO.prix" [payementPour]="'mel'" [reservation]="null"></app-pay-pal>
           </div>
         </div>
       </div>

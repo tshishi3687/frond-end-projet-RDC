@@ -6,9 +6,7 @@
       <button type="button" class="btn btn-outline-danger" (click)="deconnexion()">Deconnecter</button>
       <span class="font-weight-bold">{{donneeClient.client().nom}} {{donneeClient.client().prenom}}</span>
       <span class="text-black-50">{{donneeClient.client().role}}</span>
-      <span class="text-black-50">{{donneeClient.client().ddn | date}}</span>
       <br>
-      <span class="text-black-50">Date de création du profil : {{donneeClient.client().ddj | date}}</span>
     </div>
   </div>
   <div class="col-md-6 border-right">
@@ -24,19 +22,7 @@
   </div>
   <div class="col-md-3">
     <div class="p-3 py-5">
-      <div class="d-flex justify-content-between align-items-center experience">
-        <span>Edit Experience</span>
-        <span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span>
-      </div>
-      <br>
-      <div class="col-md-12"><label class="labels">
-        Experience in Designing</label>
-        <input type="text" class="form-control" placeholder="experience" value="">
-      </div>
-      <br>
-      <div class="col-md-12">
-        <label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value="">
-      </div>
+      <app-modif-mot-de-passe></app-modif-mot-de-passe>
     </div>
   </div>
 </div>

@@ -1,22 +1,12 @@
-
 <div class="wrapper fadeInDown" *ngIf="!activationCompteOK">
   <div id="formContent">
     <h2 class="text-warning">Compte non activé.</h2>
     <p>Vous y êtes presque !!!</p>
     <p class="text-success">Votre compte a bien été créé, mais pour l'instant il est inactif.</p>
     <p class="text-info">Pour connaître votre code d'activation,<br>Veuillez consulter votre boite e-mail!</p>
-    <!-- Login Form -->
-    <form [formGroup]="verifForm">
-      <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
-      <input type="submit" class="fadeIn fourth" value="Je confirme mon compte" (click)="validationCompte()">
+    <form [formGroup]="verificationCodeForm">
+      <input formControlName="codeActivation" placeholder="Votre Code secret">
+      <input type="submit" value="Je confirme mon compte" (click)="validationCompte()">
     </form>
-
-  </div>
-</div>
-
-<div class="wrapper fadeInDown" *ngIf="activationCompteOK">
-  <div >
-    <h1 class="text-success"> VOTRE INSCRIPTION EST UN SUCCES</h1>
-    <h3>Vous pouvez dès à prèsent vous connecter sur votre compte</h3>
   </div>
 </div>

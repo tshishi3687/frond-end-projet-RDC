@@ -98,11 +98,15 @@ export class Bien{
   dateCreation: Date;
   likes: number;
   modeActive: boolean;
-  images: Array<ImageModel>;
+  images: Array<Img>;
   idNNuit: number;
   dateFinMisEnLigne: Date;
   service: Array<Service>;
+  disponibles: Array<Date>;
+  reservers: Array<Date>;
 }
+
+
 
 export class Aladisposition{
   id: number;
@@ -258,3 +262,31 @@ export class ModifPass{
   verifPass: string;
 }
 
+export class Details{
+  id: string;
+  payerId: string;
+  createTime: Date;
+  updateTime: Date;
+  intent: string;
+  status: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  adressLine1: string;
+  adminArea1: string;
+  adminArea2: string;
+  countryCode: string;
+  postalCode: string;
+}
+
+export class PayPal{
+  id: number;
+  details: Details;
+  reservationBienDTO: Reservation;
+  Prix: number;
+}
+
+export class Detailes{
+  id: number;
+  details: Details;
+}

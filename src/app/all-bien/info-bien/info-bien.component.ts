@@ -1,10 +1,14 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Bien,  LikeBien, Service} from '../../objet';
 import {ImgService} from '../../service/img.service';
 import {LoginService} from '../../service/login.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../service/personne.service';
 import {ReservationComponent} from '../../communications/avertissement/reservation/reservation.component';
+import {MatCalendar} from '@angular/material/datepicker';
+
+class Moment {
+}
 
 @Component({
   selector: 'app-info-bien',
@@ -12,8 +16,6 @@ import {ReservationComponent} from '../../communications/avertissement/reservati
   styleUrls: ['./info-bien.component.css']
 })
 export class InfoBienComponent implements OnInit {
-
-  @Output() infoBien: EventEmitter<any> = new EventEmitter();
   constructor( private serv: LoginService,
                private imagService: ImgService,
                public dialogRef: MatDialogRef<InfoBienComponent>,
@@ -24,10 +26,15 @@ export class InfoBienComponent implements OnInit {
     this.bien = data.bien;
   }
 
+  @Output() infoBien: EventEmitter<any> = new EventEmitter();
+  @ViewChild('calendar') calendar: MatCalendar<Moment>;
+  selectedDate: Moment;
+
   bien: Bien;
   service = this.serv;
   likes = false;
   problemCo = false;
+  selected: Date | null;
 
   ngOnInit(): void {
   }
@@ -40,7 +47,6 @@ export class InfoBienComponent implements OnInit {
     this.dialogRef.close();
     this.serv.viderCache();
   }
-
   // tslint:disable-next-line:typedef
   iLike() {
     const myLike = new LikeBien();
@@ -66,4 +72,7 @@ export class InfoBienComponent implements OnInit {
     alert('vous devez être connecter pour en voir plus');
   }
   }
+}
+export class DatepickerInlineCalendarExample {
+  selected: Date | null;
 }

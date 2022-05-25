@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {PersonneService} from '../../service/personne.service';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {ContactUser, Mdp, Personne, Roll} from '../../objet';
+import {LoginService} from '../../service/login.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {InfoBienComponent} from '../../all-bien/info-bien/info-bien.component';
+import {ActivationCompteComponent} from '../activation-compte/activation-compte.component';
 
 @Component({
   selector: 'app-inscription',
@@ -13,7 +17,9 @@ export class InscriptionComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private personneService: PersonneService
+    private personneService: PersonneService,
+    private service: LoginService,
+    private dialog: MatDialog
   ) { }
 
   PersonneForm = new FormGroup({
@@ -36,6 +42,16 @@ export class InscriptionComponent implements OnInit {
   attenteBool = false;
 
   ngOnInit(): void {
+  }
+
+  comCodeActive(mdp: Mdp): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = 'auto';
+    dialogConfig.height = 'auto';
+    dialogConfig.data = {pass: mdp};
+    this.dialog.open(ActivationCompteComponent, dialogConfig);
   }
 
   ajouterPersonne(): void{
@@ -73,7 +89,6 @@ export class InscriptionComponent implements OnInit {
 
       // this.personneService.ajouterPersonne(personne).subscribe(reponseins => alert(this.ok), reponseins => alert(this.error));
       this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
-        // tslint:disable-next-line:no-conditional-assignment
         if (reponse ){
           this.personneExiste = true;
         }else{
@@ -81,6 +96,7 @@ export class InscriptionComponent implements OnInit {
           this.inscriptionBool = false;
           // tslint:disable-next-line:max-line-length
           this.personneService.ajouterPersonne(personne).subscribe(reponseins => {
+            this.comCodeActive(mdp);
             this.redirection();
           }, reponseins => alert(this.error));
         }

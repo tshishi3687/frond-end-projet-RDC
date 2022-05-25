@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Bien, Contrat, Personne} from '../objet';
+import {Bien, Contrat, Mdp, Personne} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {PersonneService} from './personne.service';
@@ -10,10 +10,6 @@ import {PersonneService} from './personne.service';
 export class LoginService implements CanActivate{
 
   private prefix = 'Bearer ';
-  // tslint:disable-next-line:variable-name
-  private bien: Bien;
-  private contrat: Contrat;
-
   // tslint:disable-next-line:variable-name
   public readonly roll1 = 'Admin';
   // tslint:disable-next-line:variable-name
@@ -66,16 +62,6 @@ export class LoginService implements CanActivate{
 
   saveToken(jwt: string): void{
     sessionStorage.setItem(this.Sessionjwt, JSON.stringify(this.prefix + jwt));
-  }
-
-  repToken(): string{
-    const jwt = JSON.parse(sessionStorage.getItem(this.Sessionjwt));
-    return jwt as string;
-  }
-
-  repUserName(): string{
-    const username = JSON.parse(sessionStorage.getItem(this.Sessionjwt));
-    return username as string;
   }
 
   verifIBAU(): void{

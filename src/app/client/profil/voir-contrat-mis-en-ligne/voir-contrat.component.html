@@ -1,7 +1,19 @@
 <div class="container px-4 py-5" id="featured-3" *ngFor="let c of listContrat">
   <h2 class="pb-2 border-bottom">Contrat de mise en ligne de/d' {{c.bienVuDTO.type_bien.nom}}.<br>A l'adresse: {{c.bienVuDTO.coordonnee.num}} {{c.bienVuDTO.coordonnee.rue}}, {{c.bienVuDTO.coordonnee.ville.nomVille}} / {{c.bienVuDTO.coordonnee.ville.province.nomprovince}}</h2>
-  <h3 class="pb-2 border-bottom" *ngIf="c.enCour">En cour... du {{c.ddDebut | date}} à {{c.ddFin | date}}</h3>
-  <h3 class="pb-2 border-bottom" *ngIf="!c.enCour">Ce contrat a prit fin le {{c.ddFin | date}}</h3>
+  <div class="row">
+    <div class="col">
+      <div *ngIf="c.enCour">
+        <h3 class="pb-2 border-bottom alert alert-success" >En cour... du {{c.ddDebut | date}} à {{c.ddFin | date}}</h3>
+      </div>
+      <div *ngIf="!c.enCour">
+        <h3 class="pb-2 border-bottom alert alert-danger">Ce contrat a prit fin le {{c.ddFin | date}}</h3>
+      </div>
+    </div>
+    <div class="col" *ngIf="c.enCour">
+      <button type="button" class="btn btn-link btn-lg px-4 me-md-2 text-danger" (click)="stopContrat(c)">Mettre fin au contrat</button>
+    </div>
+  </div>
+
   <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">
@@ -18,7 +30,7 @@
       </div>
       <h3>Objet</h3>
       <p>{{c.objet}}</p>
-      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="stopContrat(c)">Mettre fin au contrat</button>
+
     </div>
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">

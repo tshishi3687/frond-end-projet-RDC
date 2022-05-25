@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {LoginService} from '../../service/login.service';
 import {PersonneService} from '../../service/personne.service';
-import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Personne} from '../../objet';
+import {Mdp, Personne} from '../../objet';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-activation-compte',
@@ -13,27 +13,40 @@ import {Personne} from '../../objet';
 export class ActivationCompteComponent implements OnInit {
 
   constructor(private ser: LoginService,
-              private personneService: PersonneService) { }
+              private personneService: PersonneService,
+              public dialogRef: MatDialogRef<ActivationCompteComponent>,
+              @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.mdp = data.pass;
+    this.verificationCodeForm = new FormGroup({
+      codeActivation: new FormControl(null, [Validators.required])
+    });
+  }
 
+  verificationCodeForm: FormGroup;
+
+  mdp: Mdp;
   activationCompteOK: false;
   textErro: string;
-  maPersonne: Personne;
-  verifForm = new FormGroup({
-    codeActivation: new FormControl(null, [Validators.required])
-  });
 
-  code = '';
+
 
   ngOnInit(): void {
   }
 
   validationCompte(): void{
-    if (this.verifForm.valid){
-      this.code = this.verifForm.value.codeActivation;
-      this.personneService.verifCompte(this.code).subscribe(reponse => {
+    if (this.verificationCodeForm.valid){
+      this.personneService.verifCompte(this.verificationCodeForm.value.codeActivation).subscribe(reponse => {
         if (reponse){
-          // @ts-ignore
-          this.activationCompteOK = true;
+          this.personneService.voirPersonne(this.mdp).subscribe(reponse2 => {
+
+            // @ts-ignore
+            this.ser.saveToken(reponse2.token as string);
+            this.personneService.infoPersonne().subscribe((rep: Personne) => {
+                this.ser.redirection(rep);
+                this.dialogRef.close();
+            }, rep => alert('error RepPersonne') );
+          }, reponse2 => alert('error123456789'));
         }else {
           this.textErro = '*** CODE INCORECTE ***';
         }

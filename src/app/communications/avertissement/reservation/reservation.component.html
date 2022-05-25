@@ -2,11 +2,11 @@
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
       <div >
-        <h3 *ngIf="!acceptForm.value.check == true">ETAPE 1: Accepte conditions.</h3>
-        <h3 *ngIf="acceptForm.value.check == true && !verifCode && !verifCode2">ETAPE 2: Demande de date.</h3>
-        <h3 *ngIf="acceptForm.value.check == true && verifCode">ETAPE 3: Verification identité.</h3>
-        <h3 *ngIf="acceptForm.value.check == true && !verifCode && codeAcceptee && verifCode2">ETAPE 4: Payement.</h3>
-        <div class="card shadow-sm" >
+        <h3 *ngIf="!acceptForm.value.check">ETAPE 1: Accepte conditions.</h3>
+        <h3 *ngIf="acceptForm.value.check && !verifCode && !verifCode2">ETAPE 2: Demande de date.</h3>
+        <h3 *ngIf="acceptForm.value.check && verifCode">ETAPE 3: Verification identité.</h3>
+        <h3 *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">ETAPE 4: Payement.</h3>
+        <div class="card shadow-sm" *ngIf="!(acceptForm.value.check && !verifCode && codeAcceptee && verifCode2)">
           <app-img-caroucel [img]="this.bien.images" [pourcentageAffichage]="55"></app-img-caroucel>
           <div class="card-body">
             <h3 align="center">{{this.bien.coordonnee.ville.nomVille}} / {{this.bien.coordonnee.ville.province.nomprovince}}</h3>
@@ -36,6 +36,12 @@
             </div>
           </div>
         </div>
+        <div class="card shadow-sm" *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
+          <app-pay-pal  [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
+        </div>
+        <div class="card shadow-sm" *ngIf="!acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
+          <h3 class="bg-success">Votre reservation c'est fait avec succès</h3>
+        </div>
 
       </div>
     </div>
@@ -44,9 +50,9 @@
       <h1 class="display-5 fw-bold lh-1 mb-3 text-danger">ATTENTION !!!</h1>
       <h2 class="display-5 fw-bold lh-1 mb-3 text-warning">Vous êtes sur le point de reserver ce Bien.</h2>
       <h3 class="display-5 fw-bold lh-1 mb-3">{{bien.type_bien.nom}}({{bien.id}}) à {{bien.prix}}, {{bien.coordonnee.ville.nomVille}} / {{bien.coordonnee.ville.province.nomprovince}}</h3>
-      <p *ngIf="acceptForm.value.check == true" class="text-success">Vous avez accepté les termes du contrat. si ce n'est pas le cas, veuillez cliquer sur <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>.</p>
+      <p *ngIf="acceptForm.value.check" class="text-success">Vous avez accepté les termes du contrat. si ce n'est pas le cas, veuillez cliquer sur <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>.</p>
 
-      <div *ngIf="!acceptForm.value.check == true">
+      <div *ngIf="!acceptForm.value.check">
         <p class="lead">Ce qui implique que vous avez bien pris connaissance et acceptez le <span>CONTRAT BMEL</span>.</p>
         <p class="lead">L'acceptation des termes du contra indiqué ci-dessus est <span>OBLIGATOIRE</span> lors d'une location.</p>
         <br>
@@ -73,7 +79,9 @@
           </form>
           <br>
           <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="activation()">Passer au payement</button>
+          <h3>{{reservationError}}</h3>
         </div>
+
         <div *ngIf="!this.service.repIBAU()">
           <h1>ACCES REFUSE</h1>
           <p>Des informations manquantes nous empêchent de poursuivre ce processus</p>
@@ -88,7 +96,7 @@
           <table class="table">
             <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Prix / nuit</th>
               <th scope="col">ID</th>
               <th scope="col">Type Bien</th>
               <th scope="col">Lieu</th>
@@ -96,7 +104,7 @@
             </thead>
             <tbody>
             <tr>
-              <th scope="row">#</th>
+              <th scope="row">{{bien.prix}}</th>
               <td>{{bien.id}}</td>
               <td>{{bien.type_bien.nom}}</td>
               <td>{{this.bien.coordonnee.ville.nomVille}} {{this.bien.coordonnee.ville.province.nomprovince}}</td>
@@ -123,7 +131,6 @@
             </tbody>
           </table>
           <h1>Total : {{bien.prix * nJour}} €</h1>
-          <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" >Confirmer et payer</button>
         </div>
         <div *ngIf="!this.service.repIBAU()">
           <h1>ACCES REFUSE</h1>

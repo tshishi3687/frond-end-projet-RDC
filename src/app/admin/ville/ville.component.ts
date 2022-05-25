@@ -85,7 +85,7 @@ export class VilleComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  supprimerVille(id){
+  supprimerVille(id: number){
     this.service.supprimerVille(id).subscribe(reponse => this.voirVille(), reponse => alert(this.error));
   }
 

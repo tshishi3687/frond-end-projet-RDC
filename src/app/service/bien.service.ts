@@ -79,6 +79,16 @@ export class BienService {
   }
 
   // tslint:disable-next-line:typedef
+  annulCMEL(payPal){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
+      })
+    };
+    return this.client.post(this.service.serveurAdresse + '/bien/annul_cmel', payPal, httpOptions);
+  }
+
+  // tslint:disable-next-line:typedef
   envoiMail(bien){
     const httpOptions = {
       headers: new HttpHeaders({

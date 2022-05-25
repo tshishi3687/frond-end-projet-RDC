@@ -64,6 +64,12 @@ import { ModifMotDePasseComponent } from './login/modif-mot-de-passe/modif-mot-d
 import { ReservationComponent } from './communications/avertissement/reservation/reservation.component';
 import { ImgCaroucelComponent } from './communications/ImgCaroucel/img-caroucel/img-caroucel.component';
 import { StopContratMisEnLigneComponent } from './communications/avertissement/stop-contrat-mis-en-ligne/stop-contrat-mis-en-ligne.component';
+import { PayPalComponent } from './communications/pay-pal/pay-pal.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
+import { CalendarComponent } from './communications/calendar/calendar.component';
 
 @NgModule({
     declarations: [
@@ -120,21 +126,27 @@ import { StopContratMisEnLigneComponent } from './communications/avertissement/s
         ModifMotDePasseComponent,
         ReservationComponent,
         ImgCaroucelComponent,
-        StopContratMisEnLigneComponent
+        StopContratMisEnLigneComponent,
+        PayPalComponent,
+        CalendarComponent,
     ],
-    imports: [
-        BrowserModule,
-        RouterModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatCarouselModule.forRoot(),
-        MatDialogModule,
-        MatToolbarModule,
-        MatIconModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatCarouselModule.forRoot(),
+    MatDialogModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
+  ],
     exports: [],
     providers: [],
     bootstrap: [AppComponent]

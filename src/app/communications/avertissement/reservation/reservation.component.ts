@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Bien, NombreNuitVoulu, Reservation} from '../../../objet';
+import {Bien, Img, NombreNuitVoulu, Reservation} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ReservationService} from '../../../service/reservation.service';
 
 @Component({
   selector: 'app-reservation',
@@ -18,6 +19,7 @@ export class ReservationComponent implements OnInit {
 
   constructor(private route: Router,
               private bienService: BienService,
+              private reservationService: ReservationService,
               private serv: LoginService,
               public dialogRef: MatDialogRef<ReservationComponent>,
               private personneService: PersonneService,
@@ -27,6 +29,7 @@ export class ReservationComponent implements OnInit {
   }
 
   bien: Bien;
+  reservation: Reservation;
   acceptForm = new FormGroup({
     check: new FormControl(false, [Validators.required])
   });
@@ -43,6 +46,7 @@ export class ReservationComponent implements OnInit {
   cachedemandeJour = true;
   codeAcceptee = false;
   nJour: number;
+  reservationError: string;
 
   ngOnInit(): void {
     this.choixJourForm = new FormGroup({
@@ -89,16 +93,25 @@ export class ReservationComponent implements OnInit {
       reservation.faitPar = this.serv.client();
       reservation.ddArrivee = this.choixJourForm.value.jourA;
       reservation.ddDepart = this.choixJourForm.value.jourD;
-      this.bienService.envoiMailReservation(reservation).subscribe((result: number) => {
-        if (result <= 0){
-          this.codeAcceptee = true;
-          this.nJour = 1;
-        }else {
-          this.codeAcceptee = true;
-          this.nJour = result;
-          console.log(result);
+      this.reservationService.dispo(reservation).subscribe((reponse: boolean) => {
+        if (reponse){
+          this.bienService.envoiMailReservation(reservation).subscribe((result: number) => {
+            if (result <= 0){
+              this.codeAcceptee = true;
+              this.nJour = 1;
+            }else {
+              this.codeAcceptee = true;
+              this.nJour = result;
+              console.log(result);
+            }
+            this.reservation = reservation;
+          }, result => alert('problemme de connection server'));
+        } else {
+          this.verifCode = false;
+          this.cachedemandeJour = true;
+          this.reservationError = 'Le bien choisi n\'est pas disponible à cette date';
         }
-      }, result => alert('problemme de connection server'));
+      }, reponse => alert('probleme avec la vérification de réservation'));
     }
     else{
       this.route.navigateByUrl('/profil');
