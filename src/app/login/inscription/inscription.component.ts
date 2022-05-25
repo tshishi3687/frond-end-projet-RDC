@@ -37,7 +37,6 @@ export class InscriptionComponent implements OnInit {
   private personneExiste = false;
   textError = '';
   textBool = false;
-  connexionOK = false;
   inscriptionBool = true;
   attenteBool = false;
 
@@ -109,7 +108,6 @@ export class InscriptionComponent implements OnInit {
 
 // @ts-ignore
   redirection(): void{
-    this.connexionOK = true;
     this.attenteBool = false;
     this.inscriptionBool = false;
   }

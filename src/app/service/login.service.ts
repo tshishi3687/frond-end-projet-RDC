@@ -53,6 +53,11 @@ export class LoginService implements CanActivate{
       case this.roll2:
         sessionStorage.setItem(this.SessionUser, JSON.stringify(personne));
         this.verifIBAU();
+        if (this.repIBAU()){
+          this.route.navigateByUrl('allBien');
+        }else {
+          this.route.navigateByUrl('/Client/profil');
+        }
         break;
       default:
         return ;

@@ -79,7 +79,7 @@ export class PersonneService {
   verifCompte(codeActivation){
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
+        'Access-Control-Allow-Origin': '*'
       })
     };
 

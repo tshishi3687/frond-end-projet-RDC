@@ -6,7 +6,7 @@ import { MenuComponent } from './mise-en-page/menu/menu.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
-import { HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProvinceComponent } from './admin/province/province.component';
 import { VilleComponent } from './admin/ville/ville.component';
@@ -70,6 +70,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
 import { CalendarComponent } from './communications/calendar/calendar.component';
+// import {TokenInterceptorInterceptor} from './service/token-interceptor.interceptor';
 
 @NgModule({
     declarations: [
@@ -148,7 +149,9 @@ import { CalendarComponent } from './communications/calendar/calendar.component'
     MatNativeDateModule
   ],
     exports: [],
-    providers: [],
+    providers: [
+      // {provide : HTTP_INTERCEPTORS, useClass : TokenInterceptorInterceptor, multi : true}
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

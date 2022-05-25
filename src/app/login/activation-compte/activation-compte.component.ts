@@ -35,10 +35,17 @@ export class ActivationCompteComponent implements OnInit {
   }
 
   validationCompte(): void{
+    console.log('debut');
     if (this.verificationCodeForm.valid){
-      this.personneService.verifCompte(this.verificationCodeForm.value.codeActivation).subscribe(reponse => {
+      console.log('validation form');
+      console.log(this.verificationCodeForm.value.codeActivation);
+      console.log(this.verificationCodeForm.value.codeActivation.length);
+      this.personneService.verifCompte(this.verificationCodeForm.value.codeActivation).subscribe((reponse: boolean) => {
+        console.log(reponse);
         if (reponse){
+          console.log('debut if');
           this.personneService.voirPersonne(this.mdp).subscribe(reponse2 => {
+            console.log('connexion');
 
             // @ts-ignore
             this.ser.saveToken(reponse2.token as string);
