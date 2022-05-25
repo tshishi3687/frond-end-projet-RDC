@@ -1,0 +1,3 @@
+<div id="paypal" *ngIf="!attente && !messageBol"></div>
+<app-message-dattente *ngIf="attente && !messageBol"></app-message-dattente>
+<h2 *ngIf="messageBol && !attente">{{this.message}}</h2>
