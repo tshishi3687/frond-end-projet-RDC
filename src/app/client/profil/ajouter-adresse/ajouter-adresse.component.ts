@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AdressUserServiceService} from '../../../service/adress-user-service.service';
 import {PaysServiceService} from '../../../service/pays-service.service';
-import {AdressUser, Pays, Personne} from '../../../objet';
+import {AdressUser, Pays} from '../../../objet';
 import {LoginService} from '../../../service/login.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {PersonneService} from '../../../service/personne.service';
 
 @Component({
   selector: 'app-ajouter-adresse',
@@ -14,7 +15,8 @@ export class AjouterAdresseComponent implements OnInit {
 
   constructor(private adressServ: AdressUserServiceService,
               private paysServ: PaysServiceService,
-              private service: LoginService) { }
+              private service: LoginService,
+              private persService: PersonneService) { }
 
   adressText: string;
   listPays: Array<Pays> ;
@@ -31,14 +33,12 @@ export class AjouterAdresseComponent implements OnInit {
     this.voirPays();
   }
 
-  voirPays(): void{
-    // @ts-ignore
-    this.paysServ.voirPays().subscribe(reponse => this.listPays = reponse.list as Array<Pays>, reponse => alert('un proble avec la liste des pays'));
+  voirPays(): void {
+    this.paysServ.voirPays().subscribe(reponse => this.listPays = reponse, () => alert('un proble avec la liste des pays'));
   }
 
   voirAdressUser(): void{
-    // @ts-ignore
-    this.adressServ.voirAdressUSer(this.service.client()).subscribe(reponse => this.adressUser = reponse , reponse => alert('un probleme avec la reception d\'adress'));
+    this.adressServ.voirAdressUSer(this.service.client()).subscribe(reponse => this.adressUser = reponse , () => alert('un probleme avec la reception d\'adress'));
   }
 
   ajourterAdressUser(): void{
@@ -49,12 +49,14 @@ export class AjouterAdresseComponent implements OnInit {
     adressUser.codePostal = this.adressUserForm.value.codePostal;
     adressUser.pays = this.listPays[this.adressUserForm.value.pays];
     adressUser.appartienA = this.service.client();
-    this.adressServ.ajouterAdressUser(adressUser).subscribe(reponse => {
+    this.adressServ.ajouterAdressUser(adressUser).subscribe(() => {
       this.adressText = 'Votre nouvelle adresse a bien été enregistrée';
       this.adressUserForm.reset();
       this.voirAdressUser();
-      this.service.verifIBAU();
-    }, reponse => alert('il ya eu un probleme lors de l\'enregistrement d\'adresse'));
+      this.persService.verifIBAU(this.service.client()).subscribe((reponses: boolean) => {
+        sessionStorage.setItem(this.service.SessionVerifIBAU, JSON.stringify(reponses));
+      }, () => alert('Impossible de verifier l\'IBAU'));
+    }, () => alert('il ya eu un probleme lors de l\'enregistrement d\'adresse'));
   }
 
   changerAdress(): void{

@@ -64,7 +64,7 @@ export class ModifMotDePasseComponent implements OnInit {
         this.attenteBool = false;
         this.connexionOK = reponse;
       }
-    }, preponse => alert('il y a problème avec le serveur. Veuillez réessayer plus tard.'));
+    }, () => alert('il y a problème avec le serveur. Veuillez réessayer plus tard.'));
   }
 
   validationCode(): void {

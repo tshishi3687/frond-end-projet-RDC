@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ServiceService} from '../../service/service.service';
-import {Service, Ville} from '../../objet';
-import {LoginService} from '../../service/login.service';
+import {Service} from '../../objet';
 
 @Component({
   selector: 'app-list-service',
@@ -10,10 +8,7 @@ import {LoginService} from '../../service/login.service';
 })
 export class ListServiceComponent implements OnInit {
 
-  constructor(
-    private serSercice: ServiceService,
-    private serv: LoginService
-  ) { }
+  constructor() { }
 
   @Input() services: Array<Service> = [];
 

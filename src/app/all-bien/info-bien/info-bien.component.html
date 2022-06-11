@@ -8,80 +8,83 @@
 
 <br>
   <div class="nav-scroller py-1 mb-2">
-    <div class="row row-cols-3 container-fluid">
-      <div class="col-3">
-        <p>En ligne du {{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</p>
+    <div class="row row-cols-sm-1 row-cols-md-2">
+      <div class="col-sm-1 col-md-3">
         <app-calendar [disponibles]="bien.disponibles" [reservations]="bien.reservers"></app-calendar>
       </div>
-      <div class="col-4">
-        <h2 >Mise à votre disposition</h2>
-        <div class="row">
-          <div class="col-4">
-            <p *ngIf="!bien.aladisposition.securite" class="text-danger">Securité</p>
-            <p *ngIf="bien.aladisposition.securite" class="text-success">Securité</p>
-
-            <p *ngIf="!bien.aladisposition.wifi" class="text-danger">Wifi</p>
-            <p *ngIf="bien.aladisposition.wifi" class="text-success">Wifi</p>
-
-            <p *ngIf="!bien.aladisposition.television" class="text-danger">Télévision</p>
-            <p *ngIf="bien.aladisposition.television" class="text-success">Télévision</p>
-
-            <p *ngIf="!bien.aladisposition.vesselle" class="text-danger">Vaisselle</p>
-            <p *ngIf="bien.aladisposition.vesselle" class="text-success">Vaisselle</p>
-
-            <p *ngIf="!bien.aladisposition.literie" class="text-danger">Literie</p>
-            <p *ngIf="bien.aladisposition.literie" class="text-success">Literie</p>
-
-            <p *ngIf="!bien.aladisposition.eauPotable" class="text-danger">Eau potable</p>
-            <p *ngIf="bien.aladisposition.eauPotable" class="text-success">Eau potable</p>
-          </div>
-          <div class="col-4">
-            <p *ngIf="!bien.aladisposition.eauChaude" class="text-danger">Eau chaude</p>
-            <p *ngIf="bien.aladisposition.eauChaude" class="text-success">Eau chaude</p>
-
-            <p *ngIf="!bien.aladisposition.terrasse" class="text-danger">Terrasse</p>
-            <p *ngIf="bien.aladisposition.terrasse" class="text-success">Terrasse</p>
-
-            <p *ngIf="!bien.aladisposition.jardin" class="text-danger">Jardin</p>
-            <p *ngIf="bien.aladisposition.jardin" class="text-success">Jardin</p>
-
-            <p *ngIf="!bien.aladisposition.cour" class="text-danger">Cour</p>
-            <p *ngIf="bien.aladisposition.cour" class="text-success">Cour</p>
-
-            <p *ngIf="!bien.aladisposition.piscineCommune" class="text-danger">Piscine commune</p>
-            <p *ngIf="bien.aladisposition.piscineCommune" class="text-success">Piscine commune</p>
-          </div>
-          <div class="col-4">
-            <p *ngIf="!bien.aladisposition.piscinePrive" class="text-danger">Piscine privée</p>
-            <p *ngIf="bien.aladisposition.piscinePrive" class="text-success">Piscine privée</p>
-
-            <p *ngIf="!bien.aladisposition.voiture" class="text-danger">Voiture</p>
-            <p *ngIf="bien.aladisposition.voiture" class="text-success">Voiture</p>
-
-            <p *ngIf="!bien.aladisposition.moto" class="text-danger">Moto</p>
-            <p *ngIf="bien.aladisposition.moto" class="text-success">Moto</p>
-
-            <p *ngIf="!bien.aladisposition.velo" class="text-danger">Vélo</p>
-            <p *ngIf="bien.aladisposition.velo" class="text-success">Vélo</p>
-
-            <p *ngIf="!bien.aladisposition.animaux" class="text-danger">Animaux</p>
-            <p *ngIf="bien.aladisposition.animaux" class="text-success">Animaux</p>
-          </div>
-        </div>
+      <div class="col-sm-1 col-md-9">
+        <h2 class="text-secondary">Description de la location<br>En ligne du {{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</h2>
+        <div [innerHTML]="bien.description"></div>
       </div>
-      <div class="col-5">
-        <h2 class="text-secondary">Description de la location</h2>
-        <p class="text-primary">{{bien.description}}</p></div>
+      </div>
     </div>
 
+<header style="min-width: 100% !important;">
+  <div class="p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white">
+    <h2 >Mise à votre disposition</h2>
+    <div class="row">
+      <div class="col">
+        <p [style.color]="bien.aladisposition.securite? 'green': 'red'" >Securité</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.wifi? 'green': 'red'" >Wifi</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.television? 'green': 'red'" >Télévision</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.vesselle? 'green': 'red'" >Vaisselle</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.literie? 'green': 'red'" >Literie</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.eauPotable? 'green': 'red'" >Eau potable</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.eauChaude? 'green': 'red'" >Eau chaude</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.terrasse? 'green': 'red'" >Terrasse</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.jardin? 'green': 'red'" >Jardin</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.cour? 'green': 'red'" >Cour</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.piscineCommune? 'green': 'red'" >Piscine commune</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.piscinePrive? 'green': 'red'" >Piscine privée</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.voiture? 'green': 'red'" >Voiture</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.moto? 'green': 'red'" >Moto</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.velo? 'green': 'red'" >Vélo</p>
+      </div>
+      <div class="col">
+        <p [style.color]="bien.aladisposition.animaux? 'green': 'red'" >Animaux domestiques ADMIS</p>
+      </div>
+    </div>
+    <div>
+    </div>
+    <div >
+    </div>
+    <div >
+    </div>
   </div>
 
-<header style="min-width: 100% !important;">
   <div class="row flex-nowrap justify-content-between align-items-center p-3 mb-2 bg-secondary  text-white text-center">
     <div class="col-2 pt-1">
       <h1>{{bien.prix}}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
         <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
-      </svg> €</h1>
+      </svg></h1>
     </div>
     <div class="col-2 text-center">
       <h2>{{bien.superficie}}
@@ -128,25 +131,23 @@
 
       </article>
 
-      <div class="row mb-2">
-        <div class="col-md-6">
+      <div class="row row-cols-2">
+        <div class="col">
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">Province</strong>
 
               <h3 class="mb-0">{{bien.coordonnee.ville.province.nomprovince}}</h3>
-              <div class="mb-1 text-muted">Date de mise à jour  {{bien.coordonnee.ville.province.dateCreation}}</div>
               <p class="card-text mb-auto">{{bien.coordonnee.ville.province.description}}</p>
               <app-img-caroucel [img]="bien.coordonnee.ville.province.img" [pourcentageAffichage]="100"></app-img-caroucel>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col">
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success">Ville</strong>
               <h3 class="mb-0">{{bien.coordonnee.ville.nomVille}}</h3>
-              <div class="mb-1 text-muted">Date de mise à jour  {{bien.coordonnee.ville.dateCreation}}</div>
               <p class="mb-auto">{{bien.coordonnee.ville.description}}</p>
               <p class="stretched-link">Nombre habitant  {{bien.coordonnee.ville.nhabitant}}</p>
               <app-img-caroucel [img]="bien.coordonnee.ville.img" [pourcentageAffichage]="100"></app-img-caroucel>
@@ -175,7 +176,7 @@
           <p class="text-center">à {{bien.coordonnee.ville.nomVille}} dans la province de {{bien.coordonnee.ville.province.nomprovince}}.</p>
           <div class="row">
             <div class="col">
-              <button *ngIf="this.service.isAuthenticated" type="button" class="btn btn-outline-success" (click)="reservation()">Réservation</button>
+              <button *ngIf="this.service.isAuthenticated && bien.disponibles != null && bien.reservers.length < bien.disponibles.length && bien.modeActive" type="button" class="btn btn-outline-success" (click)="reservation()">Réservation</button>
             </div>
             <div class="col">
               <button type="button" class="btn btn-info" (click)="iLike()">
@@ -188,7 +189,6 @@
               </button>
             </div>
           </div>
-          <br>
 
           <p>{{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</p>
           <app-calendar [disponibles]="bien.disponibles" [reservations]="bien.reservers"></app-calendar>

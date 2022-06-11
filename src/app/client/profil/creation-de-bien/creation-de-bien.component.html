@@ -1,144 +1,97 @@
-<form *ngIf="formCreationEnvoyeBool" [formGroup]="BienForm" >
-  <div class="py-5 text-center"><p class="lead"></p></div>
-  <div class="row g-5">
-      <div class="col-md-5 col-lg-4 order-md-last">
+<div class="px-4 pt-5 my-5" >
+  <form *ngIf="formCreationEnvoyeBool" [formGroup]="BienForm" >
+<!--    div général-->
+    <div class="row row-cols-2">
 
+      <!--      div colonne de gauche-->
+      <div class="col-6">
 
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">A dispositions :</span>
-        </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="securite" type="checkbox" value="securité" >Service de sécurité</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="wifi" type="checkbox" value="wifi">Internet</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="television" type="checkbox" value="television">Télévision</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="vesselle" type="checkbox" value="vesselle" >Vaisselle</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="literie" type="checkbox" value="literie" >Literie</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="lingeMaison" type="checkbox" value="lingeMaison" >Linge de maison</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="eauChaude" type="checkbox" value="eauChaude" >Eau chaude</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="eauFroide" type="checkbox" value="eauFroide" >Eau froide</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="eauPotable" type="checkbox" value="eauPotable" >Eau potable</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="jardin" type="checkbox" value="jardin" >Jardin privé</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="cour" type="checkbox" value="cour" >Cour privée</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="terrasse" type="checkbox" value="terrasse" >Terrasse privée</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="piscinePrive" type="checkbox" value="piscinePrive" >Piscine privée</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="piscineCommune" type="checkbox" value="piscineCommune" >Piscine commune</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="vehicule" type="checkbox" value="vehicule" >Voiture</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="moto" type="checkbox" value="moto" >Moto</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="velo" type="checkbox" value="velo" >Vélo(s)</label>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <label><input formControlName="animaux" type="checkbox" value="animaux" >Animaux domestiques ADMIS</label>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <!--        div barre grise-->
+        <div class="row row-cols-2 p-3 mb-2 bg-secondary text-white">
+          <div class="col-4 p-3 mb-2">
+            <label  class="form-label"><h2>Type de bien</h2></label>
+            <select class="form-select" formControlName="type"  aria-label="Default select example" >
+              <option value="defaults" selected>Selectionez un type de bien</option>
+              <option *ngFor="let t of listTypeDeBien; let i = index" value="{{i}}">{{t.nom}}</option>
+            </select>
+          </div>
 
-      <div class="col-md-7 col-lg-8">
-        <h2 class="mb-3">Informations sur le bien</h2>
-          <div class="row g-3">
-            <div class="col-sm-6 p-3 mb-2 bg-secondary text-white">
-              <h5>Photo(s)</h5>
-              <p *ngIf="boolImgNull" class="p-3 mb-2 bg-danger text-white">{{this.imgNull}}</p>
-              <div *ngIf="tailleimg">
-                <p>Vous ne pouvez ajouter un maximum de 10 images</p>
+          <div class="col-4 p-3 mb-2">
+            <h2>Prix / Nuit</h2>
+            <input type="number" formControlName="prix" placeholder="le prix en €/$ ">
+          </div>
+
+<!--          div photo-->
+          <div class="col-4 p-3 mb-2">
+            <h2>Photo(s)</h2>
+            <p *ngIf="boolImgNull" class="p-3 mb-2 bg-danger text-white">{{this.imgNull}}</p>
+            <div *ngIf="tailleimg">
+              <p>Vous ne pouvez ajouter un maximum de 10 images</p>
+            </div>
+            <input #imgs type="file" (change)="onFileSelected($event)" multiple accept="image/png, image/jpeg"/>
+
+            <div *ngFor="let error of this.errorList">
+              <p class="p-3 mb-2 bg-danger text-white">{{error}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!--        div bloc central-->
+        <div class="row row-cols-2">
+
+          <!--          div bloc central gauche-->
+          <div class="blocCGcol-6 row-col-1">
+
+            <!--            div "adresse" bien-->
+            <div class="col row-col-1">
+              <h1>Adresse du bien</h1>
+              <div class="col-md-4">
+                  <label  class="form-label">Numéro : </label>
+                  <input type="number" formControlName="coordonneeNum" placeholder="numéro">
               </div>
-              <input #imgs type="file" (change)="onFileSelected($event)" multiple accept="image/png, image/jpeg"/>
 
-              <div *ngFor="let error of this.errorList">
-                <p class="p-3 mb-2 bg-danger text-white">{{error}}</p>
+              <div class="col-md-4">
+                <label class="form-label">Nom de la rue : </label>
+                <input type="text" formControlName="coordonneeRue" placeholder="rue">
+              </div>
+
+              <div class="col-md-4">
+                <label  class="form-label">Code postal : </label>
+                <input type="number" formControlName="coordonneeCPostal" placeholder="code postal">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Ville : </label>
+                <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
+                  <option value="defaults" selected>Selectionez une ville</option>
+                  <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
+                </select>
               </div>
             </div>
+            <br>
+            <div class="b-example-divider"></div>
 
-            <div class="col-sm-6 p-3 mb-2 bg-secondary text-white">
-              <h2>Prix / Nuit</h2>
-              <input type="number" formControlName="prix" placeholder="le prix en €/$ ">
+            <!--            div "contact"-->
+            <div class="col row-col-1">
+              <h2>Informations de contact (Pour ce bien)</h2>
+                <div class="col-md-4 ">
+                  <label  class="form-label">E-mail : </label>
+                  <input type="email" formControlName="coordonneeEmail" placeholder="email">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Téléphone : </label>
+                  <input type="number" formControlName="coordonneeTelephone" placeholder="telephone">
+                </div>
             </div>
 
-            <div class="col-sm-6">
-              <label  class="form-label">Type de bien : </label>
-              <select class="form-select" formControlName="type"  aria-label="Default select example" >
-                <option value="defaults" selected>Selectionez un type de bien</option>
-                <option *ngFor="let t of listTypeDeBien; let i = index" value="{{i}}">{{t.nom}}</option>
-              </select>
-            </div>
+          </div>
 
-            <div class="col-sm-6">
-            </div>
-
-
-
-
+          <!--          div bloc central droit "info bien-->
+          <div class="col-6 ">
+            <h1>Information sur le bien</h1>
             <div class="col-md-4">
               <label  class="form-label">Personne minimum</label>
-              <input type="number" formControlName="npmin" placeholder="le nombre de personne minimum">
+              <input  type="number" formControlName="npmin" placeholder="le nombre de personne minimum">
             </div>
 
             <div class="col-md-4">
@@ -161,65 +114,144 @@
               <input type="number" formControlName="nwc" placeholder="le nombre de toilette">
             </div>
 
-            <div class="col-md-4 p-3 mb-2 bg-secondary text-white text-center">
+            <div class="col-md-4">
               <label class="form-label">Nombre total superficie loué (m2)</label>
               <input type="number" formControlName="superficie" placeholder="supperficie du bien">
             </div>
-
-            <h1>Adresse</h1>
-            <div class="col-sm-6">
-              <label  class="form-label">Numéro: </label>
-              <input type="number" formControlName="coordonneeNum" placeholder="numéro">
-            </div>
-
-            <div class="col-sm-6">
-              <label class="form-label">Nom de la rue : </label>
-              <input type="text" formControlName="coordonneeRue" placeholder="rue">
-            </div>
-
-            <div class="col-sm-6">
-              <label  class="form-label">Code postal : </label>
-              <input type="number" formControlName="coordonneeCPostal" placeholder="code postal">
-            </div>
-
-            <div class="col-sm-6">
-              <label class="form-label">Ville : </label>
-              <select class="form-select" formControlName="coordonneeVille"  aria-label="Default select example" >
-                <option value="defaults" selected>Selectionez une ville</option>
-                <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
-              </select>
-            </div>
-
-
-            <h2>Informations de contact</h2>
-            <div class="row">
-              <div class="col-6">
-                <label  class="form-label">E-mail : </label>
-                <input type="email" formControlName="coordonneeEmail" placeholder="email">
-              </div>
-              <div class="col-6">
-                <label class="form-label">Téléphone : </label>
-                <input type="number" formControlName="coordonneeTelephone" placeholder="telephone">
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label class="form-label"><h2>Description</h2></label>
-              <p>Vous avez 850 caractaires à votre disposition.</p>
-              <p>Veuillez être le plus complet possible:</p>
-              <textarea type="text" class="md-textarea form-control" formControlName="description" placeholder="Description"></textarea>
-            </div>
-
           </div>
-          <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" (click)="ajouterBien()" *ngIf="BienForm.valid">
-            Je crée mon bien
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
-            </svg>
-          </button>
+
+        </div>
       </div>
+<!--      div colone de droite "disposition"-->
+      <div class="col-6">
+        <h2 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">A dispositions :</span>
+        </h2>
+
+        <div class="row row-cols-2">
+          <!--        div colonne "disposition 1-->
+          <div class="col-6">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="securite" type="checkbox" value="securité" ><span class="p-3">Service de sécurité</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="wifi" type="checkbox" value="wifi"><span class="p-3">Internet</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="television" type="checkbox" value="television"><span class="p-3">Télévision</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="vesselle" type="checkbox" value="vesselle" ><span class="p-3">Vaisselle</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="literie" type="checkbox" value="literie" ><span class="p-3">Literie</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="lingeMaison" type="checkbox" value="lingeMaison" ><span class="p-3">Linge de maison</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="eauChaude" type="checkbox" value="eauChaude" ><span class="p-3">Eau chaude</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="eauFroide" type="checkbox" value="eauFroide" ><span class="p-3">Eau froide</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="eauPotable" type="checkbox" value="eauPotable" ><span class="p-3">Eau potable</span></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!--        div colonne "disposition 2-->
+          <div class="col-6">
+            <ul>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="jardin" type="checkbox" value="jardin" ><span class="p-3">Jardin privé</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="cour" type="checkbox" value="cour" ><span class="p-3">Cour privée</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="terrasse" type="checkbox" value="terrasse" ><span class="p-3">Terrasse privée</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="piscinePrive" type="checkbox" value="piscinePrive" ><span class="p-3">Piscine privée</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="piscineCommune" type="checkbox" value="piscineCommune" ><span class="p-3">Piscine commune</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="vehicule" type="checkbox" value="vehicule" ><span class="p-3">Voiture</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="moto" type="checkbox" value="moto" ><span class="p-3">Moto</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="velo" type="checkbox" value="velo" ><span class="p-3">Vélo(s)</span></label>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <label><input formControlName="animaux" type="checkbox" value="animaux" ><span class="p-3">Animaux domestiques ADMIS</span></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!--    div description-->
+        <div>
+          <h2>Description <span [style.color]="this.BienForm.value.description?.toString().length < 2700? 'green' :this.BienForm.value.description?.toString().length <=3000? 'orange': 'red'">
+                {{this.BienForm.value.description?.toString().length}}</span>/3000</h2>
+          <angular-editor formControlName="description" [config]="config"></angular-editor>
+        </div>
+      </div>
+
+
     </div>
 
-</form>
+    <button class="w-100 btn btn-primary btn-lg" (click)="ajouterBien()" *ngIf="BienForm.valid">
+      Je crée mon bien
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<div class="b-example-divider"></div>

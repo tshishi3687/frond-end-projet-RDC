@@ -1,15 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BienService} from '../service/bien.service';
-import {Bien, Province, TypeDeBien, Ville} from '../objet';
+import {Bien, Province, TryListAllBiens, TypeDeBien, Ville} from '../objet';
 import {ImgService} from '../service/img.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {InfoBienComponent} from './info-bien/info-bien.component';
+import {MatDialog} from '@angular/material/dialog';
 import {LoginService} from '../service/login.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
 import {Byte} from '@angular/compiler/src/util';
 
 @Component({
@@ -51,9 +49,12 @@ export class AllBienComponent implements OnInit {
   imgProvince: Byte[];
   imgVille: Byte[];
   image: string;
-  allfaut = false;
   @Output() bien: EventEmitter<any> = new EventEmitter();
   @Input() tostring: string;
+  tryList: TryListAllBiens;
+  nbPage = 0;
+  currentPage = 1;
+  isLoading = false;
 
   ngOnInit(): void {
     this.voirToutBien();
@@ -62,39 +63,32 @@ export class AllBienComponent implements OnInit {
   }
 
   voirToutBien(): void{
-    // @ts-ignore
-    this.bienService.voirBien().subscribe((reponse: Array<Bien>) => {
-      // @ts-ignore
-      this.listBien = reponse.list;
-    }, reponse => alert('il y a un probleme'));
+    this.bienService.countBiens().subscribe((reponse: number) => {
+      this.nbPage = Math.floor((reponse - 1) / 6) + 1;
+      this.loadData();
+    }, () => alert('il y a un probleme'));
   }
+  loadData(): void{
+    // tslint:disable-next-line:max-line-length
+    this.isLoading = true;
+    // tslint:disable-next-line:max-line-length
+    this.bienService.voirBien({
+      page: this.currentPage,
+      provinceId: this.rechercheForm.value.province === 'defaults' ? 0 : this.listProvince[this.rechercheForm.value.province].id,
+      typeId: this.rechercheForm.value.typeBien === 'defaults' ? 0 : this.listTypeBien[this.rechercheForm.value.typeBien].id,
+      // tslint:disable-next-line:max-line-length
+      villeId: this.rechercheForm.value.ville === 'defaults' ? 0 : this.listProvince[this.rechercheForm.value.province].villes[this.rechercheForm.value.ville].id
+    }).subscribe((reponsee: Array<Bien>) => {
+      this.isLoading = false; this.listBien = reponsee;
 
-  informationbient(b: Bien): void{
-    if (this.service.isAuthenticated()){
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = '100%';
-      dialogConfig.height = '100%';
-      dialogConfig.data = {bien: b};
-      this.dialog.open(InfoBienComponent, dialogConfig);
-    }else{
-      alert('vous devez être connecter pour en voir plus');
-    }
+      }, () => alert('il y a un probleme'));
   }
-
   voirAllProvince(): void{
-    this.provinceService.voirProvince().subscribe(reponse => {
-      this.listProvince = reponse.list;
-    }, reponse => alert('il y a eu un probleme avec la liste des provinve'));
+    this.provinceService.voirProvince().subscribe(reponse => this.listProvince = reponse, () => alert('il y a eu un probleme avec la liste des provinve'));
   }
 
   voirTypeBien(): void{
-    // @ts-ignore
-    this.typeDBien.voirTypeDeBien().subscribe((reponse: Array<TypeDeBien>) => {
-      // @ts-ignore
-      this.listTypeBien = reponse.list;
-    }, reponse => alert('il y a eu un probleme avec la liste des type de bien'));
+    this.typeDBien.voirTypeDeBien().subscribe((reponse: Array<TypeDeBien>) => this.listTypeBien = reponse, () => alert('il y a eu un probleme avec la liste des type de bien'));
   }
 
 
@@ -102,7 +96,6 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.typeBien === 'defaults'){
       this.typeBien = '';
     }else{
-      // @ts-ignore
       this.typeBien = this.listTypeBien[this.rechercheForm.value.typeBien].nom;
     }
   }
@@ -127,7 +120,6 @@ export class AllBienComponent implements OnInit {
       this.imgVille = this.listVille[this.rechercheForm.value.ville].img[0].picByte;
       this.textVille = this.listVille[this.rechercheForm.value.ville].description;
       this.titreVille = this.listVille[this.rechercheForm.value.ville].nomVille;
-      // @ts-ignore
       this.ville = this.listVille[this.rechercheForm.value.ville].nomVille;
     }
   }
@@ -153,5 +145,20 @@ export class AllBienComponent implements OnInit {
     this.textVille = '';
     this.titreProvince = '';
     this.textProvince = '';
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.loadData();
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.loadData();
+  }
+
+  change(v): void {
+    this.currentPage = v;
+    this.loadData();
   }
 }

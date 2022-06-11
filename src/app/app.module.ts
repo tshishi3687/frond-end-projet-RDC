@@ -70,6 +70,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
 import { CalendarComponent } from './communications/calendar/calendar.component';
+import { VoirContratReservationComponent } from './client/profil/voir-contrat-reservation/voir-contrat-reservation.component';
+import {AngularEditorModule} from '@kolkov/angular-editor';
+import {TokenInterceptorInterceptor} from './service/token-interceptor.interceptor';
+import { RangePipe } from './all-bien/range.pipe';
+import { ImgInfoCaroucelComponent } from './communications/ImgCaroucel/img-info-caroucel/img-info-caroucel.component';
 // import {TokenInterceptorInterceptor} from './service/token-interceptor.interceptor';
 
 @NgModule({
@@ -130,28 +135,32 @@ import { CalendarComponent } from './communications/calendar/calendar.component'
         StopContratMisEnLigneComponent,
         PayPalComponent,
         CalendarComponent,
+        VoirContratReservationComponent,
+        RangePipe,
+        ImgInfoCaroucelComponent,
     ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatCarouselModule.forRoot(),
-    MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatCarouselModule.forRoot(),
+        MatDialogModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatNativeDateModule,
+        AngularEditorModule
+    ],
     exports: [],
-    providers: [
-      // {provide : HTTP_INTERCEPTORS, useClass : TokenInterceptorInterceptor, multi : true}
-    ],
+    providers: [{
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

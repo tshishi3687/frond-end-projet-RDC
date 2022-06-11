@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Bien, Contrat, Mdp, Personne} from '../objet';
+import { Personne} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {PersonneService} from './personne.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +29,10 @@ export class LoginService implements CanActivate{
   public readonly Sessionjwt = 'jwt-details';
   // tslint:disable-next-line:variable-name
   public readonly SessionUserName = 'username-deails';
-  // tslint:disable-next-line:variable-name
-  serveurAdresse = 'http://localhost:8081';
+  public readonly logo = 'assets/img/rdc-map-flag.png';
 
 
-  constructor(private route: Router,
-              private personneService: PersonneService) { }
+  constructor(private route: Router) { }
 
   href = this.route.url;
   // tslint:disable-next-line:ban-types
@@ -52,12 +49,7 @@ export class LoginService implements CanActivate{
       case this.roll1:
       case this.roll2:
         sessionStorage.setItem(this.SessionUser, JSON.stringify(personne));
-        this.verifIBAU();
-        if (this.repIBAU()){
-          this.route.navigateByUrl('allBien');
-        }else {
-          this.route.navigateByUrl('/Client/profil');
-        }
+        this.route.navigateByUrl('allBien');
         break;
       default:
         return ;
@@ -67,12 +59,6 @@ export class LoginService implements CanActivate{
 
   saveToken(jwt: string): void{
     sessionStorage.setItem(this.Sessionjwt, JSON.stringify(this.prefix + jwt));
-  }
-
-  verifIBAU(): void{
-    this.personneService.verifIBAU(this.client()).subscribe((reponse: boolean) => {
-      sessionStorage.setItem(this.SessionVerifIBAU, JSON.stringify(reponse));
-    }, reponse => alert('Impossible de verifier l\'IBAU'));
   }
 
   repIBAU(): boolean{

@@ -2,9 +2,8 @@ import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, Input, Output, 
 import { render} from 'creditcardpayments/creditCardPayments';
 import {LoginService} from '../../service/login.service';
 import {BienService} from '../../service/bien.service';
-import {PersonneService} from '../../service/personne.service';
 import {ReservationService} from '../../service/reservation.service';
-import {Bien, Contrat, Detailes, Details, PayPal, Reservation} from '../../objet';
+import { Detailes, Details, PayPal, Reservation} from '../../objet';
 @Component({
   selector: 'app-pay-pal',
   templateUrl: './pay-pal.component.html',
@@ -17,7 +16,9 @@ export class PayPalComponent implements OnInit, AfterViewInit {
     private service: LoginService,
     private bienService: BienService,
     private reservationService: ReservationService
-  ) {}
+  ) {
+    this.statusPayement = new EventEmitter<boolean>();
+  }
 
   @Input() idObjet: number;
   @Input() prix: number;
@@ -64,9 +65,9 @@ export class PayPalComponent implements OnInit, AfterViewInit {
               payPal.details = detail;
 
               // tslint:disable-next-line:max-line-length
-              this.bienService.annulCMEL(payPal).subscribe(reponse => {
+              this.bienService.annulCMEL(payPal).subscribe(() => {
                 this.statusPayement.emit(true);
-              }, reponse => alert('Enregistrement DB MEL RATER'));
+              }, () => alert('Enregistrement DB MEL RATER'));
               break;
             case 'reservation':
               this.attente = true;
@@ -97,15 +98,15 @@ export class PayPalComponent implements OnInit, AfterViewInit {
                 det.id = reponse;
                 det.details = detaill;
                 this.attente = false;
-                this.reservationService.details(det).subscribe(reponsee => {
+                this.reservationService.details(det).subscribe(() => {
                   this.statusPayement.emit(true);
                   this.messageBol = true;
                   this.message = 'Votre réservation c\'est bien effectué';
-                }, reponsee => {
+                }, () => {
                   this.attente = false;
                   alert('enregistrement de detail no effectuer');
                 });
-              }, reponse => {
+              }, () => {
                 alert('Enregistrement DB Réservation RATER');
                 this.attente = false;
               });

@@ -7,3 +7,6 @@
   min-width: 100vh;
 }
 
+@media print {
+  .menu{display:none}
+}

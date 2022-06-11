@@ -1,4 +1,4 @@
-<div class="wrapper fadeInDown" *ngIf="connnectionOKBUT">
+<div class="wrapper fadeInDown" >
   <div id="formContent">
     <h3 class="text-danger">{{this.textErro}}</h3>
     <!-- Login Form -->
@@ -14,5 +14,6 @@
       <input type="password" formControlName="mdp"  class="fadeIn third" name="mdp" placeholder="Votre password">
       <input *ngIf="logForm.valid" type="submit" class="fadeIn fourth" value="Connexion" (click)="verrif()">
     </form>
+    <h3 class="text-danger text-center">{{connexionCo}}</h3>
   </div>
 </div>

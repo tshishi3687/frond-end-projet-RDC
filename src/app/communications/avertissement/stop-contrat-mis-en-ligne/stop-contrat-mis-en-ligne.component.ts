@@ -26,19 +26,12 @@ export class StopContratMisEnLigneComponent implements OnInit {
 
   contrat: Contrat;
   btnSuppress = false;
-  codeFaut: string;
 
   stopFrom = new FormGroup({
       textStop: new FormControl(null, [Validators.required])
     }
   );
 
-  veifCodeForm = new FormGroup({
-    codeActivation: new FormControl('', [Validators.required])
-  });
-
-  // @ts-ignore
-  // tslint:disable-next-line:max-line-length
   stopMessageContrat: string;
 
 

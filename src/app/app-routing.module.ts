@@ -15,6 +15,7 @@ import {AppComponent} from './app.component';
 import {VoirContratComponent} from './client/profil/voir-contrat-mis-en-ligne/voir-contrat.component';
 import {ClientComponent} from './client/client.component';
 import {AdminComponent} from './admin/admin.component';
+import {VoirContratReservationComponent} from './client/profil/voir-contrat-reservation/voir-contrat-reservation.component';
 
 // @ts-ignore
 const routes: Routes = [
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'contrat_mel',
         component: VoirContratComponent
+      },
+      {
+        path: 'contrat_rese',
+        component: VoirContratReservationComponent
       }
     ],
   },

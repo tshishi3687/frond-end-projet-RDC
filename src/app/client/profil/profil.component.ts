@@ -18,24 +18,6 @@ export class ProfilComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  creationBien(): void {
-      this.creation = true;
-      this.bien = false;
-      this.reservation = false;
-  }
-
-  mesBiens(): void {
-      this.creation = false;
-      this.bien = true;
-      this.reservation = false;
-  }
-
-  mesReservation(): void {
-      this.creation = false;
-      this.bien = false;
-      this.reservation = true;
-  }
-
   deconnexion(): void{
     this.donneeClient.logout();
   }

@@ -1,12 +1,18 @@
 .demo-inline-calendar-card {
-  width: 250px;
+  width: auto;
 }
-.mat-calendar-body-cell.selected
+
+::ng-deep.selected
 {
-  background-color:red!important;
-  border-radius: 50%
+  background-color: lightgray;
 }
 .drop-calendar
 {
   width:30rem
+}
+
+::ng-deep.isnotselected
+{
+  background-color: #ade5ad;
+  color: white;
 }

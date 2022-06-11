@@ -42,6 +42,9 @@
                 <li class="nav-item" *ngIf="ser.isClient()">
                   <button type="button" class="btn btn-light" routerLink="/Client/contrat_mel">Contrat mis en ligne</button>
                 </li>
+                <li class="nav-item" *ngIf="ser.isClient()">
+                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_rese">Contrat réservation</button>
+                </li>
               </ul>
               <form class="d-flex">
                 <button type="button" class="btn btn-outline-primary" routerLink="/Client/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>

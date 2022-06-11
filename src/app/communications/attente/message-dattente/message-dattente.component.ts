@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class MessageDAttenteComponent implements OnInit {
 
   constructor() { }
-  imageAttente = 'assets/img/attent/Awaglass-par-Studio-Note.jpg';
 
   ngOnInit(): void {
   }

@@ -3,7 +3,6 @@ import {VilleService} from '../../service/VilleService';
 import {ProvinceService} from '../../service/ProvienceService';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Province, Ville} from '../../objet';
-import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'app-ville',
@@ -12,13 +11,12 @@ import {LoginService} from '../../service/login.service';
 })
 export class VilleComponent implements OnInit {
 
-  constructor(private service: VilleService, private pService: ProvinceService, private logService: LoginService) { }
+  constructor(private service: VilleService, private pService: ProvinceService) { }
 
   private error = 'Il y a eu un probleme :(';
-  startingString: string = '';
+  startingString = '';
   imgError = '';
   tailleimg = false;
-  // tslint:disable-next-line:ban-types
   private myFiles: File [] = [];
   private selectedFile: File;
   imgValid = false;
@@ -60,19 +58,15 @@ export class VilleComponent implements OnInit {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  voirProvince(){
-    // @ts-ignore
-    this.pService.voirProvince().subscribe(reponse => this.listProvince = reponse.list , reponse => alert(this.error));
-  }
-  // tslint:disable-next-line:typedef
-  voirVille(){
-    // @ts-ignore
-    this.service.voirVille().subscribe(reponse => this.listVille = reponse.list , reponse => alert(this.error));
+  voirProvince(): void{
+    this.pService.voirProvince().subscribe(reponse => this.listProvince = reponse.list , () => alert(this.error));
   }
 
-  // tslint:disable-next-line:typedef
-  ajouterVille(){
+  voirVille(): void{
+    this.service.voirVille().subscribe(reponse => this.listVille = reponse , () => alert(this.error));
+  }
+
+  ajouterVille(): void{
     if (this.villeForm.valid){
       const ville = new Ville();
       ville.id = 0;
@@ -80,13 +74,12 @@ export class VilleComponent implements OnInit {
       ville.nhabitant = this.villeForm.value.nhabitant;
       ville.province = this.listProvince[this.villeForm.value.province];
       ville.description = this.villeForm.value.description;
-      this.service.ajouterVille(ville).subscribe(reponse => this.voirVille(), reponse => alert(this.error));
+      this.service.ajouterVille(ville).subscribe(() => this.voirVille(), () => alert(this.error));
     }
   }
 
-  // tslint:disable-next-line:typedef
-  supprimerVille(id: number){
-    this.service.supprimerVille(id).subscribe(reponse => this.voirVille(), reponse => alert(this.error));
+  supprimerVille(id: number): void{
+    this.service.supprimerVille(id).subscribe(() => this.voirVille(), () => alert(this.error));
   }
 
   ajouerIMG(villeId: number): void {
@@ -94,15 +87,13 @@ export class VilleComponent implements OnInit {
     // @ts-ignore
     uploadImageData.append('province', villeId);
     for (let i = 0; i < (this.myFiles.length); i++){
-      // @ts-ignore
-      // tslint:disable-next-line:max-line-length
       uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
     }
-    this.service.ajouterImageVille(uploadImageData).subscribe(reponse => {
+    this.service.ajouterImageVille(uploadImageData).subscribe(() => {
       alert('ok');
       uploadImageData = new FormData();
 
-    }, reponse => {
+    }, () => {
       this.myFiles = [];
     });
   }

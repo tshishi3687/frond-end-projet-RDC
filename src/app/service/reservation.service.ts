@@ -1,55 +1,37 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {Contrat} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
-  constructor(private client: HttpClient, private service: LoginService) { }
+  constructor(private client: HttpClient) { }
 
   // tslint:disable-next-line:typedef
   ajouterReservation(reservation){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/bien/reservation', reservation, httpOptions);
+    return this.client.post(environment.serveur_url + '/bien/reservation', reservation);
   }
 
   // tslint:disable-next-line:typedef
   details(id){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/bien/details', id, httpOptions);
+    return this.client.post(environment.serveur_url + '/bien/details', id);
   }
 
   // tslint:disable-next-line:typedef
   dispo(reservation){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/bien/dispo', reservation, httpOptions);
+    return this.client.post(environment.serveur_url + '/bien/dispo', reservation);
   }
 
   // tslint:disable-next-line:typedef
-  voirReservationPersonne(reservation){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
+  voirReservation(){
 
-    return this.client.post(this.service.serveurAdresse + '/reservations/user', reservation, httpOptions);
+    // @ts-ignore
+    return this.client.get<Contrat[]>(environment.serveur_url + '/bien/reservations');
   }
 }

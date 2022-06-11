@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Bien, Img, NombreNuitVoulu, Reservation} from '../../../objet';
+import {Bien, Reservation} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
@@ -39,7 +39,6 @@ export class ReservationComponent implements OnInit {
     codeActivation: new FormControl('', [Validators.required])
   });
 
-  listNuit: Array<NombreNuitVoulu> = [];
   service = this.serv;
   verifCode = false;
   verifCode2 = false;
@@ -56,29 +55,6 @@ export class ReservationComponent implements OnInit {
     });
   }
 
-  addListNuit(): void{
-    const nNuit1 = new NombreNuitVoulu();
-    nNuit1.id = 1;
-    nNuit1.nNuit = 15;
-    this.listNuit.push(nNuit1);
-
-    const nNuit2 = new NombreNuitVoulu();
-    nNuit2.id = 2;
-    nNuit2.nNuit = 30;
-    this.listNuit.push(nNuit2);
-
-    const nNuit3 = new NombreNuitVoulu();
-    nNuit3.id = 3;
-    nNuit3.nNuit = 90;
-    this.listNuit.push(nNuit3);
-
-
-    const nNuit4 = new NombreNuitVoulu();
-    nNuit4.id = 4;
-    nNuit4.nNuit = 180;
-    this.listNuit.push(nNuit4);
-  }
-
   onClose(): void{
     this.dialogRef.close();
   }
@@ -93,6 +69,7 @@ export class ReservationComponent implements OnInit {
       reservation.faitPar = this.serv.client();
       reservation.ddArrivee = this.choixJourForm.value.jourA;
       reservation.ddDepart = this.choixJourForm.value.jourD;
+      reservation.nPersonneSurLieu = this.choixJourForm.value.nPersonne;
       this.reservationService.dispo(reservation).subscribe((reponse: boolean) => {
         if (reponse){
           this.bienService.envoiMailReservation(reservation).subscribe((result: number) => {
@@ -102,16 +79,15 @@ export class ReservationComponent implements OnInit {
             }else {
               this.codeAcceptee = true;
               this.nJour = result;
-              console.log(result);
             }
             this.reservation = reservation;
-          }, result => alert('problemme de connection server'));
+          }, () => alert('problemme de connection server'));
         } else {
           this.verifCode = false;
           this.cachedemandeJour = true;
           this.reservationError = 'Le bien choisi n\'est pas disponible à cette date';
         }
-      }, reponse => alert('probleme avec la vérification de réservation'));
+      }, () => alert('probleme avec la vérification de réservation'));
     }
     else{
       this.route.navigateByUrl('/profil');
@@ -123,7 +99,7 @@ export class ReservationComponent implements OnInit {
       this.personneService.verifCompte(this.veifCodeForm.value.codeActivation).subscribe((reponse: boolean) => {
           this.verifCode2 = reponse;
           this.verifCode = !reponse;
-      }, reponse => alert('problemme de connection server'));
+      }, () => alert('problemme de connection server'));
     }
   }
 
@@ -132,8 +108,4 @@ export class ReservationComponent implements OnInit {
     this.onClose();
   }
 
-  veriDate(): boolean{
-    // tslint:disable-next-line:max-line-length
-    return !(this.choixJourForm.value.jourA > Date.now() || this.choixJourForm.value.jourA > this.choixJourForm.value.jourD);
-  }
 }

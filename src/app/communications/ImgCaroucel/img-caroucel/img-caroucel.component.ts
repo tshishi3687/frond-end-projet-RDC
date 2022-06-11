@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {Img} from '../../../objet';
 
 @Component({
@@ -6,25 +6,20 @@ import {Img} from '../../../objet';
   templateUrl: './img-caroucel.component.html',
   styleUrls: ['./img-caroucel.component.css']
 })
+@Injectable()
 export class ImgCaroucelComponent implements OnInit {
 
   @Input() img: Array<Img> = [];
   @Input() pourcentageAffichage: number;
-  longSlider: number;
-  slides: [] = [];
-  nomImg = '';
+  slides: any[] = [];
 
   ngOnInit(): void {
-    this.imgProvince();
+    this.listImg();
   }
 
-  imgProvince(): void{
-    let nomimg;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.img.length; i++){
-      nomimg = this.img[i].name;
-      // @ts-ignore
-      this.slides.push({nomimg : 'data:image/jpeg;base64,' + this.img[i].picByte});
+  listImg(): void{
+    for (const image of this.img){
+      this.slides.push({image : 'data:image/jpeg;base64,' + image.picByte});
     }
   }
 

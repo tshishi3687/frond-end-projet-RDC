@@ -25,24 +25,20 @@ export class TypeDeBienComponent implements OnInit {
     this.voirTypeDeBien();
   }
 
-  // tslint:disable-next-line:typedef
-  ajouterTypeDeBien(){
+  ajouterTypeDeBien(): void{
     if (this.typeDeBienForm.valid){
       const typeDeBien = new TypeDeBien();
       typeDeBien.id = -1;
       typeDeBien.nom = this.typeDeBienForm.value.nom;
-      this.service.ajouterTypeDeBien(typeDeBien).subscribe(reponse => this.voirTypeDeBien(), reponse => alert(this.error));
+      this.service.ajouterTypeDeBien(typeDeBien).subscribe(() => this.voirTypeDeBien(), () => alert(this.error));
     }
   }
 
-  // tslint:disable-next-line:typedef
-  voirTypeDeBien(){
-    // @ts-ignore
-    this.service.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse.list , reponse => alert(this.error));
+  voirTypeDeBien(): void{
+    this.service.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse, () => alert(this.error));
   }
 
-  // tslint:disable-next-line:typedef
-  supprimerTypeDeBien(id){
-    this.service.supprimerTypeDeBien(id).subscribe(reponse => this.voirTypeDeBien(), reponse => alert(this.error));
+  supprimerTypeDeBien(id): void{
+    this.service.supprimerTypeDeBien(id).subscribe(() => this.voirTypeDeBien(), () => alert(this.error));
   }
 }

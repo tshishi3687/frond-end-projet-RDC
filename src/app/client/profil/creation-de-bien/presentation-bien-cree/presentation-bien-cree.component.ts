@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Bien} from '../../../../objet';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {SuppressionBienComponent} from '../../../../communications/danger/suppression-bien/suppression-bien.component';
@@ -39,7 +39,6 @@ export class PresentationBienCreeComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // tslint:disable-next-line:typedef
   activation(b: Bien): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

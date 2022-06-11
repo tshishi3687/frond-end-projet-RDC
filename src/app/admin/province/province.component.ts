@@ -3,7 +3,7 @@ import {Province} from '../../objet';
 import {ProvinceService} from '../../service/ProvienceService';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ImageProvinceService} from '../../service/image-province.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-province',
@@ -28,7 +28,6 @@ export class ProvinceComponent implements OnInit {
   startingString = '';
   imgError = '';
   tailleimg = false;
-  // tslint:disable-next-line:ban-types
   private myFiles: File [] = [];
   private selectedFile: File;
   imgValid = false;
@@ -49,7 +48,6 @@ export class ProvinceComponent implements OnInit {
       for (let i = 0; i < (event.target.files.length); i++) {
         if (event.target.files[i].size <= 1048576){
           this.selectedFile = event.target.files[i];
-          // @ts-ignore
           this.myFiles.push(this.selectedFile);
         }else{
           this.imgValid = true;
@@ -67,15 +65,13 @@ export class ProvinceComponent implements OnInit {
     // @ts-ignore
     uploadImageData.append('province', provinceID);
     for (let i = 0; i < (this.myFiles.length); i++){
-      // @ts-ignore
-      // tslint:disable-next-line:max-line-length
       uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
     }
-    this.imgProvince.ajouterImageProvince(uploadImageData).subscribe(reponse => {
+    this.imgProvince.ajouterImageProvince(uploadImageData).subscribe(() => {
       alert('ok');
       uploadImageData = new FormData();
 
-    }, reponse => {
+    }, () => {
       this.myFiles = [];
     });
   }
@@ -83,27 +79,22 @@ export class ProvinceComponent implements OnInit {
 
 
 
-  // tslint:disable-next-line:typedef
-  ajouterProvince(){
-    // @ts-ignore
+  ajouterProvince(): void{
     if (this.provinceForm.valid){
       const province = new Province();
       province.id = -1;
       province.nomprovince = this.provinceForm.value.nomprovince;
       province.description = this.provinceForm.value.description;
-      this.service.ajouterProvince(province).subscribe(reponse => this.voirProvince(), reponse => alert(this.error));
+      this.service.ajouterProvince(province).subscribe(() => this.voirProvince(), () => alert(this.error));
     }
   }
 
-  // tslint:disable-next-line:typedef
-  voirProvince(){
-    // @ts-ignore
-    this.service.voirProvince().subscribe(reponse => this.listProvince = reponse.list , reponse => alert(this.error));
+  voirProvince(): void{
+    this.service.voirProvince().subscribe(reponse => this.listProvince = reponse , () => alert(this.error));
 
   }
 
-  // tslint:disable-next-line:typedef
-  supprimerProvince(id){
-    this.service.supprimerProvince(id).subscribe(reponse => this.voirProvince(), reponse => alert(this.error));
+  supprimerProvince(id): void{
+    this.service.supprimerProvince(id).subscribe(() => this.voirProvince(), () => alert(this.error));
   }
 }

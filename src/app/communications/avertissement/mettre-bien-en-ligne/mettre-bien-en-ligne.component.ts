@@ -76,7 +76,6 @@ export class MettreBienEnLigneComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // tslint:disable-next-line:typedef
   activation(): void{
     this.cachedemandeJour = false;
     this.verifCode = true;
@@ -85,10 +84,9 @@ export class MettreBienEnLigneComponent implements OnInit {
       bien.id = this.bien.id;
       bien.type_bien = this.bien.type_bien;
       bien.coordonnee = this.bien.coordonnee;
-      // @ts-ignore
       bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
-      this.bienService.envoiMail(bien).subscribe(result => {
-      }, result => alert('problemme de connection server'));
+      this.bienService.envoiMail(bien).subscribe(() => {
+      }, () => alert('problemme de connection server'));
     }
     else{
       this.route.navigateByUrl('/profil');
@@ -105,13 +103,13 @@ export class MettreBienEnLigneComponent implements OnInit {
       bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
       this.personneService.verifCompte(this.veifCodeForm.value.codeActivation).subscribe((reponse: boolean) => {
         if (reponse){
-          this.bienService.activate(bien).subscribe(rep => {
+          this.bienService.activate(bien).subscribe(() => {
             this.onClose();
-          }, rep => alert('problemme de connection server'));
+          }, () => alert('problemme de connection server'));
         }else{
           this.codeFaut = 'code incorecte';
         }
-      }, reponse => alert('problemme de connection server'));
+      }, () => alert('problemme de connection server'));
     }
   }
 

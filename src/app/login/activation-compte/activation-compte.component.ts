@@ -51,9 +51,12 @@ export class ActivationCompteComponent implements OnInit {
             this.ser.saveToken(reponse2.token as string);
             this.personneService.infoPersonne().subscribe((rep: Personne) => {
                 this.ser.redirection(rep);
+                this.personneService.verifIBAU(rep).subscribe((reponses: boolean) => {
+                  sessionStorage.setItem(this.ser.SessionVerifIBAU, JSON.stringify(reponses));
+                }, () => alert('Impossible de verifier l\'IBAU'));
                 this.dialogRef.close();
-            }, rep => alert('error RepPersonne') );
-          }, reponse2 => alert('error123456789'));
+            }, () => alert('error RepPersonne') );
+          }, () => alert('error123456789'));
         }else {
           this.textErro = '*** CODE INCORECTE ***';
         }

@@ -17,11 +17,11 @@
 
   </div>
 
-  <div  align="center" *ngIf="attenteBool">
+  <div class="text-center" *ngIf="attenteBool">
     <app-message-dattente></app-message-dattente>
   </div>
 
-  <div  align="center" *ngIf="this.connexionOK">
+  <div class="text-center" *ngIf="this.connexionOK">
     <h1>Confirmation d'identitée</h1>
     <p>un e-mail vient de vous être envoyé. Insérez votre code.</p>
     <form [formGroup]="verifForm">

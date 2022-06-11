@@ -2,20 +2,50 @@
   <div id="formContent" *ngIf="this.inscriptionBool">
 
     <!-- Login Form -->
-    <form [formGroup]="PersonneForm">
+    <form [formGroup]="PersonneForm" class="text-center">
       <div class="p-3 mb-2 bg-primary text-white">
         <h1>Nouveau Client</h1>
       </div>
       <p class="text-danger" *ngIf="textBool">{{textError}}</p>
-      <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
-      <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
-      <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
-      <input type="password" formControlName="Password"  class="fadeIn third" name="password" placeholder="Un mot de passe">
-      <input type="password" formControlName="verifPassword"  class="fadeIn third" name="password" placeholder="Verif mot de passe">
-      <input type="number" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
-      <p *ngIf="verifExiste()" >Une personne est déjà inscrit avec cette adresse email !</p>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Nom.valid">Un nom entre 2 et 30 carractères</p>
+        </label>
+        <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
+      </div>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Prenom.valid">Un prénom entre 2 et 30 carractères</p>
+        </label>
+        <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
+      </div>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="errorDate">Il faut être majeur (+18ans)</p>
+        </label>
+        <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
+      </div>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Password.valid">Mot-de-passe de minimum 8 carractère</p>
+        </label>
+        <input type="password" formControlName="Password"  class="fadeIn third" name="password" placeholder="Un mot de passe">
+      </div>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="this.PersonneForm.value.Password != this.PersonneForm.value.verifPassword">Les Deux mot-de-passe ne correspondent pas</p>
+        </label>
+        <input type="password" formControlName="verifPassword"  class="fadeIn third" name="password" placeholder="Verif mot de passe">
+      </div>
+      <div>
+        <label>
+          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Telephone.valid">Votre numéro doit contenir maximum 14 chiffre</p>
+        </label>
+        <input type="number" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
+      </div>
       <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
       <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()" *ngIf="this.PersonneForm.valid">
+      <p *ngIf="verifExiste()" class="text-danger">Une personne est déjà inscrite avec cette adresse email !</p>
     </form>
 
   </div>

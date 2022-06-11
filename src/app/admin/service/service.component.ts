@@ -15,7 +15,7 @@ export class ServiceComponent implements OnInit {
   constructor(private serviceService: ServiceService, private typeService: TypeDeServiceService, private villeService: VilleService) {}
 
   private error = 'Il y a eu un probleme :(';
-  startingString: string = '';
+  startingString = '';
 
   serviceForm = new FormGroup({
     nom: new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -38,25 +38,16 @@ export class ServiceComponent implements OnInit {
     this.voirService();
   }
 
-  // tslint:disable-next-line:typedef
-  voirVille(){
-    // @ts-ignore
-    this.villeService.voirVille().subscribe(reponse => this.listVille = reponse.list , reponse => alert(this.error));
-    // console.log(this.listVille);
+  voirVille(): void{
+    this.villeService.voirVille().subscribe(reponse => this.listVille = reponse , () => alert(this.error));
   }
 
-  // tslint:disable-next-line:typedef
-  voirType(){
-    // @ts-ignore
-    this.typeService.voirTypeDeService().subscribe(reponse => this.listTypeDeService = reponse.list , reponse => alert(this.error));
-    // console.log(this.listTypeDeService);
+  voirType(): void{
+    this.typeService.voirTypeDeService().subscribe(reponse => this.listTypeDeService = reponse , () => alert(this.error));
   }
 
-  // tslint:disable-next-line:typedef
-  voirService(){
-    // @ts-ignore
-    this.serviceService.voirService().subscribe(reponse => this.listService = reponse.list , reponse => alert(this.error));
-    // console.log(this.listService);
+  voirService(): void{
+    this.serviceService.voirService().subscribe(reponse => this.listService = reponse , () => alert(this.error));
   }
 
   ajouterService(): void{
@@ -78,11 +69,11 @@ export class ServiceComponent implements OnInit {
       service.nom = this.serviceForm.value.nom;
       service.type = this.listTypeDeService[this.serviceForm.value.type];
       service.coordonnee = serviceCoordonnee;
-      this.serviceService.ajouterService(service).subscribe(reponse => this.voirService(), reponse => alert(this.error));
+      this.serviceService.ajouterService(service).subscribe(() => this.voirService(), () => alert(this.error));
     }
   }
 
   supprimerService(id): void{
-    this.serviceService.supprimerService(id).subscribe(reponse => this.voirService(), reponse => alert(this.error));
+    this.serviceService.supprimerService(id).subscribe(() => this.voirService(), () => alert(this.error));
   }
 }

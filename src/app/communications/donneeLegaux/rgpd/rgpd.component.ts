@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginService} from '../../../service/login.service';
+import { MatDialogRef} from '@angular/material/dialog';
+import { LoginService} from '../../../service/login.service';
 
 @Component({
   selector: 'app-rgpd',

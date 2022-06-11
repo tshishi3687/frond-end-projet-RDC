@@ -1,8 +1,8 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Bien} from '../objet';
 import {LoginService} from '../service/login.service';
 import {BienService} from '../service/bien.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../all-bien/info-bien/info-bien.component';
 
 @Component({
@@ -14,29 +14,26 @@ export class OneBienComponent implements OnInit {
 
   constructor(private serv: LoginService,
               private bienService: BienService,
-              private dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) data
-  ) {
-    this.b = data.bien;
-  }
+              private dialog: MatDialog
+  ) {}
 
-  b: Bien;
+  @Input() b: Bien;
   service = this.serv.isAuthenticated();
 
   ngOnInit(): void {
   }
 
-  informationbient(b: Bien): void{
-    if (this.service){
+  informationbient(b: number): void{
+    if (this.serv.isAuthenticated()){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '100%';
       dialogConfig.height = '100%';
+      dialogConfig.data = {idBien: b};
       this.dialog.open(InfoBienComponent, dialogConfig);
     }else{
       alert('vous devez être connecter pour en voir plus');
     }
-
   }
 }

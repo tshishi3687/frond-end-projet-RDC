@@ -1,0 +1,11 @@
+.padding {padding: 3rem 0}
+@media print {
+  p.bodyText {font-family:georgia, times, serif;}
+  .contrat {display: none;}
+  .print {
+    display: block;
+  }
+  .padding{padding: 0}
+  .img {display: none}
+  .icon-link {display: none}
+}

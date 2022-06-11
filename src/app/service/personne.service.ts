@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,103 +8,57 @@ import {LoginService} from './login.service';
 export class PersonneService {
 
   constructor(private client: HttpClient) { }
-  private service: LoginService;
 
   // tslint:disable-next-line:typedef
   ajouterPersonne(personne) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/creat', personne, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/creat', personne);
   }
 
   // tslint:disable-next-line:typedef
   verifIBAU(personne) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/ibau', personne, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/ibau', personne);
   }
 
   // tslint:disable-next-line:typedef
   infoPersonne() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
-      })
-    };
-    return this.client.get('http://localhost:8081/personne/info_personne', httpOptions);
+    return this.client.get(environment.serveur_url + '/personne/info_personne');
   }
 
   // tslint:disable-next-line:typedef
   voirPersonne(personne){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/user', personne, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/user', personne);
   }
 
   // tslint:disable-next-line:typedef
   voirSiExiste(personne){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/email', personne, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/email', personne);
   }
 
   // tslint:disable-next-line:typedef
   like(likeBien){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/likes', likeBien, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/likes', likeBien);
   }
 
   // tslint:disable-next-line:typedef
   verifCompte(codeActivation){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/activation_compte', codeActivation, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/activation_compte', codeActivation);
   }
 
   // tslint:disable-next-line:typedef
   changeMDP(info){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/change_passe', info, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/change_passe', info);
   }
 
   // tslint:disable-next-line:typedef
   mdpModif(modif){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem('jwt-details'))
-      })
-    };
 
-    return this.client.post('http://localhost:8081/personne/mdp_modif', modif, httpOptions);
+    return this.client.post(environment.serveur_url + '/personne/mdp_modif', modif);
   }
 }

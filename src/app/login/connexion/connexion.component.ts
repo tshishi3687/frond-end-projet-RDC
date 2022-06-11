@@ -28,6 +28,7 @@ export class ConnexionComponent implements OnInit {
   });
   textErro: string;
   connnectionOKBUT = true;
+  connexionCo: string;
 
   ngOnInit(): void {
   }
@@ -47,7 +48,6 @@ export class ConnexionComponent implements OnInit {
       const mdp = new Mdp();
       mdp.mail = this.logForm.value.email;
       mdp.mdp = this.logForm.value.mdp;
-      // @ts-ignore
       this.personneService.voirPersonne(mdp).subscribe(reponse => {
 
         // @ts-ignore
@@ -55,11 +55,14 @@ export class ConnexionComponent implements OnInit {
         this.personneService.infoPersonne().subscribe((rep: Personne) => {
           if (rep.active){
             this.logService.redirection(rep);
+            this.personneService.verifIBAU(rep).subscribe((reponses: boolean) => {
+              sessionStorage.setItem(this.logService.SessionVerifIBAU, JSON.stringify(reponses));
+            }, () => alert('Impossible de verifier l\'IBAU'));
           }else{
             this.comCodeActive(mdp);
           }
-        }, rep => alert('error RepPersonne') );
-      }, reponse => alert(this.error));
+        }, () => alert('error RepPersonne') );
+      }, () => this.connexionCo = 'Votre E-mail ou votre mot-de-passe\nest/sont invalide');
     }
   }
 }

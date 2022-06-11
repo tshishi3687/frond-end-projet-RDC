@@ -1,51 +1,27 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {Service} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  constructor(private client: HttpClient, private service: LoginService) { }
+  constructor(private client: HttpClient) { }
 
   // tslint:disable-next-line:typedef
   ajouterService(service){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.post(this.service.serveurAdresse + '/service', service, httpOptions);
+    return this.client.post(environment.serveur_url + '/service', service);
   }
 
   // tslint:disable-next-line:typedef
   voirService() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.get(this.service.serveurAdresse + '/service', httpOptions);
-  }
-
-  // tslint:disable-next-line:typedef
-  voirServiceVille(bien) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.post(this.service.serveurAdresse + '/service/ville', bien, httpOptions);
+    return this.client.get<Service[]>(environment.serveur_url + '/service');
   }
 
   // tslint:disable-next-line:typedef
   supprimerService(id) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.delete(this.service.serveurAdresse + '/service/' + id, httpOptions);
+    return this.client.delete(environment.serveur_url + '/service/' + id);
   }
 }

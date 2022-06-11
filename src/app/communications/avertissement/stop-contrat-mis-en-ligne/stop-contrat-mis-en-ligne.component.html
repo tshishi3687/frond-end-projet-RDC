@@ -21,7 +21,7 @@
         </div>
         <div class="wrapper fadeInDown" *ngIf="verifCode">
           <div id="formContent">
-            <app-pay-pal [idObjet]="contrat.id" [prix]="contrat.bienVuDTO.prix" [payementPour]="'mel'" [reservation]="null"></app-pay-pal>
+            <app-pay-pal (statusPayement)="onClose()" [idObjet]="contrat.id" [prix]="contrat.bienVuDTO.prix" [payementPour]="'mel'" [reservation]="null"></app-pay-pal>
           </div>
         </div>
       </div>

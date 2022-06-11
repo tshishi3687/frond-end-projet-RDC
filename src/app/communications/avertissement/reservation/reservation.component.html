@@ -9,11 +9,11 @@
         <div class="card shadow-sm" *ngIf="!(acceptForm.value.check && !verifCode && codeAcceptee && verifCode2)">
           <app-img-caroucel [img]="this.bien.images" [pourcentageAffichage]="55"></app-img-caroucel>
           <div class="card-body">
-            <h3 align="center">{{this.bien.coordonnee.ville.nomVille}} / {{this.bien.coordonnee.ville.province.nomprovince}}</h3>
-            <h3 align="center">{{this.bien.type_bien.nom}}</h3>
+            <h3 class="text-center">{{this.bien.coordonnee.ville.nomVille}} / {{this.bien.coordonnee.ville.province.nomprovince}}</h3>
+            <h3 class="text-center">{{this.bien.type_bien.nom}}</h3>
 
-            <h2 align="center" class="text-primary">{{this.bien.prix}}€ / nuit</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols bg-secondary text-white" align="center">
+            <h2  class="text-primary text-center">{{this.bien.prix}}€ / nuit</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols bg-secondary text-white text-center" >
               <div class="col-xl-3">{{this.bien.npmax}} / <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
@@ -28,16 +28,17 @@
             <br>
             <div class="d-flex justify-content-between align-items-center">
 
-              <small class="text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
+              <small class="text-muted">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                 <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
-              </svg> : {{this.bien.likes}}</small>
-              <small class="text-muted">{{this.bien.dateCreation | date}}</small>
+              </svg> : {{this.bien.likes}}
+              </small>
             </div>
           </div>
         </div>
         <div class="card shadow-sm" *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
-          <app-pay-pal  [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
+          <app-pay-pal (statusPayement)="onClose()" [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
         </div>
         <div class="card shadow-sm" *ngIf="!acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
           <h3 class="bg-success">Votre reservation c'est fait avec succès</h3>
@@ -104,7 +105,7 @@
             </thead>
             <tbody>
             <tr>
-              <th scope="row">{{bien.prix}}</th>
+              <th scope="row">{{bien.prix}}€</th>
               <td>{{bien.id}}</td>
               <td>{{bien.type_bien.nom}}</td>
               <td>{{this.bien.coordonnee.ville.nomVille}} {{this.bien.coordonnee.ville.province.nomprovince}}</td>
@@ -116,7 +117,7 @@
             <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">N° jour(s)</th>
+              <th scope="col">N° Nuit</th>
               <th scope="col">Date d'arrivée</th>
               <th scope="col">Date de départ</th>
             </tr>

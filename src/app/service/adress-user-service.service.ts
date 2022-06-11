@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {AdressUser} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdressUserServiceService {
 
-  constructor(private client: HttpClient, private service: LoginService) { }
+  constructor(private client: HttpClient) { }
 
   // tslint:disable-next-line:variable-name typedef
   voirAdressUSer(personne) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/adress_user/user', personne, httpOptions);
+    return this.client.post<AdressUser>(environment.serveur_url + '/adress_user/user', personne);
   }
 
   // tslint:disable-next-line:variable-name typedef
   ajouterAdressUser(adress) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/adress_user', adress, httpOptions);
+    return this.client.post(environment.serveur_url + '/adress_user', adress);
   }
 }

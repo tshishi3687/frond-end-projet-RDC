@@ -1,4 +1,4 @@
-<div class="container-fluid " >
+<div >
   <div class="menu row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white" >
      <app-menu></app-menu>
      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3" *ngIf="!this.service.isAuthenticated()">
@@ -21,10 +21,6 @@
        <app-inscription *ngIf="inscription"></app-inscription>
      </div>
    </div>
-
-  <div class="body">
     <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
     <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
-  </div>
-
 </div>

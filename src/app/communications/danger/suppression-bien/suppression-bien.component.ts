@@ -25,7 +25,6 @@ export class SuppressionBienComponent implements OnInit {
 
   bien: Bien;
   @Output() biensup = new EventEmitter();
-  clientService = this.clientSer;
   // tslint:disable-next-line:max-line-length
   suppressionMessage: string;
   btnSuppress = false;
@@ -47,16 +46,11 @@ export class SuppressionBienComponent implements OnInit {
   }
 
   suprimerBien(): void {
-    let bienSupprime = false;
     // tslint:disable-next-line:max-line-length
     if (this.suppressionMessage.includes(this.deleteForm.value.textDelet) && this.suppressionMessage.length === this.deleteForm.value.textDelet.length) {
-      this.bienService.supprimerBien(this.bien).subscribe(reponse => {
-        bienSupprime = true;
-        this.biensup.emit(bienSupprime);
+      this.bienService.supprimerBien(this.bien).subscribe(() => {
         this.annulle();
-        // @ts-ignore
-        this.location.back();
-      }, reponse => alert('pas ok'));
+      }, () => alert('pas ok'));
     }
   }
 }

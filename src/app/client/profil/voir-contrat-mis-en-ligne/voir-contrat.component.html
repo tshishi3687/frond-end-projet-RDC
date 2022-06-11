@@ -1,20 +1,31 @@
-<div class="container px-4 py-5" id="featured-3" *ngFor="let c of listContrat">
+<div [ngClass]="{print: printSelected === c}" class="contrat container px-4 py-5" id="featured-3" *ngFor="let c of listContrat">
   <h2 class="pb-2 border-bottom">Contrat de mise en ligne de/d' {{c.bienVuDTO.type_bien.nom}}.<br>A l'adresse: {{c.bienVuDTO.coordonnee.num}} {{c.bienVuDTO.coordonnee.rue}}, {{c.bienVuDTO.coordonnee.ville.nomVille}} / {{c.bienVuDTO.coordonnee.ville.province.nomprovince}}</h2>
-  <div class="row">
-    <div class="col">
+  <div class="row" *ngIf="!signature">
+    <div class="col-6">
       <div *ngIf="c.enCour">
-        <h3 class="pb-2 border-bottom alert alert-success" >En cour... du {{c.ddDebut | date}} à {{c.ddFin | date}}</h3>
+        <h3 class=" border-bottom alert alert-success" >En cour... du {{c.ddDebut | date : 'dd MMMM yyyy'}} à {{c.ddFin | date : 'dd MMMM yyyy'}}</h3>
       </div>
       <div *ngIf="!c.enCour">
-        <h3 class="pb-2 border-bottom alert alert-danger">Ce contrat a prit fin le {{c.ddFin | date}}</h3>
+        <h3 class="border-bottom alert alert-danger">Ce contrat a prit fin le {{c.ddFin | date : 'dd MMMM yyyy'}}</h3>
       </div>
     </div>
-    <div class="col" *ngIf="c.enCour">
+    <div class="col text-center">
+      <button type="button" class="btn btn-link btn-lg px-4 me-md-2 text-danger" (click)="print(c)">imprinmer</button>
+    </div>
+    <div class="col text-center" *ngIf="c.enCour">
       <button type="button" class="btn btn-link btn-lg px-4 me-md-2 text-danger" (click)="stopContrat(c)">Mettre fin au contrat</button>
     </div>
   </div>
-
-  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+  <div class="text-center border-bottom alert alert-danger" *ngIf="signature">
+    <h1 class="display-1 text-center">
+      Monbembo.cd
+      <span>
+        <img class="rounded-lg-3" src="{{this.logo}}"  width="10%" height="10%" alt="TSHISHI création">
+      </span>
+    </h1>
+    <p>By TSHISHI-RDC</p>
+  </div>
+  <div class="row g-4 padding row-cols-1 row-cols-lg-3">
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">
       </div>
@@ -30,7 +41,8 @@
       </div>
       <h3>Objet</h3>
       <p>{{c.objet}}</p>
-
+      <h3>Durée</h3>
+      <p>{{c.duree}}</p>
     </div>
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">
@@ -39,17 +51,16 @@
       <p>{{c.loyer}}</p>
       <h3>Etat des lieux</h3>
       <p>{{c.etatLieu}}</p>
+      <h5>DARDL</h5>
+      <p>{{c.dardl}}</p>
       <a class="icon-link">
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
       </a>
     </div>
-    <div class="feature col">
+    <div class="img feature col">
       <div class="feature-icon bg-primary bg-gradient">
       </div>
-      <h3>Durée</h3>
-      <p>{{c.duree}}</p>
-      <h5>DARDL</h5>
-      <p>{{c.dardl}}</p>
+      <app-one-bien [b]="c.bienVuDTO"></app-one-bien>
       <a class="icon-link">
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
       </a>

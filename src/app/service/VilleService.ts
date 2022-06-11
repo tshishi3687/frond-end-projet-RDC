@@ -1,50 +1,36 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {Ville} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VilleService {
 
-  constructor(private client: HttpClient, private service: LoginService) {}
+  constructor(private client: HttpClient) {}
 
   // tslint:disable-next-line:typedef
   ajouterVille(ville){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/ville', ville, httpOptions);
+    return this.client.post(environment.serveur_url + '/ville', ville);
   }
 
   // tslint:disable-next-line:typedef
   voirVille() {
-    return this.client.get(this.service.serveurAdresse + '/ville');
+    return this.client.get<Ville[]>(environment.serveur_url + '/ville');
   }
 
   // tslint:disable-next-line:typedef
   supprimerVille(id) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.delete(this.service.serveurAdresse + '/ville/' + id, httpOptions);
+    return this.client.delete(environment.serveur_url + '/ville/' + id);
   }
 
   // tslint:disable-next-line:typedef
   ajouterImageVille(img) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
     // tslint:disable-next-line:no-unused-expression
     // @ts-ignore
-    return this.client.post(this.service.serveurAdresse + '/image_ville/upload', img, httpOptions);
+    return this.client.post(environment.serveur_url + '/image_ville/upload', img);
   }
 }

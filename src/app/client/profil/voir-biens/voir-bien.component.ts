@@ -7,7 +7,6 @@ import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component
 import {SuppressionBienComponent} from '../../../communications/danger/suppression-bien/suppression-bien.component';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
-import {Router} from '@angular/router';
 import {MettreBienEnLigneComponent} from '../../../communications/avertissement/mettre-bien-en-ligne/mettre-bien-en-ligne.component';
 
 @Component({
@@ -21,8 +20,7 @@ export class VoirBienComponent implements OnInit {
     private infoPersonne: LoginService,
     private bienService: BienService,
     private dialog: MatDialog,
-    private typeDBien: TypeDeBienService,
-    private route: Router
+    private typeDBien: TypeDeBienService
   ) { }
 
 
@@ -34,7 +32,6 @@ export class VoirBienComponent implements OnInit {
   startingString = '';
   service = this.infoPersonne;
   private error = 'Il y a eu un probleme :(';
-  private echange = false;
   listBien: Array<Bien> = [];
   listTypeBien: Array<TypeDeBien> = [];
   typeBien = '';
@@ -68,17 +65,7 @@ export class VoirBienComponent implements OnInit {
     maPersonne.nom = this.infoPersonne.client().nom;
     maPersonne.prenom = this.infoPersonne.client().prenom;
     // tslint:disable-next-line:max-line-length
-    this.bienService.voirBienPersonne(maPersonne).subscribe((reponse: Array<Bien>) => this.listBien = reponse, reponse => alert(this.error));
-  }
-
-  changement(): boolean{
-    if (this.echange === !this.echange) {
-      this.echange = true;
-      return this.echange;
-    }else{
-      this.echange = false;
-      return this.echange;
-    }
+    this.bienService.voirBienPersonne(maPersonne).subscribe((reponse: Array<Bien>) => this.listBien = reponse, () => alert(this.error));
   }
 
 
@@ -99,8 +86,10 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
     dialogConfig.data = {bien: b};
-    this.dialog.open(SuppressionBienComponent, dialogConfig);
-    this.voirBienPersonne();
+    this.dialog.open(SuppressionBienComponent, dialogConfig).afterClosed().subscribe(() => {
+      alert('Votre bien est supprimé.');
+      this.voirBienPersonne();
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -111,7 +100,10 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
     dialogConfig.data = {bien: b};
-    this.dialog.open(MettreBienEnLigneComponent, dialogConfig);
+    this.dialog.open(MettreBienEnLigneComponent, dialogConfig).afterClosed().subscribe(() => {
+      alert('Votre bien est en ligne :)-');
+      this.voirBienPersonne();
+    });
   }
 
   enventTB(): void{

@@ -2,37 +2,29 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginService} from './login.service';
 import {Observable} from 'rxjs';
+import {Province} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
 
-  constructor(private client: HttpClient, private service: LoginService) {}
+  constructor(private client: HttpClient) {}
 
   // tslint:disable-next-line:typedef
   ajouterProvince(province) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
 
-    return this.client.post(this.service.serveurAdresse + '/province', province, httpOptions);
+    return this.client.post(environment.serveur_url + '/province', province);
   }
 
 
   voirProvince(): Observable<any>{
-    return this.client.get(this.service.serveurAdresse + '/province');
+    return this.client.get<Province[]>(environment.serveur_url + '/province');
   }
 
   // tslint:disable-next-line:typedef
   supprimerProvince(id) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.delete(this.service.serveurAdresse + '/province/' + id, httpOptions);
+    return this.client.delete(environment.serveur_url + '/province/' + id);
   }
 }

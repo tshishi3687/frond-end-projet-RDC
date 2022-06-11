@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BienMisEnLigneService} from '../../../service/bien-mis-en-ligne.service';
 import {LoginService} from '../../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {Bien, BienMisEnLigne, Contrat, Personne, TypeDeBien} from '../../../objet';
+import {Bien, BienMisEnLigne, Contrat, TypeDeBien} from '../../../objet';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {VoirContratComponent} from '../voir-contrat-mis-en-ligne/voir-contrat.component';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -15,7 +15,6 @@ import {TypeDeBienService} from '../../../service/type-de-bien.service';
 })
 export class BienMisEnLigneComponent implements OnInit {
 
-  private error = 'Il y a eu un probleme :\'( ';
   constructor(
     private bmelService: BienMisEnLigneService,
     private serv: LoginService,
@@ -35,27 +34,10 @@ export class BienMisEnLigneComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  voirTypeBien(): void{
-    this.typeDBien.voirTypeDeBien().subscribe((reponse: Array<TypeDeBien>) => {
-      // @ts-ignore
-      this.listTypeBien = reponse.list;
-    });
-  }
-
-  bienMisEnLigne(): void{
-    // tslint:disable-next-line:max-line-length
-    if (this.service.isAuthenticated()){
-      // @ts-ignore
-      // tslint:disable-next-line:max-line-length
-      this.bmelService.voirBienMisEnLigneBailleur(this.service.client()).subscribe(reponse => this.listBienMisEnLigne = reponse, reponse => alert(this.error));
-    }
-  }
-
   enventTB(): void{
     if (this.rechercheForm.value.typeBien === 'defaults'){
       this.typeBien = '';
     }else{
-      // @ts-ignore
       this.typeBien = this.listTypeBien[this.rechercheForm.value.typeBien].nom;
     }
   }

@@ -1,12 +1,9 @@
-import {DatePipe} from '@angular/common';
 import {Byte} from '@angular/compiler/src/util';
 
 export class Province{
   id: number;
   nomprovince: string;
   description: string;
-  dateCreation: Date;
-  superid: number;
   img: Array<ImageProvince>;
   villes: Array<Ville>;
 }
@@ -25,15 +22,11 @@ export class Ville{
 export class TypeDeBien{
   id: number;
   nom: string;
-  dateCreation: Date;
-  superid: number;
 }
 
 export class TypeDeService{
   id: number;
   nomtype: string;
-  dateCreation: Date;
-  superid: number;
 }
 
 export class Coordonnee{
@@ -44,8 +37,6 @@ export class Coordonnee{
   num: number;
   email: string;
   telephone: number;
-  dateCreation: Date;
-  superid: number;
 }
 
 export class Service{
@@ -53,8 +44,6 @@ export class Service{
   nom: string;
   type: TypeDeService;
   coordonnee: Coordonnee;
-  dateCreation: Date;
-  superid: number;
 }
 
 export class Roll{
@@ -62,21 +51,16 @@ export class Roll{
   nomRoll: string;
 }
 
-export class Authorities{
-  authority: string;
-}
-
 export class Personne{
   id: number;
   nom: string;
   prenom: string;
-  ddn: DatePipe;
+  ddn: Date;
   role: string;
   roll: Roll;
   contactUser: ContactUser;
   password: Mdp;
   verifMDP: string;
-  ddj: DatePipe;
   active: boolean;
 }
 
@@ -99,6 +83,7 @@ export class Bien{
   likes: number;
   modeActive: boolean;
   images: Array<Img>;
+  image: Img;
   idNNuit: number;
   dateFinMisEnLigne: Date;
   service: Array<Service>;
@@ -289,4 +274,11 @@ export class PayPal{
 export class Detailes{
   id: number;
   details: Details;
+}
+
+export interface TryListAllBiens{
+  typeId: number;
+  provinceId: number;
+  villeId: number;
+  page: number;
 }

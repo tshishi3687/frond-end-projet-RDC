@@ -1,36 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoginService} from './login.service';
+import {HttpClient} from '@angular/common/http';
+import {TypeDeBien} from '../objet';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TypeDeBienService {
 
-  constructor(private client: HttpClient, private service: LoginService) { }
-
+  constructor(private client: HttpClient) { }
   // tslint:disable-next-line:typedef
   ajouterTypeDeBien(typeDeBien){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.post('http://localhost:8081/typebien', typeDeBien, httpOptions);
+    return this.client.post(environment.serveur_url + '/typebien', typeDeBien);
   }
 
   // tslint:disable-next-line:typedef
   voirTypeDeBien() {
-    return this.client.get('http://localhost:8081/typebien');
+    return this.client.get<TypeDeBien[]>(environment.serveur_url + '/typebien');
   }
 
   // tslint:disable-next-line:typedef
   supprimerTypeDeBien(id) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: JSON.parse(sessionStorage.getItem(this.service.Sessionjwt))
-      })
-    };
-    return this.client.delete('http://localhost:8081/typebien/' + id, httpOptions);
+    return this.client.delete(environment.serveur_url + '/typebien/' + id);
   }
 }

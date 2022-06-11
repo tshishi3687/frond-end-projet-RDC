@@ -4,11 +4,12 @@ import {BienService} from '../../../service/bien.service';
 import {VilleService} from '../../../service/VilleService';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Aladisposition, Bien, Coordonnee, DureeLocation, TypeDeBien, Ville} from '../../../objet';
+import {Aladisposition, Bien, Coordonnee, TypeDeBien, Ville} from '../../../objet';
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PresentationBienCreeComponent} from './presentation-bien-cree/presentation-bien-cree.component';
+import {AngularEditorConfig} from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -28,12 +29,9 @@ export class CreationDeBienComponent implements OnInit {
 
   @ViewChild('imgs') imgs: ElementRef;
   private error = 'Il y a eu un probleme :(';
-  private ok = 'tout c\'est bien passée :)-';
-  imgFile: string;
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
-  listDureeLocation: Array<DureeLocation> = [];
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
@@ -46,7 +44,7 @@ export class CreationDeBienComponent implements OnInit {
     nsdb: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     nwc: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
     superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(900000)]),
-    description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(3000)]),
     lien_photo: new FormControl(),
     coordonneeCPostal: new FormControl(null, [Validators.min(100), Validators.max(100000)]),
     coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
@@ -72,15 +70,34 @@ export class CreationDeBienComponent implements OnInit {
     velo: new FormControl(),
     animaux: new FormControl()
   });
-  // tslint:disable-next-line:ban-types
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: 'Veuillez être le plus complet possible:....',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    customClasses: [
+      {
+        name: 'Quote',
+        class: 'quoteClass',
+      },
+      {
+        name: 'Title Heading',
+        class: 'titleHead',
+        tag: 'h1',
+      },
+    ],
+  };
+
   private myFiles: File [] = [];
   private selectedFile: File;
 
   dialogConfig = new MatDialogConfig();
   message: string;
-  imageName: any;
   tailleimg = false;
-  superid: number;
   imgError = '';
   imgValid = false;
   errorList: Array<string> = [];
@@ -91,36 +108,6 @@ export class CreationDeBienComponent implements OnInit {
   ngOnInit(): void {
     this.voirVille();
     this.voirTypeDeBien();
-  }
-
-  onFileSelected(event): void {
-    if ((event.target.files.length) > 10){
-      this.tailleimg = true;
-    }else{
-      for (let i = 0; i < (event.target.files.length); i++) {
-        if (event.target.files[i].size <= 1048576){
-          this.selectedFile = event.target.files[i];
-          // @ts-ignore
-          this.myFiles.push(this.selectedFile);
-        }else{
-          this.imgValid = true;
-          this.imgError = 'La photo n°' + (i + 1) + ' portant le nom de "' + event.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + event.target.files[i].size + '/Ko';
-          this.errorList.push(this.imgError);
-        }
-      }
-    }
-  }
-
-  voirVille(): void{
-    // @ts-ignore
-    this.villeService.voirVille().subscribe(reponse => this.listVille = reponse.list , reponse => alert(this.error));
-    // console.log(this.listVille);
-  }
-
-  voirTypeDeBien(): void{
-    // @ts-ignore
-    // tslint:disable-next-line:max-line-length
-    this.typeDeBienService.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse.list, reponse => alert(this.error));
   }
 
   ajouterBien(): void{
@@ -156,8 +143,6 @@ export class CreationDeBienComponent implements OnInit {
       aladispo.moto = this.BienForm.value.moto;
       aladispo.velo = this.BienForm.value.velo;
       aladispo.animaux = this.BienForm.value.animaux;
-      console.log(aladispo.eauPotable);
-      console.log(aladispo);
       const bien = new Bien();
       bien.id = 0;
       bien.type_bien = this.listTypeDeBien[this.BienForm.value.type];
@@ -184,19 +169,45 @@ export class CreationDeBienComponent implements OnInit {
           for (let i = 0; i < (this.myFiles.length); i++){
             uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
           }
-          this.imgService.ajouterImage(uploadImageData).subscribe(reponse => {
+          this.imgService.ajouterImage(uploadImageData).subscribe(() => {
             this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
-              // console.log(monBien);
               this.dialogConfig.data = {bien: monBien};
               this.resstFormControl();
               this.voirBienCre();
-            }, monBien => alert('error'));
-          }, reponse => alert(this.error));
+            }, () => alert('error'));
+          }, () => alert(this.error));
         }
-      }, reponselienPhoto => alert(this.error));
+      }, () => alert(this.error));
     }else{
       alert(this.error + ' on est ici 3');
     }
+  }
+
+  onFileSelected(event): void {
+    if ((event.target.files.length) > 10){
+      this.tailleimg = true;
+    }else{
+      for (let i = 0; i < (event.target.files.length); i++) {
+        if (event.target.files[i].size <= 6291456){
+          this.selectedFile = event.target.files[i];
+          this.myFiles.push(this.selectedFile);
+        }else{
+          this.imgValid = true;
+          this.imgError = 'La photo n°' + (i + 1) + ' portant le nom de "' + event.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + event.target.files[i].size + '/Ko';
+          this.errorList.push(this.imgError);
+        }
+      }
+    }
+  }
+
+  voirVille(): void{
+    this.villeService.voirVille().subscribe(reponse => this.listVille = reponse , reponse => alert(this.error + '\n' + reponse));
+
+  }
+
+  voirTypeDeBien(): void{
+    // tslint:disable-next-line:max-line-length
+    this.typeDeBienService.voirTypeDeBien().subscribe(reponse => this.listTypeDeBien = reponse, reponse => alert(this.error + '\n' + reponse));
   }
 
   voirBienCre(): void{

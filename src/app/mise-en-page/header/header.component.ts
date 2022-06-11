@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MiseEngardeStartAppsComponent} from '../../communications/avertissement/mise-engarde-start-apps-rgpd/mise-engarde-start-apps.component';
-import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -12,15 +12,14 @@ import { Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(private ser: LoginService,
-              private dialog: MatDialog,
-              private root: Router) { }
-  myRoot = '';
+              private dialog: MatDialog) { }
+
   imgBoo = true;
   connexion: boolean;
   mdpBoll: boolean;
   inscription: boolean;
   service = this.ser;
-  logo = 'assets/img/rdc-map-flag.png';
+  logo = this.ser.logo;
   boolLogo = true;
 
   ngOnInit(): void {

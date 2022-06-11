@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {LoginService} from './service/login.service';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,4 @@ import {LoginService} from './service/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  service: LoginService;
 }
