@@ -13,7 +13,7 @@
               <form [formGroup]="rechercheForm">
                 <div class="col">
                   <label class="form-label"></label>
-                  <select class="form-select"  aria-label="Default select example" formControlName="typeBien" (change)="enventTB()">
+                  <select #type class="form-select"  aria-label="Default select example" formControlName="typeBien" (change)="enventTB()">
                     <option value="defaults" selected>Type de Bien</option>
                     <option  *ngFor="let t of listTypeBien; let i = index" value="{{i}}">{{t.nom}}</option>
                   </select>
@@ -21,7 +21,7 @@
                 <br>
                 <div class="col">
                   <label class="form-label"></label>
-                  <select class="form-select" aria-label="Default select example" formControlName="province" (change)="enventProvince()">
+                  <select #provinces class="form-select" aria-label="Default select example" formControlName="province" (change)="enventProvince()">
                     <option value="defaults" selected>Par Province</option>
                     <option *ngFor="let p of listProvince; let i = index" value="{{i}}">{{p.nomprovince}}</option>
                   </select>
@@ -31,7 +31,7 @@
                 <br>
                 <div class="col" *ngIf="rechercheForm.value.province != 'defaults'">
                 <label class="form-label"></label>
-                <select class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
+                <select #villes class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
                   <option value="defaults" selected>Par Ville</option>
                   <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
                 </select>
@@ -39,7 +39,7 @@
               </div>
               </form>
               <div class="col">
-                <button type="button" class="btn btn-success" (click)="voirToutBien()">Faire la recherche</button>
+                <button type="button" class="btn btn-success" (click)="loadData()">Faire la recherche</button>
               </div>
               <div class="col p-5">
                 <button type="button" class="btn btn-primary" (click)="resetReserche()">Réinitialiser</button>

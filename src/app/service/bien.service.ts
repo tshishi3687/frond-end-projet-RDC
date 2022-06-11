@@ -29,7 +29,7 @@ export class BienService {
   }
 
   // tslint:disable-next-line:typedef
-  voirBien(filtre: TryListAllBiens){
+  voirBien(filtre: { typeId: string; page: number; provinceId: string; villeId: string }){
     let params = new HttpParams();
     params = params.append('page', filtre.page);
     params = params.append('typeId', filtre.typeId);

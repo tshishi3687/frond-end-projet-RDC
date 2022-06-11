@@ -25,7 +25,9 @@ export class InfoBienComponent implements OnInit {
                private dialog: MatDialog,
                @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.rechercheBien(data.idBien);
+    this.bienService.infoBien(data.idBien).subscribe((reponse: Bien) => {
+      this.bien = reponse;
+    }, () => alert('Il y a eu un problème lor de la récupération des finformation'));
   }
 
   @Output() infoBien: EventEmitter<any> = new EventEmitter();
@@ -38,10 +40,6 @@ export class InfoBienComponent implements OnInit {
   selected: Date | null;
 
   ngOnInit(): void {
-  }
-
-  rechercheBien(idBien: number): void{
-    this.bienService.infoBien(idBien).subscribe((reponse: Bien) => this.bien = reponse, () => alert('Il y a eu un problème lor de la récupération des finformation'));
   }
 
   onClose(): void{
@@ -65,11 +63,10 @@ export class InfoBienComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.height = '100%';
+    dialogConfig.width = 'auto';
+    dialogConfig.height = 'auto';
     dialogConfig.data = {bien: this.bien};
     this.dialog.open(ReservationComponent, dialogConfig).afterClosed().subscribe(() => {
-      alert('Votre réservation a bien été enregistrée.\nPour connaitre les détaile, rendez vous sur "contrat réservation" ou consulté votre boite E-mail.');
       this.onClose();
     });
   }else{

@@ -68,17 +68,6 @@ export class VoirBienComponent implements OnInit {
     this.bienService.voirBienPersonne(maPersonne).subscribe((reponse: Array<Bien>) => this.listBien = reponse, () => alert(this.error));
   }
 
-
-  informationbient(b: Bien): void{
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.height = '100%';
-    dialogConfig.data = {bien: b};
-    this.dialog.open(InfoBienComponent, dialogConfig);
-  }
-
   suprimerBien(b: Bien): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -87,7 +76,6 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.height = 'auto';
     dialogConfig.data = {bien: b};
     this.dialog.open(SuppressionBienComponent, dialogConfig).afterClosed().subscribe(() => {
-      alert('Votre bien est supprimé.');
       this.voirBienPersonne();
     });
   }
@@ -101,7 +89,6 @@ export class VoirBienComponent implements OnInit {
     dialogConfig.height = 'auto';
     dialogConfig.data = {bien: b};
     this.dialog.open(MettreBienEnLigneComponent, dialogConfig).afterClosed().subscribe(() => {
-      alert('Votre bien est en ligne :)-');
       this.voirBienPersonne();
     });
   }

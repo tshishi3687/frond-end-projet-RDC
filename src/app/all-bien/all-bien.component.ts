@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BienService} from '../service/bien.service';
 import {Bien, Province, TryListAllBiens, TypeDeBien, Ville} from '../objet';
 import {ImgService} from '../service/img.service';
@@ -27,6 +27,9 @@ export class AllBienComponent implements OnInit {
     private provinceService: ProvinceService
   ) { }
 
+  @ViewChild('type') type: ElementRef;
+  @ViewChild('provinces') provinces: ElementRef;
+  @ViewChild('villes') villes: ElementRef;
   rechercheForm = new FormGroup({
     province:  new FormControl('defaults'),
     ville: new FormControl('defaults'),
@@ -57,30 +60,23 @@ export class AllBienComponent implements OnInit {
   isLoading = false;
 
   ngOnInit(): void {
-    this.voirToutBien();
+    this.loadData();
     this.voirTypeBien();
     this.voirAllProvince();
   }
 
-  voirToutBien(): void{
-    this.bienService.countBiens().subscribe((reponse: number) => {
-      this.nbPage = Math.floor((reponse - 1) / 6) + 1;
-      this.loadData();
-    }, () => alert('il y a un probleme'));
-  }
   loadData(): void{
-    // tslint:disable-next-line:max-line-length
     this.isLoading = true;
-    // tslint:disable-next-line:max-line-length
     this.bienService.voirBien({
       page: this.currentPage,
-      provinceId: this.rechercheForm.value.province === 'defaults' ? 0 : this.listProvince[this.rechercheForm.value.province].id,
-      typeId: this.rechercheForm.value.typeBien === 'defaults' ? 0 : this.listTypeBien[this.rechercheForm.value.typeBien].id,
+      provinceId: this.rechercheForm.value.province === 'defaults' ? '' : this.listProvince[this.rechercheForm.value.province].nomprovince,
+      typeId: this.rechercheForm.value.typeBien === 'defaults' ? '' : this.listTypeBien[this.rechercheForm.value.typeBien].nom,
       // tslint:disable-next-line:max-line-length
-      villeId: this.rechercheForm.value.ville === 'defaults' ? 0 : this.listProvince[this.rechercheForm.value.province].villes[this.rechercheForm.value.ville].id
-    }).subscribe((reponsee: Array<Bien>) => {
-      this.isLoading = false; this.listBien = reponsee;
-
+      villeId: this.rechercheForm.value.ville === 'defaults' ? '' : this.listProvince[this.rechercheForm.value.province].villes[this.rechercheForm.value.ville].nomVille
+    }).subscribe((reponsee: TryListAllBiens) => {
+      this.isLoading = false;
+      this.listBien = reponsee.list;
+      this.nbPage = Math.floor((reponsee.nbPage - 1) / 6) + 1;
       }, () => alert('il y a un probleme'));
   }
   voirAllProvince(): void{
@@ -136,6 +132,9 @@ export class AllBienComponent implements OnInit {
     this.rechercheForm.value.province = 'defaults';
     this.rechercheForm.value.ville = 'defaults';
     this.rechercheForm.value.typeBien = 'defaults';
+    this.type.nativeElement.value = 'defaults';
+    this.provinces.nativeElement.value = 'defaults';
+    this.villes.nativeElement.value = 'defaults';
     this.imgVille = null;
     this.imgProvince = null;
     this.ville = '';
@@ -145,6 +144,7 @@ export class AllBienComponent implements OnInit {
     this.textVille = '';
     this.titreProvince = '';
     this.textProvince = '';
+    this.loadData();
   }
 
   prev(): void {

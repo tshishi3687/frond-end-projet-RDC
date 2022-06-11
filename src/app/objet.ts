@@ -277,8 +277,10 @@ export class Detailes{
 }
 
 export interface TryListAllBiens{
-  typeId: number;
-  provinceId: number;
-  villeId: number;
+  typeId: string;
+  provinceId: string;
+  villeId: string;
   page: number;
+  nbPage: number;
+  list: Array<Bien>;
 }

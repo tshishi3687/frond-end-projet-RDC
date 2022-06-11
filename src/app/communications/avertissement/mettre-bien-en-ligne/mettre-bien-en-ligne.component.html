@@ -3,6 +3,7 @@
 <div class="container col-xxl-8 px-4 py-5">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
+      <app-one-bien *ngIf="acceptForm.value.check == false" [b]="bien"></app-one-bien>
       <div *ngIf="acceptForm.value.check == true">
         <div *ngIf="this.service.repIBAU()">
           <h1>Combien de temps voulez mettre votre bien en ligne?</h1>
@@ -13,7 +14,6 @@
               <option *ngFor="let n of this.listNuit; let i = index" value="{{i}}">{{n.nNuit}} jours en ligne.</option>
             </select>
           </form>
-
           <br>
           <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="activation()">Mettre en ligne</button>
         </div>

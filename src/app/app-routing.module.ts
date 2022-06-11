@@ -86,6 +86,10 @@ const routes: Routes = [
       }],
     canActivate: [LoginService]
   },
+  {
+    path: '**',
+    redirectTo: 'allBien'
+  }
 ];
 
 @NgModule({
