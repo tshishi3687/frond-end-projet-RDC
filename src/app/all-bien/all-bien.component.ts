@@ -9,6 +9,7 @@ import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
 import {Byte} from '@angular/compiler/src/util';
+import {PersonneService} from '../service/personne.service';
 
 @Component({
   selector: 'app-all-bien',
@@ -24,7 +25,8 @@ export class AllBienComponent implements OnInit {
     private dialog: MatDialog,
     private villeService: VilleService,
     private typeDBien: TypeDeBienService,
-    private provinceService: ProvinceService
+    private provinceService: ProvinceService,
+    private personneService: PersonneService
   ) { }
 
   @ViewChild('type') type: ElementRef;
@@ -47,6 +49,7 @@ export class AllBienComponent implements OnInit {
   listVille: Array<Ville> = [];
   listProvince: Array<Province> = [];
   listTypeBien: Array<TypeDeBien> = [];
+  nbComte: number;
 
   @Output() listBien: Array<Bien> = [];
   imgProvince: Byte[];
@@ -54,7 +57,6 @@ export class AllBienComponent implements OnInit {
   image: string;
   @Output() bien: EventEmitter<any> = new EventEmitter();
   @Input() tostring: string;
-  tryList: TryListAllBiens;
   nbPage = 0;
   currentPage = 1;
   isLoading = false;
@@ -63,6 +65,11 @@ export class AllBienComponent implements OnInit {
     this.loadData();
     this.voirTypeBien();
     this.voirAllProvince();
+    this.nombreCompte();
+  }
+
+  nombreCompte(): void{
+    this.personneService.nbCompte().subscribe((reponse: number) => this.nbComte = reponse);
   }
 
   loadData(): void{
@@ -134,7 +141,10 @@ export class AllBienComponent implements OnInit {
     this.rechercheForm.value.typeBien = 'defaults';
     this.type.nativeElement.value = 'defaults';
     this.provinces.nativeElement.value = 'defaults';
-    this.villes.nativeElement.value = 'defaults';
+    // tslint:disable-next-line:triple-equals
+    if (this.rechercheForm.value.ville != 'defaults'){
+      this.villes.nativeElement.value = 'defaults';
+    }
     this.imgVille = null;
     this.imgProvince = null;
     this.ville = '';

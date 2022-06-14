@@ -7,6 +7,7 @@
       <div class="col-md-3">
         <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 ">
+            <p class="text-center">{{nbComte}} comptes actives.</p>
             <app-img-header></app-img-header>
             <h4 class="fst-italic"></h4>
             <div>
@@ -25,7 +26,7 @@
                     <option value="defaults" selected>Par Province</option>
                     <option *ngFor="let p of listProvince; let i = index" value="{{i}}">{{p.nomprovince}}</option>
                   </select>
-                  <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults'">
+                  <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults' && this.imgProvince">
 
                 </div>
                 <br>
@@ -35,7 +36,7 @@
                   <option value="defaults" selected>Par Ville</option>
                   <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
                 </select>
-                <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults'">
+                <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults' && this.imgVille">
               </div>
               </form>
               <div class="col">

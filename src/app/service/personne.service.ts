@@ -27,6 +27,11 @@ export class PersonneService {
   }
 
   // tslint:disable-next-line:typedef
+  nbCompte() {
+    return this.client.get(environment.serveur_url + '/personne/nbcompte');
+  }
+
+  // tslint:disable-next-line:typedef
   voirPersonne(personne){
 
     return this.client.post(environment.serveur_url + '/personne/user', personne);

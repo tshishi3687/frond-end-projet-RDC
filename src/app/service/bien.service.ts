@@ -49,8 +49,8 @@ export class BienService {
   }
 
   // tslint:disable-next-line:typedef
-  voirUneBien(id){
-    return this.client.get (environment.serveur_url + '/bien/' + id);
+  voirUneBien(idBien: number){
+    return this.client.post(environment.serveur_url + '/bien/readOneBien', + idBien);
   }
 
   // tslint:disable-next-line:typedef
