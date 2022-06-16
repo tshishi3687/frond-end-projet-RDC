@@ -104,16 +104,28 @@ export class CreationDeBienComponent implements OnInit {
   imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
   boolImgNull = false;
   formCreationEnvoyeBool = true;
+  messageAttente: boolean;
 
   ngOnInit(): void {
     this.voirVille();
     this.voirTypeDeBien();
   }
 
+  verifville(): boolean{
+    return this.BienForm.value.coordonneeVille !== 'defaults';
+  }
+
+  verifIMG(): boolean{
+    return this.myFiles.length >= 1;
+  }
+  verifTypeBien(): boolean{
+    return this.BienForm.value.type !== 'defaults';
+  }
+
   ajouterBien(): void{
 
-    if (this.infoPersonne.isAuthenticated()){
-
+    if (this.infoPersonne.isAuthenticated() && !this.messageAttente && this.verifville() && this.verifTypeBien() && this.verifIMG()){
+      this.messageAttente = true;
       const coordonnee = new Coordonnee();
       coordonnee.id = 0;
       coordonnee.ville = this.listVille[this.BienForm.value.coordonneeVille];
@@ -172,6 +184,7 @@ export class CreationDeBienComponent implements OnInit {
           this.imgService.ajouterImage(uploadImageData).subscribe(() => {
             this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
               this.dialogConfig.data = {bien: monBien};
+              this.messageAttente = false;
               this.resstFormControl();
               this.voirBienCre();
             }, () => alert('error'));
@@ -188,7 +201,9 @@ export class CreationDeBienComponent implements OnInit {
       this.tailleimg = true;
     }else{
       for (let i = 0; i < (event.target.files.length); i++) {
-        if (event.target.files[i].size <= 6291456){
+        if (event.target.files[i].type !== 'jpeg' || event.target.files[i].type !== 'png'){
+          console.log('passss bon');
+        }else if (event.target.files[i].size <= 6291456){
           this.selectedFile = event.target.files[i];
           this.myFiles.push(this.selectedFile);
         }else{
@@ -211,6 +226,7 @@ export class CreationDeBienComponent implements OnInit {
   }
 
   voirBienCre(): void{
+    this.messageAttente = false;
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
     this.dialogConfig.width = 'auto';

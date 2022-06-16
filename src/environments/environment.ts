@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-  // serveur_url: 'http://192.168.0.11:8081'
-  // serveur_url: 'http://10.10.19.91:8081'
-  // serveur_url: 'http://mobembo.hopto.org:8081'
-  serveur_url: 'http://localhost:8081'
+  serveur_url: 'http://mobembo.hopto.org:8081'
 };
 
 /*

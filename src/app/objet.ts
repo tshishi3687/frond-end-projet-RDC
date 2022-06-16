@@ -32,7 +32,7 @@ export class TypeDeService{
 export class Coordonnee{
   id: number;
   ville: Ville;
-  cpostal: number;
+  cpostal: string;
   rue: string;
   num: number;
   email: string;
