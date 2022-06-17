@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {InfoBancaireService} from '../../../service/info-bancaire.service';
 import {LoginService} from '../../../service/login.service';
 import {InfoBancaire} from '../../../objet';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PersonneService} from '../../../service/personne.service';
 
 @Component({
@@ -19,9 +19,10 @@ export class AjouterInfoBancaireComponent implements OnInit {
   infoBancaire: InfoBancaire;
   infoBancaireText: string;
   infoBancaireForm = new FormGroup({
-    nomBanque: new FormControl(),
-    numCarte: new FormControl(),
-    numCompte: new FormControl(),
+    nomBanque: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]),
+    // tslint:disable-next-line:max-line-length
+    numCarte: new FormControl('ex : 0234-1234-1234-01234', [Validators.required , Validators.pattern('[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
+    numCompte: new FormControl('ex : be09-0234-1234-1234', [Validators.required , Validators.pattern('[aA-zZ]{2}[0-9]{2}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
     dateExpiration: new FormControl()
   });
 

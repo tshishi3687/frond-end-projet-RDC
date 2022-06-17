@@ -45,15 +45,6 @@
               <div class="col p-5">
                 <button type="button" class="btn btn-primary" (click)="resetReserche()">Réinitialiser</button>
               </div>
-              <div class="col">
-                <nav  aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <li class="page-item" [ngClass]="{disabled: currentPage <=1}"><a class="page-link" (click)="prev()">Previous</a></li>
-                    <li *ngFor="let v of nbPage|range" class="page-item" [ngClass]=" currentPage === v? 'active' : 'disabled'" (click)="change(v)"><a class="page-link" href="#">{{v}}</a></li>
-                    <li [ngClass]="{disabled: currentPage >= nbPage}" class="page-item"><a class="page-link" (click)="next()">Next</a></li>
-                  </ul>
-                </nav>
-              </div>
             </div>
           </div>
 
@@ -67,7 +58,13 @@
         </div>
 
         <article class="blog-post">
-
+          <nav  aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [ngClass]="{disabled: currentPage <=1}"><a class="page-link" (click)="prev()">Previous</a></li>
+              <li *ngFor="let v of nbPage|range" class="page-item" [ngClass]=" currentPage === v? 'active' : 'disabled'" (click)="change(v)"><a class="page-link" href="#">{{v}}</a></li>
+              <li [ngClass]="{disabled: currentPage >= nbPage}" class="page-item"><a class="page-link" (click)="next()">Next</a></li>
+            </ul>
+          </nav>
           <div class="biens row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 " *ngIf="!isLoading">
             <div class="bien col" *ngFor="let b of listBien ">
               <app-one-bien [b]="b"></app-one-bien>
@@ -79,6 +76,15 @@
               <div class="col-4 position-sticky"><app-message-dattente class="align-items-center"></app-message-dattente></div>
               <div class="col-4 position-sticky"><app-message-dattente class="align-items-center"></app-message-dattente></div>
             </div>
+          </div>
+          <div class="mt-3">
+            <nav  aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item" [ngClass]="{disabled: currentPage <=1}"><a class="page-link" (click)="prev()">Previous</a></li>
+                <li *ngFor="let v of nbPage|range" class="page-item" [ngClass]=" currentPage === v? 'active' : 'disabled'" (click)="change(v)"><a class="page-link" href="#">{{v}}</a></li>
+                <li [ngClass]="{disabled: currentPage >= nbPage}" class="page-item"><a class="page-link" (click)="next()">Next</a></li>
+              </ul>
+            </nav>
           </div>
         </article>
 

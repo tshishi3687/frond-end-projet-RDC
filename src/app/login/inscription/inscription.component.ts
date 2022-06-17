@@ -21,13 +21,15 @@ export class InscriptionComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
+
   PersonneForm = new FormGroup({
     Nom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     Prenom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     Ddn: new FormControl(null, [Validators.required, ]),
     Password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
     verifPassword: new FormControl(),
-    Telephone: new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(99999999999999)]),
+    // tslint:disable-next-line:max-line-length
+    Telephone: new FormControl(null, [Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)]),
     Email: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
   });
 

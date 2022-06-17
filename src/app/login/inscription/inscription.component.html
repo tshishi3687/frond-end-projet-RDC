@@ -45,9 +45,9 @@
       <div>
         <label>
           <p>Numéro de téléphone</p>
-          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Telephone.valid">Votre numéro de téléphone doit contenir maximum 14 chiffre</p>
+          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Telephone.valid">Numéro de téléphone non valide</p>
         </label>
-        <input type="number" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
+        <input type="text" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
       </div>
       <div>
         <label>E-mail</label><br>

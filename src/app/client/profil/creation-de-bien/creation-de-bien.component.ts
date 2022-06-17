@@ -32,6 +32,20 @@ export class CreationDeBienComponent implements OnInit {
 
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
+  logo = this.infoPersonne.logo;
+  logo0 = this.infoPersonne.logo;
+  logo1 = this.infoPersonne.logo;
+  logo2 = this.infoPersonne.logo;
+  logo3 = this.infoPersonne.logo;
+  logo4 = this.infoPersonne.logo;
+  logo5 = this.infoPersonne.logo;
+  logo6 = this.infoPersonne.logo;
+  logo7 = this.infoPersonne.logo;
+  logo8 = this.infoPersonne.logo;
+  logo9 = this.infoPersonne.logo;
+  logo10 = this.infoPersonne.logo;
+  nbPage = 7;
+  currentPage = 1;
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
@@ -46,11 +60,11 @@ export class CreationDeBienComponent implements OnInit {
     superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(900000)]),
     description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(3000)]),
     lien_photo: new FormControl(),
-    coordonneeCPostal: new FormControl(null, [Validators.min(100), Validators.max(100000)]),
+    coordonneeCPostal: new FormControl(null, [Validators.minLength(3), Validators.maxLength(10)]),
     coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
     coordonneeNum: new FormControl(null, [Validators.min(1), Validators.max(10000)]),
-    coordonneeEmail: new FormControl(null, [Validators.email, Validators.maxLength(100)]),
-    coordonneeTelephone: new FormControl(null, [Validators.min(100000)]),
+    coordonneeEmail: new FormControl(null, [Validators.email]),
+    coordonneeTelephone: new FormControl(null, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)),
     securite: new FormControl(),
     wifi: new FormControl(),
     television: new FormControl(),
@@ -171,6 +185,7 @@ export class CreationDeBienComponent implements OnInit {
       bien.appartient = this.infoPersonne.client();
 
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
+        console.log('c\'est l\'id de mon bien ' + reponselienPhoto);
         if (reponselienPhoto <= 0){
           alert(this.error + 'Il y à eu un problème avec le server.. le bien n\'a pas ete enregistré!');
         }else{
@@ -179,6 +194,7 @@ export class CreationDeBienComponent implements OnInit {
           uploadImageData.append('bien', reponselienPhoto);
 
           for (let i = 0; i < (this.myFiles.length); i++){
+            console.log(this.myFiles);
             uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
           }
           this.imgService.ajouterImage(uploadImageData).subscribe(() => {
@@ -196,19 +212,55 @@ export class CreationDeBienComponent implements OnInit {
     }
   }
 
-  onFileSelected(event): void {
-    if ((event.target.files.length) > 10){
+  onFileSelected(e): void {
+    if ((e.target.files.length) > 10){
       this.tailleimg = true;
-    }else{
-      for (let i = 0; i < (event.target.files.length); i++) {
-        if (event.target.files[i].type !== 'jpeg' || event.target.files[i].type !== 'png'){
-          console.log('passss bon');
-        }else if (event.target.files[i].size <= 6291456){
-          this.selectedFile = event.target.files[i];
+    }else {
+      for (let i = 0; i < (e.target.files.length); i++) {
+        if (e.target.files[i].size <= 6291456) {
+          this.selectedFile = e.target.files[i];
           this.myFiles.push(this.selectedFile);
-        }else{
+
+          const reader = new FileReader();
+          reader.readAsDataURL(e.target.files[i]);
+          reader.onload = (event: any) => {
+            switch (this.myFiles.length){
+              case 1:
+                this.logo0 = event.target.result;
+                this.logo1 = event.target.result;
+                break;
+              case 2:
+                this.logo2 = event.target.result;
+                break;
+              case 3:
+                this.logo3 = event.target.result;
+                break;
+              case 4:
+                this.logo4 = event.target.result;
+                break;
+              case 5:
+                this.logo5 = event.target.result;
+                break;
+              case 6:
+                this.logo6 = event.target.result;
+                break;
+              case 7:
+                this.logo7 = event.target.result;
+                break;
+              case 8:
+                this.logo8 = event.target.result;
+                break;
+              case 9:
+                this.logo9 = event.target.result;
+                break;
+              case 10:
+                this.logo10 = event.target.result;
+                break;
+            }
+          };
+        } else {
           this.imgValid = true;
-          this.imgError = 'La photo n°' + (i + 1) + ' portant le nom de "' + event.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + event.target.files[i].size + '/Ko';
+          this.imgError = 'La photo portant le nom de "' + e.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + e.target.files[i].size + '/Ko';
           this.errorList.push(this.imgError);
         }
       }
@@ -238,5 +290,17 @@ export class CreationDeBienComponent implements OnInit {
     this.BienForm.reset();
     this.myFiles = [];
     this.imgs.nativeElement.value = null;
+  }
+
+  prev(): void {
+    this.currentPage--;
+  }
+
+  next(): void {
+    this.currentPage++;
+  }
+
+  change(v): void {
+    this.currentPage = v;
   }
 }
