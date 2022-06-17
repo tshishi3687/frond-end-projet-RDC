@@ -124,7 +124,7 @@ export class CreationDeBienComponent implements OnInit {
 
   ajouterBien(): void{
 
-    if (this.infoPersonne.isAuthenticated() && !this.messageAttente && this.verifville() && this.verifTypeBien() && this.verifIMG()){
+    if (this.infoPersonne.isAuthenticated() && !this.messageAttente && this.verifville() && this.verifTypeBien()){
       this.messageAttente = true;
       const coordonnee = new Coordonnee();
       coordonnee.id = 0;
@@ -172,7 +172,7 @@ export class CreationDeBienComponent implements OnInit {
 
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
         if (reponselienPhoto <= 0){
-          alert(this.error + 'on est ici 1');
+          alert(this.error + 'Il y à eu un problème avec le server.. le bien n\'a pas ete enregistré!');
         }else{
           const uploadImageData = new FormData();
           // @ts-ignore
@@ -187,12 +187,12 @@ export class CreationDeBienComponent implements OnInit {
               this.messageAttente = false;
               this.resstFormControl();
               this.voirBienCre();
-            }, () => alert('error'));
-          }, () => alert(this.error));
+            }, () => alert(this.error + ' Il y à eu un problème avec le server.. Impossible de voir le bien créé !'));
+          }, () => alert(this.error + 'Il y à eu un problème avec le server.. le/les images n\'ont pas été enregistré !'));
         }
-      }, () => alert(this.error));
+      }, () => alert(this.error + 'Il y à eu un problème avec le server.. le bien n\'a pas ete enregistré!'));
     }else{
-      alert(this.error + ' on est ici 3');
+      alert(this.error + ' Un ou plusieur champs sont manquant!');
     }
   }
 
