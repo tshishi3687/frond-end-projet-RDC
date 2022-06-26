@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
   }
 
   btnMesBiens(): void{
-    if (this.ser.repMyBien()){
+    if (!this.ser.repMyBien()){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;

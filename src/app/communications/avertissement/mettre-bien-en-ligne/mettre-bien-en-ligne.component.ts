@@ -86,16 +86,16 @@ export class MettreBienEnLigneComponent implements OnInit {
     this.cachedemandeJour = false;
     this.verifCode = true;
     if (this.service.repIBAU() && this.acceptForm.valid){
-      this.bien.idNNuit = this.choixJourForm.value.jour;
-      this.bienService.envoiMail(this.bien).subscribe(() => {}, () => alert('problemme de connection server'));
+        this.bien.idNNuit = this.choixJourForm.value.jour;
+        this.bienService.envoiMail(this.bien).subscribe(() => {}, () => alert('problemme de connection server'));
+      }
+      else{
+        this.route.navigateByUrl('/profil');
+      }
     }
-    else{
-      this.route.navigateByUrl('/profil');
-    }
-  }
 
-  envoiCode(): void{
-    if (this.veifCodeForm.valid){
+    envoiCode(): void{
+      if (this.veifCodeForm.valid){
       this.bien.idNNuit = this.choixJourForm.value.jour;
       this.bien.appartirDe = this.choixJourForm.value.appartirDe;
       this.personneService.verifCompte(this.veifCodeForm.value.codeActivation).subscribe((reponse: boolean) => {

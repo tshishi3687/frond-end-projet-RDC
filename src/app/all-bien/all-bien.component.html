@@ -6,7 +6,6 @@
       <div class="col-md-3">
         <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 ">
-            <p class="text-center">{{nbComte}} comptes actifs.</p>
             <div class="imgHeader">
               <app-img-header></app-img-header>
             </div>
@@ -42,10 +41,7 @@
               </div>
               </form>
               <div class="col">
-                <button type="button" class="btn btn-success" (click)="loadData()">Faire la recherche</button>
-              </div>
-              <div class="col p-5">
-                <button type="button" class="btn btn-primary" (click)="resetReserche()">Réinitialiser</button>
+                <p><button type="button" class="btn btn-success" (click)="loadData()">Recherche</button> | <button type="button" class="btn btn-primary" (click)="resetReserche()">Réinitialiser</button></p>
               </div>
             </div>
           </div>

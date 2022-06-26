@@ -100,30 +100,30 @@
           </ul>
         </li>
         <li class="nav-item active" *ngIf="ser.isClient()">
-          <a class="nav-link dropdown-toggle" >Gestion des Biens </a>
+          <a class="nav-link dropdown-toggle" >Gestion des biens</a>
           <ul class="dropdown-menu fade-up">
             <li *ngIf="ser.isClient()">
-              <a class="dropdown-item" routerLink="/Client/creerbien"> Création</a>
+              <a class="dropdown-item" routerLink="/Client/creerbien">Création</a>
             </li>
             <li>
-              <a class="dropdown-item"  (click)="btnMesBiens()"> Mes Biens </a>
+              <a class="dropdown-item"  (click)="btnMesBiens()">Mes biens</a>
             </li>
             <li *ngIf="ser.isClient()">
-              <a class="dropdown-item" routerLink="/Client/contrat_mel" *ngIf="!ser.repMel()"> Contrats de Mis en Ligne </a>
+              <a class="dropdown-item" routerLink="/Client/contrat_mel" *ngIf="ser.repMel()">Contrats de mis en ligne</a>
             </li>
           </ul>
         </li>
         <li class="nav-item active" *ngIf="ser.isClient()">
-          <a class="nav-link dropdown-toggle" >Gestion des Réservations </a>
+          <a class="nav-link dropdown-toggle" >Gestion des réservations </a>
           <ul class="dropdown-menu fade-up">
             <li *ngIf="ser.isClient()">
-              <a class="dropdown-item" (click)="bntContratReservation()"> Contrats de Réservation</a>
+              <a class="dropdown-item" (click)="bntContratReservation()">Contrats de réservation</a>
             </li>
           </ul>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" routerLink="/Client/profil"> Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}} </a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/Client/profil"> Profil {{ser.client().role}} : {{ser.client().nom}} {{ser.client().prenom}} </a></li>
       </ul>
     </div> <!-- navbar-collapse.// -->
   </div> <!-- container-fluid.// -->

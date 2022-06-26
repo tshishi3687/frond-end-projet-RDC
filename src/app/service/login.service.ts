@@ -105,7 +105,7 @@ export class LoginService implements CanActivate{
 
   AdminRolle(): boolean{
     const personne = (JSON.parse(sessionStorage.getItem(this.SessionUser)) as Personne);
-    return this.isAuthenticated && personne.role.includes(this.roll1);
+    return this.isAuthenticated && personne?.role.includes(this.roll1);
   }
 
   isClient(): boolean{
@@ -125,7 +125,7 @@ export class LoginService implements CanActivate{
       return true;
     }else{
       this.logout();
-      this.route.navigateByUrl('/home');
+      this.route.navigateByUrl('/allBien');
       return false;
     }
   }

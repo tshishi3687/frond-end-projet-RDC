@@ -20,7 +20,7 @@ import {VoirContratReservationComponent} from './client/profil/voir-contrat-rese
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'allBien',
+    redirectTo: '/allBien',
     pathMatch: 'full'
   },
   {

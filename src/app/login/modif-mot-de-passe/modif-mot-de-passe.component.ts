@@ -62,7 +62,7 @@ export class ModifMotDePasseComponent implements OnInit {
         this.inscriptionBool = true;
         this.attenteBool = false;
         this.messageReussi = '';
-        this.messageRate = 'Les données fournies ne nous permetent pas de vérifier votre identité.\nMOT DE PASSE NON CHANGE!';
+        this.messageRate = 'Les données fournies ne nous permettent pas de vérifier votre identité.';
       }else {
         this.attenteBool = false;
         this.connexionOK = reponse;

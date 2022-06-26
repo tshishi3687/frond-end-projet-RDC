@@ -80,6 +80,20 @@ import {MatButtonModule} from '@angular/material/button';
 import { BoutonMesBiensComponent } from './communications/avertissement/bouton-mes-biens/bouton-mes-biens.component';
 import { BoutonContratReservationComponent } from './communications/avertissement/bouton-contrat-reservation/bouton-contrat-reservation.component';
 import {MatSelectModule} from '@angular/material/select';
+import { CGUComponent } from './communications/donneeLegaux/cgu/cgu.component';
+import { ETComponent } from './communications/donneeLegaux/et/et.component';
+
+export const MY_FORMATS = {
+  // parse: {
+  //   dateInput: 'LL',
+  // },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @NgModule({
     declarations: [
@@ -144,6 +158,8 @@ import {MatSelectModule} from '@angular/material/select';
         ImgInfoCaroucelComponent,
         BoutonMesBiensComponent,
         BoutonContratReservationComponent,
+        CGUComponent,
+        ETComponent,
     ],
     imports: [
         BrowserModule,
@@ -170,7 +186,7 @@ import {MatSelectModule} from '@angular/material/select';
     providers: [{
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true
     },
-      { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
+      { provide: MAT_DATE_LOCALE, useValue: MY_FORMATS }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

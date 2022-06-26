@@ -80,8 +80,8 @@ export class CreationDeBienComponent implements OnInit {
 
   config: AngularEditorConfig = {
     editable: true,
-    spellcheck: true,
-    height: '10rem',
+    spellcheck: false,
+    height: 'auto',
     minHeight: '5rem',
     placeholder: 'Veuillez être le plus complet possible:....',
     defaultParagraphSeparator: 'p',

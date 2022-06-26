@@ -36,7 +36,7 @@ export class SuppressionBienComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.suppressionMessage = 'j\'aimerais supprimer_' + this.bien.type_bien.nom + '_à_' + this.bien.prix + '€_' +  '_maintenant !!.';
+    this.suppressionMessage = 'j\'aimerais_supprimer_' + this.bien.type_bien.nom + '_à_' + this.bien.prix + '€' +  '_maintenant!!';
   }
 
   etap2(): void{

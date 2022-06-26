@@ -17,7 +17,5 @@
      <app-modif-mot-de-passe *ngIf="mdpBoll"></app-modif-mot-de-passe>
      <app-inscription *ngIf="inscription"></app-inscription>
    </div>
-  <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
-  <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
  </div>
 

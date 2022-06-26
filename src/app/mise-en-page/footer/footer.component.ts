@@ -6,6 +6,7 @@ import {CurriculumViteaComponent} from '../../communications/donneeLegaux/curric
 import {LettreDeMotivationComponent} from '../../communications/donneeLegaux/lM/lettre-de-motivation/lettre-de-motivation.component';
 import {TravailDeFinEtudeComponent} from '../../communications/donneeLegaux/TFE/travail-de-fin-etude/travail-de-fin-etude.component';
 import {ContactComponent} from '../../communications/donneeLegaux/contact/contact/contact.component';
+import {CGUComponent} from '../../communications/donneeLegaux/cgu/cgu.component';
 
 @Component({
   selector: 'app-footer',
@@ -50,6 +51,24 @@ export class FooterComponent implements OnInit {
   }
 
   lookTFE(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(TravailDeFinEtudeComponent, dialogConfig);
+  }
+
+  lookCGU(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(CGUComponent, dialogConfig);
+  }
+
+  lookET(): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

@@ -4,38 +4,15 @@
       <div >
         <h3 *ngIf="!acceptForm.value.check">ETAPE 1: Accepte conditions.</h3>
         <h3 *ngIf="acceptForm.value.check && !verifCode && !verifCode2">ETAPE 2: Demande de date.</h3>
-        <h3 *ngIf="acceptForm.value.check && verifCode">ETAPE 3: Verification identité.</h3>
-        <h3 *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">ETAPE 4: Payement.</h3>
+        <h3 *ngIf="acceptForm.value.check && verifCode">ETAPE 3: Vérification identité.</h3>
+        <h3 *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">ETAPE 4: paiement.</h3>
         <div class="card shadow-sm" *ngIf="!(acceptForm.value.check && !verifCode && codeAcceptee && verifCode2)">
-          <app-img-caroucel [img]="this.bien.images" [pourcentageAffichage]="55"></app-img-caroucel>
-          <div class="card-body">
-            <h3 class="text-center">{{this.bien.coordonnee.ville.nomVille}} / {{this.bien.coordonnee.ville.province.nomprovince}}</h3>
-            <h3 class="text-center">{{this.bien.type_bien.nom}}</h3>
-
-            <h2  class="text-primary text-center">{{this.bien.prix}}€ / nuit</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols bg-secondary text-white text-center" >
-              <div class="col-xl-3">{{this.bien.npmax}} / <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
-                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-              </svg></div>
-              <div class="col-xl-3">{{this.bien.nchambre}} / chambre</div>
-              <div class="col-xl-3">{{this.bien.nsdb}} / salle bain</div>
-              <div class="col-xl-3">{{this.bien.superficie}} / <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
-              </svg></div>
-            </div>
-            <br>
+          <app-one-bien   [b]="bien"></app-one-bien>
             <div class="d-flex justify-content-between align-items-center">
 
               <small class="text-muted">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
-              </svg> : {{this.bien.likes}}
               </small>
             </div>
-          </div>
         </div>
         <div class="card shadow-sm" *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
           <app-pay-pal (statusPayement)="reservationReussit()" [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
@@ -44,14 +21,15 @@
     </div>
     <div class="col-lg-6">
 
-      <h1 class="display-5 fw-bold lh-1 mb-3 text-danger">ATTENTION !!!</h1>
-      <h2 class="display-5 fw-bold lh-1 mb-3 text-warning">Vous êtes sur le point de reserver ce Bien.</h2>
-      <h3 class="display-5 fw-bold lh-1 mb-3">{{bien.type_bien.nom}}({{bien.id}}) à {{bien.prix}}, {{bien.coordonnee.ville.nomVille}} / {{bien.coordonnee.ville.province.nomprovince}}</h3>
-      <p *ngIf="acceptForm.value.check" class="text-success">Vous avez accepté les termes du contrat. si ce n'est pas le cas, veuillez cliquer sur <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>.</p>
+        <h1 class="display-5 fw-bold lh-1 mb-3 text-danger text-center">ATTENTION !!!</h1>
+        <h2 class="display-5 fw-bold lh-1 mb-3 text-danger text-center">Vous êtes sur le point de réserver ce bien.</h2>
+        <h3 class="display-5 fw-bold lh-1 mb-3 text-center">{{bien.type_bien.nom}}({{bien.id}}) à {{bien.prix}}, {{bien.coordonnee.ville.nomVille}} / {{bien.coordonnee.ville.province.nomprovince}}</h3>
+        <p *ngIf="acceptForm.value.check">Vous avez accepté les termes du contrat.<br>Si ce n'est pas le cas, veuillez cliquer sur le bouton "Annuler".</p>
+
 
       <div *ngIf="!acceptForm.value.check">
         <p class="lead">Ce qui implique que vous avez bien pris connaissance et acceptez le <span>CONTRAT BMEL</span>.</p>
-        <p class="lead">L'acceptation des termes du contra indiqué ci-dessus est <span>OBLIGATOIRE</span> lors d'une location.</p>
+        <p class="lead">L'acceptation des termes du contrat indiqué ci-dessus est <span>OBLIGATOIRE</span> lors d'une location.</p>
         <br>
         <form [formGroup]="acceptForm">
           <div class="form-check">
@@ -84,13 +62,13 @@
                 <input class="form-control" type="number" formControlName="nPersonne">
           </form>
           <br>
-          <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="activation()">Passer au payement</button>
+          <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="activation()">Passer au paiement</button>
           <h3>{{reservationError}}</h3>
         </div>
 
         <div *ngIf="!this.service.repIBAU()">
-          <h1>ACCES REFUSE</h1>
-          <p>Des informations manquantes nous empêchent de poursuivre ce processus</p>
+          <h1 class="text-danger text-center">ACCES REFUSE</h1>
+          <p>Des informations manquantes nous empêchent de poursuivre ce processus.</p>
           <p>Veuillez consulter votre profil pour en savoir plus.</p>
           <br>
           <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="voirProfil()">Voir profil</button>
@@ -148,19 +126,20 @@
       </div>
       <div class="wrapper fadeInDown" *ngIf="verifCode">
         <div id="formContent">
-          <p class="text-info">Pour connaître votre code de vérification,<br>Veuillez consulter votre boite e-mail!</p>
+          <p>Pour connaître votre code de vérification, veuillez consulter votre boite mail!</p>
           <!-- Login Form -->
           <form [formGroup]="veifCodeForm">
             {{codeFaut}}
-            <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
-            <input type="submit" class="fadeIn fourth" value="Je confirme la mise en ligne." *ngIf="veifCodeForm.valid" (click)="envoiCode()">
+            <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre code secret">
+            <input type="submit" class="fadeIn fourth" value="Je confirme la réservation" *ngIf="veifCodeForm.valid" (click)="envoiCode()">
           </form>
-          <p class="text-danger">*** ATTENTION *** La réservation d'un Bien doit être un acte mûrement réfléchi!!!</p>
-          <p>Toute demande de résiliation pour cette réservation faite 15 jours ouvrable avant le {{choixJourForm.value.jourA}} ne vous sera pas facturé.
-            <br>Après, vous serez facturé d'une fois le prix d'une nuit demandé pour ce Bien, soit {{bien.prix}} €.</p>
+          <p class="text-danger text-center">*** ATTENTION *** </p>
+          <p class="text-danger text-center">La réservation d'un bien doit être un acte mûrement réfléchi!!!</p>
+          <p>Toute demande de résiliation pour cette réservation, faite 10 jours ouvrable avant le {{choixJourForm.value.jourA | date: 'dd MM YYYY'}}, ne vous sera pas facturé.</p>
+          <p>Après, vous serez facturé d'une fois le prix d'une nuit demandé pour ce bien, soit {{bien.prix}} €.</p>
         </div>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!acceptForm.value.check == true">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" (click)="onClose()">Annuler</button>
       </div>
     </div>
@@ -168,14 +147,14 @@
 </div>
 
 <div *ngIf="reservationOk">
-  <h1 class="text-success">Réservation réussi !</h1>
-  <h3 class="text-primary">L'équipe Mobembo.cd vous souhaite un bon sejour chez notre partenaire.</h3>
+  <h1 class="text-success">Réservation réussie !</h1>
+  <h3 class="text-primary">L'équipe Mobembo.cd vous souhaite un bon séjour chez notre partenaire.</h3>
   <p>
     Dès à présent, il vous est possible de consuler, télécharger ou d'imprimer votre contrat de réservation dans :
     <br>
-    <span class="font-weight-bold">Gestion des réservations > Contrat de reservation</span>
+    <span class="font-weight-bold">Gestion des réservations > Contrat de réservation</span>
   </p>
   <br>
   <br>
-  <button type="button" class="btn btn-primary" (click)="onClose()">Home page</button>
+  <button type="button" class="btn btn-primary" (click)="onClose()">Home</button>
 </div>

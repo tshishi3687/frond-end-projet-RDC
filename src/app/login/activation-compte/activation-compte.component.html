@@ -1,9 +1,9 @@
 <div class="wrapper fadeInDown" *ngIf="!activationCompteOK">
   <div id="formContent">
-    <h2 class="text-warning">Compte non activé.</h2>
+    <h2 class="text-warning">Compte non activé</h2>
     <p>Vous y êtes presque !!!</p>
     <p class="text-success">Votre compte a bien été créé, mais pour l'instant il est inactif.</p>
-    <p class="text-info">Pour connaître votre code d'activation,<br>Veuillez consulter votre boite e-mail!</p>
+    <p class="text-info">Pour connaître votre code d'activation,<br>veuillez consulter votre boite e-mail!</p>
     <form [formGroup]="verificationCodeForm">
       <input formControlName="codeActivation" placeholder="Votre Code secret">
       <input type="submit" value="Je confirme mon compte" (click)="validationCompte()">

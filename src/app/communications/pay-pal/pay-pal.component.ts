@@ -96,7 +96,6 @@ export class PayPalComponent implements OnInit, AfterViewInit {
               payPall.reservationBienDTO = this.reservation;
               payPall.Prix = this.prix;
 
-              console.log(this.reservation);
               this.reservationService.ajouterReservation(payPall).subscribe((reponse: number) => {
                 const det = new Detailes();
                 det.id = reponse;

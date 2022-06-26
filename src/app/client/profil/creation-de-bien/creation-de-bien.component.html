@@ -1,19 +1,16 @@
 <br>
 <br>
 <div class="container-fluid align-items-center col-md-10">
-  <h1 class="display-1 text-center text-primary">formulaire de création de bien</h1>
+  <h1 class="display-1 text-center text-primary">Formulaire de création de bien</h1>
 
   <div class="row flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 <!--    page 1 : création-->
     <div class="col-8 p-4 d-flex flex-column ">
-      <button mat-raised-button  id="toggle-linear">
-        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-      </button>
       <mat-vertical-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="BienForm">
           <form [formGroup]="BienForm">
-            <ng-template matStepLabel>Type de Bien et prix</ng-template>
-            <h3 class="mb-0">De quelle nature est votre Bien ?</h3>
+            <ng-template matStepLabel>Type de bien et prix</ng-template>
+            <h3 class="mb-0">De quelle nature est votre bien ?</h3>
             <p class="card-text mb-auto text-primary">Pour un bon référencement, le choix du type de bien est primordial </p>
             <div class="mt-5">
               <label >Type de bien</label><br>
@@ -34,7 +31,7 @@
         <mat-step [stepControl]="BienForm">
           <form [formGroup]="BienForm">
             <ng-template matStepLabel>Photos</ng-template>
-            <p class="text-primary">Vous pouvez télécharger une photo à la foix pour un maxumum de 10 photos par bien!</p>
+            <p class="text-primary">Vous pouvez télécharger une photo à la fois pour un maximum de 10 photos par bien!</p>
             <p *ngIf="boolImgNull" class="p-3 mb-2 bg-danger text-white">{{this.imgNull}}</p>
             <div *ngIf="tailleimg">
               <p class="text-primary">Vous ne pouvez ajouter un maximum de 10 images</p>
@@ -147,8 +144,8 @@
         </mat-step>
         <mat-step [stepControl]="BienForm">
           <form [formGroup]="BienForm">
-            <ng-template matStepLabel>Disponibles</ng-template>
-            <h1 class="text-primary">Mise à la disposition</h1>
+            <ng-template matStepLabel>Disponibilités</ng-template>
+            <h1 class="text-primary">Disponible dans votre bien</h1>
             <div class="row row-cols-2">
               <!--        div colonne "disposition 1-->
               <div class="col-6">
@@ -260,7 +257,7 @@
         </mat-step>
         <mat-step [stepControl]="BienForm">
           <form [formGroup]="BienForm">
-            <ng-template matStepLabel>Descriptions</ng-template>
+            <ng-template matStepLabel>Description</ng-template>
             <div>
               <h1 class="text-primary">Description du bien</h1>
               <p>*** 50 caractères minimum. Actuellement <span [style.color]="this.BienForm.value.description?.toString().length < 50? 'red': this.BienForm.value.description?.toString().length < 2700? 'green' :this.BienForm.value.description?.toString().length <=3000? 'orange': 'red'">
@@ -276,7 +273,7 @@
         <mat-step [stepControl]="BienForm">
           <form [formGroup]="BienForm">
             <ng-template matStepLabel>Création</ng-template>
-            <h1 *ngIf="!this.BienForm.valid && !messageAttente" class="text-center text-danger">Vous ne pouvez pas créer ce bien <br>Car certaines information sont manquantes.</h1>
+            <h1 *ngIf="!this.BienForm.valid && !messageAttente" class="text-center text-danger">Vous ne pouvez pas créer ce bien,<br>car certaines informations sont manquantes.</h1>
             <button class="w-100 btn btn-primary btn-lg" (click)="ajouterBien()" *ngIf="BienForm.valid && !messageAttente && verifville() && verifTypeBien()">
               Je crée mon bien
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
@@ -323,20 +320,20 @@
 
             <div class="row  row-cols-sm-4 row-cols bg-secondary text-white text-center">
               <div class="col">
-                {{this.BienForm.value.npmax == null? 'npMax': this.BienForm.value.npmax}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                {{this.BienForm.value.npmax == null? 'Max': this.BienForm.value.npmax}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
                 <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
               </div>
 
               <div class="col">
-                {{this.BienForm.value.superficie == null? 'superficie': this.BienForm.value.superficie +' m²'}}
+                {{this.BienForm.value.superficie == null? 'm²': this.BienForm.value.superficie +' m²'}}
               </div>
               <div class="col">
-                {{this.BienForm.value.nchambre == null? 'nbCham': this.BienForm.value.nchambre}} <i class="fas fa-bed"></i>
+                {{this.BienForm.value.nchambre == null? 'Chambre': this.BienForm.value.nchambre}} <i class="fas fa-bed"></i>
               </div>
               <div class="col">
-                {{this.BienForm.value.nsdb == null? 'nSDB': this.BienForm.value.nsdb}} <i class="fas fa-bath"></i>
+                {{this.BienForm.value.nsdb == null? 'SDB': this.BienForm.value.nsdb}} <i class="fas fa-bath"></i>
               </div>
             </div>
           </div>

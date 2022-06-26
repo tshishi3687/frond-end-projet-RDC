@@ -17,7 +17,7 @@
                       Durée de mis en ligne
                     </mat-option>
                     <mat-option *ngFor="let n of this.listNuit" [value]="n.nNuit">
-                      {{ n.nNuit }} jours en ligne.
+                      {{ n.nNuit }} jours en ligne
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -26,7 +26,7 @@
             <div class="col-6">
               <form id="reservation" [formGroup]="choixJourForm">
               <mat-form-field color="accent">
-                <mat-label>Appartir de :</mat-label>
+                <mat-label>A partir de :</mat-label>
                 <input matInput formControlName="appartirDe"  [matDatepicker]="picker1">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker  class="calendar" #picker1></mat-datepicker>
@@ -46,34 +46,35 @@
 
         <div class="wrapper fadeInDown" *ngIf="verifCode">
           <div id="formContent">
-            <h2 class="text-warning">Attente de confirmation</h2>
-            <p>Vous y êtes presque !!!</p>
-            <p class="text-info">Pour connaître votre code de vérification,<br>Veuillez consulter votre boite e-mail!</p>
+            <br>
+            <h2 class="text-warning text-center">Attente de confirmation</h2>
+            <p class="text-warning text-center">Vous y êtes presque !!!</p>
+            <p>Pour connaître votre code de vérification,<br>veuillez consulter votre boite mail!</p>
             <!-- Login Form -->
             <form [formGroup]="veifCodeForm">
               {{codeFaut}}
-              <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre Code secret">
+              <input type="password"  formControlName="codeActivation" class="fadeIn third" name="mdp" placeholder="Votre code secret">
               <input type="submit" class="fadeIn fourth" value="Je confirme la mise en ligne." *ngIf="veifCodeForm.valid" (click)="envoiCode()">
             </form>
-            <p class="text-danger">*** ATTENTION *** La mise en ligne est un acte qui doit être mûrement réfléchi!!!</p>
-            <p>Pour cet/cette {{bien.type_bien.nom}}, il ne vous sera plus possible de faire des modifications.
+            <p class="text-danger text-center">*** ATTENTION ***<br>La mis en ligne est un acte qui doit être mûrement réfléchi!!!</p>
+            <p>Pour ce bien de type "{{bien.type_bien.nom}}", il ne vous sera plus possible de faire des modifications.
               <br>
-            Et toute demande de retrait de mise en ligne, vous sera facturée d'une fois le prix d'une nuit demandé pour ce Bien, soit {{bien.prix}} €.</p>
+            Toute demande de retrait de mis en ligne, vous sera facturée d'une fois le prix d'une nuit, demandé pour ce bien, soit {{bien.prix}} €.</p>
           </div>
         </div>
       </div>
 
     </div>
     <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3">ATTENTION !!!</h1>
-      <h2 class="display-5 fw-bold lh-1 mb-3">Vous êtes sur le point de mettre un Bien en ligne.</h2>
+      <h1 class="display-5 fw-bold lh-1 mb-3 text-center text-danger">ATTENTION !!!</h1>
+      <h2 class="display-5 fw-bold lh-1 mb-3 text-center text-danger">Vous êtes sur le point de mettre un bien en ligne.</h2>
       <p class="lead">Ce qui implique que vous avez bien pris connaissance et acceptez le <span>CONTRAT BMEL</span>.</p>
-      <p class="lead">L'acceptation des termes du contrat indiqué ci-dessous est <span>OBLIGATOIRE</span> lors de la mise d'un Bien En Ligne.</p>
+      <p class="lead">L'acceptation des termes du contrat indiqué ci-dessous est <span>OBLIGATOIRE</span> lors de la mise d'un bien en ligne.</p>
       <br>
       <form [formGroup]="acceptForm">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" formControlName="check">
-          <label class="form-check-label" >J'accèpte les termes et les conditions du <span>CONTRAT BMEL</span>.</label>
+          <label class="form-check-label" >J'accepte les termes et les conditions du <span>CONTRAT BMEL</span>.</label>
         </div>
       </form>
 

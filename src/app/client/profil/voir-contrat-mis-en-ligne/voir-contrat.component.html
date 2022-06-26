@@ -1,17 +1,17 @@
 <div [ngClass]="{print: printSelected === c}" class="contrat container px-4 py-5" id="featured-3" *ngFor="let c of listContrat">
-  <h2 class="pb-2 border-bottom">Contrat de mise en ligne de/d' {{c.bienVuDTO.type_bien.nom}}.<br>A l'adresse: {{c.bienVuDTO.coordonnee.num}} {{c.bienVuDTO.coordonnee.rue}}, {{c.bienVuDTO.coordonnee.ville.nomVille}} / {{c.bienVuDTO.coordonnee.ville.province.nomprovince}}</h2>
+  <h2 class="pb-2 border-bottom">Contrat de mis en ligne du bien de type "{{c.bienVuDTO.type_bien.nom}}".<br>Situé : {{c.bienVuDTO.coordonnee.num}} {{c.bienVuDTO.coordonnee.rue}}, {{c.bienVuDTO.coordonnee.ville.nomVille}} / {{c.bienVuDTO.coordonnee.ville.province.nomprovince}}</h2>
   <div class="row" *ngIf="!signature">
     <div class="col-6">
       <div *ngIf="c.enCour">
         <h3 class=" border-bottom alert alert-success" >En cour... du {{c.ddDebut | date : 'dd MMMM yyyy'}} à {{c.ddFin | date : 'dd MMMM yyyy'}}</h3>
       </div>
       <div *ngIf="!c.enCour">
-        <h3 class="border-bottom alert alert-danger">Ce contrat a prit fin le {{c.ddFin | date : 'dd MMMM yyyy'}}</h3>
+        <h3 class="border-bottom alert alert-danger">Ce contrat a pris fin le {{c.ddFin | date : 'dd MMMM yyyy'}}</h3>
       </div>
     </div>
     <div class="col text-center">
       <button type="button" class="btn btn-link btn-lg px-4 me-md-2 text-primary" (click)="print(c)">
-        imprinmer
+        imprimer
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
           <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
           <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
@@ -37,27 +37,27 @@
       </div>
       <div class="row">
         <div class="col">
-          <h3>Bailleur</h3>
+          <h3 class="text-primary">Bailleur</h3>
           <p>{{c.entre}}</p>
         </div>
         <div class="col">
-          <h3>Prenneur</h3>
+          <h3 class="text-primary">Preneur</h3>
           <p>{{c.entre2}}</p>
         </div>
       </div>
-      <h3>Objet</h3>
+      <h3 class="text-primary">Objet</h3>
       <p>{{c.objet}}</p>
-      <h3>Durée</h3>
+      <h3 class="text-primary">Durée</h3>
       <p>{{c.duree}}</p>
     </div>
     <div class="feature col">
       <div class="feature-icon bg-primary bg-gradient">
       </div>
-      <h3>Loyé</h3>
+      <h3 class="text-primary">Loyer</h3>
       <p>{{c.loyer}}</p>
-      <h3>Etat des lieux</h3>
+      <h3 class="text-primary">Etat des lieux</h3>
       <p>{{c.etatLieu}}</p>
-      <h5>DARDL</h5>
+      <h5 class="text-primary">DARDL</h5>
       <p>{{c.dardl}}</p>
       <a class="icon-link">
         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>

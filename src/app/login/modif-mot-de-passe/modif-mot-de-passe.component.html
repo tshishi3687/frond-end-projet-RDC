@@ -12,10 +12,10 @@
       <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
       <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
       <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
-      <input type="submit" class="fadeIn fourth" value="Envoi de la demande" (click)="envoiDemande()" *ngIf="this.PersonneForm.valid">
+      <button type="button" class="btn btn-primary" (click)="envoiDemande()" *ngIf="this.PersonneForm.valid">Envoi de la demande</button>
     </form>
 
-    <p class="text-danger text-center">{{messageRate}}</p>
+    <p class="text-danger">{{messageRate}}</p>
     <p class="text-success text-center">{{messageReussi}}</p>
   </div>
 
@@ -24,13 +24,14 @@
   </div>
 
   <div class="text-center" *ngIf="this.connexionOK">
-    <h1>Confirmation d'identitée</h1>
-    <p>un e-mail vient de vous être envoyé. Insérez votre code.</p>
+    <h1>Confirmation d'identité</h1>
+    <p>Un e-mail vient de vous être envoyé.</p>
+    <p>Insérez votre code.</p>
     <form [formGroup]="verifForm">
-      <input type="password"  formControlName="codeActivation" class="fadeIn third" placeholder="Votre Code secret">
+      <input type="password"  formControlName="codeActivation" class="fadeIn third" placeholder="Votre code secret">
       <input type="password" formControlName="nPass"  class="fadeIn third"  placeholder="Nouveau mot de passe">
-      <input type="password" formControlName="vPass"  class="fadeIn third"  placeholder="Confirmer mdp">
-      <input type="submit" class="fadeIn fourth" value="Je confirme mon compte" (click)="validationCode()">
+      <input type="password" formControlName="vPass"  class="fadeIn third"  placeholder="Confirmer mot de passe">
+      <input type="submit" class="fadeIn fourth" value="Comfirmer" (click)="validationCode()">
     </form>
   </div>
 </div>

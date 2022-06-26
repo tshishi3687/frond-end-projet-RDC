@@ -32,7 +32,7 @@
 
       <div class="row">
         <div class="col">
-          <button *ngIf="adressUserForm.valid && adressUserForm.value.pays != 'defaults'" class="w-100 btn btn-primary btn-lg" (click)="ajourterAdressUser()">Ajouter une adresse.</button>
+          <button *ngIf="adressUserForm.valid && adressUserForm.value.pays != 'defaults'" class="w-100 btn btn-primary btn-lg" (click)="ajourterAdressUser()">Ajouter une adresse</button>
         </div>
       </div>
     </form>
@@ -40,7 +40,6 @@
 </div>
 
 <div class="text-center" *ngIf="adressUser!=null">
-  <button type="button" class="btn btn-link" (click)="changerAdress()">J'aimerais changer d'adresse</button>
   <div class="row">
     <div class="col">
       <label>N°</label>

@@ -1,12 +1,47 @@
-<footer class="footer pagination justify-content">
-  <div class="container">
-    <ul class="foote_bottom_ul_amrc">
-      <li ><button type="button" class="btn btn-link" (click)="lookRGPD()">Protection des données[2956]</button></li>
-      <li ><button type="button" class="btn btn-link" (click)="lookCV()">Curriculum vitae</button></li>
-      <li ><button type="button" class="btn btn-link" (click)="lookLM()">Lettre de motivation</button></li>
-      <li ><button type="button" class="btn btn-link" (click)="lookTFE()">Travail de fin d'étude</button></li>
-      <li ><button type="button" class="btn btn-link" *ngIf="service.isAuthenticated()" (click)="lookContact()">Contact</button></li>
-    </ul>
-  </div>
-</footer>
-
+<nav class="footer justify-content navbar navbar-expand-lg navbar-dark bg-primary pagination"  >
+  <div class="container-fluid">
+    <a class="navbar-brand">Mobembo.cd</a>
+    <div class="collapse navbar-collapse btn-group dropup" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" (click)="lookRGPD()">Protection des données[2956]</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" (click)="lookCGU()">Conditions générales d'utilisation</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link ">Etat des lieux</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">Tous sur moi</a>
+          <ul class="dropdown-menu fade-up">
+            <li >
+              <a class="Dropdown menu links"  (click)="lookCV()">Curriculum vitae</a>
+            </li>
+            <li>
+              <a class="Dropdown menu links" (click)="lookLM()">Lettre de motivation</a>
+            </li>
+            <li >
+              <a class=" Dropdown menu links" (click)="lookTFE()">Travail de fin d'étude</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" *ngIf="service.isAuthenticated()" (click)="lookContact()">Contact</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link">Produit de : Tshibangu Cédrick </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" >mail : tshishi@outlook.be</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="https://www.linkedin.com/in/c%C3%A9drick-tshibangu-07a1391b9/">Linkedin : Tshibangu Cédrick</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="navbar-brand">Mobembo.cd</a></li>
+      </ul>
+    </div> <!-- navbar-collapse.// -->
+  </div> <!-- container-fluid.// -->
+</nav>
