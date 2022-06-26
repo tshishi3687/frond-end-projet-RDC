@@ -1,4 +1,6 @@
-
+.imgHeader{
+  border: 2px solid blue;
+}
 
 /*@media only screen and (max-width: 350px) {*/
 /*  .bien {*/

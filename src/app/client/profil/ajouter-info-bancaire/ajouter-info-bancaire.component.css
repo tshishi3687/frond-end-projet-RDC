@@ -1,0 +1,14 @@
+input.ng-invalid.ng-touched{
+  border: 3px solid red;
+}
+input.ng-valid.ng-touched{
+  border: 3px solid green;
+}
+
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}

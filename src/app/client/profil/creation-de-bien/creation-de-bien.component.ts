@@ -3,13 +3,14 @@ import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {VilleService} from '../../../service/VilleService';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Aladisposition, Bien, Coordonnee, TypeDeBien, Ville} from '../../../objet';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Aladisposition, Bien, Coordonnee, TypeDeBien, Validator, Ville} from '../../../objet';
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PresentationBienCreeComponent} from './presentation-bien-cree/presentation-bien-cree.component';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
+import {PersonneService} from '../../../service/personne.service';
 
 @Component({
   selector: 'app-creation-de-bien',
@@ -25,7 +26,9 @@ export class CreationDeBienComponent implements OnInit {
     private villeService: VilleService,
     private typeDeBienService: TypeDeBienService,
     private imgService: ImgService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private perService: PersonneService,
+    private formBuilder: FormBuilder) { }
 
   @ViewChild('imgs') imgs: ElementRef;
   private error = 'Il y a eu un probleme :(';
@@ -33,19 +36,9 @@ export class CreationDeBienComponent implements OnInit {
   listTypeDeBien: Array<TypeDeBien> = [];
   listVille: Array<Ville> = [];
   logo = this.infoPersonne.logo;
-  logo0 = this.infoPersonne.logo;
-  logo1 = this.infoPersonne.logo;
-  logo2 = this.infoPersonne.logo;
-  logo3 = this.infoPersonne.logo;
-  logo4 = this.infoPersonne.logo;
-  logo5 = this.infoPersonne.logo;
-  logo6 = this.infoPersonne.logo;
-  logo7 = this.infoPersonne.logo;
-  logo8 = this.infoPersonne.logo;
-  logo9 = this.infoPersonne.logo;
-  logo10 = this.infoPersonne.logo;
   nbPage = 7;
   currentPage = 1;
+  isLinear = false;
 
   BienForm = new FormGroup({
     type: new FormControl('defaults'),
@@ -61,9 +54,9 @@ export class CreationDeBienComponent implements OnInit {
     description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(3000)]),
     lien_photo: new FormControl(),
     coordonneeCPostal: new FormControl(null, [Validators.minLength(3), Validators.maxLength(10)]),
-    coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
-    coordonneeNum: new FormControl(null, [Validators.min(1), Validators.max(10000)]),
-    coordonneeEmail: new FormControl(null, [Validators.email]),
+    coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+    coordonneeNum: new FormControl(null, [Validators.minLength(1), Validators.maxLength(5)]),
+    coordonneeEmail: new FormControl(null, [Validators.email, Validators.pattern(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)]),
     coordonneeTelephone: new FormControl(null, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)),
     securite: new FormControl(),
     wifi: new FormControl(),
@@ -106,7 +99,8 @@ export class CreationDeBienComponent implements OnInit {
     ],
   };
 
-  private myFiles: File [] = [];
+   myFiles: File [] = [];
+   photos: Array<string> = [];
   private selectedFile: File;
 
   dialogConfig = new MatDialogConfig();
@@ -185,26 +179,38 @@ export class CreationDeBienComponent implements OnInit {
       bien.appartient = this.infoPersonne.client();
 
       this.bienService.ajouterBien(bien).subscribe((reponselienPhoto: number) => {
-        console.log('c\'est l\'id de mon bien ' + reponselienPhoto);
+        this.perService.verifIBAU(this.infoPersonne.client()).subscribe((reponses: Validator) => {
+          sessionStorage.setItem(this.infoPersonne.SessionVerifValidator, JSON.stringify(reponses));
+        }, () => alert('Impossible de verifier les validators'));
         if (reponselienPhoto <= 0){
           alert(this.error + 'Il y à eu un problème avec le server.. le bien n\'a pas ete enregistré!');
-        }else{
+        }else {
           const uploadImageData = new FormData();
           // @ts-ignore
           uploadImageData.append('bien', reponselienPhoto);
 
+          // if (this.myFiles.length === 0){
+          //   // this.selectedFile = new File(this.logo.);
+          //   this.myFiles.push(this.selectedFile);
+          // }
           for (let i = 0; i < (this.myFiles.length); i++){
-            console.log(this.myFiles);
             uploadImageData.append('imageFile', this.myFiles[i], this.myFiles[i].name);
           }
-          this.imgService.ajouterImage(uploadImageData).subscribe(() => {
+          if (this.myFiles.length) {
+            this.imgService.ajouterImage(uploadImageData).subscribe(() => {
+              this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
+                this.dialogConfig.data = {bien: monBien};
+                this.messageAttente = false;
+                this.voirBienCre();
+              }, () => alert(this.error + ' Il y à eu un problème avec le server.. Impossible de voir le bien créé !'));
+            }, () => alert(this.error + 'Il y à eu un problème avec le server.. le/les images n\'ont pas été enregistré !'));
+          } else {
             this.bienService.voirUneBien(reponselienPhoto).subscribe((monBien: Bien) => {
               this.dialogConfig.data = {bien: monBien};
               this.messageAttente = false;
-              this.resstFormControl();
               this.voirBienCre();
             }, () => alert(this.error + ' Il y à eu un problème avec le server.. Impossible de voir le bien créé !'));
-          }, () => alert(this.error + 'Il y à eu un problème avec le server.. le/les images n\'ont pas été enregistré !'));
+          }
         }
       }, () => alert(this.error + 'Il y à eu un problème avec le server.. le bien n\'a pas ete enregistré!'));
     }else{
@@ -213,58 +219,32 @@ export class CreationDeBienComponent implements OnInit {
   }
 
   onFileSelected(e): void {
-    if ((e.target.files.length) > 10){
+    if ((this.myFiles.length) > 10){
       this.tailleimg = true;
     }else {
-      for (let i = 0; i < (e.target.files.length); i++) {
-        if (e.target.files[i].size <= 6291456) {
-          this.selectedFile = e.target.files[i];
+        if (e.target.files[0].size <= 6291456) {
+          this.selectedFile = e.target.files[0];
           this.myFiles.push(this.selectedFile);
 
           const reader = new FileReader();
-          reader.readAsDataURL(e.target.files[i]);
+          reader.readAsDataURL(e.target.files[0]);
           reader.onload = (event: any) => {
-            switch (this.myFiles.length){
-              case 1:
-                this.logo0 = event.target.result;
-                this.logo1 = event.target.result;
-                break;
-              case 2:
-                this.logo2 = event.target.result;
-                break;
-              case 3:
-                this.logo3 = event.target.result;
-                break;
-              case 4:
-                this.logo4 = event.target.result;
-                break;
-              case 5:
-                this.logo5 = event.target.result;
-                break;
-              case 6:
-                this.logo6 = event.target.result;
-                break;
-              case 7:
-                this.logo7 = event.target.result;
-                break;
-              case 8:
-                this.logo8 = event.target.result;
-                break;
-              case 9:
-                this.logo9 = event.target.result;
-                break;
-              case 10:
-                this.logo10 = event.target.result;
-                break;
-            }
+            this.photos.push(event.target.result);
           };
         } else {
           this.imgValid = true;
-          this.imgError = 'La photo portant le nom de "' + e.target.files[i].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + e.target.files[i].size + '/Ko';
+          this.imgError = 'La photo portant le nom de "' + e.target.files[0].name + '" est trop grande !. La taille maximum autorisée ne peut dépasser 1048576/Ko, Votre photo fait : ' + e.target.files[0].size + '/Ko';
           this.errorList.push(this.imgError);
         }
-      }
     }
+  }
+
+  supprimPhoto(n: any): void{
+    const index: number = this.photos.indexOf(n);
+    this.myFiles.splice(index, 1);
+    this.photos.splice(index, 1);
+    console.log(this.myFiles.length);
+    console.log(this.photos.length);
   }
 
   voirVille(): void{
@@ -283,24 +263,14 @@ export class CreationDeBienComponent implements OnInit {
     this.dialogConfig.autoFocus = true;
     this.dialogConfig.width = 'auto';
     this.dialogConfig.height = 'auto';
-    this.dialog.open(PresentationBienCreeComponent, this.dialogConfig);
+    this.dialog.open(PresentationBienCreeComponent, this.dialogConfig).afterClosed().subscribe(() => {
+      this.resstFormControl();
+    });
   }
 
   resstFormControl(): void{
     this.BienForm.reset();
     this.myFiles = [];
-    this.imgs.nativeElement.value = null;
-  }
-
-  prev(): void {
-    this.currentPage--;
-  }
-
-  next(): void {
-    this.currentPage++;
-  }
-
-  change(v): void {
-    this.currentPage = v;
+    this.photos = [];
   }
 }

@@ -68,14 +68,18 @@ import { PayPalComponent } from './communications/pay-pal/pay-pal.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { CalendarComponent } from './communications/calendar/calendar.component';
 import { VoirContratReservationComponent } from './client/profil/voir-contrat-reservation/voir-contrat-reservation.component';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {TokenInterceptorInterceptor} from './service/token-interceptor.interceptor';
 import { RangePipe } from './all-bien/range.pipe';
 import { ImgInfoCaroucelComponent } from './communications/ImgCaroucel/img-info-caroucel/img-info-caroucel.component';
-// import {TokenInterceptorInterceptor} from './service/token-interceptor.interceptor';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import { BoutonMesBiensComponent } from './communications/avertissement/bouton-mes-biens/bouton-mes-biens.component';
+import { BoutonContratReservationComponent } from './communications/avertissement/bouton-contrat-reservation/bouton-contrat-reservation.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -138,6 +142,8 @@ import { ImgInfoCaroucelComponent } from './communications/ImgCaroucel/img-info-
         VoirContratReservationComponent,
         RangePipe,
         ImgInfoCaroucelComponent,
+        BoutonMesBiensComponent,
+        BoutonContratReservationComponent,
     ],
     imports: [
         BrowserModule,
@@ -155,12 +161,16 @@ import { ImgInfoCaroucelComponent } from './communications/ImgCaroucel/img-info-
         MatDatepickerModule,
         MatInputModule,
         MatNativeDateModule,
-        AngularEditorModule
+        AngularEditorModule,
+        MatStepperModule,
+        MatButtonModule,
+        MatSelectModule,
     ],
     exports: [],
     providers: [{
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true
-    }],
+    },
+      { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

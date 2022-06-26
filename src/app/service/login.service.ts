@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Personne} from '../objet';
+import {Personne, Validator} from '../objet';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -22,7 +22,7 @@ export class LoginService implements CanActivate{
   // tslint:disable-next-line:variable-name
   public readonly SessionREservation = 'reservation-details';
   // tslint:disable-next-line:variable-name
-  public readonly SessionVerifIBAU = 'IBAU-details';
+  public readonly SessionVerifValidator = 'validators-details';
   // tslint:disable-next-line:variable-name
   public readonly SessionContrat = 'contrat-details';
   // tslint:disable-next-line:variable-name
@@ -62,7 +62,23 @@ export class LoginService implements CanActivate{
   }
 
   repIBAU(): boolean{
-    return JSON.parse(sessionStorage.getItem(this.SessionVerifIBAU)) as boolean;
+    const validator = JSON.parse(sessionStorage.getItem(this.SessionVerifValidator)) as Validator;
+    return validator.ibau;
+  }
+
+  repReservation(): boolean{
+    const validator = JSON.parse(sessionStorage.getItem(this.SessionVerifValidator)) as Validator;
+    return validator?.reservation;
+  }
+
+  repMel(): boolean{
+    const validator = JSON.parse(sessionStorage.getItem(this.SessionVerifValidator)) as Validator;
+    return validator?.mel;
+  }
+
+  repMyBien(): boolean{
+    const validator = JSON.parse(sessionStorage.getItem(this.SessionVerifValidator)) as Validator;
+    return validator?.biensNonMel;
   }
 
 
@@ -79,7 +95,7 @@ export class LoginService implements CanActivate{
 
   logout(): void{
     sessionStorage.removeItem(this.SessionUser);
-    sessionStorage.removeItem(this.SessionVerifIBAU);
+    sessionStorage.removeItem(this.SessionVerifValidator);
     sessionStorage.removeItem(this.SessionREservation);
     sessionStorage.removeItem(this.SessionDemande);
     sessionStorage.removeItem(this.Sessionjwt);

@@ -11,7 +11,6 @@ import {LoginService} from './service/login.service';
 import {AllBienComponent} from './all-bien/all-bien.component';
 import {InfoBienComponent} from './all-bien/info-bien/info-bien.component';
 import {ProfilComponent} from './client/profil/profil.component';
-import {AppComponent} from './app.component';
 import {VoirContratComponent} from './client/profil/voir-contrat-mis-en-ligne/voir-contrat.component';
 import {ClientComponent} from './client/client.component';
 import {AdminComponent} from './admin/admin.component';

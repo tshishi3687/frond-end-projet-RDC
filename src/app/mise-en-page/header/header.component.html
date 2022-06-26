@@ -1,26 +1,23 @@
-<div >
-  <div class="menu row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white" >
-     <app-menu></app-menu>
-     <div class="col-lg-7 p-3 p-lg-5 pt-lg-3" *ngIf="!this.service.isAuthenticated()">
-
-       <h1 class="display-4 fw-bold lh-1">Bienvenue sur Mobembo.cd</h1>
-       <h2 class="display-4 fw-bold lh-2">Cette application est un travail de fin d'étude de bachelier en informatique de gestion.</h2>
-       <h3>De Tshibangu Cédrick</h3>
-       <p>Developpeur junior</p>
-       <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3" *ngIf="!this.service.isAuthenticated()">
-         <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" (click)="bntInscription()">Inscription</button>
-         <button type="button" class="btn btn-outline-success btn-lg px-4" (click)="bntConnection()">Connexion</button>
-         <button type="button" class="btn btn-link-warning" (click)="mdpModif()">Mot de passe oublié ?</button>
-       </div>
-     </div>
-     <br>
-     <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg" align="center" *ngIf="!this.service.isAuthenticated()">
-       <img class="rounded-lg-3" src="{{this.logo}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="this.boolLogo">
-       <app-connexion *ngIf="this.connexion"></app-connexion>
-       <app-modif-mot-de-passe *ngIf="mdpBoll"></app-modif-mot-de-passe>
-       <app-inscription *ngIf="inscription"></app-inscription>
+<div class="menu row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white" >
+   <app-menu></app-menu>
+   <div class="col-lg-7 p-3 p-lg-5 pt-lg-3" *ngIf="!this.service.isAuthenticated()">
+     <h1 class="display-4 fw-bold lh-1">Bienvenue sur Mobembo.cd</h1>
+     <h2 class="display-4 fw-bold lh-2">Cette application est un travail de fin d'étude de bachelier en informatique de gestion.</h2>
+     <h3>De Tshibangu Cédrick</h3>
+     <p>Developpeur junior</p>
+     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3" *ngIf="!this.service.isAuthenticated()">
+       <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" (click)="bntInscription()">Inscription</button>
+       <button type="button" class="btn btn-outline-success btn-lg px-4" (click)="bntConnection()">Connexion</button>
+       <button type="button" class="btn btn-link-warning" (click)="mdpModif()">Mot de passe oublié ?</button>
      </div>
    </div>
-    <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
-    <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
-</div>
+   <div class="col-lg-4" *ngIf="!this.service.isAuthenticated()">
+     <img class="rounded-lg-3" src="{{this.logo}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="this.boolLogo">
+     <app-connexion *ngIf="this.connexion"></app-connexion>
+     <app-modif-mot-de-passe *ngIf="mdpBoll"></app-modif-mot-de-passe>
+     <app-inscription *ngIf="inscription"></app-inscription>
+   </div>
+  <app-all-bien *ngIf="!this.service.isAuthenticated()"></app-all-bien>
+  <router-outlet *ngIf="service.isAuthenticated()"></router-outlet>
+ </div>
+

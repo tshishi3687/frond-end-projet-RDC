@@ -15,6 +15,8 @@
       <input type="submit" class="fadeIn fourth" value="Envoi de la demande" (click)="envoiDemande()" *ngIf="this.PersonneForm.valid">
     </form>
 
+    <p class="text-danger text-center">{{messageRate}}</p>
+    <p class="text-success text-center">{{messageReussi}}</p>
   </div>
 
   <div class="text-center" *ngIf="attenteBool">

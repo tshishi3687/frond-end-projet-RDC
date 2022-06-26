@@ -8,21 +8,39 @@
         <div *ngIf="this.service.repIBAU()">
           <h1>Combien de temps voulez mettre votre bien en ligne?</h1>
           <br>
-          <form [formGroup]="choixJourForm">
-            <select class="form-select" formControlName="jour"  aria-label="Default select example" >
-              <option value="defaults" selected>Durée de mis en ligne</option>
-              <option *ngFor="let n of this.listNuit; let i = index" value="{{i}}">{{n.nNuit}} jours en ligne.</option>
-            </select>
-          </form>
+          <div class="row">
+            <div class="col-6">
+              <form [formGroup]="choixJourForm">
+                <mat-form-field>
+                  <mat-select placeholder="Durée de mis en ligne" formControlName="jour">
+                    <mat-option [value]="'defaults'">
+                      Durée de mis en ligne
+                    </mat-option>
+                    <mat-option *ngFor="let n of this.listNuit" [value]="n.nNuit">
+                      {{ n.nNuit }} jours en ligne.
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="col-6">
+              <form id="reservation" [formGroup]="choixJourForm">
+              <mat-form-field color="accent">
+                <mat-label>Appartir de :</mat-label>
+                <input matInput formControlName="appartirDe"  [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker  class="calendar" #picker1></mat-datepicker>
+              </mat-form-field>
+              </form>
+            </div>
+          </div>
           <br>
-          <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="activation()">Mettre en ligne</button>
+          <button *ngIf="choixJourForm.valid && verifJour()" type="button" class="btn btn-outline-success" (click)="activation()">Mettre en ligne</button>
         </div>
         <div *ngIf="!this.service.repIBAU()">
           <h1>ACCES REFUSE</h1>
-          <p>Des informations manquents nous enpêchent de poursuivre ce progress</p>
+          <p>Des informations manquantes nous enpêchent de poursuivre cette mise en ligne.</p>
           <p>Veuillez consulter votre profil pour en savoir plus.</p>
-          <br>
-          <button *ngIf="choixJourForm.valid" type="button" class="btn btn-outline-success" (click)="voirProfil()">Voir profil</button>
         </div>
 
 
@@ -50,7 +68,7 @@
       <h1 class="display-5 fw-bold lh-1 mb-3">ATTENTION !!!</h1>
       <h2 class="display-5 fw-bold lh-1 mb-3">Vous êtes sur le point de mettre un Bien en ligne.</h2>
       <p class="lead">Ce qui implique que vous avez bien pris connaissance et acceptez le <span>CONTRAT BMEL</span>.</p>
-      <p class="lead">L'acceptation des termes du contra indiqué ci-deçus est <span>OBLIGATOIRE</span> lors de la mise d'un Bien En Ligne.</p>
+      <p class="lead">L'acceptation des termes du contrat indiqué ci-dessous est <span>OBLIGATOIRE</span> lors de la mise d'un Bien En Ligne.</p>
       <br>
       <form [formGroup]="acceptForm">
         <div class="form-check">

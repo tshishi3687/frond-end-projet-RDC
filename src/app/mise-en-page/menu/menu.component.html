@@ -1,68 +1,130 @@
-<div class="fadeInDown text-center" >
-  <div id="content" class="content p-0" *ngIf="ser.isAuthenticated()">
-    <div class="profile-header">
-      <div class="profile-header-cover"></div>
+<!--<div class="fadeInDown text-center" >-->
+<!--  <div id="content" class="content p-0" *ngIf="ser.isAuthenticated()">-->
+<!--    <div class="profile-header">-->
+<!--      <div class="profile-header-cover"></div>-->
 
-      <div class="profile-header-content">
+<!--      <div class="profile-header-content">-->
 
-        <div class="profile-header-info">
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-          <div class="container-fluid">
-            <a class="navbar-brand" >Mobembo.cd</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" *ngIf="ser.AdminRolle()" >
-                  <button type="button" class="btn btn-light" routerLink="/Admin/province">Province</button>
+<!--        <div class="profile-header-info">-->
+<!--        </div>-->
+<!--        <nav class="navbar navbar-expand-lg navbar-light bg-light" >-->
+<!--          <div class="container-fluid">-->
+<!--            <a class="navbar-brand" >Mobembo.cd</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--              <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--              <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item" *ngIf="ser.AdminRolle()" >-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Admin/province">Province</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.AdminRolle()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Admin/ville">Ville</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.AdminRolle()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Admin/service">Service</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.AdminRolle()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Admin/typeBien">Type de Bien</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.AdminRolle()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Admin/service/typeService">Type de service</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.isClient()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Client/creerbien">Créer un Bien</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.isClient()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Client/voirBienPersonne">Mes Biens</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.isClient()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_mel">Contrat mis en ligne</button>-->
+<!--                </li>-->
+<!--                <li class="nav-item" *ngIf="ser.isClient()">-->
+<!--                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_rese">Contrat réservation</button>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--              <form class="d-flex">-->
+<!--                <button type="button" class="btn btn-outline-primary" routerLink="/Client/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </nav>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="profile-container">-->
+<!--      <div class="row row-space-20">-->
+<!--        <div class="col-md-8">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="ser.isAuthenticated()">
+  <div class="container-fluid">
+    <a class="navbar-brand">Mobembo.cd</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item active"> <a class="nav-link" routerLink="/allBien">Home </a> </li>
+        <li class="nav-item dropdown" *ngIf="ser.AdminRolle()">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">  Gestion Admin  </a>
+          <ul class="dropdown-menu fade-up">
+            <li>
+              <a class="dropdown-item" routerLink="/Admin/province"> Province</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/Admin/ville"> Ville </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/Admin/service"> Service</a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"> Type </a>
+              <ul class="dropdown-menu fade-up">
+                <li>
+                  <a class="dropdown-item" routerLink="/Admin/typeBien"> Type de Bien</a>
                 </li>
-                <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/Admin/ville">Ville</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/Admin/service">Service</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/Admin/typeBien">Type de Bien</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.AdminRolle()">
-                  <button type="button" class="btn btn-light" routerLink="/Admin/service/typeService">Type de service</button>
-                </li>
-                <li class="nav-item">
-                  <button type="button" class="btn btn-light" routerLink="/allBien">Quoi de neuf</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/Client/creerbien">Créer un Bien</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/Client/voirBienPersonne">Mes Biens</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_mel">Contrat mis en ligne</button>
-                </li>
-                <li class="nav-item" *ngIf="ser.isClient()">
-                  <button type="button" class="btn btn-light" routerLink="/Client/contrat_rese">Contrat réservation</button>
+                <li>
+                  <a class="dropdown-item" routerLink="/Admin/service/typeService"> Type de Service </a>
                 </li>
               </ul>
-              <form class="d-flex">
-                <button type="button" class="btn btn-outline-primary" routerLink="/Client/profil"><P>Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}}</P></button>
-              </form>
-            </div>
-          </div>
-        </nav>
-
-      </div>
-    </div>
-
-    <div class="profile-container">
-      <div class="row row-space-20">
-        <div class="col-md-8">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item active" *ngIf="ser.isClient()">
+          <a class="nav-link dropdown-toggle" >Gestion des Biens </a>
+          <ul class="dropdown-menu fade-up">
+            <li *ngIf="ser.isClient()">
+              <a class="dropdown-item" routerLink="/Client/creerbien"> Création</a>
+            </li>
+            <li>
+              <a class="dropdown-item"  (click)="btnMesBiens()"> Mes Biens </a>
+            </li>
+            <li *ngIf="ser.isClient()">
+              <a class="dropdown-item" routerLink="/Client/contrat_mel" *ngIf="!ser.repMel()"> Contrats de Mis en Ligne </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item active" *ngIf="ser.isClient()">
+          <a class="nav-link dropdown-toggle" >Gestion des Réservations </a>
+          <ul class="dropdown-menu fade-up">
+            <li *ngIf="ser.isClient()">
+              <a class="dropdown-item" (click)="bntContratReservation()"> Contrats de Réservation</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="/Client/profil"> Profil {{ser.client().role}} de : {{ser.client().nom}} {{ser.client().prenom}} </a></li>
+      </ul>
+    </div> <!-- navbar-collapse.// -->
+  </div> <!-- container-fluid.// -->
+</nav>

@@ -1,65 +1,107 @@
 <div class="wrapper fadeInDown">
   <div id="formContent" *ngIf="this.inscriptionBool">
 
-    <!-- Login Form -->
-    <form [formGroup]="PersonneForm" class="text-center">
-      <div class="p-3 mb-2 bg-primary text-white">
-        <h1>Nouveau Client</h1>
-      </div>
-      <p class="text-danger" *ngIf="textBool">{{textError}}</p>
-      <div>
-        <label>
-          <p>Nom</p>
-          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Nom.valid">Un nom entre 2 et 30 carractères</p>
-        </label>
-        <input type="text" formControlName="Nom"   class="fadeIn second" name="nom" placeholder="Votre nom">
-      </div>
-      <div>
-        <label>
-          <p>Prénom</p>
-          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Prenom.valid">Un prénom entre 2 et 30 carractères</p>
-        </label>
-        <input type="text" formControlName="Prenom"  class="fadeIn third" name="prenom" placeholder="Votre prénom">
-      </div>
-      <div>
-        <label>
-          <p>Date de naissance</p>
-          <p class="text-danger" *ngIf="errorDate">Il faut être majeur (+18ans)</p>
-        </label>
-        <input type="date" formControlName="Ddn"  class="fadeIn third" name="ddn" placeholder="Votre date de naissance">
-      </div>
-      <div>
-        <label>
-          <p>Mot de passe</p>
-          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Password.valid">Mot-de-passe de minimum 8 carractère</p>
-        </label>
-        <input type="password" formControlName="Password"  class="fadeIn third" name="password" placeholder="Un mot de passe">
-      </div>
-      <div>
-        <label>
-          <p>Vérification du mot de passe</p>
-          <p class="text-danger" *ngIf="this.PersonneForm.value.Password != this.PersonneForm.value.verifPassword">Les Deux mot-de-passe ne correspondent pas</p>
-        </label>
-        <input type="password" formControlName="verifPassword"  class="fadeIn third" name="password" placeholder="Verif mot de passe">
-      </div>
-      <div>
-        <label>
-          <p>Numéro de téléphone</p>
-          <p class="text-danger" *ngIf="!this.PersonneForm.controls.Telephone.valid">Numéro de téléphone non valide</p>
-        </label>
-        <input type="text" formControlName="Telephone"  class="fadeIn third" name="password2" placeholder="Un numero de telephone">
-      </div>
-      <div>
-        <label>E-mail</label><br>
-        <input type="email" formControlName="Email"  class="fadeIn third" name="password2" placeholder="Votre email">
-        <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()" *ngIf="this.PersonneForm.valid">
-        <p *ngIf="verifExiste()" class="text-danger">Une personne est déjà inscrite avec cette adresse email !</p>
-      </div>
+<div class="p-3 mb-2 bg-primary text-white">
+<h1>Nouveau Client</h1>
+</div>
+<p class="text-danger" *ngIf="textBool">{{textError}}</p>
+<p *ngIf="!verifDate()" class="text-danger">Il faut être majeur (+18ans) !</p>
 
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="PersonneForm">
+    <form [formGroup]="PersonneForm">
+      <ng-template matStepLabel>Etape 1</ng-template>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput formControlName="Nom" placeholder="Votre nom">
+          <mat-error *ngIf="!this.PersonneForm.controls.Nom.valid">
+            Un nom entre 2 et 30 carractères !
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput formControlName="Prenom" placeholder="Votre prénom">
+          <mat-error *ngIf="!this.PersonneForm.controls.Prenom.valid">
+            Un prénom entre 2 et 30 carractères !
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field color="accent">
+          <mat-label>Votre date de naissance</mat-label>
+          <input matInput formControlName="Ddn"  [max]="dateJ" [matDatepicker]="picker5">
+          <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+          <mat-datepicker  class="calendar" #picker5></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </form>
-
+  </mat-step>
+  <mat-step [stepControl]="PersonneForm">
+    <form [formGroup]="PersonneForm">
+      <ng-template matStepLabel>Etape 2</ng-template>
+      <div>
+      <mat-form-field class="example-full-width">
+        <input type="password" matInput formControlName="Password" placeholder="Un mot de passe">
+        <mat-error *ngIf="!this.PersonneForm.controls.Password.valid">
+          Un mot-de-passe de minimum 8 carractère !
+        </mat-error>
+      </mat-form-field>
+    </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="password" matInput formControlName="verifPassword" placeholder="Vérification du mot de passe">
+          <mat-error *ngIf="this.PersonneForm.value.Password != this.PersonneForm.value.verifPassword">
+            Les Deux mot-de-passe ne correspondent pas !
+          </mat-error>
+        </mat-form-field>>
+      </div>
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="PersonneForm">
+    <form [formGroup]="PersonneForm">
+      <ng-template matStepLabel>Etape 3</ng-template>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput formControlName="Telephone" placeholder="Votre numéro de téléphone">
+          <mat-error *ngIf="!this.PersonneForm.controls.Telephone.valid">
+            Numéro de téléphone non valide pas !
+          </mat-error>
+        </mat-form-field>>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="email" matInput formControlName="Email" placeholder="Votre e-mail">
+          <mat-error *ngIf="!this.PersonneForm.controls.Email.valid">
+            Email non valide pas !
+          </mat-error>
+        </mat-form-field>>
+      </div>
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+    <div>
+      <input type="submit" class="fadeIn fourth" value="S'nscrire" (click)="ajouterPersonne()" *ngIf="this.PersonneForm.valid && verifDate()">
+      <p *ngIf="verifExiste()" class="text-danger">Une personne est déjà inscrite avec cette adresse email !</p>
+    </div>
   </div>
-
   <div  class="text-center" *ngIf="attenteBool">
     <app-message-dattente></app-message-dattente>
   </div>

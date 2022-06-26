@@ -3,7 +3,8 @@ import { render} from 'creditcardpayments/creditCardPayments';
 import {LoginService} from '../../service/login.service';
 import {BienService} from '../../service/bien.service';
 import {ReservationService} from '../../service/reservation.service';
-import { Detailes, Details, PayPal, Reservation} from '../../objet';
+import {Detailes, Details, PayPal, Reservation, Validator} from '../../objet';
+import {PersonneService} from '../../service/personne.service';
 @Component({
   selector: 'app-pay-pal',
   templateUrl: './pay-pal.component.html',
@@ -15,7 +16,8 @@ export class PayPalComponent implements OnInit, AfterViewInit {
   constructor(
     private service: LoginService,
     private bienService: BienService,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private perService: PersonneService
   ) {
     this.statusPayement = new EventEmitter<boolean>();
   }
@@ -70,6 +72,7 @@ export class PayPalComponent implements OnInit, AfterViewInit {
               }, () => alert('Enregistrement DB MEL RATER'));
               break;
             case 'reservation':
+              console.log(this.reservation);
               this.attente = true;
               const detaill = new Details();
               detaill.id = details.id;
@@ -93,15 +96,19 @@ export class PayPalComponent implements OnInit, AfterViewInit {
               payPall.reservationBienDTO = this.reservation;
               payPall.Prix = this.prix;
 
+              console.log(this.reservation);
               this.reservationService.ajouterReservation(payPall).subscribe((reponse: number) => {
                 const det = new Detailes();
                 det.id = reponse;
                 det.details = detaill;
                 this.attente = false;
                 this.reservationService.details(det).subscribe(() => {
-                  this.statusPayement.emit(true);
-                  this.messageBol = true;
                   this.message = 'Votre réservation c\'est bien effectué';
+                  this.perService.verifIBAU(this.service.client()).subscribe((reponses: Validator) => {
+                    this.statusPayement.emit(true);
+                    this.messageBol = true;
+                    sessionStorage.setItem(this.service.SessionVerifValidator, JSON.stringify(reponses));
+                  }, () => alert('Impossible de verifier les validators'));
                 }, () => {
                   this.attente = false;
                   alert('enregistrement de detail no effectuer');

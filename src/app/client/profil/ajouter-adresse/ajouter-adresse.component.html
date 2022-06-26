@@ -6,18 +6,22 @@
     <form [formGroup]="adressUserForm">
       <div class="row">
         <div class="col">
-          <input type="text" formControlName="numBien" class="form-control" placeholder="Numéro">
+          N° d'habitation
+          <input type="text" formControlName="numBien" class="form-control" placeholder="N° d'habitation">
         </div>
         <div class="col">
+          <label>Nom de rue / Avenue</label>
           <input type="text" formControlName="nomRue" class="form-control" placeholder="Rue">
         </div>
       </div>
       <br>
       <div class="row">
         <div class="col">
-          <input type="text" formControlName="codePostal" class="form-control" placeholder="Code postal">
+          <label>Code postal / province</label>
+          <input type="text" formControlName="codePostal" class="form-control" placeholder="Code postal / province">
         </div>
         <div class="col">
+          <label>Pays</label>
           <select class="form-select" formControlName="pays"  aria-label="Default select example" >
             <option value="defaults" selected>Pays</option>
             <option *ngFor="let p of listPays; let i = index" value="{{i}}">{{i}} - {{p.nomFrFr}}  ({{p.alpha2}})</option>
@@ -28,7 +32,7 @@
 
       <div class="row">
         <div class="col">
-          <button class="w-100 btn btn-primary btn-lg" (click)="ajourterAdressUser()">Ajouter une adresse.</button>
+          <button *ngIf="adressUserForm.valid && adressUserForm.value.pays != 'defaults'" class="w-100 btn btn-primary btn-lg" (click)="ajourterAdressUser()">Ajouter une adresse.</button>
         </div>
       </div>
     </form>

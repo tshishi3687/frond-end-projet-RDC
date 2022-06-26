@@ -25,7 +25,7 @@ export class InscriptionComponent implements OnInit {
   PersonneForm = new FormGroup({
     Nom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     Prenom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    Ddn: new FormControl(null, [Validators.required, ]),
+    Ddn: new FormControl(Date, [Validators.required]),
     Password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
     verifPassword: new FormControl(),
     // tslint:disable-next-line:max-line-length
@@ -41,7 +41,7 @@ export class InscriptionComponent implements OnInit {
   attenteBool = false;
   dateJ = new Date();
   datePer: Date;
-  errorDate: boolean;
+  isLinear = false;
 
   ngOnInit(): void {
   }
@@ -56,51 +56,47 @@ export class InscriptionComponent implements OnInit {
     this.dialog.open(ActivationCompteComponent, dialogConfig);
   }
 
+  verifDate(): boolean{
+    return (new Date().getFullYear() - (new Date(this.PersonneForm.value.Ddn).getFullYear()) >= 18);
+  }
+
   ajouterPersonne(): void{
 
     this.datePer = new Date(this.PersonneForm.value.Ddn);
     const mdp1 = this.PersonneForm.value.Password;
     const mdp2 = this.PersonneForm.value.verifPassword;
 
-    if ((this.dateJ.getFullYear() - this.dateJ.getFullYear()) < 18){this.errorDate = true; }
-    // @ts-ignore
-    if (this.PersonneForm.valid && ((this.dateJ.getFullYear() - this.datePer.getFullYear()) >= 18) && (mdp1 === mdp2)){
+    const contactUser = new ContactUser();
+    contactUser.id = 0;
+    contactUser.email = this.PersonneForm.value.Email;
+    contactUser.telephone = this.PersonneForm.value.Telephone;
 
-      const contactUser = new ContactUser();
-      contactUser.id = 0;
-      contactUser.email = this.PersonneForm.value.Email;
-      contactUser.telephone = this.PersonneForm.value.Telephone;
+    const mdp = new Mdp();
+    mdp.mdp = this.PersonneForm.value.Password;
+    mdp.mail = this.PersonneForm.value.Email;
 
-      const mdp = new Mdp();
-      mdp.mdp = this.PersonneForm.value.Password;
-      mdp.mail = this.PersonneForm.value.Email;
+    const personne = new Personne();
+    personne.id = 0;
+    personne.nom = this.PersonneForm.value.Nom;
+    personne.prenom = this.PersonneForm.value.Prenom;
+    personne.ddn = this.PersonneForm.value.Ddn;
+    personne.contactUser = contactUser;
+    personne.password = mdp;
+    personne.verifMDP = this.PersonneForm.value.verifPassword;
 
-      const personne = new Personne();
-      personne.id = 0;
-      personne.nom = this.PersonneForm.value.Nom;
-      personne.prenom = this.PersonneForm.value.Prenom;
-      personne.ddn = this.PersonneForm.value.Ddn;
-      personne.contactUser = contactUser;
-      personne.password = mdp;
-      personne.verifMDP = this.PersonneForm.value.verifPassword;
-
-      this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
-        if (reponse ){
-          this.personneExiste = true;
-        }else{
-          this.attenteBool = true;
-          this.inscriptionBool = false;
-          // tslint:disable-next-line:max-line-length
-          this.personneService.ajouterPersonne(personne).subscribe(() => {
-            this.comCodeActive(mdp);
-            this.redirection();
-          }, () => alert(this.error));
-        }
-      }, () => alert(this.error));
-    }else{
-      this.textBool = true;
-      this.textError = 'Les information entrées ne nous permetent pas d\'accepter votre inscription';
-    }
+    this.personneService.voirSiExiste(mdp).subscribe((reponse: boolean) => {
+      if (reponse ){
+        this.personneExiste = true;
+      }else{
+        this.attenteBool = true;
+        this.inscriptionBool = false;
+        // tslint:disable-next-line:max-line-length
+        this.personneService.ajouterPersonne(personne).subscribe(() => {
+          this.comCodeActive(mdp);
+          this.redirection();
+        }, () => alert(this.error));
+      }
+    }, () => alert(this.error));
   }
 
   redirection(): void{
@@ -110,15 +106,5 @@ export class InscriptionComponent implements OnInit {
 
   verifExiste(): boolean{
     return this.personneExiste;
-  }
-
-  validate(): ValidatorFn{
-    const ddn = new Date(this.PersonneForm.value.Ddn);
-    const dateDay = Date.now() - ddn.getFullYear();
-    const majeur = 18;
-    if (dateDay <= majeur){
-      return null;
-    }
-    return(this.PersonneForm.value.Ddn);
   }
 }

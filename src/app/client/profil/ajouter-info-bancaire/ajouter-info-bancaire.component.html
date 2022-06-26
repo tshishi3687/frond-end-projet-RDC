@@ -6,26 +6,46 @@
     <form [formGroup]="infoBancaireForm">
       <div class="row">
         <div class="col">
+          <label>Nom de la banque</label>
           <input type="text" formControlName="nomBanque" class="form-control" placeholder="Nom banque">
         </div>
         <div class="col">
-          <input type="text" formControlName="numCarte" class="form-control" placeholder="N° carte">
+          <label>N° carte</label>
+          <input type="text" formControlName="numCarte" class="form-control" placeholder="ex :0234-1234-1234-01234">
         </div>
       </div>
       <br>
       <div class="row">
         <div class="col">
-          <input type="text" formControlName="numCompte" class="form-control" placeholder="N° compte">
+          <label>N° compte</label>
+          <input type="text" formControlName="numCompte" class="form-control" placeholder="ex: be09-0234-1234-1234">
         </div>
         <div class="col">
-          <input type="date" formControlName="dateExpiration" class="form-control" placeholder="Date d'expiration">
+          <div class="col-lg-8 col-lg-offset-2 centered">
+            <div style="float: left">
+              <label>Mois</label>
+              <select [style.border-block-color]="verifMois()? 'green': 'red'" class="form-select" formControlName="expirM"  aria-label="Default select example" >
+                <option value="defaults" selected>Mois</option>
+                <option *ngFor="let m of listMois">{{m}}</option>
+              </select>
+            </div>
+            <div style="float: right">
+              <label>Année</label>
+              <select [style.border-block-color]="verifAnnee()? 'green': 'red'" class="form-select" formControlName="expirA"  aria-label="Default select example" >
+                <option value="defaults" selected>Année</option>
+                <option *ngFor="let a of listAnnee">{{a}}</option>
+              </select>
+            </div>
+          </div>
+
+
         </div>
       </div>
       <br>
 
       <div class="row">
         <div class="col">
-          <button class="w-100 btn btn-primary btn-lg" (click)="ajouterInfoBancaire()">Ajouter une information bancaire.</button>
+          <button *ngIf="infoBancaireForm.valid && verifAnnee() && verifMois()" class="w-100 btn btn-primary btn-lg" (click)="ajouterInfoBancaire()">Ajouter une information bancaire.</button>
         </div>
       </div>
     </form>
@@ -33,8 +53,9 @@
 </div>
 
 <div class="text-center" *ngIf="infoBancaire!=null">
-  <button type="button" class="btn btn-link" (click)="changerInfoBancaire()">J'aimerais changer d'information bancaire
-  </button>
+<!--  <button type="button" class="btn btn-link" (click)="changerInfoBancaire()">-->
+<!--    J'aimerais changer d'information bancaire-->
+<!--  </button>-->
   <div class="row">
     <div class="col">
       <label>Nom Banque</label>
@@ -53,7 +74,7 @@
     </div>
     <div class="col">
       <label>Expiration</label>
-      <input type="text" class="form-control" placeholder="{{infoBancaire.dateExpiration}}" readonly>
+      <input type="text" class="form-control" placeholder="{{infoBancaire.dateExpiration | date: 'MM YYYY'}}" readonly>
     </div>
   </div>
 </div>

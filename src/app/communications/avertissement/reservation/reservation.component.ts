@@ -26,6 +26,11 @@ export class ReservationComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.bien = data.bien;
+    this.choixJourForm = new FormGroup({
+      jourA: new FormControl(Date, [Validators.required]),
+      jourD: new FormControl(Date, [Validators.required]),
+      nPersonne: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(this.bien.npmax)])
+    });
   }
 
   bien: Bien;
@@ -34,11 +39,11 @@ export class ReservationComponent implements OnInit {
     check: new FormControl(false, [Validators.required])
   });
 
-  choixJourForm: FormGroup;
   veifCodeForm = new FormGroup({
     codeActivation: new FormControl('', [Validators.required])
   });
 
+  choixJourForm: FormGroup;
   service = this.serv;
   verifCode = false;
   verifCode2 = false;
@@ -46,13 +51,24 @@ export class ReservationComponent implements OnInit {
   codeAcceptee = false;
   nJour: number;
   reservationError: string;
+  date: Date;
+  listR: Array<Date> = [];
+  event: any;
+  reservationOk = false;
 
   ngOnInit(): void {
-    this.choixJourForm = new FormGroup({
-      jourA: new FormControl(Date, [Validators.required]),
-      jourD: new FormControl(Date, [Validators.required]),
-      nPersonne: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(this.bien.npmax)])
+
+    // @ts-ignore
+    this.choixJourForm.get('jourA').valueChanges.subscribe((v) => {
+      if (!v) {
+        return;
+      }
+      this.date = new Date(v);
     });
+  }
+
+  reservationReussit(): void{
+    this.reservationOk = true;
   }
 
   onClose(): void{
@@ -90,7 +106,7 @@ export class ReservationComponent implements OnInit {
       }, () => alert('probleme avec la vérification de réservation'));
     }
     else{
-      this.route.navigateByUrl('/profil');
+      this.route.navigateByUrl('/Client/profil');
     }
   }
 
@@ -104,8 +120,22 @@ export class ReservationComponent implements OnInit {
   }
 
   voirProfil(): void{
-    this.route.navigateByUrl('/profil');
+    this.route.navigateByUrl('/Client/profil');
     this.onClose();
   }
 
+  isSelected = (event: Date): boolean => {
+    if (!event) {
+      return true;
+    }
+    const date =
+      event.getFullYear() +
+      '-' +
+      ('00' + (event.getMonth() + 1)).slice(-2) +
+      '-' +
+      ('00' + event.getDate()).slice(-2);
+    this.bien.reservers.find(r => this.listR.push(r));
+    // @ts-ignore
+    return this.bien.reservers.find(r => r === date) ? false : (this.bien.disponibles.find(d => d === date)) ? true : null;
+  }
 }

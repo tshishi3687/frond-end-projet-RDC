@@ -1,4 +1,4 @@
-<div class="container col-xxl-8 px-4 py-5">
+<div class="container col-xxl-8 px-4 py-5" *ngIf="!reservationOk">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
       <div >
@@ -38,12 +38,8 @@
           </div>
         </div>
         <div class="card shadow-sm" *ngIf="acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
-          <app-pay-pal (statusPayement)="onClose()" [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
+          <app-pay-pal (statusPayement)="reservationReussit()" [idObjet]="bien.id" [prix]="(bien.prix * nJour)" [payementPour]="'reservation'" [reservation]="reservation"></app-pay-pal>
         </div>
-        <div class="card shadow-sm" *ngIf="!acceptForm.value.check && !verifCode && codeAcceptee && verifCode2">
-          <h3 class="bg-success">Votre reservation c'est fait avec succès</h3>
-        </div>
-
       </div>
     </div>
     <div class="col-lg-6">
@@ -63,17 +59,26 @@
             <label class="form-check-label" >J'accepte les termes et les conditions du <span>CONTRAT BMEL</span>.</label>
           </div>
         </form>
+
       </div>
 
       <div *ngIf="acceptForm.value.check == true && !verifCode && !verifCode2">
         <div *ngIf="this.service.repIBAU()">
           <br>
-          <form [formGroup]="choixJourForm">
-                <p>Date d'arrivée souhaitée:</p>
-                <input class="form-control" type="date" formControlName="jourA">
-              <br>
-                <p>Date de départ souhaitée:</p>
-                <input class="form-control" type="date" formControlName="jourD">
+          <form id="reservation" [formGroup]="choixJourForm">
+            <mat-form-field color="accent">
+              <mat-label>Date d'arrivé</mat-label>
+              <input matInput formControlName="jourA" [matDatepickerFilter]="isSelected" [min]="bien.disponibles[0]" [max]="bien.disponibles[bien.disponibles.length-1]" [matDatepicker]="picker1">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker  class="calendar" #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field color="accent" >
+              <mat-label>Date de départ</mat-label>
+              <input formControlName="jourD" matInput [matDatepickerFilter]="isSelected"  [min]="date" [max]="bien.disponibles[bien.disponibles.length-1]" [matDatepicker]="picker2"  >
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker class="calendar" #picker2 color="primary"></mat-datepicker>
+            </mat-form-field>
               <br>
                 <p>Nombre personne(s) sur les lieux (1 à {{this.bien.npmax}} pour ce bien):</p>
                 <input class="form-control" type="number" formControlName="nPersonne">
@@ -160,4 +165,17 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="reservationOk">
+  <h1 class="text-success">Réservation réussi !</h1>
+  <h3 class="text-primary">L'équipe Mobembo.cd vous souhaite un bon sejour chez notre partenaire.</h3>
+  <p>
+    Dès à présent, il vous est possible de consuler, télécharger ou d'imprimer votre contrat de réservation dans :
+    <br>
+    <span class="font-weight-bold">Gestion des réservations > Contrat de reservation</span>
+  </p>
+  <br>
+  <br>
+  <button type="button" class="btn btn-primary" (click)="onClose()">Home page</button>
 </div>

@@ -5,7 +5,8 @@ import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BienService} from '../../../service/bien.service';
 import { Location } from '@angular/common';
-import {Bien} from '../../../objet';
+import {Bien, Validator} from '../../../objet';
+import {PersonneService} from '../../../service/personne.service';
 
 @Component({
   selector: 'app-suppression-bien',
@@ -18,6 +19,7 @@ export class SuppressionBienComponent implements OnInit {
               private dialogRef: MatDialogRef<InfoBienComponent>,
               private bienService: BienService,
               private location: Location,
+              private perService: PersonneService,
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.bien = data.bien;
@@ -49,7 +51,10 @@ export class SuppressionBienComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     if (this.suppressionMessage.includes(this.deleteForm.value.textDelet) && this.suppressionMessage.length === this.deleteForm.value.textDelet.length) {
       this.bienService.supprimerBien(this.bien).subscribe(() => {
-        this.annulle();
+        this.perService.verifIBAU(this.clientSer.client()).subscribe((reponses: Validator) => {
+          sessionStorage.setItem(this.clientSer.SessionVerifValidator, JSON.stringify(reponses));
+          this.annulle();
+        }, () => alert('Impossible de verifier les validators'));
       }, () => alert('pas ok'));
     }
   }

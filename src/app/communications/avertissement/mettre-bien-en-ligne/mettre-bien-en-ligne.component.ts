@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Bien, NombreNuitVoulu} from '../../../objet';
+import {Bien, NombreNuitVoulu, Validator} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
@@ -19,6 +19,7 @@ export class MettreBienEnLigneComponent implements OnInit {
               private bienService: BienService,
               private serv: LoginService,
               public dialogRef: MatDialogRef<MettreBienEnLigneComponent>,
+              private persService: PersonneService,
               private personneService: PersonneService,
               @Inject(MAT_DIALOG_DATA) data
   ) {
@@ -31,7 +32,8 @@ export class MettreBienEnLigneComponent implements OnInit {
   });
 
   choixJourForm = new FormGroup({
-    jour: new FormControl('defaults', [Validators.required])
+    jour: new FormControl('defaults', [Validators.required]),
+    appartirDe: new FormControl(Date, Validators.required)
   });
 
   veifCodeForm = new FormGroup({
@@ -46,6 +48,10 @@ export class MettreBienEnLigneComponent implements OnInit {
 
   ngOnInit(): void {
     this.addListNuit();
+  }
+
+  verifJour(): boolean{
+    return this.choixJourForm.value.jour !== 'defaults';
   }
 
   addListNuit(): void{
@@ -80,13 +86,8 @@ export class MettreBienEnLigneComponent implements OnInit {
     this.cachedemandeJour = false;
     this.verifCode = true;
     if (this.service.repIBAU() && this.acceptForm.valid){
-      const bien = new Bien();
-      bien.id = this.bien.id;
-      bien.type_bien = this.bien.type_bien;
-      bien.coordonnee = this.bien.coordonnee;
-      bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
-      this.bienService.envoiMail(bien).subscribe(() => {
-      }, () => alert('problemme de connection server'));
+      this.bien.idNNuit = this.choixJourForm.value.jour;
+      this.bienService.envoiMail(this.bien).subscribe(() => {}, () => alert('problemme de connection server'));
     }
     else{
       this.route.navigateByUrl('/profil');
@@ -95,26 +96,20 @@ export class MettreBienEnLigneComponent implements OnInit {
 
   envoiCode(): void{
     if (this.veifCodeForm.valid){
-      const bien = new Bien();
-      bien.id = this.bien.id;
-      bien.type_bien = this.bien.type_bien;
-      bien.coordonnee = this.bien.coordonnee;
-      // @ts-ignore
-      bien.idNNuit = this.listNuit[this.choixJourForm.value.jour].nNuit;
+      this.bien.idNNuit = this.choixJourForm.value.jour;
+      this.bien.appartirDe = this.choixJourForm.value.appartirDe;
       this.personneService.verifCompte(this.veifCodeForm.value.codeActivation).subscribe((reponse: boolean) => {
         if (reponse){
-          this.bienService.activate(bien).subscribe(() => {
-            this.onClose();
+          this.bienService.activate(this.bien).subscribe(() => {
+            this.persService.verifIBAU(this.service.client()).subscribe((reponses: Validator) => {
+              sessionStorage.setItem(this.service.SessionVerifValidator, JSON.stringify(reponses));
+              this.onClose();
+            }, () => alert('Impossible de verifier les validators'));
           }, () => alert('problemme de connection server'));
         }else{
           this.codeFaut = 'code incorecte';
         }
       }, () => alert('problemme de connection server'));
     }
-  }
-
-  voirProfil(): void{
-    this.route.navigateByUrl('/profil');
-    this.onClose();
   }
 }

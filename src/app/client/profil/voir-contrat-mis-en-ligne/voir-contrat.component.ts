@@ -54,6 +54,6 @@ export class VoirContratComponent implements OnInit {
     setTimeout(() => {
       window.print();
       this.signature = false;
-    }, 1);
+    }, 2);
   }
 }

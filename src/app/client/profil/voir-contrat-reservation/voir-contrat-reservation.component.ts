@@ -25,7 +25,6 @@ export class VoirContratReservationComponent implements OnInit {
 
   voirContrat(): void{
     this.contratService.voirReservation().subscribe(reponse => {
-      console.log(reponse);
       this.listContrat = reponse;
     }, () => alert('impossible de recupérer la liste des réservation'));
   }

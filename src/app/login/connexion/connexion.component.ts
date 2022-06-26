@@ -1,5 +1,5 @@
 import {Component, OnInit, Output} from '@angular/core';
-import {Mdp, Personne} from '../../objet';
+import {Mdp, Personne, Validator} from '../../objet';
 import {PersonneService} from '../../service/personne.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventEmitter} from 'events';
@@ -55,9 +55,9 @@ export class ConnexionComponent implements OnInit {
         this.personneService.infoPersonne().subscribe((rep: Personne) => {
           if (rep.active){
             this.logService.redirection(rep);
-            this.personneService.verifIBAU(rep).subscribe((reponses: boolean) => {
-              sessionStorage.setItem(this.logService.SessionVerifIBAU, JSON.stringify(reponses));
-            }, () => alert('Impossible de verifier l\'IBAU'));
+            this.personneService.verifIBAU(rep).subscribe((reponses: Validator) => {
+              sessionStorage.setItem(this.logService.SessionVerifValidator, JSON.stringify(reponses));
+            }, () => alert('Impossible de verifier les validator'));
           }else{
             this.comCodeActive(mdp);
           }

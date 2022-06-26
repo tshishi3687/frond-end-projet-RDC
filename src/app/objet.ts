@@ -79,7 +79,7 @@ export class Bien{
   description: string;
   coordonnee: Coordonnee;
   appartient: Personne;
-  dateCreation: Date;
+  appartirDe: Date;
   likes: number;
   modeActive: boolean;
   images: Array<Img>;
@@ -283,4 +283,11 @@ export interface TryListAllBiens{
   page: number;
   nbPage: number;
   list: Array<Bien>;
+}
+
+export class Validator{
+  ibau: boolean;
+  reservation: boolean;
+  mel: boolean;
+  biensNonMel: boolean;
 }

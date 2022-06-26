@@ -1,0 +1,19 @@
+:host /deep/ .selected
+{
+  background-color: lightgray;
+}
+.drop-calendar
+{
+  width:30rem
+}
+
+:host /deep/ .isnotselected
+{
+  background-color: #ade5ad;
+  color: white;
+}
+mat-form-field {
+  margin-right: 12px;
+}
+
+

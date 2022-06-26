@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AdressUserServiceService} from '../../../service/adress-user-service.service';
 import {PaysServiceService} from '../../../service/pays-service.service';
-import {AdressUser, Pays} from '../../../objet';
+import {AdressUser, Pays, Validator} from '../../../objet';
 import {LoginService} from '../../../service/login.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PersonneService} from '../../../service/personne.service';
 
 @Component({
@@ -22,10 +22,10 @@ export class AjouterAdresseComponent implements OnInit {
   listPays: Array<Pays> ;
   adressUser: AdressUser;
   adressUserForm = new FormGroup({
-    numBien: new FormControl(),
-    nomRue: new FormControl(),
-    codePostal: new FormControl(),
-    pays: new FormControl('defaults'),
+    numBien: new FormControl('', Validators.required),
+    nomRue: new FormControl('', Validators.required),
+    codePostal: new FormControl('', Validators.required),
+    pays: new FormControl('defaults', Validators.required),
   });
 
   ngOnInit(): void {
@@ -53,9 +53,9 @@ export class AjouterAdresseComponent implements OnInit {
       this.adressText = 'Votre nouvelle adresse a bien été enregistrée';
       this.adressUserForm.reset();
       this.voirAdressUser();
-      this.persService.verifIBAU(this.service.client()).subscribe((reponses: boolean) => {
-        sessionStorage.setItem(this.service.SessionVerifIBAU, JSON.stringify(reponses));
-      }, () => alert('Impossible de verifier l\'IBAU'));
+      this.persService.verifIBAU(this.service.client()).subscribe((reponses: Validator) => {
+        sessionStorage.setItem(this.service.SessionVerifValidator, JSON.stringify(reponses));
+      }, () => alert('Impossible de verifier les validators'));
     }, () => alert('il ya eu un probleme lors de l\'enregistrement d\'adresse'));
   }
 

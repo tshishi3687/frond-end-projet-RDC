@@ -2,7 +2,7 @@
   width: auto;
 }
 
-::ng-deep.selected
+:host /deep/ .selected .mat-calendar-body-cell-content
 {
   background-color: lightgray;
 }
@@ -11,7 +11,7 @@
   width:30rem
 }
 
-::ng-deep.isnotselected
+:host /deep/ .isnotselected .mat-calendar-body-cell-content
 {
   background-color: #ade5ad;
   color: white;

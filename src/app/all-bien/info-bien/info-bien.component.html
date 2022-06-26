@@ -1,12 +1,13 @@
-<div class=" text-white rounded bg-dark">
+<ng-container *ngIf="bien">
+  <div class=" text-white rounded bg-dark">
     <app-img-caroucel [img]="bien.images" [pourcentageAffichage]="55"></app-img-caroucel>
-  <h3 class="pb-4 mb-4 fst-italic border-bottom">
-    {{bien.type_bien.nom}} à {{bien.coordonnee.ville.nomVille}} dans la province de {{bien.coordonnee.ville.province.nomprovince}}. <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
-  </h3>
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      {{bien.type_bien.nom}} à {{bien.coordonnee.ville.nomVille}} dans la province de {{bien.coordonnee.ville.province.nomprovince}}. <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
+    </h3>
 
-</div>
+  </div>
 
-<br>
+  <br>
   <div class="nav-scroller py-1 mb-2">
     <div class="row row-cols-sm-1 row-cols-md-2">
       <div class="col-sm-1 col-md-3">
@@ -16,189 +17,186 @@
         <h2 class="text-secondary">Description de la location<br>En ligne du {{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</h2>
         <div [innerHTML]="bien.description"></div>
       </div>
-      </div>
-    </div>
-
-<header style="min-width: 100% !important;">
-  <div class="p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white">
-    <h2 >Mise à votre disposition</h2>
-    <div class="row">
-      <div class="col">
-        <p [style.color]="bien.aladisposition.securite? 'green': 'red'" >Securité</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.wifi? 'green': 'red'" >Wifi</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.television? 'green': 'red'" >Télévision</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.vesselle? 'green': 'red'" >Vaisselle</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.literie? 'green': 'red'" >Literie</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.eauPotable? 'green': 'red'" >Eau potable</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.eauChaude? 'green': 'red'" >Eau chaude</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.terrasse? 'green': 'red'" >Terrasse</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.jardin? 'green': 'red'" >Jardin</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.cour? 'green': 'red'" >Cour</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.piscineCommune? 'green': 'red'" >Piscine commune</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.piscinePrive? 'green': 'red'" >Piscine privée</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.voiture? 'green': 'red'" >Voiture</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.moto? 'green': 'red'" >Moto</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.velo? 'green': 'red'" >Vélo</p>
-      </div>
-      <div class="col">
-        <p [style.color]="bien.aladisposition.animaux? 'green': 'red'" >Animaux domestiques ADMIS</p>
-      </div>
-    </div>
-    <div>
-    </div>
-    <div >
-    </div>
-    <div >
     </div>
   </div>
 
-  <div class="row flex-nowrap justify-content-between align-items-center p-3 mb-2 bg-secondary  text-white text-center">
-    <div class="col-2 pt-1">
-      <h1>{{bien.prix}}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
-        <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
-      </svg></h1>
+  <header style="min-width: 100% !important;">
+    <div class="p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-white">
+      <h2 >Mise à votre disposition</h2>
+      <div class="row">
+        <div class="col">
+          <p [style.color]="bien.aladisposition.securite? 'green': 'red'" >Securité</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.wifi? 'green': 'red'" >Wifi</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.television? 'green': 'red'" >Télévision</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.vesselle? 'green': 'red'" >Vaisselle</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.literie? 'green': 'red'" >Literie</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.eauPotable? 'green': 'red'" >Eau potable</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.eauChaude? 'green': 'red'" >Eau chaude</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.terrasse? 'green': 'red'" >Terrasse</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.jardin? 'green': 'red'" >Jardin</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.cour? 'green': 'red'" >Cour</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.piscineCommune? 'green': 'red'" >Piscine commune</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.piscinePrive? 'green': 'red'" >Piscine privée</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.voiture? 'green': 'red'" >Voiture</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.moto? 'green': 'red'" >Moto</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.velo? 'green': 'red'" >Vélo</p>
+        </div>
+        <div class="col">
+          <p [style.color]="bien.aladisposition.animaux? 'green': 'red'" >Animaux domestiques ADMIS</p>
+        </div>
+      </div>
+      <div>
+      </div>
+      <div >
+      </div>
+      <div >
+      </div>
     </div>
-    <div class="col-2 text-center">
-      <h2>{{bien.superficie}}
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
+
+    <div class="row flex-nowrap justify-content-between align-items-center p-3 mb-2 bg-secondary  text-white text-center">
+      <div class="col-2 pt-1">
+        <h1>{{bien.prix}}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
+          <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
+        </svg></h1>
+      </div>
+      <div class="col-2 text-center">
+        {{bien.superficie}} m²
+      </div>
+      <div class="col-2 text-center">
+        {{bien.nchambre}}
+        <i class="fas fa-bed"></i>
+      </div>
+      <div class="col-2 text-center">
+        {{bien.nsdb}}
+        <i class="fas fa-bath"></i>
+      </div>
+      <div class="col-2 text-center">
+        {{bien.nwc}}
+        <i class="fas fa-toilet"></i>
+      </div>
+      <div class="col-2 text-center">
+        {{bien.npmin}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
         </svg>
-      </h2>
-    </div>
-    <div class="col-2 text-center">
-      {{bien.nchambre}}
-      <i class="fas fa-bed"></i>
-    </div>
-    <div class="col-2 text-center">
-      {{bien.nsdb}}
-      <i class="fas fa-bath"></i>
-    </div>
-    <div class="col-2 text-center">
-      {{bien.nwc}}
-      <i class="fas fa-toilet"></i>
-    </div>
-    <div class="col-2 text-center">
-      {{bien.npmin}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-      </svg>
-      -
-      {{bien.npmax}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
-        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-      </svg>
-    </div>
-  </div>
-</header>
-
-<main class="container">
-
-  <div class="row g-5">
-    <div class="col-md-9">
-
-      <article class="blog-post">
-        <br>
-
-      </article>
-
-      <div class="row row-cols-2">
-        <div class="col">
-          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-primary">Province</strong>
-
-              <h3 class="mb-0">{{bien.coordonnee.ville.province.nomprovince}}</h3>
-              <p class="card-text mb-auto">{{bien.coordonnee.ville.province.description}}</p>
-              <app-img-caroucel [img]="bien.coordonnee.ville.province.img" [pourcentageAffichage]="100"></app-img-caroucel>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-success">Ville</strong>
-              <h3 class="mb-0">{{bien.coordonnee.ville.nomVille}}</h3>
-              <p class="mb-auto">{{bien.coordonnee.ville.description}}</p>
-              <p class="stretched-link">Nombre habitant  {{bien.coordonnee.ville.nhabitant}}</p>
-              <app-img-caroucel [img]="bien.coordonnee.ville.img" [pourcentageAffichage]="100"></app-img-caroucel>
-            </div>
-          </div>
-        </div>
+        -
+        {{bien.npmax}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+          <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+          <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+        </svg>
       </div>
-
-
-      <article class="blog-post">
-        <h2 class="blog-post-title">Disponible dans le coin</h2>
-        <app-list-service [services]="bien.service"></app-list-service>
-      </article>
-
-      <nav class="blog-pagination" aria-label="Pagination">
-        <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
-      </nav>
-
     </div>
+  </header>
 
-    <div class="col-md-3">
-      <div class="position-sticky" style="top:2rem;">
-        <div class="p-4 mb-3 bg-light rounded">
-          <h1 class="text-primary display-2 text-center">
-            {{bien.type_bien.nom}} {{bien.prix}}€ la nuit <br></h1>
-          <p class="text-center">à {{bien.coordonnee.ville.nomVille}} dans la province de {{bien.coordonnee.ville.province.nomprovince}}.</p>
-          <div class="row">
-            <div class="col">
-              <button *ngIf="this.service.isAuthenticated && bien.disponibles != null && bien.reservers.length < bien.disponibles.length && bien.modeActive" type="button" class="btn btn-outline-success" (click)="reservation()">Réservation</button>
-            </div>
-            <div class="col">
-              <button type="button" class="btn btn-info" (click)="iLike()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                  <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
-                </svg>  {{bien.likes}}
-                <p *ngIf="likes">merci pour votre réaction</p>
-                <p *ngIf="problemCo">il y a eu un problème de connéxion, veuillez réessayer plustard</p>
-              </button>
+  <main class="container">
+
+    <div class="row g-5">
+      <div class="col-md-9">
+
+        <article class="blog-post">
+          <br>
+
+        </article>
+
+        <div class="row row-cols-2">
+          <div class="col">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Province</strong>
+
+                <h3 class="mb-0">{{bien.coordonnee.ville.province.nomprovince}}</h3>
+                <p class="card-text mb-auto">{{bien.coordonnee.ville.province.description}}</p>
+                <app-img-caroucel [img]="bien.coordonnee.ville.province.img" [pourcentageAffichage]="100"></app-img-caroucel>
+              </div>
             </div>
           </div>
-
-          <p>{{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</p>
-          <app-calendar [disponibles]="bien.disponibles" [reservations]="bien.reservers"></app-calendar>
+          <div class="col">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Ville</strong>
+                <h3 class="mb-0">{{bien.coordonnee.ville.nomVille}}</h3>
+                <p class="mb-auto">{{bien.coordonnee.ville.description}}</p>
+                <p class="stretched-link">Nombre habitant  {{bien.coordonnee.ville.nhabitant}}</p>
+                <app-img-caroucel [img]="bien.coordonnee.ville.img" [pourcentageAffichage]="100"></app-img-caroucel>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col">
+
+
+        <article class="blog-post">
+          <h2 class="blog-post-title">Disponible dans le coin</h2>
+          <app-list-service [services]="bien.service"></app-list-service>
+        </article>
+
+        <nav class="blog-pagination" aria-label="Pagination">
           <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
-        </div>
+        </nav>
 
       </div>
-    </div>
-  </div>
 
-</main>
+      <div class="col-md-3">
+        <div class="position-sticky" style="top:2rem;">
+          <div class="p-4 mb-3 bg-light rounded">
+            <h1 class="text-primary display-2 text-center">
+              {{bien.type_bien.nom}} {{bien.prix}}€ la nuit <br></h1>
+            <p class="text-center">à {{bien.coordonnee.ville.nomVille}} dans la province de {{bien.coordonnee.ville.province.nomprovince}}.</p>
+            <div class="row">
+              <div class="col">
+                <button *ngIf="this.service.isAuthenticated && bien.disponibles != null && bien.reservers.length < bien.disponibles.length && bien.modeActive" type="button" class="btn btn-outline-success" (click)="reservation()">Réservation</button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-info" (click)="iLike()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
+                  </svg>  {{bien.likes}}
+                  <p *ngIf="likes">merci pour votre réaction</p>
+                  <p *ngIf="problemCo">il y a eu un problème de connéxion, veuillez réessayer plustard</p>
+                </button>
+              </div>
+            </div>
+
+            <p>{{bien.disponibles[0] | date: 'd MMM y'}} au {{bien.disponibles[bien.disponibles.length-1] | date :'d MMM y'}}</p>
+            <app-calendar [disponibles]="bien.disponibles" [reservations]="bien.reservers"></app-calendar>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-link" (click)="onClose()">Retour</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</ng-container>
+
