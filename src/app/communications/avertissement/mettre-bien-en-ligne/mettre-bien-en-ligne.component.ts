@@ -4,8 +4,11 @@ import {Bien, NombreNuitVoulu, Validator} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
+import {RGPDComponent} from '../../donneeLegaux/rgpd/rgpd.component';
+import {CGUComponent} from '../../donneeLegaux/cgu/cgu.component';
+import {CMELComponent} from '../../donneeLegaux/cmel/cmel.component';
 
 @Component({
   selector: 'app-mettre-bien-en-ligne',
@@ -21,6 +24,7 @@ export class MettreBienEnLigneComponent implements OnInit {
               public dialogRef: MatDialogRef<MettreBienEnLigneComponent>,
               private persService: PersonneService,
               private personneService: PersonneService,
+              private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.bien = data.bien;
@@ -111,5 +115,32 @@ export class MettreBienEnLigneComponent implements OnInit {
         }
       }, () => alert('problemme de connection server'));
     }
+  }
+
+  lookRGPD(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(RGPDComponent, dialogConfig);
+  }
+
+  lookCGU(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(CGUComponent, dialogConfig);
+  }
+
+  lookCMEL(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(CMELComponent, dialogConfig);
   }
 }

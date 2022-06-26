@@ -7,6 +7,7 @@ import {LettreDeMotivationComponent} from '../../communications/donneeLegaux/lM/
 import {TravailDeFinEtudeComponent} from '../../communications/donneeLegaux/TFE/travail-de-fin-etude/travail-de-fin-etude.component';
 import {ContactComponent} from '../../communications/donneeLegaux/contact/contact/contact.component';
 import {CGUComponent} from '../../communications/donneeLegaux/cgu/cgu.component';
+import {ETComponent} from '../../communications/donneeLegaux/et/et.component';
 
 @Component({
   selector: 'app-footer',
@@ -74,7 +75,7 @@ export class FooterComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '100%';
     dialogConfig.height = '100%';
-    this.dialog.open(TravailDeFinEtudeComponent, dialogConfig);
+    this.dialog.open(ETComponent, dialogConfig);
   }
 
   lookContact(): void{

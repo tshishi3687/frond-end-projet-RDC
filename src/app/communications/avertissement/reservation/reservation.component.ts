@@ -3,10 +3,13 @@ import {Bien, Reservation} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReservationService} from '../../../service/reservation.service';
+import {RGPDComponent} from '../../donneeLegaux/rgpd/rgpd.component';
+import {CGUComponent} from '../../donneeLegaux/cgu/cgu.component';
+import {CRComponent} from '../../donneeLegaux/cr/cr.component';
 
 @Component({
   selector: 'app-reservation',
@@ -23,6 +26,7 @@ export class ReservationComponent implements OnInit {
               private serv: LoginService,
               public dialogRef: MatDialogRef<ReservationComponent>,
               private personneService: PersonneService,
+              private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.bien = data.bien;
@@ -137,5 +141,32 @@ export class ReservationComponent implements OnInit {
     this.bien.reservers.find(r => this.listR.push(r));
     // @ts-ignore
     return this.bien.reservers.find(r => r === date) ? false : (this.bien.disponibles.find(d => d === date)) ? true : null;
+  }
+
+  lookRGPD(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(RGPDComponent, dialogConfig);
+  }
+
+  lookCGU(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(CGUComponent, dialogConfig);
+  }
+
+  lookCR(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    this.dialog.open(CRComponent, dialogConfig);
   }
 }

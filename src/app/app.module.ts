@@ -82,6 +82,8 @@ import { BoutonContratReservationComponent } from './communications/avertissemen
 import {MatSelectModule} from '@angular/material/select';
 import { CGUComponent } from './communications/donneeLegaux/cgu/cgu.component';
 import { ETComponent } from './communications/donneeLegaux/et/et.component';
+import { CMELComponent } from './communications/donneeLegaux/cmel/cmel.component';
+import { CRComponent } from './communications/donneeLegaux/cr/cr.component';
 
 export const MY_FORMATS = {
   // parse: {
@@ -160,6 +162,8 @@ export const MY_FORMATS = {
         BoutonContratReservationComponent,
         CGUComponent,
         ETComponent,
+        CMELComponent,
+        CRComponent,
     ],
     imports: [
         BrowserModule,

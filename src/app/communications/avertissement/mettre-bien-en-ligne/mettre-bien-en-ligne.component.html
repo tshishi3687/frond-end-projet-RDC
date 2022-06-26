@@ -68,13 +68,17 @@
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold lh-1 mb-3 text-center text-danger">ATTENTION !!!</h1>
       <h2 class="display-5 fw-bold lh-1 mb-3 text-center text-danger">Vous êtes sur le point de mettre un bien en ligne.</h2>
-      <p class="lead">Ce qui implique que vous avez bien pris connaissance et acceptez le <span>CONTRAT BMEL</span>.</p>
-      <p class="lead">L'acceptation des termes du contrat indiqué ci-dessous est <span>OBLIGATOIRE</span> lors de la mise d'un bien en ligne.</p>
+      <p class="lead">Ce qui implique que vous avez bien pris connaissance et vous acceptez les termes et conditions  du <span (click)="lookRGPD()" class="btn btn-link">RGPD</span> ainsi que les <span (click)="lookCGU()" class="btn btn-link">Conditions général d'utilisation</span>.</p>
+      <p class="lead">L'acceptation des termes indiqué ci-dessous est <span class="text-danger">OBLIGATOIRE</span> lors de la mise en ligne d'un bien.</p>
+      <p class="lead">Exemple de contrat :</p>
+      <ul>
+        <li (click)="lookCMEL()" class="btn btn-link">Contrat de mis en ligne</li>
+      </ul>
       <br>
       <form [formGroup]="acceptForm">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" formControlName="check">
-          <label class="form-check-label" >J'accepte les termes et les conditions du <span>CONTRAT BMEL</span>.</label>
+          <label class="form-check-label" >J'accepte les termes et les conditions du <span (click)="lookRGPD()" class="btn btn-link">RGPD</span> ainsi que les <span (click)="lookCGU()" class="btn btn-link">Conditions général d'utilisation</span>.</label>
         </div>
       </form>
 
