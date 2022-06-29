@@ -24,7 +24,7 @@
         <h1 class="display-5 fw-bold lh-1 mb-3 text-danger text-center">ATTENTION !!!</h1>
         <h2 class="display-5 fw-bold lh-1 mb-3 text-danger text-center">Vous êtes sur le point de réserver ce bien.</h2>
         <h3 class="display-5 fw-bold lh-1 mb-3 text-center">{{bien.type_bien.nom}}({{bien.id}}) à {{bien.prix}}, {{bien.coordonnee.ville.nomVille}} / {{bien.coordonnee.ville.province.nomprovince}}</h3>
-        <p *ngIf="acceptForm.value.check">Vous avez accepté les termes du contrat.<br>Si ce n'est pas le cas, veuillez cliquer sur le bouton "Annuler".</p>
+        <p *ngIf="acceptForm.value.check">Vous avez accepté les termes et conditions.<br>Si ce n'est pas le cas, veuillez cliquer sur le bouton "Annuler".</p>
 
 
       <div *ngIf="!acceptForm.value.check">

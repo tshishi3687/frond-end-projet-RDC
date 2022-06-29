@@ -19,7 +19,14 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
       const token = JSON.parse(sessionStorage.getItem(this.service.Sessionjwt));
       const clone = request.clone({setHeaders : { Authorization : token}});
       return  next.handle(clone);
+    }else {
+      const clonne = request.clone({setHeaders : {'Access-Control-Allow-Origin': '*'}});
+      return  next.handle(clonne);
     }
-    return  next.handle(request);
+
+  //   headers: new HttpHeaders({
+  //     'Access-Control-Allow-Origin': '*'
+  //   })
+  // };
   }
 }
