@@ -7,3 +7,8 @@
 /*    width: 50%;*/
 /*  }*/
 /*}*/
+
+#biens{
+  display: flex;
+  align-items: center;
+}

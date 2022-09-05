@@ -1,0 +1,52 @@
+.notifications{
+  font-max-size: 1.5em;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 3px 1px -1px rgba(0,0,0,0.5);
+  padding: 15px;
+}
+
+.bien{
+  width: 400px;
+  margin: 30px;
+  display: inline-block;
+  background-color: white;
+  padding-bottom: 15px;
+  border: 0 solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  text-align: center;
+}
+
+.bien:hover{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: 0.3s;
+}
+
+.picture{
+  width: 400px;
+  height: 266px;
+  overflow: hidden;
+}
+
+.title{
+  margin-top: 15px;
+}
+
+ul{
+  padding: 0;
+  display: inline;
+}
+
+li{
+  list-style-type: none;
+  display: inline;
+  margin: 10px;
+}
+
+h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
