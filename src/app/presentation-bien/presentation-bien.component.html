@@ -1,0 +1,17 @@
+<mat-card (click)="addInformation(b.id)">
+  <mat-card-header>
+    <mat-card-title>{{b.prix}} €/ nuit</mat-card-title>
+    <mat-card-subtitle>{{b.type_bien.nom}}</mat-card-subtitle>
+    <p>{{b.coordonnee.ville.nomVille}} {{b.coordonnee.ville.province.nomprovince}}</p>
+  </mat-card-header>
+  <mat-card-content>
+    <app-img-info-caroucel [img]="b.image? b.image : b.images[0]" [pourcentageAffichage]="55"></app-img-info-caroucel>
+    <mat-icon matBadge="{{b.npmax}}"  [matTooltip]="b.npmax" matBadgeColor="primary">groups</mat-icon>
+    <mat-icon matBadge="{{b.superficie}}" [matTooltip]="b.superficie" matBadgeColor="primary">grid_4x4</mat-icon>
+    <mat-icon matBadge="{{b.nchambre}}" [matTooltip]="b.nchambre" matBadgeColor="primary">bed</mat-icon>
+    <mat-icon matBadge="{{b.nsdb}}" [matTooltip]="b.nsdb" matBadgeColor="primary">bathtub</mat-icon>
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>

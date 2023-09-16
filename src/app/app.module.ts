@@ -27,7 +27,6 @@ import { VoirBienComponent } from './client/profil/voir-biens/voir-bien.componen
 import { VoirBienPipe } from './client/profil/voir-biens/voir-bien.pipe';
 import { AllBienComponent } from './all-bien/all-bien.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCarouselModule} from '@ngmodule/material-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoBienComponent } from './all-bien/info-bien/info-bien.component';
 import { MiseEnPageComponent } from './mise-en-page/mise-en-page.component';
@@ -84,6 +83,11 @@ import { CGUComponent } from './communications/donneeLegaux/cgu/cgu.component';
 import { ETComponent } from './communications/donneeLegaux/et/et.component';
 import { CMELComponent } from './communications/donneeLegaux/cmel/cmel.component';
 import { CRComponent } from './communications/donneeLegaux/cr/cr.component';
+import {MatCarouselModule} from 'ng-mat-carousel';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { PresentationBienComponent } from './presentation-bien/presentation-bien.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 export const MY_FORMATS = {
   // parse: {
@@ -164,28 +168,33 @@ export const MY_FORMATS = {
         ETComponent,
         CMELComponent,
         CRComponent,
+        PresentationBienComponent,
     ],
-    imports: [
-        BrowserModule,
-        RouterModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatCarouselModule.forRoot(),
-        MatDialogModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatCardModule,
-        MatDatepickerModule,
-        MatInputModule,
-        MatNativeDateModule,
-        AngularEditorModule,
-        MatStepperModule,
-        MatButtonModule,
-        MatSelectModule,
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatCarouselModule.forRoot(),
+    MatDialogModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    AngularEditorModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatCarouselModule,
+    MatBadgeModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+  ],
     exports: [],
     providers: [{
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true

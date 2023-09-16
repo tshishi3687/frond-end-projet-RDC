@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Bien} from '../objet';
 import {LoginService} from '../service/login.service';
-import {BienService} from '../service/bien.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {InfoBienComponent} from '../all-bien/info-bien/info-bien.component';
 
@@ -13,12 +12,10 @@ import {InfoBienComponent} from '../all-bien/info-bien/info-bien.component';
 export class OneBienComponent implements OnInit {
 
   constructor(private serv: LoginService,
-              private bienService: BienService,
               private dialog: MatDialog
   ) {}
 
   @Input() b: Bien;
-  service = this.serv.isAuthenticated();
 
   ngOnInit(): void {
   }

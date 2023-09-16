@@ -64,7 +64,8 @@
             </ul>
           </nav>
           <div class="biens row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 " *ngIf="!isLoading">
-              <app-one-bien *ngFor="let b of listBien " [b]="b"></app-one-bien>
+            <app-presentation-bien *ngFor="let b of listBien" [b]="b" ></app-presentation-bien>
+<!--            <app-one-bien *ngFor="let b of listBien " [b]="b"></app-one-bien>-->
           </div>
           <div *ngIf="isLoading">
             <div class="row">
