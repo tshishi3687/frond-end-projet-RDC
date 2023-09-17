@@ -28,6 +28,9 @@ export class PresentationBienComponent implements OnInit {
       this.dialog.open(InfoBienComponent, {
         disableClose: true,
         autoFocus: true,
+        width: '100%',
+        height: '100%',
+        data: {idBien: idB}
       });
     } else {
       this.snackBar.open('vous devez être connecté pour en voir plus', 'Fermer');
