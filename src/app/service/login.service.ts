@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Personne, Validator} from '../objet';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService implements CanActivate{
+export class LoginService {
 
   private prefix = 'Bearer ';
   // tslint:disable-next-line:variable-name
