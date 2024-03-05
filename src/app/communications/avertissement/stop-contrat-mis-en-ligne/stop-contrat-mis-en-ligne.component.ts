@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {LoginService} from '../../../service/login.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import { Contrat} from '../../../objet';
 
 @Component({
@@ -20,15 +20,15 @@ export class StopContratMisEnLigneComponent implements OnInit {
     this.contrat = data.contrat;
   }
 
-  acceptForm = new FormGroup({
-    check: new FormControl(false, [Validators.required])
+  acceptForm = new UntypedFormGroup({
+    check: new UntypedFormControl(false, [Validators.required])
   });
 
   contrat: Contrat;
   btnSuppress = false;
 
-  stopFrom = new FormGroup({
-      textStop: new FormControl(null, [Validators.required])
+  stopFrom = new UntypedFormGroup({
+      textStop: new UntypedFormControl(null, [Validators.required])
     }
   );
 

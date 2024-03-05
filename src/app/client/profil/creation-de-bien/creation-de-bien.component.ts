@@ -3,7 +3,7 @@ import {LoginService} from '../../../service/login.service';
 import {BienService} from '../../../service/bien.service';
 import {VilleService} from '../../../service/VilleService';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Aladisposition, Bien, Coordonnee, TypeDeBien, Validator, Ville} from '../../../objet';
 import {ImgService} from '../../../service/img.service';
 import {DureeLocationService} from '../../../service/duree-location.service';
@@ -28,7 +28,7 @@ export class CreationDeBienComponent implements OnInit {
     private imgService: ImgService,
     private dialog: MatDialog,
     private perService: PersonneService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: UntypedFormBuilder) { }
 
   @ViewChild('imgs') imgs: ElementRef;
   private error = 'Il y a eu un probleme :(';
@@ -40,42 +40,42 @@ export class CreationDeBienComponent implements OnInit {
   currentPage = 1;
   isLinear = false;
 
-  BienForm = new FormGroup({
-    type: new FormControl('defaults'),
-    dureeLocation: new FormControl('defaults'),
-    coordonneeVille: new FormControl('defaults'),
-    prix: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(999999)]),
-    npmin: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
-    npmax: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(500000)]),
-    nchambre: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
-    nsdb: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
-    nwc: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
-    superficie: new FormControl(null, [Validators.required, Validators.min(2), Validators.max(900000)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(3000)]),
-    lien_photo: new FormControl(),
-    coordonneeCPostal: new FormControl(null, [Validators.minLength(3), Validators.maxLength(10)]),
-    coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-    coordonneeNum: new FormControl(null, [Validators.minLength(1), Validators.maxLength(5)]),
-    coordonneeEmail: new FormControl(null, [Validators.email, Validators.pattern(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)]),
-    coordonneeTelephone: new FormControl(null, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)),
-    securite: new FormControl(),
-    wifi: new FormControl(),
-    television: new FormControl(),
-    vesselle: new FormControl(),
-    literie: new FormControl(),
-    lingeMaison: new FormControl(),
-    eauChaude: new FormControl(),
-    eauFroide: new FormControl(),
-    eauPotable: new FormControl(),
-    jardin: new FormControl(),
-    cour: new FormControl(),
-    terrasse: new FormControl(),
-    piscinePrive: new FormControl(),
-    piscineCommune: new FormControl(),
-    vehicule: new FormControl(),
-    moto: new FormControl(),
-    velo: new FormControl(),
-    animaux: new FormControl()
+  BienForm = new UntypedFormGroup({
+    type: new UntypedFormControl('defaults'),
+    dureeLocation: new UntypedFormControl('defaults'),
+    coordonneeVille: new UntypedFormControl('defaults'),
+    prix: new UntypedFormControl(null, [Validators.required, Validators.min(1), Validators.max(999999)]),
+    npmin: new UntypedFormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
+    npmax: new UntypedFormControl(null, [Validators.required, Validators.min(1), Validators.max(500000)]),
+    nchambre: new UntypedFormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
+    nsdb: new UntypedFormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
+    nwc: new UntypedFormControl(null, [Validators.required, Validators.min(0), Validators.max(20)]),
+    superficie: new UntypedFormControl(null, [Validators.required, Validators.min(2), Validators.max(900000)]),
+    description: new UntypedFormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(3000)]),
+    lien_photo: new UntypedFormControl(),
+    coordonneeCPostal: new UntypedFormControl(null, [Validators.minLength(3), Validators.maxLength(10)]),
+    coordonneeRue: new UntypedFormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+    coordonneeNum: new UntypedFormControl(null, [Validators.minLength(1), Validators.maxLength(5)]),
+    coordonneeEmail: new UntypedFormControl(null, [Validators.email, Validators.pattern(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)]),
+    coordonneeTelephone: new UntypedFormControl(null, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)),
+    securite: new UntypedFormControl(),
+    wifi: new UntypedFormControl(),
+    television: new UntypedFormControl(),
+    vesselle: new UntypedFormControl(),
+    literie: new UntypedFormControl(),
+    lingeMaison: new UntypedFormControl(),
+    eauChaude: new UntypedFormControl(),
+    eauFroide: new UntypedFormControl(),
+    eauPotable: new UntypedFormControl(),
+    jardin: new UntypedFormControl(),
+    cour: new UntypedFormControl(),
+    terrasse: new UntypedFormControl(),
+    piscinePrive: new UntypedFormControl(),
+    piscineCommune: new UntypedFormControl(),
+    vehicule: new UntypedFormControl(),
+    moto: new UntypedFormControl(),
+    velo: new UntypedFormControl(),
+    animaux: new UntypedFormControl()
   });
 
   config: AngularEditorConfig = {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {VilleService} from '../../service/VilleService';
 import {ProvinceService} from '../../service/ProvienceService';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Province, Ville} from '../../objet';
 
 @Component({
@@ -25,11 +25,11 @@ export class VilleComponent implements OnInit {
   imgNull = 'Vous ne pouvez pas créer un bien sans lui ajouter au moin une photo';
 
 
-  villeForm = new FormGroup({
-    nom_ville: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-    nhabitant: new FormControl(null, [Validators.required, Validators.min(1000), Validators.max(900000000)]),
-    province: new FormControl('default'),
-    description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)])
+  villeForm = new UntypedFormGroup({
+    nom_ville: new UntypedFormControl(null, [Validators.required, Validators.minLength(3)]),
+    nhabitant: new UntypedFormControl(null, [Validators.required, Validators.min(1000), Validators.max(900000000)]),
+    province: new UntypedFormControl('default'),
+    description: new UntypedFormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)])
   });
 
   listVille: Array<Ville> = [];

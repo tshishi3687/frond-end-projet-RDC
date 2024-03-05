@@ -5,7 +5,7 @@ import {BienService} from '../../../service/bien.service';
 import {LoginService} from '../../../service/login.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PersonneService} from '../../../service/personne.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ReservationService} from '../../../service/reservation.service';
 import {RGPDComponent} from '../../donneeLegaux/rgpd/rgpd.component';
 import {CGUComponent} from '../../donneeLegaux/cgu/cgu.component';
@@ -30,24 +30,24 @@ export class ReservationComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.bien = data.bien;
-    this.choixJourForm = new FormGroup({
-      jourA: new FormControl(Date, [Validators.required]),
-      jourD: new FormControl(Date, [Validators.required]),
-      nPersonne: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(this.bien.npmax)])
+    this.choixJourForm = new UntypedFormGroup({
+      jourA: new UntypedFormControl(Date, [Validators.required]),
+      jourD: new UntypedFormControl(Date, [Validators.required]),
+      nPersonne: new UntypedFormControl(0, [Validators.required, Validators.min(1), Validators.max(this.bien.npmax)])
     });
   }
 
   bien: Bien;
   reservation: Reservation;
-  acceptForm = new FormGroup({
-    check: new FormControl(false, [Validators.required])
+  acceptForm = new UntypedFormGroup({
+    check: new UntypedFormControl(false, [Validators.required])
   });
 
-  veifCodeForm = new FormGroup({
-    codeActivation: new FormControl('', [Validators.required])
+  veifCodeForm = new UntypedFormGroup({
+    codeActivation: new UntypedFormControl('', [Validators.required])
   });
 
-  choixJourForm: FormGroup;
+  choixJourForm: UntypedFormGroup;
   service = this.serv;
   verifCode = false;
   verifCode2 = false;

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {LoginService} from '../../../service/login.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {BienService} from '../../../service/bien.service';
 import { Location } from '@angular/common';
 import {Bien, Validator} from '../../../objet';
@@ -30,8 +30,8 @@ export class SuppressionBienComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   suppressionMessage: string;
   btnSuppress = false;
-  deleteForm = new FormGroup({
-    textDelet: new FormControl(null, [Validators.required])
+  deleteForm = new UntypedFormGroup({
+    textDelet: new UntypedFormControl(null, [Validators.required])
   }
   );
 

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Bien, NombreNuitVoulu, Validator} from '../../../objet';
 import {Router} from '@angular/router';
 import {BienService} from '../../../service/bien.service';
@@ -31,17 +31,17 @@ export class MettreBienEnLigneComponent implements OnInit {
   }
 
   bien: Bien;
-  acceptForm = new FormGroup({
-    check: new FormControl(false, [Validators.required])
+  acceptForm = new UntypedFormGroup({
+    check: new UntypedFormControl(false, [Validators.required])
   });
 
-  choixJourForm = new FormGroup({
-    jour: new FormControl('defaults', [Validators.required]),
-    appartirDe: new FormControl(Date, Validators.required)
+  choixJourForm = new UntypedFormGroup({
+    jour: new UntypedFormControl('defaults', [Validators.required]),
+    appartirDe: new UntypedFormControl(Date, Validators.required)
   });
 
-  veifCodeForm = new FormGroup({
-    codeActivation: new FormControl('', [Validators.required])
+  veifCodeForm = new UntypedFormGroup({
+    codeActivation: new UntypedFormControl('', [Validators.required])
   });
 
   listNuit: Array<NombreNuitVoulu> = [];

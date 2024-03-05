@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {InfoBancaireService} from '../../../service/info-bancaire.service';
 import {LoginService} from '../../../service/login.service';
 import {InfoBancaire, Validator} from '../../../objet';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {PersonneService} from '../../../service/personne.service';
 
 @Component({
@@ -18,13 +18,13 @@ export class AjouterInfoBancaireComponent implements OnInit {
 
   infoBancaire: InfoBancaire;
   infoBancaireText: string;
-  infoBancaireForm = new FormGroup({
-    nomBanque: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]),
+  infoBancaireForm = new UntypedFormGroup({
+    nomBanque: new UntypedFormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]),
     // tslint:disable-next-line:max-line-length
-    numCarte: new FormControl('', [Validators.required , Validators.pattern('[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
-    numCompte: new FormControl('', [Validators.required , Validators.pattern('[aA-zZ]{2}[0-9]{2}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
-    expirM: new FormControl('defaults', [Validators.required, Validators.min(1), Validators.max(12)]),
-    expirA: new FormControl('defaults', [Validators.required])
+    numCarte: new UntypedFormControl('', [Validators.required , Validators.pattern('[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
+    numCompte: new UntypedFormControl('', [Validators.required , Validators.pattern('[aA-zZ]{2}[0-9]{2}-[0-9]{4}-[0-9]{4}-[0-9]{4}')]),
+    expirM: new UntypedFormControl('defaults', [Validators.required, Validators.min(1), Validators.max(12)]),
+    expirA: new UntypedFormControl('defaults', [Validators.required])
   });
 
   listAnnee: number [] = [];

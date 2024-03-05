@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {LoginService} from '../../service/login.service';
 import {PersonneService} from '../../service/personne.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Mdp, Personne, Validator} from '../../objet';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
@@ -18,12 +18,12 @@ export class ActivationCompteComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data
   ) {
     this.mdp = data.pass;
-    this.verificationCodeForm = new FormGroup({
-      codeActivation: new FormControl(null, [Validators.required])
+    this.verificationCodeForm = new UntypedFormGroup({
+      codeActivation: new UntypedFormControl(null, [Validators.required])
     });
   }
 
-  verificationCodeForm: FormGroup;
+  verificationCodeForm: UntypedFormGroup;
 
   mdp: Mdp;
   activationCompteOK: false;

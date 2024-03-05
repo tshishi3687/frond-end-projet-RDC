@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceService} from '../../service/service.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TypeDeServiceService} from '../../service/type-de-service.service';
 import {VilleService} from '../../service/VilleService';
 import {Coordonnee, Service, TypeDeService, Ville} from '../../objet';
@@ -17,15 +17,15 @@ export class ServiceComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
   startingString = '';
 
-  serviceForm = new FormGroup({
-    nom: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-    type: new FormControl('default'),
-    coordonneeVille: new FormControl('defaults'),
-    coordonneeCpostal: new FormControl(null, [Validators.min(100), Validators.max(100000)]),
-    coordonneeRue: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
-    coordonneeNum: new FormControl(null, [Validators.min(1), Validators.max(10000)]),
-    coordonneeEmail: new FormControl(null, [Validators.email, Validators.maxLength(100)]),
-    coordonneeTelephone: new FormControl(null, [Validators.min(1000), Validators.max(999999999999999)])
+  serviceForm = new UntypedFormGroup({
+    nom: new UntypedFormControl(null, [Validators.required, Validators.minLength(3)]),
+    type: new UntypedFormControl('default'),
+    coordonneeVille: new UntypedFormControl('defaults'),
+    coordonneeCpostal: new UntypedFormControl(null, [Validators.min(100), Validators.max(100000)]),
+    coordonneeRue: new UntypedFormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
+    coordonneeNum: new UntypedFormControl(null, [Validators.min(1), Validators.max(10000)]),
+    coordonneeEmail: new UntypedFormControl(null, [Validators.email, Validators.maxLength(100)]),
+    coordonneeTelephone: new UntypedFormControl(null, [Validators.min(1000), Validators.max(999999999999999)])
   });
 
   listService: Array<Service> = [];

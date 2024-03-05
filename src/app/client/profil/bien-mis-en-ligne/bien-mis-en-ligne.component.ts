@@ -5,7 +5,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Bien, BienMisEnLigne, Contrat, TypeDeBien} from '../../../objet';
 import {InfoBienComponent} from '../../../all-bien/info-bien/info-bien.component';
 import {VoirContratComponent} from '../voir-contrat-mis-en-ligne/voir-contrat.component';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {TypeDeBienService} from '../../../service/type-de-bien.service';
 
 @Component({
@@ -22,8 +22,8 @@ export class BienMisEnLigneComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  rechercheForm = new FormGroup({
-    typeBien: new FormControl('defaults')
+  rechercheForm = new UntypedFormGroup({
+    typeBien: new UntypedFormControl('defaults')
   });
 
   listTypeBien: Array<TypeDeBien> = [];

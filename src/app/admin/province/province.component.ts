@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Province} from '../../objet';
 import {ProvinceService} from '../../service/ProvienceService';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ImageProvinceService} from '../../service/image-province.service';
 import {Router} from '@angular/router';
 
@@ -18,9 +18,9 @@ export class ProvinceComponent implements OnInit {
   myRoute = this.route.url;
    error = 'Il y a eu un probleme :(';
 
-  provinceForm = new FormGroup({
-    nomprovince: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-    description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(400)])
+  provinceForm = new UntypedFormGroup({
+    nomprovince: new UntypedFormControl(null, [Validators.required, Validators.minLength(4)]),
+    description: new UntypedFormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(400)])
   });
 
   listProvince: Array<Province> = [];

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Mdp, Personne, Validator} from '../../objet';
 import {PersonneService} from '../../service/personne.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivationCompteComponent} from '../activation-compte/activation-compte.component';
@@ -21,9 +21,9 @@ export class ConnexionComponent implements OnInit {
 
   private error = 'Il y a eu un probleme :(';
   @Output() envoyerPersonne = new EventEmitter();
-  logForm = new FormGroup({
-    email: new FormControl(null, [Validators.required]),
-    mdp: new FormControl(null, [Validators.required]),
+  logForm = new UntypedFormGroup({
+    email: new UntypedFormControl(null, [Validators.required]),
+    mdp: new UntypedFormControl(null, [Validators.required]),
   });
   textErro: string;
   connnectionOKBUT = true;

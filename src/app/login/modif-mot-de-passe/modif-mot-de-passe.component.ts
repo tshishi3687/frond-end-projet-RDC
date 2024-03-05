@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {PersonneService} from '../../service/personne.service';
 import {ContactUser, Mdp, ModifPass, Personne} from '../../objet';
 
@@ -19,17 +19,17 @@ export class ModifMotDePasseComponent implements OnInit {
   textBool = false;
   activationCompte = false;
 
-  PersonneForm = new FormGroup({
-    Nom: new FormControl(null, [Validators.required]),
-    Prenom: new FormControl(null, [Validators.required]),
-    Ddn: new FormControl(null, [Validators.required]),
-    Email: new FormControl(null, [Validators.required])
+  PersonneForm = new UntypedFormGroup({
+    Nom: new UntypedFormControl(null, [Validators.required]),
+    Prenom: new UntypedFormControl(null, [Validators.required]),
+    Ddn: new UntypedFormControl(null, [Validators.required]),
+    Email: new UntypedFormControl(null, [Validators.required])
   });
 
-  verifForm = new FormGroup({
-    codeActivation: new FormControl(null, [Validators.required]),
-    nPass: new FormControl(null, [Validators.required]),
-    vPass: new FormControl(null, [Validators.required]),
+  verifForm = new UntypedFormGroup({
+    codeActivation: new UntypedFormControl(null, [Validators.required]),
+    nPass: new UntypedFormControl(null, [Validators.required]),
+    vPass: new UntypedFormControl(null, [Validators.required]),
   });
   messageRate: string;
   messageReussi: string;

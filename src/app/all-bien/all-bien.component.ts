@@ -4,7 +4,7 @@ import {Bien, Province, TryListAllBiens, TypeDeBien, Ville} from '../objet';
 import {ImgService} from '../service/img.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginService} from '../service/login.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
@@ -32,10 +32,10 @@ export class AllBienComponent implements OnInit {
   @ViewChild('type') type: ElementRef;
   @ViewChild('provinces') provinces: ElementRef;
   @ViewChild('villes') villes: ElementRef;
-  rechercheForm = new FormGroup({
-    province:  new FormControl('defaults'),
-    ville: new FormControl('defaults'),
-    typeBien: new FormControl('defaults')
+  rechercheForm = new UntypedFormGroup({
+    province:  new UntypedFormControl('defaults'),
+    ville: new UntypedFormControl('defaults'),
+    typeBien: new UntypedFormControl('defaults')
   });
 
   service = this.ser;

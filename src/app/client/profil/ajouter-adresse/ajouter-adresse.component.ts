@@ -3,7 +3,7 @@ import {AdressUserServiceService} from '../../../service/adress-user-service.ser
 import {PaysServiceService} from '../../../service/pays-service.service';
 import {AdressUser, Pays, Validator} from '../../../objet';
 import {LoginService} from '../../../service/login.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {PersonneService} from '../../../service/personne.service';
 
 @Component({
@@ -21,11 +21,11 @@ export class AjouterAdresseComponent implements OnInit {
   adressText: string;
   listPays: Array<Pays> ;
   adressUser: AdressUser;
-  adressUserForm = new FormGroup({
-    numBien: new FormControl('', Validators.required),
-    nomRue: new FormControl('', Validators.required),
-    codePostal: new FormControl('', Validators.required),
-    pays: new FormControl('defaults', Validators.required),
+  adressUserForm = new UntypedFormGroup({
+    numBien: new UntypedFormControl('', Validators.required),
+    nomRue: new UntypedFormControl('', Validators.required),
+    codePostal: new UntypedFormControl('', Validators.required),
+    pays: new UntypedFormControl('defaults', Validators.required),
   });
 
   ngOnInit(): void {

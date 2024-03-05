@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TypeDeBienService} from '../../service/type-de-bien.service';
 import {TypeDeBien} from '../../objet';
 
@@ -15,8 +15,8 @@ export class TypeDeBienComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
   startingString = '';
 
-  typeDeBienForm = new FormGroup({
-    nom: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)])
+  typeDeBienForm = new UntypedFormGroup({
+    nom: new UntypedFormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)])
   });
 
   listTypeDeBien: Array<TypeDeBien> = [];

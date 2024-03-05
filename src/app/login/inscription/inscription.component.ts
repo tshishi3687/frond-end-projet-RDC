@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {PersonneService} from '../../service/personne.service';
-import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {ContactUser, Mdp, Personne} from '../../objet';
 import {LoginService} from '../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -22,15 +22,15 @@ export class InscriptionComponent implements OnInit {
   ) { }
 
 
-  PersonneForm = new FormGroup({
-    Nom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    Prenom: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    Ddn: new FormControl(Date, [Validators.required]),
-    Password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-    verifPassword: new FormControl(),
+  PersonneForm = new UntypedFormGroup({
+    Nom: new UntypedFormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
+    Prenom: new UntypedFormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
+    Ddn: new UntypedFormControl(Date, [Validators.required]),
+    Password: new UntypedFormControl(null, [Validators.required, Validators.minLength(8)]),
+    verifPassword: new UntypedFormControl(),
     // tslint:disable-next-line:max-line-length
-    Telephone: new FormControl(null, [Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)]),
-    Email: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
+    Telephone: new UntypedFormControl(null, [Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3,4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)]),
+    Email: new UntypedFormControl(null, [Validators.required, Validators.maxLength(50), Validators.email])
   });
 
   private error = 'Il y a eu un probleme avec le serveur.\nVeuillez réessayer plus tard:(';

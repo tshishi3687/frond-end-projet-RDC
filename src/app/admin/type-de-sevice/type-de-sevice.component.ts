@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TypeDeServiceService} from '../../service/type-de-service.service';
 import {TypeDeService} from '../../objet';
 
@@ -15,8 +15,8 @@ export class TypeDeSeviceComponent implements OnInit {
   private error = 'Il y a eu un probleme :(';
   startingString = '';
 
-  typeDeServiceForm = new FormGroup({
-    nomtype: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)])
+  typeDeServiceForm = new UntypedFormGroup({
+    nomtype: new UntypedFormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)])
   });
 
   listTypeDeService: Array<TypeDeService> = [];
