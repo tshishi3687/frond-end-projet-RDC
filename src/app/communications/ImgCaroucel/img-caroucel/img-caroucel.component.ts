@@ -24,7 +24,7 @@ constructor(private service: LoginService) {
       this.slides.push({image : this.service.logo});
     }else{
       for (const image of this.img){
-        this.slides.push({image : 'data:image/jpeg;base64,' + image.picByte});
+        this.slides.push({image : 'data:image/jpeg;base64,' + image});
       }
     }
   }

@@ -8,7 +8,6 @@ import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {VilleService} from '../service/VilleService';
 import {TypeDeBienService} from '../service/type-de-bien.service';
 import {ProvinceService} from '../service/ProvienceService';
-import {Byte} from '@angular/compiler/src/util';
 import {PersonneService} from '../service/personne.service';
 
 @Component({
@@ -52,8 +51,8 @@ export class AllBienComponent implements OnInit {
   nbComte: number;
 
   @Output() listBien: Array<Bien> = [];
-  imgProvince: Byte[];
-  imgVille: Byte[];
+  // imgProvince: Byte[];
+  // imgVille: Byte[];
   image: string;
   @Output() bien: EventEmitter<any> = new EventEmitter();
   @Input() tostring: string;
@@ -108,7 +107,7 @@ export class AllBienComponent implements OnInit {
       this.province = '';
     }else{
       this.resetVille();
-      this.imgProvince = this.listProvince[this.rechercheForm.value.province].img[0].picByte;
+      // this.imgProvince = this.listProvince[this.rechercheForm.value.province].img[0].picByte;
       this.textProvince = this.listProvince[this.rechercheForm.value.province].description;
       this.titreProvince = this.listProvince[this.rechercheForm.value.province].nomprovince;
       this.province = this.listProvince[this.rechercheForm.value.province].nomprovince;
@@ -120,7 +119,7 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.ville === 'defaults'){
       this.ville = '';
     }else{
-      this.imgVille = this.listVille[this.rechercheForm.value.ville].img[0].picByte;
+      // this.imgVille = this.listVille[this.rechercheForm.value.ville].img[0].picByte;
       this.textVille = this.listVille[this.rechercheForm.value.ville].description;
       this.titreVille = this.listVille[this.rechercheForm.value.ville].nomVille;
       this.ville = this.listVille[this.rechercheForm.value.ville].nomVille;
@@ -129,7 +128,7 @@ export class AllBienComponent implements OnInit {
 
   resetVille(): void{
     this.rechercheForm.value.ville = 'defaults';
-    this.imgVille = null;
+    // this.imgVille = null;
     this.ville = '';
     this.titreVille = '';
     this.textVille = '';
@@ -145,8 +144,8 @@ export class AllBienComponent implements OnInit {
     if (this.rechercheForm.value.ville != 'defaults'){
       this.villes.nativeElement.value = 'defaults';
     }
-    this.imgVille = null;
-    this.imgProvince = null;
+    // this.imgVille = null;
+    // this.imgProvince = null;
     this.ville = '';
     this.province = '';
     this.typeBien = '';

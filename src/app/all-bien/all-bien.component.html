@@ -27,17 +27,17 @@
                     <option value="defaults" selected>Par Province</option>
                     <option *ngFor="let p of listProvince; let i = index" value="{{i}}">{{p.nomprovince}}</option>
                   </select>
-                  <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults' && this.imgProvince">
+<!--                  <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgProvince}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.province != 'defaults' && this.imgProvince">-->
 
                 </div>
                 <br>
-                <div class="col" *ngIf="rechercheForm.value.province != 'defaults'">
+                <div class="col" >
                 <label class="form-label"></label>
                 <select #villes class="form-select" aria-label="Default select example" formControlName="ville" (change)="enventVille()" >
                   <option value="defaults" selected>Par Ville</option>
                   <option *ngFor="let v of listVille; let i = index" value="{{i}}">{{v.nomVille}}</option>
                 </select>
-                <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults' && this.imgVille">
+<!--                <img class="rounded-lg-3" src="data:image/jpeg;base64,{{this.imgVille}}"  width="80%" height="80%" alt="TSHISHI création" *ngIf="rechercheForm.value.ville != 'defaults' && this.imgVille">-->
               </div>
               </form>
               <div class="col">

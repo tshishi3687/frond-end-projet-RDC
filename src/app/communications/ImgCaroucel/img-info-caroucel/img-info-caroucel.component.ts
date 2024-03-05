@@ -22,7 +22,7 @@ export class ImgInfoCaroucelComponent implements OnInit {
 
   image(): void{
     if (this.img) {
-      this.slides.push({image : 'data:image/jpeg;base64,' + this.img.picByte});
+      this.slides.push({image : 'data:image/jpeg;base64,' + this.img});
     }
     else {
       this.slides.push({

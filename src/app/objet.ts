@@ -1,4 +1,4 @@
-import {Byte} from '@angular/compiler/src/util';
+
 
 export class Province{
   id: number;
@@ -170,7 +170,7 @@ export class Reservation{
 export class ImageModel{
   name: string;
   type: string;
-  picByte: Byte[];
+  // picByte: Byte[];
 }
 
 
@@ -179,7 +179,7 @@ export class ImageProvince{
   id: string;
   name: string;
   type: string;
-  picByte: Byte[];
+  // picByte: Byte[];
 }
 
 // tslint:disable-next-line:class-name
@@ -187,7 +187,7 @@ export class ImageVille{
   id: string;
   name: string;
   type: string;
-  picByte: Byte[];
+  // picByte: Byte[];
 }
 
 
@@ -195,7 +195,7 @@ export class Img{
   id: string;
   name: string;
   type: string;
-  picByte: Byte[];
+  // picByte: Byte[];
 }
 
 export class DureeLocation{
