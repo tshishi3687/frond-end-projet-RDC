@@ -1,8 +1,7 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Mdp, Personne, Validator} from '../../objet';
 import {PersonneService} from '../../service/personne.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {EventEmitter} from 'events';
 import {LoginService} from '../../service/login.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivationCompteComponent} from '../activation-compte/activation-compte.component';
